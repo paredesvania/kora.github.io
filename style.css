@@ -1,13 +1,43 @@
-.project.big {
-  margin-bottom: 120px;
-}
+/* ABOUT */
 
-.project img {
-  width: 100%;
-  margin-top: 20px;
-}
-
-.project h2 {
+.about-title {
   font-size: 50px;
-  margin-bottom: 10px;
+  max-width: 900px;
+  margin-bottom: 60px;
+}
+
+.highlight {
+  color: #ff2aa3;
+  font-style: italic;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.about-left img {
+  width: 100%;
+}
+
+.caption {
+  font-size: 14px;
+  margin-top: 10px;
+  opacity: 0.6;
+}
+
+.about-right p {
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+
+.contact {
+  margin-top: 30px;
+}
+
+.email {
+  margin-top: 10px;
+  color: #ff2aa3;
 }
