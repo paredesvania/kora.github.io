@@ -223,3 +223,7 @@ a {
   text-transform: uppercase;
   margin-bottom: 20px;
 }
+
+* {
+  cursor: none !important;
+}
