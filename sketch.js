@@ -1,20 +1,10 @@
 let points = [];
 
 function setup() {
-  let canvas = createCanvas(windowWidth, windowHeight);
-  canvas.style('position', 'fixed');
-  canvas.style('top', '0');
-  canvas.style('left', '0');
-  canvas.style('z-index', '0');
-
-  for (let i = 0; i < 80; i++) {
-    points.push({
-      x: random(width),
-      y: random(height),
-      vx: random(-0.5, 0.5),
-      vy: random(-0.5, 0.5)
-    });
-  }
+  let canvas = createCanvas(window.innerWidth, 500);
+  canvas.parent("p5-container");
+  pixelDensity(1);
+  initSketch();
 }
 
 function draw() {
