@@ -216,3 +216,10 @@ a {
   background: black;
   margin: 0 40px;
 }
+
+.about h3 {
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
