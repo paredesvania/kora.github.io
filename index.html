@@ -1,31 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>KORA</title>
+
+  <!-- tipografía -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- p5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script src="sketch.js"></script>
+</head>
+
 <body>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<nav class="nav">
-  <a href="projects.html">Proyectos</a>
-  <a href="about.html">About</a>
-</nav>
 
-<main class="layout">
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="projects.html">Proyectos</a>
+    <a href="about.html">About</a>
+  </nav>
 
-  <!-- BLOQUE TEXTO -->
-  <section class="hero">
-    <h1>KORA</h1>
-    <p>Diseño, tecnología y experiencias interactivas</p>
+  <section class="home">
+    <div class="home-content">
+      <h1>KORA</h1>
+      <p>Diseño, tecnología y experiencias interactivas</p>
+    </div>
   </section>
 
-  <!-- BLOQUE INTERACTIVO -->
-  <section class="canvas-module">
-    <div id="canvas-container"></div>
-  </section>
-
-</main>
-<div class="cursor"></div>
-<script>
-const cursor = document.querySelector('.cursor');
-
-document.addEventListener('mousemove', (e) => {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
-});
-</script>
 </body>
+</html>
