@@ -41,3 +41,25 @@
   margin-top: 10px;
   color: #ff2aa3;
 }
+
+.tools {
+  margin-top: 30px;
+}
+
+.tools-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.tools-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tools-grid span {
+  padding: 6px 12px;
+ border: 1px solid black;
+border-radius: 20px;
+  font-size: 14px;
+}
