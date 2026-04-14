@@ -62,7 +62,7 @@ body {
 .tools-table {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px 40px;
+  gap: 20px 60px;
   max-width: 400px;
 }
 
@@ -70,5 +70,5 @@ body {
 .tools-table div {
   font-size: 16px;
   padding-bottom: 6px;
-  border-bottom: 1px solid rgba(0,0,0,0.2);
+  border-bottom: 1px solid black;
 }
