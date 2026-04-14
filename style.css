@@ -1,6 +1,3 @@
-/* =========================
-   VARIABLES (SISTEMA)
-========================= */
 :root {
   --bg: #f2f2f2;
   --panel: #ffffff;
@@ -9,302 +6,29 @@
   --line: rgba(0,0,0,0.15);
 }
 
-/* =========================
-   RESET
-========================= */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
   background: var(--bg);
-  color: var(--text);
   font-family: 'Helvetica Neue', sans-serif;
-}
-
-/* =========================
-   NAV = BARRA DE SISTEMA
-========================= */
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 16px 40px;
-  border-bottom: 1px solid var(--line);
-  background: var(--panel);
-
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
-}
-
-.nav a {
-  text-decoration: none;
-  color: var(--text);
-  margin-right: 25px;
-  position: relative;
-}
-
-.nav a:last-child {
-  margin-right: 0;
-}
-
-.nav a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0%;
-  height: 1px;
-  background: var(--accent);
-  transition: 0.25s;
-}
-
-.nav a:hover::after {
-  width: 100%;
-}
-
-/* =========================
-   GRID PRINCIPAL (INTERFAZ)
-========================= */
-.layout {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  height: calc(100vh - 60px);
-}
-
-/* =========================
-   PANEL (BASE INTERFAZ)
-========================= */
-.panel {
-  background: var(--panel);
-  border-right: 1px solid var(--line);
-  position: relative;
-}
-
-/* líneas tipo grid técnico */
-.panel::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.2;
-  pointer-events: none;
-}
-
-/* =========================
-   HERO (PANEL IZQUIERDO)
-========================= */
-.hero {
-  padding: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.hero h1 {
-  font-size: 72px;
-  margin: 0;
-  letter-spacing: -2px;
-}
-
-.hero p {
-  margin-top: 10px;
-  font-family: 'JetBrains Mono', monospace;
-  opacity: 0.6;
-}
-
-/* etiqueta tipo sistema */
-.hero::after {
-  content: 'SYSTEM: KORA_PORTFOLIO_V1';
-  position: absolute;
-  bottom: 20px;
-  left: 60px;
-  font-size: 11px;
-  font-family: 'JetBrains Mono', monospace;
-  opacity: 0.4;
-}
-
-/* =========================
-   CANVAS MODULE (PANEL DERECHO)
-========================= */
-.canvas-module {
-  position: relative;
-  background: var(--panel);
-}
-
-#canvas-container {
-  width: 100%;
-  height: 100%;
-}
-
-/* overlay técnico */
-.canvas-module::after {
-  content: 'INTERACTION MODULE ACTIVE';
-  position: absolute;
-  bottom: 20px;
-  right: 30px;
-  font-size: 11px;
-  font-family: 'JetBrains Mono', monospace;
-  opacity: 0.4;
-}
-
-/* =========================
-   ABOUT (INTERFAZ)
-========================= */
-section {
-  padding: 60px;
-}
-
-/* título */
-.about-title {
-  font-size: 42px;
-  max-width: 800px;
-  margin-bottom: 60px;
-}
-
-.highlight {
-  color: var(--accent);
-  font-style: italic;
-}
-
-/* grid */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 60px;
-}
-
-/* imagen */
-.about-left img {
-  width: 100%;
-  filter: grayscale(100%);
-  border: 1px solid var(--line);
-}
-
-/* caption */
-.caption {
-  font-size: 11px;
-  margin-top: 10px;
-  opacity: 0.5;
-  font-family: 'JetBrains Mono', monospace;
-}
-
-/* texto */
-.about-right p {
-  margin-bottom: 20px;
-  max-width: 500px;
-}
-
-/* tools estilo terminal */
-.tools {
-  margin-top: 40px;
-}
-
-.tools-title {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
-  margin-bottom: 20px;
-}
-
-.tools-flow {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px 30px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-}
-
-.tools-flow span {
-  border-bottom: 1px solid var(--line);
-  padding-bottom: 4px;
-  transition: 0.2s;
-}
-
-.tools-flow span:hover {
-  color: var(--accent);
-}
-
-/* contacto */
-.email {
-  margin-top: 10px;
-  color: var(--accent);
-  font-family: 'JetBrains Mono', monospace;
-}
-
-/* =========================
-   PROJECTS = LISTA SISTEMA
-========================= */
-.project {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 40px;
-  padding: 40px 0;
-  border-bottom: 1px solid var(--line);
-  cursor: pointer;
-}
-
-/* izquierda */
-.project-info h2 {
-  margin: 0;
-}
-
-.project-info p {
-  margin-top: 10px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
-  opacity: 0.6;
-}
-
-/* imagen */
-.project img {
-  width: 100%;
-  filter: grayscale(100%);
-  transition: 0.4s;
-}
-
-/* hover = activación */
-.project:hover img {
-  filter: grayscale(0%);
-}
-
-.project:hover .project-info h2 {
-  color: var(--accent);
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-@media (max-width: 900px) {
-
-  .layout {
-    grid-template-columns: 1fr;
-  }
-
-  .panel {
-    border-right: none;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .project {
-    grid-template-columns: 1fr;
-  }
-/* =========================
-   CURSOR CUSTOM
-========================= */
-
-body {
   cursor: none;
 }
 
+/* NAV */
+.nav {
+  padding: 15px 40px;
+  border-bottom: 1px solid var(--line);
+  font-family: monospace;
+}
+
+.nav a {
+  margin-right: 20px;
+  text-decoration: none;
+  color: black;
+}
+
+/* CURSOR */
 .cursor {
   position: fixed;
   width: 20px;
@@ -313,118 +37,67 @@ body {
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);
-  z-index: 9999;
 }
 
-.cursor::before,
-.cursor::after {
-  content: '';
-  position: absolute;
-  background: var(--accent);
+/* LAYOUT */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
 }
 
-.cursor::before {
-  width: 1px;
-  height: 30px;
-  left: 50%;
-  top: -5px;
-  transform: translateX(-50%);
+.panel {
+  border-right: 1px solid var(--line);
 }
 
-.cursor::after {
-  height: 1px;
-  width: 30px;
-  top: 50%;
-  left: -5px;
-  transform: translateY(-50%);
+/* HERO */
+.hero {
+  padding: 60px;
 }
 
-/* interacción */
-a:hover ~ .cursor,
-.project-card:hover ~ .cursor {
-  transform: scale(1.5);
+/* CANVAS */
+#canvas-container {
+  width: 100%;
+  height: 100%;
 }
-   /* =========================
-   GRID PROYECTOS
-========================= */
+
+/* PROJECT GRID */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   padding: 40px;
 }
 
-.project-card {
-  position: relative;
-  cursor: pointer;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  background: white;
-}
-
 .project-card img {
   width: 100%;
-  display: block;
   filter: grayscale(100%);
-  transition: 0.4s;
 }
 
 .project-card:hover img {
   filter: grayscale(0%);
-  transform: scale(1.05);
 }
 
-.project-label {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 15px;
-  background: rgba(255,255,255,0.9);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-}
-
-/* =========================
-   WINDOW (VENTANA)
-========================= */
+/* WINDOW */
 .window {
   position: fixed;
   top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70%;
-  max-height: 80vh;
-
+  left: 20%;
+  width: 60%;
   background: white;
   border: 1px solid var(--line);
-  z-index: 999;
-
-  display: flex;
-  flex-direction: column;
 }
 
-.hidden {
-  display: none;
+.hidden { display: none; }
+
+/* ABOUT */
+.about-system {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 40px;
 }
 
-.window-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 20px;
-  border-bottom: 1px solid var(--line);
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.window-header button {
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.window-content {
-  padding: 20px;
-  overflow-y: auto;
-}
+.exp-panel {
+  grid-column: span 2;
 }
