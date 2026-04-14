@@ -1,39 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <meta charset="UTF-8">
-  <title>Proyectos</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KORA | Index</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 </head>
+<body class="grid-main">
+    <nav class="sidebar">
+        <div class="brand">KORA_LAB</div>
+        <div class="nav-links">
+            <a href="index.html" class="active">01_HOME</a>
+            <a href="projects.html">02_PROJECTS</a>
+            <a href="about.html">03_ABOUT</a>
+        </div>
+        <div class="status-bar">STATUS: ONLINE</div>
+    </nav>
 
-<body>
-
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="projects.html">Proyectos</a>
-    <a href="about.html">About</a>
-  </nav>
-
-  <section>
-    <h1>Proyectos</h1>
-
-    <div class="project">
-      <h2>Albura</h2>
-      <img src="assets/albura/imagen1.jpg">
-    </div>
-
-    <div class="project">
-      <h2>Feria móvil</h2>
-      <img src="assets/feria-movil/imagen1.jpg">
-    </div>
-
-    <div class="project">
-      <h2>Lemontech</h2>
-      <img src="assets/lemontech/imagen1.jpg">
-    </div>
-
-  </section>
-
+    <main class="content">
+        <section class="hero">
+            <div id="canvas-container">
+                </div>
+            <div class="hero-text">
+                <h1>DESIGN <br> & TECH</h1>
+                <p class="mono-text">// Interacción digital y diseño industrial.</p>
+            </div>
+        </section>
+    </main>
+    <script src="sketch.js"></script>
 </body>
 </html>
