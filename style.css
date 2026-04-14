@@ -1,74 +1,108 @@
-/* ABOUT */
+:root {
+    --bg-color: #f4f4f4; /* Gris técnico claro */
+    --accent-color: #00ff41; /* Verde terminal sutil */
+    --black: #000000;
+    --border: 0.5px solid rgba(0, 0, 0, 0.2);
+    --font-main: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-  
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: white;
-  color: black;
+    background-color: var(--bg-color);
+    font-family: var(--font-main);
+    color: var(--black);
+    display: flex;
+    min-height: 100vh;
 }
 
-.about-title {
-  font-size: 50px;
-  max-width: 900px;
-  margin-bottom: 60px;
+/* SIDEBAR NAVEGACIÓN */
+.sidebar {
+    width: 250px;
+    border-right: var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px 20px;
+    position: fixed;
+    height: 100vh;
 }
 
-.highlight {
-  color: #ff2aa3;
-  font-style: italic;
+.brand {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    letter-spacing: -1px;
 }
 
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 60px;
-  align-items: start;
+.nav-links { display: flex; flex-direction: column; gap: 15px; }
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--black);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 5px 0;
+    transition: all 0.3s;
 }
 
-.about-left img {
-  width: 100%;
+.nav-links a:hover, .active {
+    color: var(--accent-color);
+    padding-left: 10px;
 }
 
-.caption {
-  font-size: 14px;
-  margin-top: 10px;
-  opacity: 0.6;
+/* CONTENIDO PRINCIPAL */
+.content {
+    margin-left: 250px;
+    width: 100%;
+    position: relative;
 }
 
-.about-right p {
-  margin-bottom: 20px;
-  max-width: 500px;
+#canvas-container {
+    width: 100%;
+    height: 70vh;
+    border-bottom: var(--border);
+    background: #fff;
+    overflow: hidden;
+    position: relative;
 }
 
-.contact {
-  margin-top: 30px;
+.hero-text { padding: 40px; }
+
+h1 {
+    font-size: clamp(3rem, 10vw, 8rem);
+    line-height: 0.9;
+    font-weight: 300;
+    text-transform: uppercase;
 }
 
-.email {
-  margin-top: 10px;
-  color: #ff2aa3;
+.mono-text {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    opacity: 0.6;
+    margin-top: 20px;
 }
 
-.tools {
-  margin-top: 50px;
+/* GRILLA DE HERRAMIENTAS (ABOUT) */
+.tools-flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1px;
+    background: rgba(0,0,0,0.1); /* Crea el efecto de bordes */
+    border: var(--border);
 }
 
-.tools-title {
-  font-weight: 600;
-  margin-bottom: 20px;
+.tools-flow span {
+    background: var(--bg-color);
+    padding: 15px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-align: center;
 }
 
-/* grilla tipo tabla */
-.tools-table {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px 60px;
-  max-width: 400px;
-}
-
-/* cada celda */
-.tools-table div {
-  font-size: 16px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid black;
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    body { flex-direction: column; }
+    .sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: var(--border); }
+    .content { margin-left: 0; }
 }
