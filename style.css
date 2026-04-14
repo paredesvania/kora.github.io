@@ -2,10 +2,11 @@
    VARIABLES (SISTEMA)
 ========================= */
 :root {
-  --bg: #f5f5f5;
+  --bg: #f2f2f2;
+  --panel: #ffffff;
   --text: #111;
-  --accent: #00ff9f;
-  --line: rgba(0,0,0,0.2);
+  --accent: rgb(255, 42, 163);
+  --line: rgba(0,0,0,0.15);
 }
 
 /* =========================
@@ -23,22 +24,30 @@ body {
 }
 
 /* =========================
-   NAV (UI TIPO SOFTWARE)
+   NAV = BARRA DE SISTEMA
 ========================= */
 .nav {
   display: flex;
-  gap: 30px;
-  padding: 20px 40px;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 16px 40px;
   border-bottom: 1px solid var(--line);
+  background: var(--panel);
 
   font-family: 'JetBrains Mono', monospace;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .nav a {
   text-decoration: none;
   color: var(--text);
+  margin-right: 25px;
   position: relative;
+}
+
+.nav a:last-child {
+  margin-right: 0;
 }
 
 .nav a::after {
@@ -49,7 +58,7 @@ body {
   width: 0%;
   height: 1px;
   background: var(--accent);
-  transition: 0.3s;
+  transition: 0.25s;
 }
 
 .nav a:hover::after {
@@ -57,27 +66,50 @@ body {
 }
 
 /* =========================
-   LAYOUT HOME
+   GRID PRINCIPAL (INTERFAZ)
 ========================= */
 .layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  height: calc(100vh - 70px);
+  grid-template-columns: 1fr 1.2fr;
+  height: calc(100vh - 60px);
 }
 
-/* HERO */
+/* =========================
+   PANEL (BASE INTERFAZ)
+========================= */
+.panel {
+  background: var(--panel);
+  border-right: 1px solid var(--line);
+  position: relative;
+}
+
+/* líneas tipo grid técnico */
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+/* =========================
+   HERO (PANEL IZQUIERDO)
+========================= */
 .hero {
   padding: 60px;
-  border-right: 1px solid var(--line);
-
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .hero h1 {
-  font-size: 80px;
+  font-size: 72px;
   margin: 0;
+  letter-spacing: -2px;
 }
 
 .hero p {
@@ -86,9 +118,23 @@ body {
   opacity: 0.6;
 }
 
-/* CANVAS MODULE */
+/* etiqueta tipo sistema */
+.hero::after {
+  content: 'SYSTEM: KORA_PORTFOLIO_V1';
+  position: absolute;
+  bottom: 20px;
+  left: 60px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  opacity: 0.4;
+}
+
+/* =========================
+   CANVAS MODULE (PANEL DERECHO)
+========================= */
 .canvas-module {
   position: relative;
+  background: var(--panel);
 }
 
 #canvas-container {
@@ -96,8 +142,19 @@ body {
   height: 100%;
 }
 
+/* overlay técnico */
+.canvas-module::after {
+  content: 'INTERACTION MODULE ACTIVE';
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  opacity: 0.4;
+}
+
 /* =========================
-   ABOUT
+   ABOUT (INTERFAZ)
 ========================= */
 section {
   padding: 60px;
@@ -105,8 +162,8 @@ section {
 
 /* título */
 .about-title {
-  font-size: 48px;
-  max-width: 900px;
+  font-size: 42px;
+  max-width: 800px;
   margin-bottom: 60px;
 }
 
@@ -115,22 +172,23 @@ section {
   font-style: italic;
 }
 
-/* GRID */
+/* grid */
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   gap: 60px;
-  align-items: start;
 }
 
 /* imagen */
 .about-left img {
   width: 100%;
   filter: grayscale(100%);
+  border: 1px solid var(--line);
 }
 
+/* caption */
 .caption {
-  font-size: 12px;
+  font-size: 11px;
   margin-top: 10px;
   opacity: 0.5;
   font-family: 'JetBrains Mono', monospace;
@@ -142,36 +200,36 @@ section {
   max-width: 500px;
 }
 
-/* tools (modo sistema técnico) */
+/* tools estilo terminal */
 .tools {
-  margin-top: 50px;
+  margin-top: 40px;
 }
 
 .tools-title {
-  font-weight: 600;
-  margin-bottom: 20px;
   font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  margin-bottom: 20px;
 }
 
 .tools-flow {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px 30px;
-
   font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .tools-flow span {
   border-bottom: 1px solid var(--line);
   padding-bottom: 4px;
+  transition: 0.2s;
+}
+
+.tools-flow span:hover {
+  color: var(--accent);
 }
 
 /* contacto */
-.contact {
-  margin-top: 30px;
-}
-
 .email {
   margin-top: 10px;
   color: var(--accent);
@@ -179,7 +237,7 @@ section {
 }
 
 /* =========================
-   PROJECTS
+   PROJECTS = LISTA SISTEMA
 ========================= */
 .project {
   display: grid;
@@ -187,8 +245,10 @@ section {
   gap: 40px;
   padding: 40px 0;
   border-bottom: 1px solid var(--line);
+  cursor: pointer;
 }
 
+/* izquierda */
 .project-info h2 {
   margin: 0;
 }
@@ -196,19 +256,24 @@ section {
 .project-info p {
   margin-top: 10px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 14px;
-  opacity: 0.7;
+  font-size: 13px;
+  opacity: 0.6;
 }
 
 /* imagen */
 .project img {
   width: 100%;
   filter: grayscale(100%);
-  transition: 0.3s;
+  transition: 0.4s;
 }
 
+/* hover = activación */
 .project:hover img {
   filter: grayscale(0%);
+}
+
+.project:hover .project-info h2 {
+  color: var(--accent);
 }
 
 /* =========================
@@ -220,7 +285,7 @@ section {
     grid-template-columns: 1fr;
   }
 
-  .hero {
+  .panel {
     border-right: none;
     border-bottom: 1px solid var(--line);
   }
