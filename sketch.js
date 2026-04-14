@@ -2,7 +2,6 @@ let canvas;
 
 function setup() {
   const container = document.getElementById('canvas-container');
-
   canvas = createCanvas(container.offsetWidth, container.offsetHeight);
   canvas.parent(container);
 }
@@ -15,7 +14,6 @@ function draw() {
 
   ellipse(mouseX, mouseY, 60);
 
-  strokeWeight(0.5);
   line(mouseX, 0, mouseX, height);
   line(0, mouseY, width, mouseY);
 }
