@@ -1,43 +1,53 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-<meta charset="UTF-8">
-<title>Proyectos</title>
-<link rel="stylesheet" href="style.css">
-</head>
 <body>
-<nav class="sidebar">
-        <div class="brand">KORA_LAB</div>
-        <div class="nav-links">
-            <a href="index.html" class="active">home</a>
-            <a href="about.html">about</a>
-        </div>
-        <div class="status-bar">STATUS: ONLINE</div>
-    </nav>
-<section>
-<h1>Proyectos</h1>
-<div class="project">
-  <div class="project-info">
-    <h2>Albura</h2>
-    <p>Objeto experimental en madera que explora ensamblaje modular.</p>
+
+<nav class="nav">
+  <div>
+    <a href="index.html">Home</a>
+    <a href="projects.html">Proyectos</a>
+    <a href="about.html">About</a>
   </div>
-  <img src="assets/albura/imagen1.jpg">
-</div>
-<div class="project">
-  <div class="project-info">
-    <h2>0-atao</h2>
-    <p>Objeto experimental en madera que explora ensamblaje modular.</p>
+</nav>
+
+<section class="projects-grid">
+
+  <div class="project-card" onclick="openProject('albura')">
+    <img src="assets/albura/imagen1.jpg">
+    <div class="project-label">
+      <h3>Albura</h3>
+      <span>Objeto / Madera</span>
+    </div>
   </div>
-  <img src="assets/albura/imagen1.jpg">
-</div>
-<div class="project">
-  <div class="project-info">
-    <h2>AND-Y</h2>
-    <p>Objeto experimental en madera que explora ensamblaje modular.</p>
+
+  <div class="project-card" onclick="openProject('feria')">
+    <img src="assets/feria-movil/imagen1.jpg">
+    <div class="project-label">
+      <h3>Feria móvil</h3>
+      <span>Proyecto urbano</span>
+    </div>
   </div>
-  <img src="assets/albura/imagen1.jpg">
-</div>
+
+  <div class="project-card" onclick="openProject('lemontech')">
+    <img src="assets/lemontech/imagen1.jpg">
+    <div class="project-label">
+      <h3>Lemontech</h3>
+      <span>Branding</span>
+    </div>
+  </div>
+
 </section>
+
+<!-- VENTANA -->
+<div id="project-window" class="window hidden">
+  <div class="window-header">
+    <span id="window-title">Proyecto</span>
+    <button onclick="closeProject()">×</button>
+  </div>
+  <div class="window-content" id="window-content">
+  </div>
+</div>
+
+<div class="cursor"></div>
+
+<script src="projects.js"></script>
+
 </body>
-</html>
