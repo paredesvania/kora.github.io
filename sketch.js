@@ -50,7 +50,8 @@ function initSketch() {
 }
 
 function draw() {
-  background(255);
+ background(250); // blanco roto
+fill(0);
 
   let dt = min(deltaTime, 100) / 1000;
   timer += dt;
