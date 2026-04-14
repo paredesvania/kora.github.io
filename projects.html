@@ -3,58 +3,58 @@
 <nav class="nav">
   <div>
     <a href="index.html">Home</a>
+    <a href="projects.html">Proyectos</a>
     <a href="about.html">About</a>
   </div>
 </nav>
 
-<section class="projects-grid">
+<section class="projects-wall">
 
-  <div class="project-card" onclick="openProject('albura')">
+  <div class="floating" onclick="openProject('albura')">
     <img src="assets/albura/imagen1.jpg">
-    <div class="project-label">
-      <h3>Albura</h3>
-      <span>Objeto / Madera</span>
+    <div class="hover-info">
+      <span>Albura</span>
+      <small>Objeto / Madera</small>
     </div>
   </div>
 
-  <div class="project-card" onclick="openProject('feria')">
+  <div class="floating" onclick="openProject('feria')">
     <img src="assets/feria-movil/imagen1.jpg">
-    <div class="project-label">
-      <h3>Feria móvil</h3>
-      <span>Proyecto urbano</span>
+    <div class="hover-info">
+      <span>Feria móvil</span>
+      <small>Proyecto urbano</small>
     </div>
   </div>
 
-  <div class="project-card" onclick="openProject('lemontech')">
+  <div class="floating" onclick="openProject('lemontech')">
     <img src="assets/lemontech/imagen1.jpg">
-    <div class="project-label">
-      <h3>Lemontech</h3>
-      <span>Branding</span>
+    <div class="hover-info">
+      <span>Lemontech</span>
+      <small>Branding</small>
     </div>
   </div>
 
 </section>
 
-<!-- VENTANA -->
+<!-- ventana -->
 <div id="project-window" class="window hidden">
   <div class="window-header">
-    <span id="window-title">Proyecto</span>
+    <span id="window-title"></span>
     <button onclick="closeProject()">×</button>
   </div>
-  <div class="window-content" id="window-content">
-  </div>
+  <div id="window-content" class="window-content"></div>
 </div>
 
 <div class="cursor"></div>
 
 <script src="projects.js"></script>
-<div class="cursor"></div>
+
 <script>
 const cursor = document.querySelector('.cursor');
-
 document.addEventListener('mousemove', (e) => {
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
 });
 </script>
+
 </body>
