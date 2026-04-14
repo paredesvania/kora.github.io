@@ -1,59 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Proyectos</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
 <body>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<nav class="nav">
-  <div>
+
+  <nav>
     <a href="index.html">Home</a>
+    <a href="projects.html">Proyectos</a>
     <a href="about.html">About</a>
-  </div>
-</nav>
+  </nav>
 
-<section class="projects-wall">
+  <section class="projects">
 
-  <div class="floating" onclick="openProject('albura')">
-    <img src="assets/albura/imagen1.jpg">
-    <div class="hover-info">
-      <span>Albura</span>
-      <small>Objeto / Madera</small>
+    <h1>Proyectos</h1>
+
+    <div class="projects-grid">
+
+      <a href="#" class="card">
+        <img src="assets/albura/imagen1.jpg">
+        <div class="overlay">
+          <h2>Albura</h2>
+          <p>Producto / Material</p>
+        </div>
+      </a>
+
+      <a href="#" class="card">
+        <img src="assets/feria-movil/imagen1.jpg">
+        <div class="overlay">
+          <h2>Feria móvil</h2>
+          <p>Interacción / Sistema</p>
+        </div>
+      </a>
+
+      <a href="#" class="card">
+        <img src="assets/lemontech/imagen1.jpg">
+        <div class="overlay">
+          <h2>Lemontech</h2>
+          <p>Branding</p>
+        </div>
+      </a>
+
     </div>
-  </div>
 
-  <div class="floating" onclick="openProject('feria')">
-    <img src="assets/feria-movil/imagen1.jpg">
-    <div class="hover-info">
-      <span>Feria móvil</span>
-      <small>Proyecto urbano</small>
-    </div>
-  </div>
-
-  <div class="floating" onclick="openProject('lemontech')">
-    <img src="assets/lemontech/imagen1.jpg">
-    <div class="hover-info">
-      <span>Lemontech</span>
-      <small>Branding</small>
-    </div>
-  </div>
-
-</section>
-
-<!-- ventana -->
-<div id="project-window" class="window hidden">
-  <div class="window-header">
-    <span id="window-title"></span>
-    <button onclick="closeProject()">×</button>
-  </div>
-  <div id="window-content" class="window-content"></div>
-</div>
-
-<div class="cursor"></div>
-
-<script src="projects.js"></script>
-
-<script>
-const cursor = document.querySelector('.cursor');
-document.addEventListener('mousemove', (e) => {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
-});
-</script>
+  </section>
 
 </body>
+</html>
