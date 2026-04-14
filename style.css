@@ -171,3 +171,48 @@ a {
   background-repeat: repeat;
   opacity: 0.05;
 }
+
+.tools-bauhaus {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-top: 40px;
+}
+
+.tool {
+  border: 1px solid black;
+  padding: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* variaciones tipo bauhaus */
+.tool.big {
+  grid-column: span 2;
+  font-weight: 600;
+}
+
+.tool.wide {
+  grid-column: span 3;
+}
+
+.tool.circle {
+  border-radius: 50%;
+}
+
+.about-row {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 80px;
+}
+
+.about-col {
+  flex: 1;
+}
+
+.divider {
+  width: 2px;
+  height: 150px;
+  background: black;
+  margin: 0 40px;
+}
