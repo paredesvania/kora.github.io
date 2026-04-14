@@ -50,7 +50,6 @@ body {
 }
 
 .tools {
-.tools {
   margin-top: 50px;
 }
 
@@ -59,28 +58,17 @@ body {
   margin-bottom: 20px;
 }
 
-/* layout fluido tipo editorial */
-.tools-flow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px 30px;
-  max-width: 500px;
+/* grilla tipo tabla */
+.tools-table {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 40px;
+  max-width: 400px;
 }
 
-/* cada herramienta */
-.tools-flow span {
-  font-size: 18px;
-  position: relative;
-}
-
-/* detalle gráfico sutil */
-.tools-flow span::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -3px;
-  width: 100%;
-  height: 1px;
-  background: black;
-  opacity: 0.2;
+/* cada celda */
+.tools-table div {
+  font-size: 16px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
 }
