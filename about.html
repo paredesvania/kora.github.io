@@ -6,6 +6,9 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script src="sketch.js"></script>
 </head>
 
 <body>
@@ -16,21 +19,20 @@
     <a href="about.html">About</a>
   </nav>
 
-  <section>
+  <section class="about">
 
     <h2 class="about-title">
       Hola! mi nombre es <b>vania</b>, pero puedes llamarme <span class="highlight">kora.</span>
     </h2>
 
-    <div class="about-grid">
+    <div class="about-intro">
 
-      <div class="about-left">
-        <img src="assets/about/vania.png" alt="Vania">
+      <div class="about-image">
+        <img src="assets/about/vania.png">
         <p class="caption">this is me ;)</p>
       </div>
 
-      <div class="about-right">
-
+      <div class="about-text">
         <p>
           Soy estudiante de cuarto año de <b>Diseño Industrial</b>, últimamente obsesionada con la tecnología y cómo interactuamos con ella.
           El <b>diseño de interacción</b> es mi alter ego, es donde todo cobra sentido.
@@ -38,75 +40,86 @@
 
         <p>
           Estudio en la <b>Universidad Diego Portales</b>, donde también curso un diplomado en <b>Medio Ambiente y Crisis Sostenible</b>.
-          En 2025 realicé un semestre de intercambio en Valencia.
+          En 2025 realicé un semestre de intercambio en la Universitat Politècnica de València.
         </p>
-
-        <!-- TOOLS -->
-        <div class="tools">
-          <p class="tools-title">Herramientas</p>
-
-          <div class="tools-grid">
-            <span>p5.js</span>
-            <span>Python</span>
-            <span>Arduino</span>
-            <span>TouchDesigner</span>
-            <span>VS Code</span>
-            <span>Rhinoceros</span>
-            <span>AutoCAD</span>
-            <span>3ds Max</span>
-            <span>Illustrator</span>
-            <span>Photoshop</span>
-            <span>InDesign</span>
-            <span>Figma</span>
-          </div>
-        </div>
-
-        <!-- EDUCACIÓN -->
-        <div class="timeline">
-          <div class="item">
-            <span>2025</span>
-            <p>Intercambio en Valencia</p>
-          </div>
-
-          <div class="item">
-            <span>UDP</span>
-            <p>Diseño Industrial + Medio Ambiente</p>
-          </div>
-        </div>
-
-        <!-- EXPERIENCIA -->
-        <div class="experience">
-
-          <div class="exp-block">
-            <h3>Primavera Hacker</h3>
-            <p>Exploración de experiencias interactivas y tecnología.</p>
-          </div>
-
-          <div class="exp-block">
-            <h3>Centro GAM</h3>
-            <p>Instalación inspirada en Gordon Matta-Clark.</p>
-          </div>
-
-          <div class="exp-block">
-            <h3>Lemontech</h3>
-            <p>Trabajo en identidad visual.</p>
-          </div>
-
-        </div>
-
-        <p class="contact">
-          Si estás trabajando en algo o tienes una idea, feliz de conversar ;)
-        </p>
-
-        <p class="email">
-          hola.koralab@gmail.com
-        </p>
-
       </div>
 
     </div>
 
+    <!-- VISUAL INTERACTIVO -->
+    <div class="about-visual">
+      <div id="p5-container"></div>
+    </div>
+
+    <!-- TOOLS -->
+    <div class="about-block">
+      <p class="block-title">Herramientas</p>
+
+      <div class="tools-grid">
+        <span>p5.js</span>
+        <span>Python</span>
+        <span>Arduino</span>
+        <span>TouchDesigner</span>
+        <span>VS Code</span>
+        <span>Rhinoceros</span>
+        <span>AutoCAD</span>
+        <span>3ds Max</span>
+        <span>Illustrator</span>
+        <span>Photoshop</span>
+        <span>InDesign</span>
+        <span>Figma</span>
+      </div>
+    </div>
+
+    <!-- EDUCACIÓN -->
+    <div class="about-block">
+      <p class="block-title">Educación</p>
+
+      <div class="timeline">
+        <div class="item">
+          <span>2025</span>
+          <p>Intercambio en Valencia</p>
+        </div>
+
+        <div class="item">
+          <span>UDP</span>
+          <p>Diseño Industrial + Medio Ambiente</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPERIENCIA -->
+    <div class="about-block">
+      <p class="block-title">Experiencia</p>
+
+      <div class="exp">
+        <div>
+          <h3>Primavera Hacker</h3>
+          <p>Exploración de experiencias interactivas.</p>
+        </div>
+
+        <div>
+          <h3>Centro GAM</h3>
+          <p>Instalación inspirada en Gordon Matta-Clark.</p>
+        </div>
+
+        <div>
+          <h3>Lemontech</h3>
+          <p>Trabajo gráfico e identidad visual.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="contact">
+      Si estás trabajando en algo o tienes una idea en mente, feliz de conversar ;)
+    </p>
+
+    <p class="email">
+      hola.koralab@gmail.com
+    </p>
+
   </section>
 
+  <script src="cursor.js"></script>
 </body>
 </html>
