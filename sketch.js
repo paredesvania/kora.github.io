@@ -1,43 +1,26 @@
-/**
- * KORA Portfolio Sketch
- * Experimento interactivo integrado en layout
- */
+let canvas;
 
 function setup() {
-    // Buscamos el contenedor por ID
-    let container = document.getElementById('canvas-container');
-    let w = container.offsetWidth;
-    let h = container.offsetHeight;
+  const container = document.getElementById('canvas-container');
 
-    let canvas = createCanvas(w, h);
-    canvas.parent('canvas-container'); // Mantiene el canvas dentro del div
-    
-    background(255);
+  canvas = createCanvas(container.offsetWidth, container.offsetHeight);
+  canvas.parent(container);
 }
 
 function draw() {
-    background(255, 50); // Efecto ghosting/trail
-    
-    // Estética técnica: Líneas de guía
-    stroke(0, 30);
-    strokeWeight(0.5);
-    line(mouseX, 0, mouseX, height);
-    line(0, mouseY, width, mouseY);
+  clear();
 
-    // Cursor interactivo Bauhaus
-    noFill();
-    stroke(0);
-    rectMode(CENTER);
-    square(mouseX, mouseY, 40);
-    
-    // Punto de acento neón
-    fill(0, 255, 65); // Verde terminal
-    noStroke();
-    circle(mouseX, mouseY, 4);
+  stroke(0);
+  noFill();
+
+  ellipse(mouseX, mouseY, 60);
+
+  strokeWeight(0.5);
+  line(mouseX, 0, mouseX, height);
+  line(0, mouseY, width, mouseY);
 }
 
-// Crucial para que sea responsivo
 function windowResized() {
-    let container = document.getElementById('canvas-container');
-    resizeCanvas(container.offsetWidth, container.offsetHeight);
+  const container = document.getElementById('canvas-container');
+  resizeCanvas(container.offsetWidth, container.offsetHeight);
 }
