@@ -340,3 +340,36 @@ a { color: var(--black); text-decoration: none; }
 
   opacity: 0.4;
 }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: black; /* cambia si quieres */
+}
+
+#hero {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#typing-line {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(3rem, 10vw, 10rem);
+  color: white;
+  letter-spacing: 0.08em;
+}
+
+#cursor {
+  color: #FF9BB3;
+  margin-left: 5px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
