@@ -99,10 +99,11 @@ nav {
 }
 
 #typing-line {
-  font-size: clamp(4rem, 12vw, 10rem);
+  font-size: clamp(6rem, 18vw, 16rem); /* mucho más grande */
   color: var(--black);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   text-align: center;
+  font-weight: 600;
 }
 
 /* ── CURSOR TEXTO ── */
