@@ -1,10 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const el = document.getElementById("typing-text");
-
-  // ======================
-  // CONFIG
-  // ======================
+  if (!el) return;
 
   const sequences = [
     "kora_lab();",
@@ -23,7 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const current = sequences[seqIndex];
 
     if (!isDeleting) {
-      // escribiendo
       el.textContent = current.substring(0, charIndex + 1);
       charIndex++;
 
@@ -36,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(loop, typingSpeed);
 
     } else {
-      // borrando
       el.textContent = current.substring(0, charIndex - 1);
       charIndex--;
 
@@ -45,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
         seqIndex++;
 
         if (seqIndex >= sequences.length) {
-          // se queda en el último
           seqIndex = sequences.length - 1;
           return;
         }
