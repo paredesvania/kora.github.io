@@ -42,17 +42,15 @@ html, body {
 }
 /* ── CURSOR ── */
 .cursor {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   background: var(--pink);
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
   z-index: 9999;
-
   transform: translate(-50%, -50%);
-  transition: transform 0.12s ease, width 0.2s ease, height 0.2s ease;
-  mix-blend-mode: difference;
+  transition: transform 0.15s ease, width 0.2s ease, height 0.2s ease;
 }
 
 /* ── NAV ── */
@@ -66,22 +64,11 @@ nav {
   justify-content: space-between;
   align-items: center;
 
-  padding: 18px var(--pad);
-
-  background: rgba(250, 250, 250, 0.75);
-  backdrop-filter: blur(10px);
-
-  border-bottom: 1px solid rgba(0,0,0,0.08);
+  padding: 20px var(--pad);
+  background: var(--white);
+  border-bottom: 1px solid var(--black);
 
   z-index: 100;
-  transition: all 0.3s ease;
-}
-
-/* estado al hacer scroll */
-nav.scrolled {
-  padding: 10px var(--pad);
-  background: rgba(250, 250, 250, 0.92);
-  border-bottom: 1px solid rgba(255,42,163,0.2);
 }
 
 .nav-logo {
@@ -217,20 +204,18 @@ nav.scrolled {
   aspect-ratio: 4/5;
   cursor: pointer;
 }
-.card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+
 .card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.5s ease, filter 0.3s ease;
   opacity: 0.95;
 }
 
 .card:hover img {
-   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  transform: scale(1.05);
+  filter: brightness(0.85);
 }
 
 /* ── OVERLAY ── */
@@ -499,13 +484,4 @@ nav.scrolled {
   opacity: 1;
   border-bottom: 1px solid var(--pink);
   color: var(--pink);
-}
-#page-transition {
-  position: fixed;
-  inset: 0;
-  background: var(--black);
-  z-index: 9999;
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform 0.5s ease;
 }
