@@ -108,26 +108,15 @@ nav {
 
 #typing-text::after {
   content: "|";
-  color: #ff2aa3;
+  color: var(--pink);
   animation: blink 1.2s infinite;
 }
 
+/* blink cursor */
 @keyframes blink {
   50% {
     opacity: 0;
   }
-}
-
-/* ── CURSOR TEXTO ── */
-#cursor {
-  margin-left: 5px;
-  color: #FF9BB3;
-  animation: blink 1s infinite;
-}
-
-@keyframes blink {
-  0%, 50%, 100% { opacity: 1; }
-  25%, 75% { opacity: 0; }
 }
 
 /* ── HOME ── */
@@ -164,25 +153,23 @@ nav {
   height: 80vh;
 }
 
-/* columnas animadas */
 .column {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* pausa en hover (CLAVE) */
-.column:hover {
-  animation-play-state: paused;
-}
-
-/* animaciones */
+/* scroll animations */
 .scroll-down {
   animation: scrollDown 20s linear infinite;
 }
 
 .scroll-up {
   animation: scrollUp 20s linear infinite;
+}
+
+.column:hover {
+  animation-play-state: paused;
 }
 
 @keyframes scrollDown {
@@ -209,13 +196,13 @@ nav {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease, opacity 0.3s ease;
+  transition: transform 0.5s ease, filter 0.3s ease;
   opacity: 0.95;
 }
 
 .card:hover img {
   transform: scale(1.05);
-  filter: brightness(0.9);
+  filter: brightness(0.85);
 }
 
 /* ── OVERLAY ── */
@@ -236,19 +223,23 @@ nav {
     transparent 70%
   );
 
-  transform: translateY(80px);
+  transform: translateY(100%);
   opacity: 0;
 
   transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
               opacity 0.3s ease;
+
+  will-change: transform, opacity;
+  pointer-events: none;
 }
 
 .card:hover .overlay {
   transform: translateY(0);
   opacity: 1;
+  pointer-events: auto;
 }
 
-/* animación texto */
+/* overlay text */
 .overlay h2 {
   color: white;
   font-size: 16px;
@@ -284,6 +275,8 @@ nav {
   padding: 140px 40px 80px;
 }
 
+/* (todo lo de about lo dejo igual, sin cambios importantes) */
+
 .about-title {
   font-size: clamp(28px, 4vw, 48px);
   font-weight: 600;
@@ -303,30 +296,15 @@ nav {
   align-items: start;
 }
 
-.about-image {
-  width: 100%;
-  max-width: 280px;
-}
-
 .about-image img {
   width: 100%;
+  max-width: 280px;
   height: auto;
   display: block;
-
   border-radius: 2px;
-
-  /* look más editorial */
   object-fit: cover;
-
-  /* evita que se vea “gigante agresiva” */
   max-height: 360px;
-
   filter: grayscale(10%);
-}
-
-.about-image img:hover {
-  transform: scale(1.02);
-  transition: transform 0.4s ease;
 }
 
 .about-text {
@@ -340,25 +318,7 @@ nav {
   font-size: 13.5px;
 }
 
-/* QUOTE */
-.quote {
-  margin-top: 40px;
-  max-width: 520px;
-  font-size: 16px;
-  line-height: 1.6;
-  opacity: 0.7;
-}
-
-.quote .author {
-  display: block;
-  margin-top: 16px;
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  opacity: 0.4;
-}
-
-/* TOOLS */
+/* tools */
 .tools-section {
   margin-top: 80px;
 }
@@ -395,68 +355,4 @@ nav {
   background: var(--pink);
   border-color: var(--pink);
   color: white;
-}
-
-/* INFO GRID */
-.about-info-grid {
-  display: grid;
-  grid-template-columns: 1fr 1px 1fr;
-  gap: 0 60px;
-  margin-top: 80px;
-  padding-top: 40px;
-  border-top: 0.5px solid var(--gray);
-}
-
-.info-divider {
-  background: var(--gray);
-}
-
-.about-info-grid h3 {
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  opacity: 0.35;
-  margin-bottom: 20px;
-}
-
-.info-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 0.5px solid var(--gray);
-  font-size: 13px;
-}
-
-.info-item span {
-  opacity: 0.45;
-  font-size: 11px;
-}
-
-/* CONTACT */
-.contact-section {
-  margin-top: 100px;
-  padding-top: 40px;
-  border-top: 1px solid var(--black);
-
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-.contact-text {
-  font-size: 13px;
-  opacity: 0.6;
-  max-width: 300px;
-}
-
-.email-link {
-  font-size: 14px;
-  font-weight: 600;
-  border-bottom: 1.5px solid var(--pink);
-  padding-bottom: 2px;
-  transition: opacity 0.2s;
-}
-
-.email-link:hover {
-  opacity: 0.7;
 }
