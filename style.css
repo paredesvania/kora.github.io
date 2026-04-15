@@ -25,12 +25,11 @@ html, body {
   line-height: 1.6;
   font-weight: 300;
 }
-.cursor {
-  display: inline-block;
-  width: 10px;
-  margin-left: 2px;
-  background-color: currentColor;
-  animation: blink 1s steps(2, start) infinite;
+#typing-text::after {
+  content: "|";
+  margin-left: 4px;
+  color: #ff2aa3;
+  animation: blink 1s step-start infinite;
 }
 
 @keyframes blink {
