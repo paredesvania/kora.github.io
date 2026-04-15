@@ -25,7 +25,17 @@ html, body {
   line-height: 1.6;
   font-weight: 300;
 }
+.cursor {
+  display: inline-block;
+  width: 10px;
+  margin-left: 2px;
+  background-color: currentColor;
+  animation: blink 1s steps(2, start) infinite;
+}
 
+@keyframes blink {
+  50% { opacity: 0; }
+}
 /* ── CURSOR ── */
 .cursor {
   width: 10px;
