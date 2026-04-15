@@ -403,3 +403,9 @@ nav {
   0% { transform: translateY(0); }
   100% { transform: translateY(-50%); }
 }
+
+.about {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 140px 20px 80px;
+}
