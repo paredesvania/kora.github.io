@@ -9,32 +9,35 @@ document.addEventListener("DOMContentLoaded", () => {
     "print(\"<3\");"
   ];
 
-  const typingSpeed = 80;
-  const deletingSpeed = 40;
-  const pauseTime = 1300;
-
   let seqIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
   let finished = false;
 
+  const typingSpeed = 80;
+  const deletingSpeed = 40;
+  const pauseTime = 1300;
+
+  function render(text) {
+    el.innerHTML = `${text}<span class="cursor"></span>`;
+  }
+
   function loop() {
     const current = sequences[seqIndex];
 
-    // Si ya terminamos todo, dejamos el texto fijo + cursor
     if (finished) {
-      el.textContent = current + " |";
+      render(current);
       setTimeout(loop, 500);
       return;
     }
 
     if (!isDeleting) {
-      el.textContent = current.substring(0, charIndex + 1) + " |";
+      const text = current.substring(0, charIndex + 1);
+      render(text);
       charIndex++;
 
       if (charIndex === current.length) {
 
-        // Si es el último comando, NO borrar
         if (seqIndex === sequences.length - 1) {
           finished = true;
           setTimeout(loop, pauseTime);
@@ -49,13 +52,13 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(loop, typingSpeed);
 
     } else {
-      el.textContent = current.substring(0, charIndex - 1) + " |";
+      const text = current.substring(0, charIndex - 1);
+      render(text);
       charIndex--;
 
       if (charIndex === 0) {
         isDeleting = false;
         seqIndex++;
-
         setTimeout(loop, 400);
         return;
       }
@@ -65,5 +68,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   loop();
-
 });
