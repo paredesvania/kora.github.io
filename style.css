@@ -26,10 +26,18 @@ html, body {
   font-weight: 300;
 }
 #typing-text::after {
-  content: "|";
-  margin-left: 4px;
-  color: #ff2aa3;
-  animation: blink 1s step-start infinite;
+  content: "";
+  width: 2px;
+  height: 1em;
+  display: inline-block;
+  background: #ff2aa3;
+  margin-left: 6px;
+  animation: blink 1s steps(2, start) infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
 }
 
 @keyframes blink {
