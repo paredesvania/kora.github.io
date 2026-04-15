@@ -1,93 +1,88 @@
-// sketch.js - Versión Elegante (Ritmo suave, inicio rápido)
+// =======================
+// CONFIGURACIÓN
+// =======================
 
-const SVG_PATHS = `<g fill="black" stroke="black" stroke-width="6" stroke-linejoin="round"><path d="M669.346,363.145C637.735,421.412 620.329,415.845 616.555,415.187C584.11,409.525 622.593,344.38 605.643,372.661C581.544,412.874 575.333,423.794 548.75,430.999C545.509,431.878 543.726,474.406 564.896,501.192C570.512,508.298 571.498,500.435 624.767,470.955C678.348,441.303 733.702,436.285 750.152,461.746C787.788,519.997 621.036,589.801 551.813,506.195C481.154,420.856 587.691,329.482 562.572,323.298C535.146,316.546 488.131,438.077 486.464,438.39C473.708,440.78 473.186,439.332 462.529,446.574C451.262,454.23 509.628,350.619 503.254,337.615C491.769,314.186 460.326,403.119 430.378,441.407C410.171,467.24 383.766,464.173 390.844,425.464C393.055,413.372 365.623,480.662 340.564,467.376C305.164,448.609 355.601,350.643 398.491,349.197C416.102,348.604 412.755,363.986 412.737,366.475C412.484,370.995 414.525,367.746 414.612,367.595C415.083,366.182 419.786,352.054 423.441,351.204C437.768,347.873 437.91,346.988 445.86,334.732C466.327,303.18 411.914,417.556 407.356,437.468C404.272,450.941 411.713,456.282 421.17,446.15C458.806,405.832 484.31,305.45 514.283,331.767C527.5,343.372 516.304,367.266 521.214,359.185C523.165,355.972 546.669,308.822 573.652,318.156C612.291,331.522 528.352,427.119 556.488,424.351C572.459,422.779 608.368,368.77 626.783,323.641C630.772,313.867 629.019,311.096 639.429,309.128C663.676,304.545 655.817,289.547 662.667,291.149C669.633,292.778 593.727,425.251 629.379,408.27C663.182,392.17 683.621,289.442 739.528,283.8C759.403,281.794 750.387,310.082 754.314,303.364C754.964,302.252 754.15,302.052 760.582,288.542C762.514,284.484 775.588,287.759 782.075,278.176C816.223,227.726 746.276,350.723 745.459,387.501C744.222,443.22 842.644,402.485 855,319.423C864.336,256.664 795.415,296.313 794.699,345.517C794.69,346.14 794.31,372.255 791.322,352.535C784.81,309.55 840.148,262.324 862.203,291.714C897.353,338.554 779.992,459.837 735.897,403.163C717.628,379.681 740.823,336.818 727.017,363.239C696.043,422.515 669.367,402.572 669.235,378.504C669.196,371.323 669.222,371.431 670.693,364.482C670.724,364.334 670.693,364.482 669.346,363.145Z"/><path d="M37.066,422.457C32.324,500.136 117.225,451.894 150.923,365.668C153.222,359.787 171.839,312.149 162.114,287.531C157.037,274.68 183.611,304.667 177.032,342.425C157.785,452.878 3.605,521.889 33.412,396.477C59.835,285.306 212.127,209.242 275.711,233.016C280.1,234.657 288.607,225.852 283.448,232.468C277.836,239.665 302.765,238.946 303.421,276.501C304.601,344.155 199.237,462.823 210.942,497.318C214.753,508.551 244.374,490.462 291.781,414.677C358.243,308.432 419.481,166.713 545.488,180.611C591.973,185.738 603.75,234.719 595.514,229.466C594.45,228.787 588.353,171.167 488.581,205.726C362.323,249.459 294.976,457.982 228.194,500.018C204.138,515.161 179.426,495.095 213.377,422.438C250.417,343.171 298.166,278.98 274.234,245.717C270.548,240.593 253.19,270.504 243.236,299.408C227.372,345.475 210.576,441.793 124.373,477.214C108.59,483.7 104.693,480.042 107.355,479.31C169.751,462.14 169.016,418.043 223.385,308.444C244.628,265.622 270.255,242.203 268.537,240.472C243.869,215.626 110.832,255.552 46.813,390.64C40.332,404.317 37.537,419.837 37.066,422.457Z"/><path d="M676.917,263.603C661.997,294.195 632.246,265.067 653.566,250.59C654.747,249.788 662.927,244.234 671.325,248.892C679.05,253.177 677.182,254.81 676.917,263.603Z"/></g>`;
+// Textos (puedes cambiar fácil aquí)
+const text1 = "K O R A   L A B";
+const text2 = "Kora.";
 
-let dots = [], posA, posB, showingA = true, timer = 0, imgV;
+// Velocidades (en milisegundos)
+const typingSpeed = 100;
+const deletingSpeed = 60;
 
-const DENSITY = 3;
-const T_MORPH = 2;
+// Pausas
+const pauseAfterTyping = 1200;
+const pauseAfterDeleting = 500;
 
-function preload() {
-  let s = `<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">${SVG_PATHS}</svg>`;
-  imgV = loadImage('data:image/svg+xml;base64,' + btoa(s));
-}
+// Loop (true = repite, false = se queda en "Kora.")
+const loop = true;
 
-function setup() {
-let canvas = createCanvas(window.innerWidth, 500);
-canvas.parent("p5-container");
-  pixelDensity(1);
-  initSketch();
-}
 
-function initSketch() {
-  let pgA = createGraphics(width, height);
-  let pgB = createGraphics(width, height);
-  pgA.pixelDensity(1); pgB.pixelDensity(1);
+// =======================
+// LÓGICA
+// =======================
 
-  pgA.background(255); pgA.fill(0); pgA.textAlign(CENTER, CENTER);
-  pgA.textSize(min(width, height) * 0.18); pgA.textFont('Arial Black');
-  pgA.text('KORA', width/2, height/2);
-  posA = samplePts(pgA);
+const textElement = document.getElementById("typing-text");
 
-  pgB.background(255);
-  let w = width * 0.65;
-  let h = w;
-  pgB.image(imgV, (width - w) / 2, (height - h) / 2 + (h * 0.08), w, h);
-  posB = samplePts(pgB);
+let currentText = "";
+let index = 0;
+let isDeleting = false;
+let phase = 0; 
+// 0 = escribiendo text1
+// 1 = borrando
+// 2 = escribiendo text2
+// 3 = terminado
 
-  let total = Math.max(posA.length, posB.length);
-  while(posA.length < total) posA.push({...posA[Math.floor(Math.random()*posA.length)]});
-  while(posB.length < total) posB.push({...posB[Math.floor(Math.random()*posB.length)]});
+function type() {
+  let fullText;
 
-  dots = posA.map((p, i) => ({
-    x: p.x, y: p.y, tx: posB[i].x, ty: posB[i].y, fx: p.x, fy: p.y,
-    r: Math.random() * 1.4 + 0.4
-  }));
+  if (phase === 0) fullText = text1;
+  else if (phase === 2) fullText = text2;
 
-  // Arranca morpheando de inmediato hacia Vania
-  timer = 0;
-  showingA = true;
-}
+  if (phase === 0 || phase === 2) {
+    // ESCRIBIENDO
+    currentText = fullText.substring(0, index + 1);
+    textElement.innerHTML = currentText;
+    index++;
 
-function draw() {
- background(250); // blanco roto
-fill(0);
-
-  let dt = min(deltaTime, 100) / 1000;
-  timer += dt;
-
-  if (timer >= T_MORPH) {
-    showingA = !showingA;
-    let targets = showingA ? posA : posB;
-    dots.forEach(d => { d.fx = d.x; d.fy = d.y; });
-    for (let i = 0; i < dots.length; i++) {
-      dots[i].tx = targets[i].x;
-      dots[i].ty = targets[i].y;
+    if (index === fullText.length) {
+      if (phase === 0) {
+        phase = 1;
+        setTimeout(type, pauseAfterTyping);
+      } else {
+        phase = 3;
+        if (loop) {
+          setTimeout(() => {
+            phase = 1;
+            index = currentText.length;
+            type();
+          }, pauseAfterTyping);
+        }
+      }
+      return;
     }
-    timer = 0;
+
+    setTimeout(type, typingSpeed);
   }
 
-  let p = ease(constrain(timer / T_MORPH, 0, 1));
+  else if (phase === 1) {
+    // BORRANDO
+    currentText = currentText.substring(0, currentText.length - 1);
+    textElement.innerHTML = currentText;
 
-  fill(30); noStroke();
-  for (let d of dots) {
-    d.x = d.fx + (d.tx - d.fx) * p;
-    d.y = d.fy + (d.ty - d.fy) * p;
-    circle(d.x, d.y, d.r * 2);
-  }
-}
+    if (currentText.length === 0) {
+      if (index > 0) index = 0;
 
-function samplePts(g) {
-  g.loadPixels();
-  let pts = [];
-  for (let y = 0; y < g.height; y += DENSITY) {
-    for (let x = 0; x < g.width; x += DENSITY) {
-      if (g.pixels[4 * (y * g.width + x)] < 128) pts.push({x, y});
+      if (phase === 1 && textElement.innerHTML === "") {
+        phase = 2;
+        setTimeout(type, pauseAfterDeleting);
+        return;
+      }
     }
+
+    setTimeout(type, deletingSpeed);
   }
-  return pts;
 }
 
-function ease(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
-function windowResized() {resizeCanvas(window.innerWidth, 500);
-initSketch(); }
+// iniciar
+type();
