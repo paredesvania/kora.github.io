@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sequences = [
     "kora_lab();",
     "kora();"
+     "kora("<3");"
   ];
 
   const typingSpeed = 80;
