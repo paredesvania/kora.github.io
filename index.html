@@ -3,20 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <title>KORA</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-  <script src="sketch.js"></script>
-</head>
-<body>
-<div id="hero">
-  <div id="typing-line">
-    <span id="typing-text"></span><span id="cursor">|</span>
-  </div>
-</div>
 
-<!-- IMPORTANTE: defer -->
-<script src="sketch.js" defer></script>
+  <!-- p5 solo si lo usas realmente -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+</head>
+
+<body>
+
+  <!-- HERO -->
+  <div id="hero">
+    <div id="typing-line">
+      <span id="typing-text"></span><span id="cursor">|</span>
+    </div>
+  </div>
+
+  <!-- NAV -->
   <nav>
     <a href="index.html" class="nav-logo">KORA</a>
     <div class="nav-links">
@@ -25,19 +29,9 @@
     </div>
   </nav>
 
-  <section class="home">
-    <div class="home-bottom">
-      <span class="home-tag">Santiago, Chile — 2026</span>
-      </span>
-    </div>
-  </section>
-  
-<div id="typing-container">
-  <span id="typing-text"></span><span id="cursor">|</span>
-</div>
-  <!-- El p5 morph va aquí debajo del hero, como sección propia -->
-  <div id="p5-container" style="width:100%; overflow:hidden;"></div>
-
+  <!-- SCRIPTS (SIEMPRE AL FINAL) -->
+  <script src="sketch.js"></script>
   <script src="cursor.js"></script>
+
 </body>
 </html>
