@@ -227,3 +227,56 @@ a {
 * {
   cursor: none !important;
 }
+
+.about-title {
+  font-size: 48px;
+  max-width: 700px;
+  line-height: 1.2;
+  margin-bottom: 80px;
+}
+
+.about-intro {
+  display: flex;
+  gap: 80px;
+  align-items: flex-start;
+}
+
+.about-image img {
+  width: 220px;
+}
+
+.about-text {
+  max-width: 420px;
+}
+
+.about-visual {
+  margin: 160px 0;
+  height: 520px;
+  display: flex;
+  justify-content: center;
+}
+
+.tools-line {
+  margin-top: 80px;
+  font-size: 14px;
+  opacity: 0.7;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.about-info {
+  display: flex;
+  gap: 120px;
+  margin-top: 100px;
+}
+
+.about-info h3 {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.about-info p {
+  margin: 6px 0;
+}
