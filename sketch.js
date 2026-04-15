@@ -16,18 +16,23 @@ document.addEventListener("DOMContentLoaded", () => {
   let charIndex = 0;
   let isDeleting = false;
 
+  let finished = false;
+
   function loop() {
+    if (finished) return;
+
     const current = sequences[seqIndex];
 
     if (!isDeleting) {
       el.textContent = current.substring(0, charIndex + 1);
       charIndex++;
 
-      // TERMINA DE ESCRIBIR
+      // terminó de escribir la palabra actual
       if (charIndex === current.length) {
 
-        // SI ES EL ÚLTIMO TEXTO → NO BORRAR
+        // si es la última → congelar
         if (seqIndex === sequences.length - 1) {
+          finished = true;
           startCursorBlink();
           return;
         }
@@ -54,13 +59,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Cursor parpadeante tipo terminal
   function startCursorBlink() {
-    let showCursor = true;
+    let show = true;
 
     setInterval(() => {
-      el.textContent = sequences[seqIndex]);
-      showCursor = !showCursor;
+      el.textContent = sequences[seqIndex] + (show ? "|" : "");
+      show = !show;
     }, 500);
   }
 
