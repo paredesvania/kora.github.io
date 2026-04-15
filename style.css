@@ -142,44 +142,49 @@ nav {
   opacity: 0.35;
 }
 
-/* ── PROJECTS GRID ── */
+/* ── PROJECTS SECTION ── */
+.projects {
+  height: 100vh;
+  padding-top: 70px; /* espacio del nav fijo */
+}
+
+/* GRID full screen real */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
+
+  height: calc(100vh - 70px); /* nav restado */
   overflow: hidden;
-  height: 80vh;
+  padding: 16px var(--pad) 16px var(--pad);
 }
 
+/* columnas ocupan todo */
 .column {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  height: 100%;
 }
 
-/* scroll animations */
+/* mejora scroll animation para full height */
 .scroll-down {
-  animation: scrollDown 20s linear infinite;
+  animation: scrollDown 25s linear infinite;
 }
 
 .scroll-up {
-  animation: scrollUp 20s linear infinite;
-}
-
-.column:hover {
-  animation-play-state: paused;
+  animation: scrollUp 25s linear infinite;
 }
 
 @keyframes scrollDown {
-  0% { transform: translateY(-50%); }
+  0% { transform: translateY(-30%); }
   100% { transform: translateY(0); }
 }
 
 @keyframes scrollUp {
   0% { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
+  100% { transform: translateY(-30%); }
 }
-
 /* ── CARD ── */
 .card {
   position: relative;
