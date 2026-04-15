@@ -3,27 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <title>KORA</title>
-<div class="bauhaus-bg"></div>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script src="sketch.js"></script>
 </head>
-
 <body>
 
   <nav>
-    <a href="index.html">Home</a>
-    <a href="projects.html">Proyectos</a>
-    <a href="about.html">About</a>
+    <a href="index.html" class="nav-logo">KORA</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="projects.html">Proyectos</a>
+      <a href="about.html">About</a>
+    </div>
   </nav>
 
   <section class="home">
-    <div class="home-content">
-      <h1>KORA</h1>
-      <p>Diseño, tecnología y experiencias interactivas</p>
+    <div>
+      <p class="home-eyebrow">Diseño & Interacción Digital</p>
+      <h1>KO<span class="accent">R</span>A</h1>
+      <p class="home-sub">Diseñadora industrial explorando la intersección entre tecnología y experiencia.</p>
+    </div>
+    <div class="home-bottom">
+      <span class="home-tag">Santiago, Chile — 2025</span>
+      <span class="home-scroll">
+        <span class="scroll-line"></span>scroll
+      </span>
     </div>
   </section>
+
+  <!-- El p5 morph va aquí debajo del hero, como sección propia -->
+  <div id="p5-container" style="width:100%; overflow:hidden;"></div>
 
   <script src="cursor.js"></script>
 </body>
