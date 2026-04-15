@@ -3,41 +3,55 @@ document.addEventListener("DOMContentLoaded", () => {
   const el = document.getElementById("typing-text");
   if (!el) return;
 
-  const fullText = "kora_lab";
-  const finalText = "kora";
+  const sequences = [
+    "kora_lab();",
+    "kora();"
+  ];
 
+  const typingSpeed = 80;
+  const deletingSpeed = 40;
+  const pauseTime = 1300;
+
+  let seqIndex = 0;
   let charIndex = 0;
+  let isDeleting = false;
 
-  const typingSpeed = 100;
-  const deletingSpeed = 60;
-  const pauseTime = 1200;
+  function loop() {
+    const current = sequences[seqIndex];
 
-  // ESCRIBIR kora_lab
-  function typeFull() {
-    el.textContent = fullText.substring(0, charIndex + 1);
-    charIndex++;
+    if (!isDeleting) {
+      el.textContent = current.substring(0, charIndex + 1);
+      charIndex++;
 
-    if (charIndex < fullText.length) {
-      setTimeout(typeFull, typingSpeed);
+      if (charIndex === current.length) {
+        isDeleting = true;
+        setTimeout(loop, pauseTime);
+        return;
+      }
+
+      setTimeout(loop, typingSpeed);
+
     } else {
-      setTimeout(deleteToKora, pauseTime);
+      el.textContent = current.substring(0, charIndex - 1);
+      charIndex--;
+
+      if (charIndex === 0) {
+        isDeleting = false;
+        seqIndex++;
+
+        if (seqIndex >= sequences.length) {
+          seqIndex = sequences.length - 1;
+          return;
+        }
+
+        setTimeout(loop, 400);
+        return;
+      }
+
+      setTimeout(loop, deletingSpeed);
     }
   }
 
-  // BORRAR hasta "kora"
-  function deleteToKora() {
-    el.textContent = fullText.substring(0, charIndex - 1);
-    charIndex--;
-
-    if (charIndex > finalText.length) {
-      setTimeout(deleteToKora, deletingSpeed);
-    } else {
-      // asegura que quede EXACTO "kora"
-      el.textContent = finalText;
-      // y NO hace nada más → se queda ahí
-    }
-  }
-
-  typeFull();
+  loop();
 
 });
