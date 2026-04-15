@@ -154,6 +154,7 @@ nav {
 
 /* GRID full screen real */
 .projects-grid {
+  height: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
@@ -162,7 +163,6 @@ nav {
   padding: 16px var(--pad);
 
   overflow: hidden;
-  align-items: stretch; 
 }
 
 /* columnas ocupan todo */
@@ -170,10 +170,6 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 16px;
-
-  height: 100%; 
-  justify-content: space-between;
-  min-height: 100%;
 }
 
 /* mejora scroll animation para full height */
@@ -193,6 +189,11 @@ nav {
 @keyframes scrollUp {
   0% { transform: translateY(0); }
   100% { transform: translateY(-30%); }
+}
+
+.projects {
+  height: calc(100vh - 70px);
+  padding: 70px 0 0; /* solo compensa nav */
 }
 /* ── CARD ── */
 .card {
