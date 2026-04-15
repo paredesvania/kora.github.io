@@ -99,11 +99,10 @@ nav {
 }
 
 #typing-line {
-  font-size: clamp(1.2rem, 2vw, 1.8rem);
-  color: var(--black); /* 👈 ahora negro */
-  letter-spacing: 0.05em;
-  line-height: 1.8;
-  text-align: left;
+  font-size: clamp(4rem, 12vw, 10rem);
+  color: var(--black);
+  letter-spacing: 0.08em;
+  text-align: center;
 }
 
 /* ── CURSOR TEXTO ── */
