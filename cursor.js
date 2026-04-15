@@ -14,3 +14,12 @@ link.addEventListener("mouseleave", () => {
 cursor.style.transform = "translate(-50%, -50%) scale(1)";
 });
 });
+
+window.addEventListener("scroll", () => {
+  const nav = document.querySelector("nav");
+  if (window.scrollY > 10) {
+    nav.classList.add("scrolled");
+  } else {
+    nav.classList.remove("scrolled");
+  }
+});
