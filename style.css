@@ -104,19 +104,7 @@ nav {
   letter-spacing: 0.05em;
   text-align: center;
   font-weight: 350;
-}
 
-#typing-text::after {
-  content: "|";
-  color: var(--pink);
-  animation: blink 1.2s infinite;
-}
-
-/* blink cursor */
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
 }
 
 /* ── HOME ── */
