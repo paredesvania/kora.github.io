@@ -3,11 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const el = document.getElementById("typing-text");
   if (!el) return;
 
- const sequences = [
-  "kora_lab();",
-  "kora();",
-  "print(\"<3\");"
-];
+  const sequences = [
+    "kora_lab();",
+    "kora();",
+    "print(\"<3\");"
+  ];
 
   const typingSpeed = 80;
   const deletingSpeed = 40;
@@ -31,10 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
       // terminó de escribir la palabra actual
       if (charIndex === current.length) {
 
-        // si es la última → congelar
+        // si es la última → STOP TOTAL
         if (seqIndex === sequences.length - 1) {
           finished = true;
-          startCursorBlink();
+          el.textContent = sequences[seqIndex]; // fijo, sin cursor JS
           return;
         }
 
@@ -58,15 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       setTimeout(loop, deletingSpeed);
     }
-  }
-
-  function startCursorBlink() {
-    let show = true;
-
-    setInterval(() => {
-      el.textContent = sequences[seqIndex] + (show ? "|" : "");
-      show = !show;
-    }, 500);
   }
 
   loop();
