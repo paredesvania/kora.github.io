@@ -331,3 +331,26 @@ a { color: var(--black); text-decoration: none; }
   0%, 50%, 100% { opacity: 1; }
   25%, 75% { opacity: 0; }
 }
+
+.quote {
+  margin-top: 80px;
+  max-width: 520px;
+
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 300;
+
+  color: var(--black);
+  opacity: 0.7;
+}
+
+.quote .author {
+  display: block;
+  margin-top: 16px;
+
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  opacity: 0.4;
+}
