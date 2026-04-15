@@ -23,7 +23,15 @@ document.addEventListener("DOMContentLoaded", () => {
       el.textContent = current.substring(0, charIndex + 1);
       charIndex++;
 
+      // TERMINA DE ESCRIBIR
       if (charIndex === current.length) {
+
+        // SI ES EL ÚLTIMO TEXTO → NO BORRAR
+        if (seqIndex === sequences.length - 1) {
+          startCursorBlink();
+          return;
+        }
+
         isDeleting = true;
         setTimeout(loop, pauseTime);
         return;
@@ -38,18 +46,22 @@ document.addEventListener("DOMContentLoaded", () => {
       if (charIndex === 0) {
         isDeleting = false;
         seqIndex++;
-
-        if (seqIndex >= sequences.length) {
-          seqIndex = sequences.length - 1;
-          return;
-        }
-
         setTimeout(loop, 400);
         return;
       }
 
       setTimeout(loop, deletingSpeed);
     }
+  }
+
+  // Cursor parpadeante tipo terminal
+  function startCursorBlink() {
+    let showCursor = true;
+
+    setInterval(() => {
+      el.textContent = sequences[seqIndex] + (showCursor ? "|" : "");
+      showCursor = !showCursor;
+    }, 500);
   }
 
   loop();
