@@ -16,25 +16,28 @@ document.addEventListener("DOMContentLoaded", () => {
   let seqIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
-
   let finished = false;
 
   function loop() {
-    if (finished) return;
-
     const current = sequences[seqIndex];
 
+    // Si ya terminamos todo, dejamos el texto fijo + cursor
+    if (finished) {
+      el.textContent = current + " |";
+      setTimeout(loop, 500);
+      return;
+    }
+
     if (!isDeleting) {
-      el.textContent = current.substring(0, charIndex + 1);
+      el.textContent = current.substring(0, charIndex + 1) + " |";
       charIndex++;
 
-      // terminó de escribir la palabra actual
       if (charIndex === current.length) {
 
-        // si es la última → STOP TOTAL
+        // Si es el último comando, NO borrar
         if (seqIndex === sequences.length - 1) {
           finished = true;
-          el.textContent = sequences[seqIndex]; // fijo, sin cursor JS
+          setTimeout(loop, pauseTime);
           return;
         }
 
@@ -46,12 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(loop, typingSpeed);
 
     } else {
-      el.textContent = current.substring(0, charIndex - 1);
+      el.textContent = current.substring(0, charIndex - 1) + " |";
       charIndex--;
 
       if (charIndex === 0) {
         isDeleting = false;
         seqIndex++;
+
         setTimeout(loop, 400);
         return;
       }
