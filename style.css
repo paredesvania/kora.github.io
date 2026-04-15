@@ -27,17 +27,13 @@ html, body {
 }
 #typing-text::after {
   content: "";
-  width: 2px;
-  height: 1em;
   display: inline-block;
-  background: #ff2aa3;
+  width: 3px;
+  height: 1em;
   margin-left: 6px;
-  animation: blink 1s steps(2, start) infinite;
+  background: #ff2aa3;
+  animation: blink 1s step-start infinite;
   vertical-align: middle;
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
 }
 
 @keyframes blink {
