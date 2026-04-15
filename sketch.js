@@ -3,41 +3,55 @@ document.addEventListener("DOMContentLoaded", () => {
   const el = document.getElementById("typing-text");
   if (!el) return;
 
-  const lines = [
-    "> initializing system...",
-    "> loading modules...",
-    "> connecting nodes...",
-    "> compiling identity...",
-    "> kora_lab();",
-    "> deleting suffix...",
-    "> kora"
+  const sequences = [
+    "kora_lab();",
+    "kora();"
   ];
 
-  let lineIndex = 0;
+  const typingSpeed = 90;
+  const deletingSpeed = 50;
+  const pauseTime = 1200;
+
+  let seqIndex = 0;
   let charIndex = 0;
+  let isDeleting = false;
 
-  const typingSpeed = 35;
-  const pauseBetweenLines = 600;
+  function loop() {
+    const current = sequences[seqIndex];
 
-  function typeLine() {
-    if (lineIndex >= lines.length) return;
+    if (!isDeleting) {
+      el.textContent = current.substring(0, charIndex + 1);
+      charIndex++;
 
-    const currentLine = lines[lineIndex];
+      if (charIndex === current.length) {
+        isDeleting = true;
+        setTimeout(loop, pauseTime);
+        return;
+      }
 
-    el.innerHTML += currentLine.charAt(charIndex);
-    charIndex++;
+      setTimeout(loop, typingSpeed);
 
-    if (charIndex < currentLine.length) {
-      setTimeout(typeLine, typingSpeed);
     } else {
-      el.innerHTML += "<br>";
-      lineIndex++;
-      charIndex = 0;
-      setTimeout(typeLine, pauseBetweenLines);
+      el.textContent = current.substring(0, charIndex - 1);
+      charIndex--;
+
+      if (charIndex === 0) {
+        isDeleting = false;
+        seqIndex++;
+
+        if (seqIndex >= sequences.length) {
+          seqIndex = sequences.length - 1;
+          return;
+        }
+
+        setTimeout(loop, 400);
+        return;
+      }
+
+      setTimeout(loop, deletingSpeed);
     }
   }
 
-  // pequeño delay inicial para que se sienta intencional
-  setTimeout(typeLine, 500);
+  loop();
 
 });
