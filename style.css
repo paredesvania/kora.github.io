@@ -87,7 +87,7 @@ nav {
   border-bottom: 1.5px solid var(--pink);
 }
 
-/* ── HERO (HOME) ── */
+/* ── HERO ── */
 #hero {
   width: 100%;
   height: 100vh;
@@ -99,7 +99,7 @@ nav {
 }
 
 #typing-line {
-  font-size: clamp(6rem, 18vw, 16rem); /* mucho más grande */
+  font-size: clamp(6rem, 18vw, 16rem);
   color: var(--black);
   letter-spacing: 0.05em;
   text-align: center;
@@ -118,7 +118,7 @@ nav {
   25%, 75% { opacity: 0; }
 }
 
-/* ── HOME INFO ── */
+/* ── HOME ── */
 .home {
   min-height: 100vh;
   display: flex;
@@ -143,19 +143,54 @@ nav {
   opacity: 0.35;
 }
 
-/* ── PROJECTS ── */
+/* ── PROJECTS GRID ── */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
+  overflow: hidden;
+  height: 80vh;
 }
 
+/* columnas animadas */
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* pausa en hover (CLAVE) */
+.column:hover {
+  animation-play-state: paused;
+}
+
+/* animaciones */
+.scroll-down {
+  animation: scrollDown 20s linear infinite;
+}
+
+.scroll-up {
+  animation: scrollUp 20s linear infinite;
+}
+
+@keyframes scrollDown {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes scrollUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+/* ── CARD ── */
 .card {
   position: relative;
   overflow: hidden;
   display: block;
   background: #111;
   aspect-ratio: 4/5;
+  cursor: pointer;
 }
 
 .card img {
@@ -167,11 +202,11 @@ nav {
 }
 
 .card:hover img {
-  transform: scale(1.03);
-  opacity: 1;
+  transform: scale(1.05);
+  filter: brightness(0.9);
 }
 
-/* OVERLAY */
+/* ── OVERLAY ── */
 .overlay {
   position: absolute;
   inset: 0;
@@ -182,23 +217,34 @@ nav {
 
   padding: 20px;
 
-  background: linear-gradient(transparent 60%, rgba(0,0,0,0.85));
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.85) 0%,
+    rgba(0,0,0,0.4) 40%,
+    transparent 70%
+  );
 
-  transform: translateY(40px); /* 👈 parte abajo */
+  transform: translateY(80px);
   opacity: 0;
 
-  transition: all 0.4s ease;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+              opacity 0.3s ease;
 }
 
 .card:hover .overlay {
-  transform: translateY(0); /* 👈 sube */
+  transform: translateY(0);
   opacity: 1;
 }
 
+/* animación texto */
 .overlay h2 {
   color: white;
   font-size: 16px;
   font-weight: 500;
+
+  transform: translateY(10px);
+  opacity: 0;
+  transition: all 0.3s ease 0.1s;
 }
 
 .overlay p {
@@ -207,11 +253,23 @@ nav {
   letter-spacing: 1.5px;
   text-transform: uppercase;
   margin-top: 4px;
+
+  transform: translateY(10px);
+  opacity: 0;
+  transition: all 0.3s ease 0.2s;
+}
+
+.card:hover .overlay h2,
+.card:hover .overlay p {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 /* ── ABOUT ── */
 .about {
-  padding: 120px var(--pad) 80px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 140px 20px 80px;
 }
 
 .about-title {
@@ -366,44 +424,4 @@ nav {
 
 .email-link:hover {
   opacity: 0.7;
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  overflow: hidden;
-  height: 80vh;
-}
-
-/* columnas */
-.column {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* animaciones */
-.scroll-down {
-  animation: scrollDown 20s linear infinite;
-}
-
-.scroll-up {
-  animation: scrollUp 20s linear infinite;
-}
-
-@keyframes scrollDown {
-  0% { transform: translateY(-50%); }
-  100% { transform: translateY(0); }
-}
-
-@keyframes scrollUp {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
-}
-
-.about {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 140px 20px 80px;
 }
