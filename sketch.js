@@ -18,22 +18,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const deletingSpeed = 40;
   const pauseTime = 1300;
 
-  function render(text) {
-    el.innerHTML = `${text}<span class="cursor"></span>`;
-  }
-
   function loop() {
     const current = sequences[seqIndex];
 
     if (finished) {
-      render(current);
+      el.textContent = current; // <- sin cursor aquí
       setTimeout(loop, 500);
       return;
     }
 
     if (!isDeleting) {
-      const text = current.substring(0, charIndex + 1);
-      render(text);
+      el.textContent = current.slice(0, charIndex + 1);
       charIndex++;
 
       if (charIndex === current.length) {
@@ -52,8 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(loop, typingSpeed);
 
     } else {
-      const text = current.substring(0, charIndex - 1);
-      render(text);
+      el.textContent = current.slice(0, charIndex - 1);
       charIndex--;
 
       if (charIndex === 0) {
