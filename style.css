@@ -181,13 +181,17 @@ nav {
   justify-content: flex-end;
 
   padding: 20px;
-  background: linear-gradient(transparent 50%, rgba(0,0,0,0.85));
 
+  background: linear-gradient(transparent 60%, rgba(0,0,0,0.85));
+
+  transform: translateY(40px); /* 👈 parte abajo */
   opacity: 0;
-  transition: opacity 0.3s ease;
+
+  transition: all 0.4s ease;
 }
 
 .card:hover .overlay {
+  transform: translateY(0); /* 👈 sube */
   opacity: 1;
 }
 
@@ -364,4 +368,38 @@ nav {
 
 .email-link:hover {
   opacity: 0.7;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  overflow: hidden;
+  height: 80vh;
+}
+
+/* columnas */
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* animaciones */
+.scroll-down {
+  animation: scrollDown 20s linear infinite;
+}
+
+.scroll-up {
+  animation: scrollUp 20s linear infinite;
+}
+
+@keyframes scrollDown {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes scrollUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
 }
