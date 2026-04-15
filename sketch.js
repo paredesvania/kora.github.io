@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let showCursor = true;
 
     setInterval(() => {
-      el.textContent = sequences[seqIndex] + (showCursor ? "|" : "");
+      el.textContent = sequences[seqIndex]);
       showCursor = !showCursor;
     }, 500);
   }
