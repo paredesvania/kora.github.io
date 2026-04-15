@@ -18,3 +18,15 @@ links.forEach(link => {
     cursor.style.transform = "translate(-50%, -50%) scale(1)";
   });
 });
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', e => {
+    if (link.hostname === window.location.hostname) {
+      e.preventDefault();
+      const target = link.href;
+      document.querySelector('.page-transition').classList.add('active');
+      setTimeout(() => {
+        window.location.href = target;
+      }, 600);
+    }
+  });
+});
