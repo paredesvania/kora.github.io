@@ -28,12 +28,13 @@ html, body {
 #typing-text::after {
   content: "";
   display: inline-block;
-  width: 3px;
-  height: 1em;
-  margin-left: 6px;
+  width: 6px;
+  height: 1.2em;
+  margin-left: 8px;
   background: #ff2aa3;
   animation: blink 1s step-start infinite;
   vertical-align: middle;
+  border-radius: 2px;
 }
 
 @keyframes blink {
