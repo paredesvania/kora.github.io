@@ -90,7 +90,6 @@ nav {
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  opacity: 0.5;
   transition: opacity 0.2s;
   padding-bottom: 2px;
 }
