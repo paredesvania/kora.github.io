@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const el = document.getElementById("typing-text");
-  if (!el) return;
 
   const sequences = [
     "kora_lab();",
@@ -9,57 +8,41 @@ document.addEventListener("DOMContentLoaded", () => {
     "print(\"<3\");"
   ];
 
-  let seqIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-  let finished = false;
+  let i = 0;
+  let j = 0;
+  let deleting = false;
 
-  const typingSpeed = 80;
-  const deletingSpeed = 40;
-  const pauseTime = 1300;
+  function type() {
+    const current = sequences[i];
 
-  function loop() {
-    const current = sequences[seqIndex];
-
-    if (finished) {
-      el.textContent = current; // <- sin cursor aquí
-      setTimeout(loop, 500);
-      return;
-    }
-
-    if (!isDeleting) {
-      el.textContent = current.slice(0, charIndex + 1);
-      charIndex++;
-
-      if (charIndex === current.length) {
-
-        if (seqIndex === sequences.length - 1) {
-          finished = true;
-          setTimeout(loop, pauseTime);
-          return;
-        }
-
-        isDeleting = true;
-        setTimeout(loop, pauseTime);
+    if (!deleting) {
+      el.textContent = current.slice(0, j++);
+      
+      if (j > current.length) {
+        deleting = true;
+        setTimeout(type, 1000);
         return;
       }
 
-      setTimeout(loop, typingSpeed);
+      setTimeout(type, 80);
 
     } else {
-      el.textContent = current.slice(0, charIndex - 1);
-      charIndex--;
+      el.textContent = current.slice(0, j--);
 
-      if (charIndex === 0) {
-        isDeleting = false;
-        seqIndex++;
-        setTimeout(loop, 400);
+      if (j < 0) {
+        deleting = false;
+        i++;
+
+        if (i >= sequences.length) return;
+
+        j = 0;
+        setTimeout(type, 300);
         return;
       }
 
-      setTimeout(loop, deletingSpeed);
+      setTimeout(type, 40);
     }
   }
 
-  loop();
+  type();
 });
