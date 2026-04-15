@@ -106,6 +106,18 @@ nav {
   font-weight: 350;
 }
 
+#typing-text::after {
+  content: "|";
+  color: #ff2aa3;
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 /* ── CURSOR TEXTO ── */
 #cursor {
   margin-left: 5px;
