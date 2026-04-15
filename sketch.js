@@ -3,11 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const el = document.getElementById("typing-text");
   if (!el) return;
 
-  const sequences = [
-    "kora_lab();",
-    "kora();"
-     "kora("<3");"
-  ];
+ const sequences = [
+  "kora_lab();",
+  "kora();",
+  "print(\"<3\");"
+];
 
   const typingSpeed = 80;
   const deletingSpeed = 40;
