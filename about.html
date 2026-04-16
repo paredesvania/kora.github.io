@@ -33,7 +33,7 @@
     </div>
     <div class="about-text">
       <p>
-        Tengo 23 años y soy estudiante de cuarto año de <b>Diseño Industrial</b>, últimamente obsesionada con la tecnología y cómo interactuamos con ella. El <b>diseño de interacción</b> es mi alter ego, es donde todo cobra sentido. Me encanta la tecnología pero también me gusta tejer y la manicura, no puedo quedarme con un solo hobbie, debo tener 100 para ser feliz.
+        Tengo 23 años y soy estudiante de cuarto año de <b>Diseño Industrial</b>, Últimamente estoy muy obsesionada con cómo interactuamos con la tecnología. El <b>diseño de interacción</b> como mi alter ego, me encanta moverme entre lo digital. Tengo muchos intereses y lejos de ordenarlos, los uso a mi favor.
       </p>
       <div class="quote">
         "I consider design the highest expression of human creativity (...)"
@@ -117,5 +117,22 @@
 </section>
 
 <script src="cursor.js"></script>
+<script>  // Reveal animado en scroll para info-items
+  const items = document.querySelectorAll('.info-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  items.forEach(item => observer.observe(item));
+</script>
+   
+    
 </body>
 </html>
