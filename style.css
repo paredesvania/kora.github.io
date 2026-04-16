@@ -319,7 +319,7 @@ nav {
  
   /* etiqueta discreta bajo la foto */
   .about-image::after {
-    content: 'Vania — Santiago, CL';
+    content: 'En Santiago de Chile <3';
     display: block;
     margin-top: 10px;
     font-size: 9px;
