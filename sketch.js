@@ -41,3 +41,20 @@ setTimeout(type, 40);
 type();
 });
 
+
+
+
+  // Reveal animado en scroll para info-items
+  const items = document.querySelectorAll('.info-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  items.forEach(item => observer.observe(item));
