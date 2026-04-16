@@ -25,6 +25,8 @@ html, body {
   line-height: 1.6;
   font-weight: 300;
 }
+
+/* ── CURSOR PARPADEANTE EN HERO ── */
 #typing-text::after {
   content: "";
   display: inline-block;
@@ -40,6 +42,7 @@ html, body {
 @keyframes blink {
   50% { opacity: 0; }
 }
+
 /* ── CURSOR ── */
 .cursor {
   width: 10px;
@@ -86,10 +89,11 @@ nav {
 
 .nav-links a {
   text-decoration: none;
-  color: var(--pink);
+  color: var(--black);
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
+  opacity: 0.5;
   transition: opacity 0.2s;
   padding-bottom: 2px;
 }
@@ -117,61 +121,26 @@ nav {
   letter-spacing: 0.05em;
   text-align: center;
   font-weight: 350;
-
-}
-
-/* ── HOME ── */
-.home {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 0 var(--pad) 60px;
-}
-
-.home-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-top: 48px;
-  border-top: 0.5px solid var(--gray);
-  padding-top: 20px;
-}
-
-.home-tag {
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  opacity: 0.35;
 }
 
 /* ── PROJECTS SECTION ── */
-.projects {
-  height: 100vh;
-  padding-top: 70px; /* espacio del nav fijo */
-}
-
-/* GRID full screen real */
 .projects-grid {
-  height: 100%;
+  height: calc(100vh - 61px);
+  margin-top: 61px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-
-  height: calc(100vh - 70px);
   padding: 16px var(--pad);
-
   overflow: hidden;
 }
 
-/* columnas ocupan todo */
+/* columnas */
 .column {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* mejora scroll animation para full height */
 .scroll-down {
   animation: scrollDown 25s linear infinite;
 }
@@ -181,19 +150,15 @@ nav {
 }
 
 @keyframes scrollDown {
-  0% { transform: translateY(-30%); }
+  0%   { transform: translateY(-30%); }
   100% { transform: translateY(0); }
 }
 
 @keyframes scrollUp {
-  0% { transform: translateY(0); }
+  0%   { transform: translateY(0); }
   100% { transform: translateY(-30%); }
 }
 
-.projects {
-  height: calc(100vh - 70px);
-  padding: 70px 0 0; /* solo compensa nav */
-}
 /* ── CARD ── */
 .card {
   position: relative;
@@ -202,6 +167,8 @@ nav {
   background: #111;
   aspect-ratio: 4/5;
   cursor: pointer;
+  border-radius: 16px;            /* único cambio respecto al original */
+  text-decoration: none;
 }
 
 .card img {
@@ -251,7 +218,6 @@ nav {
   pointer-events: auto;
 }
 
-/* overlay text */
 .overlay h2 {
   color: white;
   font-size: 16px;
@@ -286,8 +252,6 @@ nav {
   margin: 0 auto;
   padding: 140px 40px 80px;
 }
-
-/* (todo lo de about lo dejo igual, sin cambios importantes) */
 
 .about-title {
   font-size: clamp(28px, 4vw, 48px);
@@ -330,7 +294,14 @@ nav {
   font-size: 13.5px;
 }
 
-/* tools */
+.quote {
+  margin-top: 24px;
+  padding-left: 16px;
+  border-left: 2px solid var(--pink);
+  font-size: 12px;
+  opacity: 0.8;
+}
+
 .tools-section {
   margin-top: 80px;
 }
@@ -369,51 +340,6 @@ nav {
   color: white;
 }
 
-/* ── ABOUT VISUAL POLISH ── */
-
-/* bloque general más editorial */
-.about {
-  position: relative;
-}
-
-/* textura / composición suave de fondo */
-.about::before {
-  content: "";
-  position: absolute;
-  top: 120px;
-  right: -80px;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(255,42,163,0.08), transparent 60%);
-  z-index: -1;
-}
-
-.about::after {
-  content: "";
-  position: absolute;
-  bottom: 200px;
-  left: -120px;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(0,0,0,0.05), transparent 65%);
-  z-index: -1;
-}
-
-/* intro más limpio y gráfico */
-.about-intro {
-  align-items: center;
-}
-
-/* quote más “objeto editorial” */
-.quote {
-  margin-top: 24px;
-  padding-left: 16px;
-  border-left: 2px solid var(--pink);
-  font-size: 12px;
-  opacity: 0.8;
-}
-
-/* grid educación/experiencia más tipo cards */
 .about-info-grid {
   display: grid;
   grid-template-columns: 1fr 1px 1fr;
@@ -426,7 +352,6 @@ nav {
   background: var(--gray);
 }
 
-/* cada item más “card minimal” */
 .info-item {
   margin-bottom: 14px;
   font-size: 12.5px;
@@ -440,7 +365,6 @@ nav {
   margin-top: 2px;
 }
 
-/* CONTACTO NUEVO SISTEMA */
 .contact-section {
   margin-top: 100px;
   padding-top: 40px;
@@ -462,7 +386,6 @@ nav {
   margin-bottom: 20px;
 }
 
-/* links estilo “tech minimal” */
 .contact-links {
   display: flex;
   gap: 24px;
