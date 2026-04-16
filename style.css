@@ -288,20 +288,6 @@ nav {
     transform: scaleX(1);
   }
  
-  /* número decorativo flotante */
-  .deco-num {
-    position: absolute;
-    top: 148px;
-    right: 40px;
-    font-size: 120px;
-    font-weight: 600;
-    color: rgba(0,0,0,0.04);
-    letter-spacing: -0.04em;
-    line-height: 1;
-    user-select: none;
-    pointer-events: none;
-  }
- 
   /* intro grid */
   .about-intro {
     display: grid;
@@ -433,19 +419,6 @@ nav {
     font-size: 10px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-  }
- 
-  .tool-tag.featured:hover::before {
-    animation: tagGlitch 0.35s ease forwards;
-  }
- 
-  @keyframes tagGlitch {
-    0%   { opacity: 0; transform: translateX(0); }
-    20%  { opacity: 0.7; transform: translateX(-3px); }
-    40%  { opacity: 0; transform: translateX(4px); }
-    60%  { opacity: 0.5; transform: translateX(-2px); }
-    80%  { opacity: 0; transform: translateX(0); }
-    100% { opacity: 0; }
   }
  
   /* ── EDU / EXP ── */
