@@ -23,11 +23,33 @@
     </div>
   </nav>
 
-  <div id="hero">
-    <div id="typing-line">
-      <span id="typing-text"></span>
-    </div>
+<div id="hero">
+  <div id="typing-line">
+    <span id="typing-text"></span>
   </div>
+</div>
+
+<section id="interactive-block">
+  <div class="interactive-content">
+    <p class="interactive-code">systemAwait.Input();</p>
+    <input 
+      id="command-input" 
+      placeholder='type("whatever_u_want");'
+      autocomplete="off"
+    />
+  </div>
+
+  <!-- playground dentro del mismo bloque -->
+  <div id="playground"></div>
+
+<div class="color-controls">
+  <button data-bg="#000000" data-text="#ffffff"></button> <!-- negro -->
+  <button data-bg="#ff2aa3" data-text="#ffffff"></button> <!-- rosado -->
+  <button data-bg="#1e2bff" data-text="#ffffff"></button> <!-- azul -->
+  <button data-bg="#f5e6c8" data-text="#000000"></button> <!-- beige -->
+  <button data-bg="#3a5a40" data-text="#ffffff"></button> <!-- verde -->
+</div>
+</section>
 
   <script src="cursor.js"></script>
   <script src="nav.js"></script>
