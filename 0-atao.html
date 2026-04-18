@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>0-atao — KORA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a href="projects.html" class="nav-link active">Proyectos</a>
+  </div>
+  <div class="nav-center">
+    <a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a>
+  </div>
+  <div class="nav-right">
+    <a href="about.html" class="nav-link">About</a>
+    <button class="dark-toggle" aria-label="Modo oscuro"></button>
+  </div>
+</nav>
+
+<div class="proy">
+
+  <!-- ── TÍTULO ── -->
+  <div class="proy-title-block">
+    <p class="proy-eyebrow">Diseño de interacción</p>
+    <h1 class="proy-h1">0-atao</h1>
+    <span class="proy-year">2025</span>
+  </div>
+
+  <div class="proy-rule"></div>
+
+  <!-- ── COVER ── -->
+  <img src="assets/0-atao/cover.jpg" alt="Cover" class="proy-cover">
+
+  <!-- ── CONCEPTO ── -->
+  <div class="proy-concepto">
+    <div class="proy-concepto-left">
+      <span class="proy-num">2025</span>
+    </div>
+    <div class="proy-concepto-right">
+      <p class="proy-concepto-tag">concepto</p>
+
+      <div class="proy-concepto-body">
+        <p>
+         0aTAo es una máquina Arcade que invita al usuario a corregir una figura simple, pero cada intento de reparación genera aún más
+desorden. Algunos botones comen pixeles, cambian los colores, el joystick no se mueve a donde quieres y el
+instructivo no te da instrucciones claras!
+        </p>
+      </div>
+
+      <div class="proy-tags-row">
+        <span class="proy-tag">diseño de interacción</span>
+        <span class="proy-tag">arduino</span>
+        <span class="proy-tag">programación</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SPLIT (NUEVO) ── -->
+  <div class="proy-split">
+    <div class="proy-split-img">
+      <img src="assets/0-atao/imagen-detalle.jpg" alt="">
+    </div>
+    <div class="proy-split-text">
+      <p class="proy-concepto-tag">interacción</p>
+      <p>
+       Al iniciar, un cuadrado perfecto se desestabiliza cuando uno de sus píxeles se desplaza. Desde ahí, todas
+las acciones del usuario buscan corregir el error, sin éxito. Pero cuando el jugador deja de intervenir, la figura
+vuelve a su estado original, reforzando la aporía como idea central del proyecto.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── PROCESO ── -->
+  <div class="proy-proceso-wrap" id="procesoWrap">
+    <span class="proy-proceso-label">proceso</span>
+    <div class="proy-proceso-track" id="procesoTrack">
+      <img src="assets/0-atao/proceso1.jpg" class="proy-proceso-img" alt="">
+      <img src="assets/0-atao/proceso2.jpg" class="proy-proceso-img" alt="">
+      <img src="assets/0-atao/proceso3.jpg" class="proy-proceso-img" alt="">
+      <img src="assets/0-atao/proceso4.jpg" class="proy-proceso-img" alt="">
+      <img src="assets/0-atao/proceso5.jpg" class="proy-proceso-img" alt="">
+      <img src="assets/0-atao/proceso6.jpg" class="proy-proceso-img" alt="">
+    </div>
+  </div>
+
+  <!-- ── TEXTO CONTEXTO GRID ── -->
+  <div class="proy-grid-text">
+    <p>
+     El dispositivo está hecho a base de acrílico, programado en Arduino IDE en lenguaje C++. Usa dos placas Arduino R4
+Minima, una matriz de píxeles 8×8, una pantalla LED, un joystick y cinco botones. Una experencia interactiva basada en la aporia,
+entendida como una situación en la que el problema existe, pero cualquier intento de solución resulta inútil o se anula a sí mismo.
+    </p>
+  </div>
+
+  <!-- ── GRID ── -->
+  <div class="proy-grid">
+    <img src="assets/PROYECTO/imagen2.jpg" class="proy-grid-a" alt="">
+    <img src="assets/PROYECTO/imagen3.jpg" class="proy-grid-b" alt="">
+    <img src="assets/PROYECTO/imagen4.jpg" class="proy-grid-c" alt="">
+  </div>
+
+  <!-- ── FULL IMAGE ── -->
+  <div class="proy-full">
+    <img src="assets/albura/imagen5.jpg" alt="">
+    <div class="proy-full-text">
+      <p class="proy-full-quote">
+        “Mientras más intentas arreglarlo, peor se vuelve.”
+      </p>
+      <span class="proy-full-credit">KORA — 2025</span>
+    </div>
+  </div>
+
+</div>
+
+<script src="cursor.js"></script>
+<script src="nav.js"></script>
+<script src="nav-typing.js"></script>
+<script src="transitions.js"></script>
+
+<script>
+(function() {
+  const wrap  = document.getElementById("procesoWrap");
+  const track = document.getElementById("procesoTrack");
+  if (!wrap || !track) return;
+
+  let targetX = 0;
+  let currentX = 0;
+  let maxScroll = 0;
+  let raf = null;
+
+  function getMax() {
+    return Math.max(0, track.scrollWidth - wrap.clientWidth + parseInt(getComputedStyle(track).paddingLeft) * 2);
+  }
+
+  wrap.addEventListener("mousemove", (e) => {
+    const rect = wrap.getBoundingClientRect();
+    const rel  = (e.clientX - rect.left) / rect.width;
+    maxScroll  = getMax();
+    targetX    = rel * maxScroll;
+    if (!raf) raf = requestAnimationFrame(lerp);
+  });
+
+  wrap.addEventListener("mouseleave", () => {
+    targetX = 0;
+    if (!raf) raf = requestAnimationFrame(lerp);
+  });
+
+  function lerp() {
+    currentX += (targetX - currentX) * 0.07;
+    track.style.transform = `translateX(-${currentX}px)`;
+
+    if (Math.abs(targetX - currentX) > 0.3) {
+      raf = requestAnimationFrame(lerp);
+    } else {
+      raf = null;
+    }
+  }
+
+  let touchStartX = 0;
+  let touchStartScroll = 0;
+
+  wrap.addEventListener("touchstart", (e) => {
+    touchStartX      = e.touches[0].clientX;
+    touchStartScroll = currentX;
+  }, { passive: true });
+
+  wrap.addEventListener("touchmove", (e) => {
+    const dx = touchStartX - e.touches[0].clientX;
+    maxScroll = getMax();
+    targetX   = Math.max(0, Math.min(maxScroll, touchStartScroll + dx));
+    if (!raf) raf = requestAnimationFrame(lerp);
+  }, { passive: true });
+})();
+</script>
+
+</body>
+</html>

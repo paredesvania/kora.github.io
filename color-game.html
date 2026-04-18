@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KORA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a href="projects.html" class="nav-link active">Proyectos</a>
+  </div>
+  <div class="nav-center">
+    <a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a>
+  </div>
+  <div class="nav-right">
+    <a href="about.html" class="nav-link">About</a>
+    <button class="dark-toggle" aria-label="Modo oscuro"></button>
+  </div>
+</nav>
+
+<section id="game-section">
+     <!-- ── CONCEPTO ── -->
+  <div class="proy-concepto">
+    <div class="proy-concepto-left">
+      <span class="proy-num">2026</span>
+    </div>
+    <div class="proy-concepto-right">
+      <p class="proy-concepto-tag">concepto</p>
+      <p class="proy-concepto-body">
+      Proyecto explorativo de juego interactivo creado en lenguaje html, que desafía la percepción visual a través de 
+      la identificación de colores. Inspirado en los tests de Ishihara, el juego 
+      presenta una cuadrícula de colores con un tono ligeramente diferente, y el 
+      jugador debe encontrar el "odd one out" para avanzar. A medida que se avanza, 
+      los niveles aumentan en dificultad, poniendo a prueba la agudeza visual y la 
+      rapidez del jugador. Busca crear una experiencia inmersiva y desafiante, explorando la 
+      relación entre el color y la percepción humana.
+      </p>
+      <!-- Etiquetas -->
+      <div class="proy-tags-row">
+        <span class="proy-tag">juego</span>
+        <span class="proy-tag">interactivo</span>
+        <span class="proy-tag">html</span>
+      </div>
+    </div>
+  </div>
+  <div id="game-box">
+    <!-- START -->
+    <div class="g-screen on" id="g-start">
+      <p class="g-label"></p>
+      <h2 class="g-title">find the <span>odd</span> one.</h2>
+      <p class="g-sub">Encuentra el color diferente.</p>
+      <div class="g-rec">récord: <b id="g-rec-start">—</b></div>
+      <button class="g-btn primary" onclick="G.start()">play();</button>
+    </div>
+
+    <!-- GAME -->
+    <div class="g-screen" id="g-game">
+      <div style="width:100%">
+        <p class="g-label">nivel <span id="g-lvl">1</span></p>
+        <div class="g-stats">
+          <div class="g-stat"><span class="g-stat-lbl">puntos</span><span class="g-stat-val pink" id="g-sc">0</span></div>
+          <div class="g-stat"><span class="g-stat-lbl">ronda</span><span class="g-stat-val" id="g-rd">1</span></div>
+          <div class="g-stat"><span class="g-stat-lbl">racha</span><span class="g-stat-val" id="g-st">0</span></div>
+          <div class="g-stat"><span class="g-stat-lbl">récord</span><span class="g-stat-val" id="g-bst">—</span></div>
+        </div>
+        <div class="g-pips">
+          <span class="g-pip-lbl">dif</span>
+          <div class="g-pip" id="pp1"></div><div class="g-pip" id="pp2"></div>
+          <div class="g-pip" id="pp3"></div><div class="g-pip" id="pp4"></div>
+          <div class="g-pip" id="pp5"></div><div class="g-pip" id="pp6"></div>
+          <div class="g-pip" id="pp7"></div><div class="g-pip" id="pp8"></div>
+          <div class="g-pip" id="pp9"></div><div class="g-pip" id="pp10"></div>
+        </div>
+        <div class="g-tbar-wrap"><div class="g-tbar" id="g-tb"></div></div>
+      </div>
+      <div class="g-grid-wrap"><div class="g-grid" id="g-gr"></div></div>
+      <div class="g-fb" id="g-fb"></div>
+    </div>
+
+    <!-- END -->
+    <div class="g-screen" id="g-end">
+      <p class="g-label"></p>
+      <h2 class="g-title">game <span>over.</span></h2>
+      <div class="g-big" id="g-final">0</div>
+      <div class="g-rec">récord: <b id="g-rec-end">—</b></div>
+      <p class="g-sub" id="g-msg"></p>
+      <div class="g-btn-row">
+        <button class="g-btn primary" onclick="G.start()">retry();</button>
+        <button class="g-btn" onclick="G.menu()">menu();</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script src="cursor.js"></script>
+<script src="nav.js"></script>
+<script src="nav-typing.js"></script>
+<script src="transitions.js"></script>
+
+<!-- DIFICULTAD NIVELES -->
+<script>
+const G = (() => {
+  const CFGS = [
+    {c:2,r:2,d:20,t:8000},
+    {c:3,r:2,d:18,t:8000},
+    {c:3,r:3,d:16,t:8000},
+    {c:4,r:3,d:14,t:7000},
+    {c:4,r:4,d:12,t:7000},
+    {c:5,r:4,d:10,t:6500},
+    {c:5,r:5,d:8, t:6000},
+    {c:6,r:5,d:7, t:5000},
+    {c:6,r:6,d:6, t:4000},
+    {c:7,r:6,d:5, t:4000},
+  ];
+  const MSGS = [
+    'Buen intento.',
+    '¿Puedes hacerlo mejor?',
+    'El color te venció.',
+    'Tus ojos te traicionaron.',
+    'Casi.'
+  ];
+
+  let score=0, round=1, level=1, streak=0, oddIdx=-1;
+  let timerTO=null, timerStart=0, timerDur=8000;
+  let best=0;
+
+  const cfg = () => CFGS[Math.min(level-1, 9)];
+
+  function scr(id) {
+    document.querySelectorAll('.g-screen').forEach(s => s.classList.remove('on'));
+    document.getElementById(id).classList.add('on');
+  }
+
+  // Récord en localStorage — persiste por dispositivo
+  function loadBest() {
+    best = parseInt(localStorage.getItem('kora_color_best') || '0');
+  }
+
+  function saveBest() {
+    if (score <= best) return;
+    best = score;
+    localStorage.setItem('kora_color_best', String(best));
+  }
+
+  function showBest(id) {
+    document.getElementById(id).textContent = best > 0 ? best : '—';
+  }
+
+  function menu() {
+    clearTO();
+    loadBest();
+    showBest('g-rec-start');
+    scr('g-start');
+  }
+
+  function start() {
+    loadBest();
+    score=0; round=1; level=1; streak=0;
+    showBest('g-bst');
+    scr('g-game');
+    newRound();
+  }
+
+  function newRound() {
+    clearTO();
+    fb('', '');
+    level = Math.min(10, Math.floor((round-1)/3) + 1);
+    updateStats();
+    updatePips();
+    buildGrid();
+    startTimer();
+  }
+
+  function buildGrid() {
+    const c = cfg();
+    const gr = document.getElementById('g-gr');
+    gr.innerHTML = '';
+    const total = c.c * c.r;
+    oddIdx = Math.floor(Math.random() * total);
+
+    const hue = Math.floor(Math.random() * 360);
+    const sat = 60 + Math.floor(Math.random() * 20);
+    const lit = 45 + Math.floor(Math.random() * 15);
+    const sign = Math.random() < 0.5 ? 1 : -1;
+    const oddLit = Math.max(12, Math.min(88, lit + sign * c.d));
+
+    const box = document.getElementById('game-box');
+    const avail = Math.min(500, (box.offsetWidth || 500) - 48);
+    const cell = Math.max(28, Math.floor((avail - c.c * 5) / c.c));
+
+    gr.style.gridTemplateColumns = `repeat(${c.c}, ${cell}px)`;
+    gr.style.gridTemplateRows    = `repeat(${c.r}, ${cell}px)`;
+
+    for (let i = 0; i < total; i++) {
+      const div = document.createElement('div');
+      div.className = 'g-cell';
+      div.style.width = div.style.height = cell + 'px';
+      div.style.background = `hsl(${hue}, ${sat}%, ${i === oddIdx ? oddLit : lit}%)`;
+      div.addEventListener('click', () => pick(i, div));
+      gr.appendChild(div);
+    }
+  }
+
+  function pick(idx, cell) {
+    clearTO();
+    if (idx === oddIdx) {
+      const elapsed = Date.now() - timerStart;
+      const speed = Math.max(0, Math.floor((timerDur - elapsed) / 100));
+      streak++;
+      const sBonus = streak > 1 ? (streak - 1) * 50 : 0;
+      const pts = 100 + speed + level * 20 + sBonus;
+      score += pts;
+      cell.classList.add('g-pulse');
+      fb(`+${pts}${sBonus ? ' x' + streak : ''}`, 'ok');
+      if (score > best) {
+        best = score;
+        localStorage.setItem('kora_color_best', String(best));
+      }
+      updateStats();
+      setTimeout(() => { round++; newRound(); }, 550);
+    } else {
+      streak = 0;
+      const gr = document.getElementById('g-gr');
+      gr.classList.add('g-shake');
+      setTimeout(() => gr.classList.remove('g-shake'), 320);
+      fb('incorrecto', 'bad');
+      updateStats();
+      setTimeout(() => endGame(), 700);
+    }
+  }
+
+  function startTimer() {
+    const bar = document.getElementById('g-tb');
+    const c = cfg();
+    timerDur = c.t;
+    timerStart = Date.now();
+    bar.style.transition = 'none';
+    bar.style.transform  = 'scaleX(1)';
+    bar.offsetWidth;
+    bar.style.transition = `transform ${timerDur}ms linear`;
+    bar.style.transform  = 'scaleX(0)';
+    timerTO = setTimeout(() => {
+      streak = 0;
+      fb('tiempo agotado', 'bad');
+      updateStats();
+      setTimeout(() => endGame(), 700);
+    }, timerDur);
+  }
+
+  function clearTO() {
+    if (timerTO) { clearTimeout(timerTO); timerTO = null; }
+    const bar = document.getElementById('g-tb');
+    bar.style.transition = 'none';
+    bar.style.transform  = 'scaleX(1)';
+  }
+
+  function endGame() {
+    clearTO();
+    saveBest();
+    document.getElementById('g-final').textContent = score;
+    showBest('g-rec-end');
+    document.getElementById('g-msg').textContent = MSGS[Math.floor(Math.random() * MSGS.length)];
+    scr('g-end');
+  }
+
+  function updateStats() {
+    document.getElementById('g-sc').textContent  = score;
+    document.getElementById('g-rd').textContent  = round;
+    document.getElementById('g-st').textContent  = streak;
+    document.getElementById('g-lvl').textContent = level;
+    showBest('g-bst');
+  }
+
+  function updatePips() {
+    for (let i = 1; i <= 10; i++)
+      document.getElementById('pp' + i).classList.toggle('on', i <= level);
+  }
+
+  function fb(msg, type) {
+    const el = document.getElementById('g-fb');
+    el.textContent = msg;
+    el.className = 'g-fb ' + type;
+  }
+
+  menu();
+  return { start, menu };
+})();
+</script>
+
+</body>
+</html>

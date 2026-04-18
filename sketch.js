@@ -53,7 +53,15 @@ const bannedWords = [
   "conchetumadre", "conchadesumadre", "mierda", "cagado",
   "marica", "maricon", "aweonao", "aweonado", "weona",
   "flaite", "poto", "raja", "cagar", "cagaste",
-  "fuck", "shit", "ass", "bitch", "cunt", "nigga", "faggot"
+  "fuck", "shit", "ass", "bitch", "cunt", "nigga", "faggot",
+   "peo", "sexo", "mierda", "caca", "blowjob", "culiar", "culear", 
+   "coger", "cojer", "joder", "jodete", "jodeme", "polla", "conchetumare",
+  "zorra", "pendejo", "pendeja", "boludo", "boluda", "gilipollas", "hijo de puta", 
+  "hija de puta", "hijueputa", "hijueputo", "malparido", "malparida",
+   "imbecil", "idiota", "estupido", "estupida", "tarado", 
+   "tarada", "subnormal", "mongol", "mongolo", "retardado", "retardada", 
+   "lameculos", "lamebotas", "zopenco", "zopenca", "cabrón", "cabrona", "capullo", 
+   "capulla", "gilipollas", "gilipoyas", "dumb", "culo", "pussy"
 ];
 
 function containsBannedWord(text) {
@@ -79,15 +87,33 @@ const input      = document.getElementById("command-input");
 const playground = document.getElementById("playground");
 const controls   = document.querySelector(".color-controls");
 
-let letters        = [];
-let animationId    = null;
+let letters          = [];
+let animationId      = null;
 let currentTextColor = "#ffffff";
 
-function getLetterSize() {
+
+// ─────────────────────────────
+// TAMAÑO DINÁMICO SEGÚN TEXTO
+// Achica las letras si el texto es muy largo
+// para que quepan bien en el playground
+// ─────────────────────────────
+function getLetterSize(charCount) {
   const w = window.innerWidth;
-  if (w < 480) return 48;
-  if (w < 768) return 64;
-  return Math.min(120, Math.max(60, w * 0.08));
+  const bounds = playground.getBoundingClientRect();
+  const pw = bounds.width || w * 0.9;
+
+  // Tamaño base según pantalla
+  let base;
+  if (w < 480) base = 48;
+  else if (w < 768) base = 64;
+  else base = Math.min(120, Math.max(60, w * 0.08));
+
+  // Reducir si hay muchos caracteres
+  // El ancho disponible dividido entre chars da el máximo por letra
+  const maxByWidth = Math.floor((pw * 0.9) / charCount);
+  const size = Math.min(base, Math.max(28, maxByWidth));
+
+  return size;
 }
 
 
@@ -102,7 +128,7 @@ input.addEventListener("keydown", (e) => {
   if (containsBannedWord(value)) {
     input.value = "";
     input.placeholder = "esa no... intenta otra cosa ;)";
-    setTimeout(() => { input.placeholder = 'type("whatever_u_want");'; }, 2000);
+    setTimeout(() => { input.placeholder = 'type("something");'; }, 2000);
     return;
   }
 
@@ -121,15 +147,18 @@ function startPlayground(text) {
   letters = [];
   controls.classList.add("active");
 
-  const size   = getLetterSize();
+  const chars  = text.split("");
+  const size   = getLetterSize(chars.length);
   const bounds = playground.getBoundingClientRect();
-  const centerX = bounds.width / 2;
+  const pw     = bounds.width;
+  const centerX = pw / 2;
 
-  const totalChars = text.length;
-  const spacing = Math.min(size * 0.85, bounds.width / (totalChars + 1));
-  const startX  = centerX - (spacing * (totalChars - 1)) / 2;
+  // Espaciado: cada letra ocupa ~size*0.7 horizontalmente
+  // Si no caben en una fila, el tamaño ya fue reducido por getLetterSize
+  const spacing = Math.min(size * 0.75, (pw * 0.9) / chars.length);
+  const startX  = centerX - (spacing * (chars.length - 1)) / 2;
 
-  text.split("").forEach((char, idx) => {
+  chars.forEach((char, idx) => {
     const el = document.createElement("span");
     el.innerText = char === " " ? "\u00A0" : char;
     el.className = "play-letter";
@@ -139,10 +168,11 @@ function startPlayground(text) {
 
     letters.push({
       el,
-      x:  startX + idx * spacing + (Math.random() - 0.5) * 20,
-      y:  -size * 2 - idx * 30,
-      vx: (Math.random() - 0.5) * 3,
-      vy: Math.random() * 2,
+      // Caen desde arriba escalonadas, no todas juntas
+      x:  startX + idx * spacing + (Math.random() - 0.5) * 10,
+      y:  -size - idx * (size * 0.6),
+      vx: (Math.random() - 0.5) * 2,
+      vy: Math.random() * 1.5,
       size
     });
   });
@@ -152,64 +182,62 @@ function startPlayground(text) {
 
 
 // ─────────────────────────────
-// FÍSICA — rebote corregido
+// CONSTANTES FÍSICAS
 // ─────────────────────────────
 const GRAVITY      = 0.55;
 const FRICTION_X   = 0.92;
-const BOUNCE_FLOOR = 0.28;   // menos rebote en piso
-const BOUNCE_WALL  = 0.4;
-const BOUNCE_CEIL  = 0.3;
-const SLEEP_VY     = 0.8;    // umbral más alto → se duerme antes
-const SLEEP_VX     = 0.3;
-const DAMP_COLLIDE = 0.15;   // amortiguación en colisiones entre letras
+const BOUNCE_FLOOR = 0.25;
+const BOUNCE_WALL  = 0.35;
+const BOUNCE_CEIL  = 0.25;
+const SLEEP_VY     = 1.0;
+const SLEEP_VX     = 0.4;
+const DAMP_COLLIDE = 0.12;
 
+
+// ─────────────────────────────
+// FÍSICA
+// ─────────────────────────────
 function animate() {
   function loop() {
     const bounds = playground.getBoundingClientRect();
 
     letters.forEach((a, i) => {
-      // ── gravedad
       a.vy += GRAVITY;
-
-      // ── movimiento
-      a.x += a.vx;
-      a.y += a.vy;
-
-      // ── fricción
+      a.x  += a.vx;
+      a.y  += a.vy;
       a.vx *= FRICTION_X;
 
       const sz = a.size;
 
-      // ── PISO
+      // PISO
       if (a.y >= bounds.height - sz) {
-        a.y  = bounds.height - sz;
+        a.y   = bounds.height - sz;
         a.vy *= -BOUNCE_FLOOR;
         a.vx *= 0.8;
-        // matar velocidad residual
         if (Math.abs(a.vy) < SLEEP_VY) a.vy = 0;
         if (Math.abs(a.vx) < SLEEP_VX) a.vx = 0;
       }
 
-      // ── TECHO
+      // TECHO
       if (a.y < 0) {
-        a.y  = 0;
+        a.y   = 0;
         a.vy *= -BOUNCE_CEIL;
         if (Math.abs(a.vy) < SLEEP_VY) a.vy = 0;
       }
 
-      // ── PAREDES
+      // PAREDES
       if (a.x < 0) {
-        a.x  = 0;
+        a.x   = 0;
         a.vx *= -BOUNCE_WALL;
         if (Math.abs(a.vx) < SLEEP_VX) a.vx = 0;
       }
       if (a.x > bounds.width - sz) {
-        a.x  = bounds.width - sz;
+        a.x   = bounds.width - sz;
         a.vx *= -BOUNCE_WALL;
         if (Math.abs(a.vx) < SLEEP_VX) a.vx = 0;
       }
 
-      // ── COLISIONES ENTRE LETRAS
+      // COLISIONES ENTRE LETRAS
       letters.forEach((b, j) => {
         if (i >= j) return;
 
@@ -221,28 +249,25 @@ function animate() {
         if (ox <= 0 || oy <= 0) return;
 
         if (ox < oy) {
-          // separar horizontalmente
+          // Separar horizontalmente
           const sign = dx >= 0 ? 1 : -1;
           a.x += sign * ox * 0.5;
           b.x -= sign * ox * 0.5;
-          // intercambio amortiguado de velocidad horizontal
           const avg = (a.vx + b.vx) * 0.5;
           a.vx = avg * DAMP_COLLIDE;
           b.vx = avg * DAMP_COLLIDE;
         } else {
-          // separar verticalmente
+          // Separar verticalmente — sin rebote, solo separación
           const sign = dy >= 0 ? 1 : -1;
           if (sign > 0) {
-            // a está encima de b → a sube, b absorbe
-            a.y  = b.y - sz;
-            a.vy = a.vy * -DAMP_COLLIDE;   // rebote mínimo
-            b.vy += Math.abs(a.vy) * 0.1;  // empuje suave a b
+            a.y   = b.y - sz;
+            a.vy  = 0;
+            b.vy += 0.2;
           } else {
-            b.y  = a.y - sz;
-            b.vy = b.vy * -DAMP_COLLIDE;
-            a.vy += Math.abs(b.vy) * 0.1;
+            b.y   = a.y - sz;
+            b.vy  = 0;
+            a.vy += 0.2;
           }
-          // matar velocidades muy pequeñas tras colisión vertical
           if (Math.abs(a.vy) < SLEEP_VY) a.vy = 0;
           if (Math.abs(b.vy) < SLEEP_VY) b.vy = 0;
         }
@@ -263,9 +288,7 @@ function animate() {
 // ─────────────────────────────
 playground.addEventListener("mousemove", (e) => {
   const rect = playground.getBoundingClientRect();
-  const mx = e.clientX - rect.left;
-  const my = e.clientY - rect.top;
-  repel(mx, my, 130, 0.045);
+  repel(e.clientX - rect.left, e.clientY - rect.top, 130, 0.045);
 });
 
 playground.addEventListener("touchmove", (e) => {

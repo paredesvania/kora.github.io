@@ -8,24 +8,36 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <nav>
-    <div class="nav-left">
-      <a href="projects.html" class="nav-link active">Proyectos</a>
-    </div>
-    <div class="nav-center">
-      <a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a>
-    </div>
-    <div class="nav-right">
-      <a href="about.html" class="nav-link">About</a>
-      <button class="dark-toggle" aria-label="Modo oscuro"></button>
-    </div>
-  </nav>
 
-  <div class="projects-grid">
-    <div class="column scroll-down">
-      <a href="albura.html" class="card">
-        <img src="assets/albura/imagen1.jpg" alt="Albura">
-        <div class="overlay"><h2>Albura</h2><p>Diseño de producto / exploración material</p></div>
+<nav>
+  <div class="nav-left">
+    <a href="projects.html" class="nav-link active">Proyectos</a>
+  </div>
+  <div class="nav-center">
+    <a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a>
+  </div>
+  <div class="nav-right">
+    <a href="about.html" class="nav-link">About</a>
+    <button class="dark-toggle" aria-label="Modo oscuro"></button>
+  </div>
+</nav>
+
+<div class="projects-grid" id="projects-grid">
+
+  <!-- COLUMNA 1 — scroll hacia abajo -->
+  <div class="column" data-dir="down">
+    <div class="col-inner">
+      <a href="and-y.html" class="card">
+        <img src="assets/and-y/imagen1.jpg" alt="AND-Y">
+        <div class="overlay"><h2>AND-Y</h2><p>Proyecto conceptual de identidad y sistema visual</p></div>
+      </a>
+      <a href="0-atao.html" class="card">
+        <img src="assets/0-atao/imagen1.jpg" alt="0-atao">
+        <div class="overlay"><h2>0-atao</h2><p>Exploración gráfica y sistema experimental</p></div>
+      </a>
+      <a href="teatro-a-mil.html" class="card">
+        <img src="assets/teatro-a-mil/imagen1.jpg" alt="Teatro a Mil">
+        <div class="overlay"><h2>Teatro a Mil</h2><p>Identidad visual y piezas gráficas culturales</p></div>
       </a>
       <a href="and-y.html" class="card">
         <img src="assets/and-y/imagen1.jpg" alt="AND-Y">
@@ -40,11 +52,26 @@
         <div class="overlay"><h2>Teatro a Mil</h2><p>Identidad visual y piezas gráficas culturales</p></div>
       </a>
     </div>
+  </div>
 
-    <div class="column scroll-up">
-      <a href="feria-movil.html" class="card">
-        <img src="assets/feria-movil/imagen1.jpg" alt="Feria Móvil">
-        <div class="overlay"><h2>Feria Móvil</h2><p>Prototipo de feria itinerante / diseño espacial</p></div>
+  <!-- COLUMNA 2 — scroll hacia arriba -->
+  <div class="column" data-dir="up">
+    <div class="col-inner">
+      <a href="iphone.html" class="card">
+        <img src="assets/iphone/imagen1.jpg" alt="iPhone">
+        <div class="overlay"><h2>iPhone</h2><p>Rediseño conceptual / estudio de interfaz</p></div>
+      </a>
+      <a href="lemontech.html" class="card">
+        <img src="assets/lemontech/imagen1.jpg" alt="Lemontech">
+        <div class="overlay"><h2>Lemontech</h2><p>Identidad visual corporativa</p></div>
+      </a>
+      <a href="color-game.html" class="card-game">
+        <div class="card-game-bg" id="game-card-bg"></div>
+        <div class="card-game-overlay">
+          <p class="card-game-label">experimento interactivo</p>
+          <h2 class="card-game-title">find the odd one.</h2>
+          <p class="card-game-desc">juego / color / percepción</p>
+        </div>
       </a>
       <a href="iphone.html" class="card">
         <img src="assets/iphone/imagen1.jpg" alt="iPhone">
@@ -54,9 +81,32 @@
         <img src="assets/lemontech/imagen1.jpg" alt="Lemontech">
         <div class="overlay"><h2>Lemontech</h2><p>Identidad visual corporativa</p></div>
       </a>
+       <a href="color-game.html" class="card-game">
+        <div class="card-game-bg" id="game-card-bg"></div>
+        <div class="card-game-overlay">
+          <p class="card-game-label">experimento interactivo</p>
+          <h2 class="card-game-title">find the odd one.</h2>
+          <p class="card-game-desc">juego / color / percepción</p>
+        </div>
+      </a>
     </div>
+  </div>
 
-    <div class="column scroll-down">
+  <!-- COLUMNA 3 — scroll hacia abajo -->
+  <div class="column" data-dir="down">
+    <div class="col-inner">
+      <a href="visuales.html" class="card">
+        <img src="assets/visuales/imagen1.jpg" alt="Visuales">
+        <div class="overlay"><h2>Visuales</h2><p>Experimentos visuales y motion graphics</p></div>
+      </a>
+      <a href="albura.html" class="card">
+        <img src="assets/albura/imagen1.jpg" alt="Albura">
+        <div class="overlay"><h2>Albura</h2><p>Revisión de exploración material</p></div>
+      </a>
+      <a href="feria-movil.html" class="card">
+        <img src="assets/feria-movil/imagen1.jpg" alt="Feria Móvil">
+        <div class="overlay"><h2>Feria Móvil</h2><p>Iteración de prototipo espacial</p></div>
+      </a>
       <a href="visuales.html" class="card">
         <img src="assets/visuales/imagen1.jpg" alt="Visuales">
         <div class="overlay"><h2>Visuales</h2><p>Experimentos visuales y motion graphics</p></div>
@@ -72,9 +122,129 @@
     </div>
   </div>
 
-  <script src="cursor.js"></script>
-  <script src="nav.js"></script>
-  <script src="nav-typing.js"></script>
-  <script src="transitions.js"></script>
+</div>
+
+<script src="cursor.js"></script>
+<script src="nav.js"></script>
+<script src="nav-typing.js"></script>
+<script src="transitions.js"></script>
+
+<script>
+// ── COLUMNAS: auto-scroll + control manual con wheel ──
+(function () {
+  const columns = document.querySelectorAll('.column');
+
+  // Estado por columna
+  const state = Array.from(columns).map((col, i) => {
+    const inner = col.querySelector('.col-inner');
+    const dir   = col.dataset.dir === 'up' ? -1 : 1;
+    return {
+      col,
+      inner,
+      dir,           // dirección auto: 1 = hacia abajo, -1 = hacia arriba
+      offset: 0,     // posición actual en px
+      speed: 0.3,    // velocidad auto (px por frame)
+      hovered: false,
+      manualV: 0,    // velocidad manual acumulada por wheel
+    };
+  });
+
+  function getMax(s) {
+    // Mitad del contenido: cuando llega al 50% vuelve al inicio (loop)
+    return s.inner.scrollHeight / 2;
+  }
+
+  // Loop principal
+  function tick() {
+    state.forEach(s => {
+      const max = getMax(s);
+      if (max <= 0) return;
+
+      if (s.hovered && Math.abs(s.manualV) > 0.01) {
+        // Modo manual: aplica la velocidad acumulada con fricción
+        s.offset += s.manualV;
+        s.manualV *= 0.88; // fricción
+      } else {
+        // Modo auto: avanza lentamente en su dirección
+        s.offset += s.speed * s.dir;
+      }
+
+      // Loop infinito: cuando llega a la mitad vuelve a 0
+      if (s.offset >= max) s.offset -= max;
+      if (s.offset < 0)    s.offset += max;
+
+      s.inner.style.transform = `translateY(-${s.offset}px)`;
+    });
+
+    requestAnimationFrame(tick);
+  }
+
+  // Detectar qué columna tiene el mouse
+  state.forEach(s => {
+    s.col.addEventListener('mouseenter', () => { s.hovered = true; });
+    s.col.addEventListener('mouseleave', () => {
+      s.hovered = false;
+      // Al salir, la velocidad manual se convierte en impulso
+      // que el auto-scroll va absorbiendo gradualmente
+    });
+  });
+
+  // Wheel sobre la columna activa
+  const grid = document.getElementById('projects-grid');
+  grid.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    state.forEach(s => {
+      if (!s.hovered) return;
+      // Sumar delta al manualV (con cap para que no vuele)
+      s.manualV += e.deltaY * 0.4;
+      s.manualV  = Math.max(-20, Math.min(20, s.manualV));
+    });
+  }, { passive: false });
+
+  // Arrancar con offsets distintos para que no empiecen todas iguales
+  state[0].offset = 0;
+  state[1].offset = 200;
+  state[2].offset = 100;
+
+  requestAnimationFrame(tick);
+})();
+
+// ── GAME CARD: cuadros animados ──
+(function () {
+  const bg = document.getElementById('game-card-bg');
+  if (!bg) return;
+
+  const sat = 60, lit = 50, total = 20;
+
+  function paint(hue, oddIdx, delta) {
+    const spans = bg.querySelectorAll('span');
+    const sign  = Math.random() < 0.5 ? 1 : -1;
+    const oddLit = Math.max(15, Math.min(85, lit + sign * delta));
+    spans.forEach((s, i) => {
+      s.classList.toggle('odd', i === oddIdx);
+      s.style.background = `hsl(${hue},${sat}%,${i === oddIdx ? oddLit : lit}%)`;
+    });
+  }
+
+  // Crear spans
+  for (let i = 0; i < total; i++) {
+    const s = document.createElement('span');
+    s.style.borderRadius = '4px';
+    s.style.animationDelay = (Math.random() * 2) + 's';
+    bg.appendChild(s);
+  }
+
+  function randomize() {
+    const hue   = Math.floor(Math.random() * 360);
+    const odd   = Math.floor(Math.random() * total);
+    const delta = 7 + Math.floor(Math.random() * 6);
+    paint(hue, odd, delta);
+  }
+
+  randomize();
+  setInterval(randomize, 3500);
+})();
+</script>
+
 </body>
 </html>
