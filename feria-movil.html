@@ -6,170 +6,95 @@
   <title>Feria Móvil — KORA</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
-
 <nav>
-  <div class="nav-left">
-    <a href="projects.html" class="nav-link active">Proyectos</a>
-  </div>
-  <div class="nav-center">
-    <a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a>
-  </div>
-  <div class="nav-right">
-    <a href="about.html" class="nav-link">About</a>
-    <button class="dark-toggle" aria-label="Modo oscuro"></button>
-  </div>
+  <div class="nav-left"><a href="projects.html" class="nav-link active">Proyectos</a></div>
+  <div class="nav-center"><a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a></div>
+  <div class="nav-right"><a href="about.html" class="nav-link">About</a><button class="dark-toggle" aria-label="Modo oscuro"></button></div>
 </nav>
 
-<div class="proy">
+<!-- HERO: título dividido en dos líneas con eyebrow -->
+<section class="p-wrap" style="padding-top:120px;padding-bottom:60px;">
+  <span class="p-eyebrow">Diseño de producto · 2024</span>
+  <h1 class="p-h1" style="font-size:clamp(60px,12vw,160px);">Feria<br>Móvil</h1>
+</section>
 
-  <!-- ── TÍTULO ── -->
-  <div class="proy-title-block">
-    <p class="proy-eyebrow">Diseño de producto</p>
-    <h1 class="proy-h1">Feria Móvil</h1>
-    <span class="proy-year">2024</span>
-  </div>
+<div class="p-rule p-bleed"></div>
 
-  <div class="proy-rule"></div>
+<!-- COVER -->
+<img src="assets/feria-movil/feria-movil.png" alt="Feria Móvil" class="p-img p-img-hover p-bleed" style="height:80vh;object-fit:cover;">
 
-  <!-- ── COVER ── -->
-  <img src="assets/feria-movil/cover.jpg" alt="Cover" class="proy-cover">
-
-  <!-- ── CONCEPTO ── -->
-  <div class="proy-concepto">
-    <div class="proy-concepto-left">
-      <span class="proy-num">2024</span>
+<!-- DATOS COMO TIPOGRAFÍA GRANDE: tres columnas -->
+<section class="p-wrap" style="padding-top:0;border-bottom:1px solid var(--border-subtle);">
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border-subtle);">
+    <div style="padding:44px 0;border-right:1px solid var(--border-subtle);padding-right:40px;">
+      <span class="p-label" style="display:block;margin-bottom:10px;">materiales</span>
+      <span style="font-size:clamp(28px,4vw,48px);font-weight:600;letter-spacing:-0.03em;color:var(--fg);line-height:1;">Pino + PLA</span>
     </div>
-    <div class="proy-concepto-right">
-      <p class="proy-concepto-tag">concepto</p>
-
-      <div class="proy-concepto-body">
-        <p>
- Solución portátil para feriantes, hecha en madera de pino y con detalles impresos
-en 3D, diseñada con enfoque ergonómico, pensada para montarse, desmontarse
-y trasladarse fácilmente.
-        </p>
-      </div>
-
-      <div class="proy-tags-row">
-        <span class="proy-tag">Producto</span>
-        <span class="proy-tag">madera</span>
-        <span class="proy-tag">impresión 3D</span>
-      </div>
+    <div style="padding:44px 40px;border-right:1px solid var(--border-subtle);">
+      <span class="p-label" style="display:block;margin-bottom:10px;">montaje</span>
+      <span style="font-size:clamp(28px,4vw,48px);font-weight:600;letter-spacing:-0.03em;color:var(--fg);line-height:1;">5 min</span>
+    </div>
+    <div style="padding:44px 0 44px 40px;">
+      <span class="p-label" style="display:block;margin-bottom:10px;">diseño</span>
+      <span style="font-size:clamp(28px,4vw,48px);font-weight:600;letter-spacing:-0.03em;color:var(--fg);line-height:1;">Plegable</span>
     </div>
   </div>
+</section>
 
-  <!-- ── SPLIT (NUEVO) ── -->
-  <div class="proy-split">
-    <div class="proy-split-img">
-      <img src="assets/feria-movil/fotos.jpg" alt="">
-    </div>
-    <div class="proy-split-text">
-      <p class="proy-concepto-tag"></p>
- <p>
-Permite llevar ferias y actividades comerciales a distintos
-espacios de forma flexible y accesible.
-Responde a las condiciones reales de trabajo en ferias urbanas, mejorando tiempos,
-comodidad y dignidad laboral.
-        </p>
-    </div>
-  </div>
-
-  <!-- ── PROCESO ── -->
-  <div class="proy-proceso-wrap" id="procesoWrap">
-    <span class="proy-proceso-label">proceso</span>
-    <div class="proy-proceso-track" id="procesoTrack">
-      <img src="assets/feria-movil/proceso1.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/feria-movil/proceso2.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/feria-movil/proceso3.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/feria-movil/proceso4.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/feria-movil/proceso5.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/feria-movil/proceso6.jpg" class="proy-proceso-img" alt="">
+<!-- CONCEPTO: texto amplio con espacio -->
+<section class="p-wrap" style="padding-top:80px;padding-bottom:80px;display:grid;grid-template-columns:1fr 2fr;gap:60px;align-items:start;">
+  <span class="p-label" style="padding-top:5px;">sobre el proyecto</span>
+  <div>
+    <p class="p-body" style="font-size:15px;margin-bottom:20px;">Solución portátil para feriantes. Diseñada con enfoque ergonómico para montarse, desmontarse y trasladarse fácilmente entre distintos espacios urbanos.</p>
+    <p class="p-body" style="font-size:15px;">Mejora tiempos, comodidad y dignidad laboral de quienes trabajan en ferias.</p>
+    <div class="p-tags" style="margin-top:24px;">
+      <span class="p-tag">producto</span>
+      <span class="p-tag">madera</span>
+      <span class="p-tag">impresión 3D</span>
+      <span class="p-tag">ergonomía</span>
     </div>
   </div>
+</section>
 
-
-  <!-- ── GRID ── -->
-  <div class="proy-grid">
-    <img src="assets/feria-movil/imagen2.jpg" class="proy-grid-a" alt="">
-    <img src="assets/feria-movil/imagen3.jpg" class="proy-grid-b" alt="">
-    <img src="assets/feria-movil/imagen4.jpg" class="proy-grid-c" alt="">
+<!-- DOS IMÁGENES: distintos tamaños, una más alta -->
+<section class="p-wrap" style="padding-bottom:10px;">
+  <div style="display:grid;grid-template-columns:3fr 2fr;gap:10px;align-items:end;">
+    <img src="assets/feria-movil/feria-movil1.png" alt="" class="p-img p-img-hover" style="height:500px;object-fit:cover;border-radius:4px;">
+    <img src="assets/feria-movil/feria-movil4.png" alt="" class="p-img p-img-hover" style="height:360px;object-fit:cover;border-radius:4px;">
   </div>
+</section>
 
-  <!-- ── FULL IMAGE ── -->
-  <div class="proy-full">
-    <img src="assets/feria-movil/imagen5.jpg" alt="">
-    <div class="proy-full-text">
-      <p class="proy-full-quote">
-      </p>
-      <span class="proy-full-credit">KORA — 2024</span>
-    </div>
-  </div>
+<!-- IMAGEN FINAL -->
+<img src="assets/feria-movil/feria-movil5.png" alt="" class="p-img p-bleed p-img-hover" style="height:60vh;object-fit:cover;">
 
+</div><!-- /wrapper -->
+ 
+<!-- FOOTER: fuera de todo, último elemento antes de </body> -->
+<div class="p-footer">
+  <a href="lemontech.html">← lemontech</a>
+  <a href="projects.html" style="opacity:0.35;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;color:var(--fg);">proyectos</a>
+  <a href="visuales.html" class="p-footer-pink">visuales →</a>
 </div>
 
 <script src="cursor.js"></script>
 <script src="nav.js"></script>
 <script src="nav-typing.js"></script>
 <script src="transitions.js"></script>
-
 <script>
-(function() {
-  const wrap  = document.getElementById("procesoWrap");
-  const track = document.getElementById("procesoTrack");
-  if (!wrap || !track) return;
-
-  let targetX = 0;
-  let currentX = 0;
-  let maxScroll = 0;
-  let raf = null;
-
-  function getMax() {
-    return Math.max(0, track.scrollWidth - wrap.clientWidth + parseInt(getComputedStyle(track).paddingLeft) * 2);
-  }
-
-  wrap.addEventListener("mousemove", (e) => {
-    const rect = wrap.getBoundingClientRect();
-    const rel  = (e.clientX - rect.left) / rect.width;
-    maxScroll  = getMax();
-    targetX    = rel * maxScroll;
-    if (!raf) raf = requestAnimationFrame(lerp);
-  });
-
-  wrap.addEventListener("mouseleave", () => {
-    targetX = 0;
-    if (!raf) raf = requestAnimationFrame(lerp);
-  });
-
-  function lerp() {
-    currentX += (targetX - currentX) * 0.07;
-    track.style.transform = `translateX(-${currentX}px)`;
-
-    if (Math.abs(targetX - currentX) > 0.3) {
-      raf = requestAnimationFrame(lerp);
-    } else {
-      raf = null;
-    }
-  }
-
-  let touchStartX = 0;
-  let touchStartScroll = 0;
-
-  wrap.addEventListener("touchstart", (e) => {
-    touchStartX      = e.touches[0].clientX;
-    touchStartScroll = currentX;
-  }, { passive: true });
-
-  wrap.addEventListener("touchmove", (e) => {
-    const dx = touchStartX - e.touches[0].clientX;
-    maxScroll = getMax();
-    targetX   = Math.max(0, Math.min(maxScroll, touchStartScroll + dx));
-    if (!raf) raf = requestAnimationFrame(lerp);
-  }, { passive: true });
+(function(){
+  const wrap=document.querySelector('.p-strip-wrap'),track=document.getElementById('stripTrack');
+  if(!wrap||!track)return;
+  let tX=0,cX=0,raf=null;
+  function max(){return Math.max(0,track.scrollWidth-wrap.clientWidth);}
+  wrap.addEventListener('mousemove',e=>{const r=wrap.getBoundingClientRect();tX=(e.clientX-r.left)/r.width*max();if(!raf)raf=requestAnimationFrame(lerp);});
+  wrap.addEventListener('mouseleave',()=>{tX=0;if(!raf)raf=requestAnimationFrame(lerp);});
+  function lerp(){cX+=(tX-cX)*0.07;track.style.transform=`translateX(-${cX}px)`;raf=Math.abs(tX-cX)>0.3?requestAnimationFrame(lerp):null;}
+  let tx0=0,cx0=0;
+  wrap.addEventListener('touchstart',e=>{tx0=e.touches[0].clientX;cx0=cX;},{passive:true});
+  wrap.addEventListener('touchmove',e=>{tX=Math.max(0,Math.min(max(),cx0+(tx0-e.touches[0].clientX)));if(!raf)raf=requestAnimationFrame(lerp);},{passive:true});
 })();
 </script>
-
 </body>
 </html>
