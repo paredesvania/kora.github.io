@@ -6,173 +6,117 @@
   <title>iPhone — KORA</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
-
 <nav>
-  <div class="nav-left">
-    <a href="projects.html" class="nav-link active">Proyectos</a>
-  </div>
-  <div class="nav-center">
-    <a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a>
-  </div>
-  <div class="nav-right">
-    <a href="about.html" class="nav-link">About</a>
-    <button class="dark-toggle" aria-label="Modo oscuro"></button>
-  </div>
+  <div class="nav-left"><a href="projects.html" class="nav-link active">Proyectos</a></div>
+  <div class="nav-center"><a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a></div>
+  <div class="nav-right"><a href="about.html" class="nav-link">About</a><button class="dark-toggle" aria-label="Modo oscuro"></button></div>
 </nav>
 
-<div class="proy">
-
-  <!-- ── TÍTULO ── -->
-  <div class="proy-title-block">
-    <p class="proy-eyebrow">Modelado 3D y Renderizado</p>
-    <h1 class="proy-h1">iPhone</h1>
-    <span class="proy-year">2024</span>
+<!-- HERO: título a la izquierda, datos técnicos a la derecha -->
+<section class="p-wrap" style="padding-top:120px;padding-bottom:60px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:flex-end;">
+  <div>
+    <span class="p-eyebrow">Modelado 3D · Renderizado · 2024</span>
+    <h1 class="p-h1" style="font-size:clamp(60px,11vw,150px);">iPhone</h1>
   </div>
-
-  <div class="proy-rule"></div>
-
-  <!-- ── COVER ── -->
-  <img src="assets/iphone/cover.jpg" alt="Cover" class="proy-cover">
-
-  <!-- ── CONCEPTO ── -->
-  <div class="proy-concepto">
-    <div class="proy-concepto-left">
-      <span class="proy-num">2024</span>
-    </div>
-    <div class="proy-concepto-right">
-      <p class="proy-concepto-tag">concepto</p>
-
-      <div class="proy-concepto-body">
-        <p>
-Reconstrucción digital del iPhone 11 en Rhinoceros 8, utilizando mediciones precisas con pie de metro.
-        </p>
-      </div>
-
-      <div class="proy-tags-row">
-        <span class="proy-tag">modelado 3D</span>
-        <span class="proy-tag">renderizado</span>
-        <span class="proy-tag">rhinoceros</span>
-      </div>
+  <div style="padding-bottom:12px;display:flex;flex-direction:column;gap:20px;">
+    <p class="p-body">Reconstrucción digital del iPhone 11 usando mediciones precisas con pie de metro. Todos los detalles exteriores, materiales y variantes de color.</p>
+    <div class="p-tags">
+      <span class="p-tag">rhinoceros 8</span>
+      <span class="p-tag">v-ray</span>
+      <span class="p-tag">modelado 3D</span>
     </div>
   </div>
+</section>
 
-  <!-- ── SPLIT (NUEVO) ── -->
-  <div class="proy-split">
-    <div class="proy-split-img">
-      <img src="assets/iphone/imagen-detalle.jpg" alt="">
-    </div>
-    <div class="proy-split-text">
-      <p class="proy-concepto-tag"></p>
- <p>
-    El modelado incluyó todos los
-detalles exteriores del dispositivo, aplicación de materiales y variantes de color.
-        </p>
-    </div>
-  </div>
+<div class="p-rule p-bleed"></div>
 
-  <!-- ── PROCESO ── -->
-  <div class="proy-proceso-wrap" id="procesoWrap">
-    <span class="proy-proceso-label">proceso</span>
-    <div class="proy-proceso-track" id="procesoTrack">
-      <img src="assets/iphone/proceso1.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/iphone/proceso2.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/iphone/proceso3.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/iphone/proceso4.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/iphone/proceso5.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/iphone/proceso6.jpg" class="proy-proceso-img" alt="">
+<!-- COVER -->
+<img src="assets/iphone/cover.jpg" alt="iPhone" class="p-img p-img-hover p-bleed" style="height:85vh;object-fit:cover;">
+
+<!-- SPECS en tres columnas -->
+<section class="p-wrap" style="padding-top:0;padding-bottom:0;border-bottom:1px solid var(--border-subtle);">
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border-subtle);">
+    <div style="padding:40px 0;border-right:1px solid var(--border-subtle);padding-right:40px;">
+      <span class="p-label" style="display:block;margin-bottom:10px;">software</span>
+      <span style="font-size:20px;font-weight:600;letter-spacing:-0.02em;color:var(--fg);">Rhinoceros 8</span>
+    </div>
+    <div style="padding:40px;border-right:1px solid var(--border-subtle);">
+      <span class="p-label" style="display:block;margin-bottom:10px;">render</span>
+      <span style="font-size:20px;font-weight:600;letter-spacing:-0.02em;color:var(--fg);">V-Ray</span>
+    </div>
+    <div style="padding:40px 0 40px 40px;">
+      <span class="p-label" style="display:block;margin-bottom:10px;">entorno</span>
+      <span style="font-size:20px;font-weight:600;letter-spacing:-0.02em;color:var(--fg);">HDRI Apple Store</span>
     </div>
   </div>
+</section>
 
-  <!-- ── TEXTO CONTEXTO GRID ── -->
-  <div class="proy-grid-text">
- <p>
-Se diseñó una tienda Apple como entorno expositivo, incorporando un ambiente HDRI para simular iluminación natural exterior. Finalmente,
-el renderizado en V-Ray permitió obtener imágenes de alta calidad que destacan el producto en un contexto realista y coherente.
-        </p>
+<!-- TEXTO CENTRADO CON AIRE -->
+<section class="p-wrap" style="padding-top:80px;padding-bottom:80px;max-width:700px;">
+  <p class="p-body" style="font-size:15px;">Se diseñó una tienda Apple como entorno expositivo, incorporando iluminación natural exterior simulada con HDRI. El renderizado en V-Ray permitió obtener imágenes de alta calidad que destacan el producto en un contexto realista.</p>
+</section>
+
+<!-- RENDERS: scroll horizontal libre -->
+<div style="overflow-x:auto;scrollbar-width:none;padding-bottom:4px;" id="rendersScroll">
+  <div style="display:flex;gap:6px;padding:0 48px;width:max-content;">
+    <img src="assets/iphone/imagen2.jpg" alt="" style="width:42vw;max-width:560px;height:40vh;object-fit:cover;flex-shrink:0;display:block;border-radius:4px;" class="p-img-hover">
+    <img src="assets/iphone/imagen3.jpg" alt="" style="width:32vw;max-width:420px;height:40vh;object-fit:cover;flex-shrink:0;display:block;border-radius:4px;" class="p-img-hover">
+    <img src="assets/iphone/imagen4.jpg" alt="" style="width:38vw;max-width:500px;height:40vh;object-fit:cover;flex-shrink:0;display:block;border-radius:4px;" class="p-img-hover">
+    <img src="assets/iphone/proceso1.jpg" alt="" style="width:28vw;max-width:360px;height:40vh;object-fit:cover;flex-shrink:0;display:block;border-radius:4px;" class="p-img-hover">
   </div>
-
-  <!-- ── GRID ── -->
-  <div class="proy-grid">
-    <img src="assets/iphone/imagen2.jpg" class="proy-grid-a" alt="">
-    <img src="assets/iphone/imagen3.jpg" class="proy-grid-b" alt="">
-    <img src="assets/iphone/imagen4.jpg" class="proy-grid-c" alt="">
-  </div>
-
-  <!-- ── FULL IMAGE ── -->
-  <div class="proy-full">
-    <img src="assets/iphone/imagen5.jpg" alt="">
-    <div class="proy-full-text">
-      <p class="proy-full-quote">
-      </p>
-      <span class="proy-full-credit">KORA — 2024</span>
-    </div>
-  </div>
-
 </div>
+<div style="padding:12px 48px;">
+  <span class="p-label">← scroll para ver más</span>
+</div>
+
+<!-- STRIP PROCESO -->
+<div class="p-strip-wrap" style="border-top:1px solid var(--border-subtle);margin-top:40px;">
+  <span class="p-strip-label">proceso</span>
+  <div class="p-strip-track" id="stripTrack">
+    <img src="assets/iphone/proceso1.jpg" class="p-strip-img" alt="">
+    <img src="assets/iphone/proceso2.jpg" class="p-strip-img" alt="">
+    <img src="assets/iphone/proceso3.jpg" class="p-strip-img" alt="">
+    <img src="assets/iphone/proceso4.jpg" class="p-strip-img" alt="">
+    <img src="assets/iphone/proceso5.jpg" class="p-strip-img" alt="">
+    <img src="assets/iphone/proceso6.jpg" class="p-strip-img" alt="">
+  </div>
+</div>
+
+<!-- IMAGEN FINAL -->
+<img src="assets/iphone/imagen5.jpg" alt="" class="p-img p-bleed" style="height:60vh;object-fit:cover;margin-top:80px;">
+
+</div><!-- /wrapper -->
+ 
+<!-- FOOTER: fuera de todo, último elemento antes de </body> -->
+<div class="p-footer">
+  <a href="0-atao.html">← 0-atao</a>
+  <a href="projects.html" style="opacity:0.35;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;color:var(--fg);">proyectos</a>
+  <a href="lemontech.html" class="p-footer-pink">lemontech →</a>
+</div>
+
 
 <script src="cursor.js"></script>
 <script src="nav.js"></script>
 <script src="nav-typing.js"></script>
 <script src="transitions.js"></script>
-
 <script>
-(function() {
-  const wrap  = document.getElementById("procesoWrap");
-  const track = document.getElementById("procesoTrack");
-  if (!wrap || !track) return;
-
-  let targetX = 0;
-  let currentX = 0;
-  let maxScroll = 0;
-  let raf = null;
-
-  function getMax() {
-    return Math.max(0, track.scrollWidth - wrap.clientWidth + parseInt(getComputedStyle(track).paddingLeft) * 2);
-  }
-
-  wrap.addEventListener("mousemove", (e) => {
-    const rect = wrap.getBoundingClientRect();
-    const rel  = (e.clientX - rect.left) / rect.width;
-    maxScroll  = getMax();
-    targetX    = rel * maxScroll;
-    if (!raf) raf = requestAnimationFrame(lerp);
-  });
-
-  wrap.addEventListener("mouseleave", () => {
-    targetX = 0;
-    if (!raf) raf = requestAnimationFrame(lerp);
-  });
-
-  function lerp() {
-    currentX += (targetX - currentX) * 0.07;
-    track.style.transform = `translateX(-${currentX}px)`;
-
-    if (Math.abs(targetX - currentX) > 0.3) {
-      raf = requestAnimationFrame(lerp);
-    } else {
-      raf = null;
-    }
-  }
-
-  let touchStartX = 0;
-  let touchStartScroll = 0;
-
-  wrap.addEventListener("touchstart", (e) => {
-    touchStartX      = e.touches[0].clientX;
-    touchStartScroll = currentX;
-  }, { passive: true });
-
-  wrap.addEventListener("touchmove", (e) => {
-    const dx = touchStartX - e.touches[0].clientX;
-    maxScroll = getMax();
-    targetX   = Math.max(0, Math.min(maxScroll, touchStartScroll + dx));
-    if (!raf) raf = requestAnimationFrame(lerp);
-  }, { passive: true });
+(function(){
+  const wrap=document.querySelector('.p-strip-wrap'),track=document.getElementById('stripTrack');
+  if(!wrap||!track)return;
+  let tX=0,cX=0,raf=null;
+  function max(){return Math.max(0,track.scrollWidth-wrap.clientWidth);}
+  wrap.addEventListener('mousemove',e=>{const r=wrap.getBoundingClientRect();tX=(e.clientX-r.left)/r.width*max();if(!raf)raf=requestAnimationFrame(lerp);});
+  wrap.addEventListener('mouseleave',()=>{tX=0;if(!raf)raf=requestAnimationFrame(lerp);});
+  function lerp(){cX+=(tX-cX)*0.07;track.style.transform=`translateX(-${cX}px)`;raf=Math.abs(tX-cX)>0.3?requestAnimationFrame(lerp):null;}
+  let tx0=0,cx0=0;
+  wrap.addEventListener('touchstart',e=>{tx0=e.touches[0].clientX;cx0=cX;},{passive:true});
+  wrap.addEventListener('touchmove',e=>{tX=Math.max(0,Math.min(max(),cx0+(tx0-e.touches[0].clientX)));if(!raf)raf=requestAnimationFrame(lerp);},{passive:true});
+  // Scroll horizontal en renders con mouse
+  const rs=document.getElementById('rendersScroll');
+  if(rs){rs.style.cursor='none';rs.addEventListener('wheel',e=>{e.preventDefault();rs.scrollLeft+=e.deltaY*0.8;},{passive:false});}
 })();
 </script>
-
 </body>
 </html>
