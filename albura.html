@@ -3,159 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ALBURA — KORA</title>
+  <title>Albura — KORA</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
+  <style>
+    /* Imagen que se mueve levemente con el mouse */
+    .alb-cover { transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); }
+  </style>
 </head>
 <body>
-
 <nav>
-  <div class="nav-left">
-    <a href="projects.html" class="nav-link active">Proyectos</a>
-  </div>
-  <div class="nav-center">
-    <a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a>
-  </div>
-  <div class="nav-right">
-    <a href="about.html" class="nav-link">About</a>
-    <button class="dark-toggle" aria-label="Modo oscuro"></button>
-  </div>
+  <div class="nav-left"><a href="projects.html" class="nav-link active">Proyectos</a></div>
+  <div class="nav-center"><a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a></div>
+  <div class="nav-right"><a href="about.html" class="nav-link">About</a><button class="dark-toggle" aria-label="Modo oscuro"></button></div>
 </nav>
 
-<div class="proy">
+<!-- ── HERO: título que convive con la imagen ── -->
+<section style="padding-top:80px;position:relative;overflow:hidden;">
 
-  <!-- ── TÍTULO ── -->
-  <div class="proy-title-block">
-    <p class="proy-eyebrow">Diseño de producto</p>
-    <h1 class="proy-h1">Albura</h1>
-    <span class="proy-year">2024</span>
+  <!-- Eyebrow + título centrado -->
+  <div class="p-wrap" style="padding-top:60px;padding-bottom:40px;">
+    <span class="p-eyebrow">Diseño de producto · 2023</span>
+    <h1 class="p-h1" style="font-size:clamp(72px,14vw,180px);">Albura</h1>
   </div>
 
-  <div class="proy-rule"></div>
+  <!-- Cover full-bleed, sin márgenes -->
+  <img src="assets/albura/albura.png" alt="Albura"
+    class="p-img p-img-hover alb-cover"
+    style="height:80vh;object-fit:cover;"
+    id="alb-cover">
 
-  <!-- ── IMAGEN COVER ── -->
-  <!-- ruta -->
-  <img src="assets/albura/albur.jpg" alt="Cover" class="proy-cover">
+</section>
 
-  <!-- ── FILA(mouse drag) ── -->
-  <div class="proy-proceso-wrap" id="procesoWrap">
-    <span class="proy-proceso-label">proceso</span>
-    <div class="proy-proceso-track" id="procesoTrack">
-      <!-- imágenes -->
-      <img src="assets/albura/proceso1.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/albura/proceso2.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/albura/proceso3.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/albura/proceso4.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/albura/proceso5.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/albura/proceso6.jpg" class="proy-proceso-img" alt="">
+<!-- ── CONCEPTO: texto grande a la izquierda, tags flotando derecha ── -->
+<section class="p-wrap" style="padding-top:80px;padding-bottom:80px;display:grid;grid-template-columns:1fr auto;gap:60px;align-items:start;">
+  <div>
+    <span class="p-label" style="display:block;margin-bottom:20px;"></span>
+    <p class="p-statement" style="max-width:700px;">Lámpara inspirada en la forma de un conejo. 
+      Hecha con terciado y listones de pino usando técnicas de curvado de madera.</p>
+
+  </div>
+  <div style="padding-top:48px;">
+    <div class="p-tags" style="flex-direction:column;align-items:flex-end;gap:8px;">
+      <span class="p-tag">diseño de producto</span>
+      <span class="p-tag">madera</span>
+      <span class="p-tag">curvado</span>
+      <span class="p-tag">2023</span>
     </div>
   </div>
+</section>
 
-  <!-- ── CONCEPTO ── -->
-  <div class="proy-concepto">
-    <div class="proy-concepto-left">
-      <span class="proy-num">2023</span>
-    </div>
-    <div class="proy-concepto-right">
-      <p class="proy-concepto-tag">concepto</p>
-      <!-- descripción -->
-      <p class="proy-concepto-body">
-      Una lámpara inspirada en la forma de un conejo, hecha de terciado y listones
-      de pino usando técnicas de curvado de madera y ensamblaje.
-      </p>
-      <!-- etiquetas -->
-      <div class="proy-tags-row">
-        <span class="proy-tag">diseño de producto</span>
-        <span class="proy-tag">madera</span>
-        <span class="proy-tag">curvado de madera</span>
-      </div>
-    </div>
+
+<!-- ── DOS IMÁGENES: tamaños distintos, sin alineación perfecta ── -->
+<section class="p-wrap" style="padding-bottom:4px;">
+  <div style="display:grid;grid-template-columns:5fr 3fr;gap:10px;align-items:end;">
+    <img src="assets/albura/albura1.png" alt="" class="p-img p-img-hover" style="height:520px;object-fit:cover;border-radius:4px;">
+    <!-- imagen más pequeña, desplazada hacia arriba -->
+    <img src="assets/albura/albura3.png" alt="" class="p-img p-img-hover" style="height:360px;object-fit:cover;border-radius:4px;margin-bottom:80px;">
   </div>
+</section>
 
-  <!-- ── 5. GRID IRREGULAR ── -->
-  <div class="proy-grid">
-    <!-- rutas -->
-    <img src="assets/albura/imagen2.jpg" class="proy-grid-a" alt="">
-    <img src="assets/albura/imagen3.jpg" class="proy-grid-b" alt="">
-    <img src="assets/albura/imagen4.jpg" class="proy-grid-c" alt="">
+<!-- ── PROCESO ── -->
+<div class="p-strip-wrap">
+  <span class="p-strip-label">proceso</span>
+  <div class="p-strip-track" id="stripTrack">
+    <img src="assets/albura/proceso1.jpg" class="p-strip-img" alt="">
+    <img src="assets/albura/proceso2.jpg" class="p-strip-img" alt="">
+    <img src="assets/albura/proceso3.jpg" class="p-strip-img" alt="">
+    <img src="assets/albura/proceso4.jpg" class="p-strip-img" alt="">
+    <img src="assets/albura/proceso5.jpg" class="p-strip-img" alt="">
+    <img src="assets/albura/proceso6.jpg" class="p-strip-img" alt="">
   </div>
+</div>
 
-  <!-- ── IMAGEN FULL CON TEXTO ── -->
-  <div class="proy-full">
-    <img src="assets/albura/imagen5.jpg" alt="">
-    <div class="proy-full-text">
-      <!--frase o vacío -->
-      <p class="proy-full-quote"></p>
-      <span class="proy-full-credit">KORA — 2023</span>
-    </div>
+<!-- ── IMAGEN FINAL full-bleed con texto superpuesto ── -->
+<section style="position:relative;">
+  <img src="assets/albura/albura4.png" alt="" class="p-img" style="height:65vh;object-fit:cover;">
+  <div style="position:absolute;bottom:40px;right:48px;">
+    <span style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);">KORA — 2023</span>
   </div>
+</section>
 
-</div><!-- /proy -->
+</div><!-- /wrapper -->
+ 
+<!-- FOOTER: fuera de todo, último elemento antes de </body> -->
+<div class="p-footer">
+  <a href="velador.html">Mesa de noche</a>
+  <a href="projects.html" style="opacity:0.35;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;color:var(--fg);">proyectos</a>
+  <a href="and-y.html" class="p-footer-pink">and-y →</a>
+</div>
 
 <script src="cursor.js"></script>
 <script src="nav.js"></script>
 <script src="nav-typing.js"></script>
 <script src="transitions.js"></script>
-
 <script>
-// ── FILA DE PROCESO — se mueve siguiendo el mouse ──
-(function() {
-  const wrap  = document.getElementById("procesoWrap");
-  const track = document.getElementById("procesoTrack");
-  if (!wrap || !track) return;
-
-  let targetX = 0;
-  let currentX = 0;
-  let maxScroll = 0;
-  let raf = null;
-
-  function getMax() {
-    // Cuánto puede moverse la fila hacia la izquierda
-    return Math.max(0, track.scrollWidth - wrap.clientWidth + parseInt(getComputedStyle(track).paddingLeft) * 2);
-  }
-
-  wrap.addEventListener("mousemove", (e) => {
-    const rect = wrap.getBoundingClientRect();
-    const rel  = (e.clientX - rect.left) / rect.width; // 0 = izquierda, 1 = derecha
-    maxScroll  = getMax();
-    targetX    = rel * maxScroll;
-    if (!raf) raf = requestAnimationFrame(lerp);
+// Strip
+(function(){
+  const wrap=document.querySelector('.p-strip-wrap'),track=document.getElementById('stripTrack');
+  if(!wrap||!track)return;
+  let tX=0,cX=0,raf=null;
+  function max(){return Math.max(0,track.scrollWidth-wrap.clientWidth);}
+  wrap.addEventListener('mousemove',e=>{const r=wrap.getBoundingClientRect();tX=(e.clientX-r.left)/r.width*max();if(!raf)raf=requestAnimationFrame(lerp);});
+  wrap.addEventListener('mouseleave',()=>{tX=0;if(!raf)raf=requestAnimationFrame(lerp);});
+  function lerp(){cX+=(tX-cX)*0.07;track.style.transform=`translateX(-${cX}px)`;raf=Math.abs(tX-cX)>0.3?requestAnimationFrame(lerp):null;}
+  let tx0=0,cx0=0;
+  wrap.addEventListener('touchstart',e=>{tx0=e.touches[0].clientX;cx0=cX;},{passive:true});
+  wrap.addEventListener('touchmove',e=>{tX=Math.max(0,Math.min(max(),cx0+(tx0-e.touches[0].clientX)));if(!raf)raf=requestAnimationFrame(lerp);},{passive:true});
+})();
+// Parallax suave en cover
+(function(){
+  const img=document.getElementById('alb-cover');
+  if(!img)return;
+  document.addEventListener('mousemove',e=>{
+    const rx=(e.clientX/window.innerWidth-0.5)*10;
+    const ry=(e.clientY/window.innerHeight-0.5)*6;
+    img.style.transform=`translate(${rx}px,${ry}px) scale(1.04)`;
   });
-
-  wrap.addEventListener("mouseleave", () => {
-    targetX = 0;
-    if (!raf) raf = requestAnimationFrame(lerp);
-  });
-
-  function lerp() {
-    currentX += (targetX - currentX) * 0.07;
-    track.style.transform = `translateX(-${currentX}px)`;
-
-    if (Math.abs(targetX - currentX) > 0.3) {
-      raf = requestAnimationFrame(lerp);
-    } else {
-      raf = null;
-    }
-  }
-
-  // Touch: drag con el dedo
-  let touchStartX = 0;
-  let touchStartScroll = 0;
-
-  wrap.addEventListener("touchstart", (e) => {
-    touchStartX      = e.touches[0].clientX;
-    touchStartScroll = currentX;
-  }, { passive: true });
-
-  wrap.addEventListener("touchmove", (e) => {
-    const dx = touchStartX - e.touches[0].clientX;
-    maxScroll = getMax();
-    targetX   = Math.max(0, Math.min(maxScroll, touchStartScroll + dx));
-    if (!raf) raf = requestAnimationFrame(lerp);
-  }, { passive: true });
 })();
 </script>
-
 </body>
 </html>
