@@ -6,185 +6,136 @@
   <title>AND-y — KORA</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
-
 <nav>
-  <div class="nav-left">
-    <a href="projects.html" class="nav-link active">Proyectos</a>
-  </div>
-  <div class="nav-center">
-    <a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a>
-  </div>
-  <div class="nav-right">
-    <a href="about.html" class="nav-link">About</a>
-    <button class="dark-toggle" aria-label="Modo oscuro"></button>
-  </div>
+  <div class="nav-left"><a href="projects.html" class="nav-link active">Proyectos</a></div>
+  <div class="nav-center"><a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a></div>
+  <div class="nav-right"><a href="about.html" class="nav-link">About</a><button class="dark-toggle" aria-label="Modo oscuro"></button></div>
 </nav>
 
-<div class="proy">
-
-  <!-- ── TÍTULO ── -->
-  <div class="proy-title-block">
-    <p class="proy-eyebrow">Interacción Digital</p>
-    <h1 class="proy-h1">AND-y</h1>
-    <span class="proy-year">2025</span>
+<!-- ── HERO: título grande a la izquierda, año a la derecha ── -->
+<section class="p-wrap" style="padding-top:120px;padding-bottom:60px;display:flex;justify-content:space-between;align-items:flex-end;">
+  <div>
+    <span class="p-eyebrow">Interacción Digital · 2025</span>
+    <h1 class="p-h1" style="font-size:clamp(68px,13vw,170px);">AND-y</h1>
   </div>
+  <div style="padding-bottom:16px;text-align:right;">
+    <a href="https://github.com/paredesvania/dis8645-2025-02-procesos/tree/main/00-proyecto-02/grupo-01" target="_blank" class="p-gh-link">
+      GitHub →
+    </a>
+  </div>
+</section>
 
-  <div class="proy-rule"></div>
+<div class="p-rule p-bleed"></div>
 
-  <!-- ── COVER ── -->
-  <img src="assets/and-y/cover.jpg" alt="Cover" class="proy-cover">
+<!-- ── COVER full-bleed ── -->
+<img src="assets/and-y/andy.jpg" alt="AND-y" class="p-img p-img-hover p-bleed" style="height:85vh;object-fit:cover;">
 
-  <!-- ── CONCEPTO ── -->
-  <div class="proy-concepto">
-    <div class="proy-concepto-left">
-      <span class="proy-num">2024</span>
-    </div>
-    <div class="proy-concepto-right">
-      <p class="proy-concepto-tag">concepto</p>
+<!-- ── CONCEPTO: texto que empieza en el margen pero la frase es grande ── -->
+<section class="p-wrap" style="padding-top:80px;padding-bottom:60px;">
+  <span class="p-label" style="display:block;margin-bottom:24px;">concepto</span>
+  <p class="p-statement" style="max-width:740px;">AND-Y detecta qué tan cerca estás y responde: te saluda, tiembla de nervios, o levanta el brazo para decirte datos curiosos.</p>
+  <div class="p-tags" style="margin-top:28px;">
+    <span class="p-tag">arduino</span>
+    <span class="p-tag">modelado 3D</span>
+    <span class="p-tag">rhinoceros</span>
+    <span class="p-tag">interacción</span>
+  </div>
+</section>
 
-      <div class="proy-concepto-body">
-        <p>
-            AND-Y fue modelado en Rhinoceros y programado
-en Arduino IDE, en lenguaje C++ utilizando una
-placa Arduino R4 Minima. A través de un sensor
-ultrasónico detecta qué tan cerca estás y responde
-mediante distintos actuadores: un servomotor, un
-motor vibrador y un reproductor MP3.
-        </p>
-             <p>
- Según la
-distancia, te saluda, tiembla de nervios o levanta
-el brazo para interactuar contigo y decirte datos
-curiosos.
-        </p>
+<!-- ── DESPIECE + COMPONENTES: imagen grande izquierda, lista derecha ── -->
+<section class="p-wrap" style="padding-bottom:80px;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;align-items:stretch;">
+    <!-- imagen despiece -->
+    <img src="assets/and-y/vistaExplo.png" alt="Despiece AND-y" class="p-img p-img-hover" style="height:700px;object-fit:cover;border-radius:4px;">
+    <!-- lista de componentes -->
+    <div style="border:1px solid var(--border-subtle);padding:48px 40px;display:flex;flex-direction:column;justify-content:center;gap:0;border-radius:4px;">
+      <span class="p-label" style="margin-bottom:28px;">componentes</span>
+      <div style="display:flex;flex-direction:column;">
+        <div style="padding:14px 0;border-bottom:1px solid var(--border-subtle);font-size:12px;letter-spacing:0.5px;color:var(--fg);opacity:0.65;display:flex;justify-content:space-between;">
+          <span>Arduino R4 Minima</span><span style="opacity:0.35;font-size:10px;">microcontrolador</span>
+        </div>
+        <div style="padding:14px 0;border-bottom:1px solid var(--border-subtle);font-size:12px;letter-spacing:0.5px;color:var(--fg);opacity:0.65;display:flex;justify-content:space-between;">
+          <span>HC-SR04</span><span style="opacity:0.35;font-size:10px;">sensor ultrasónico</span>
+        </div>
+        <div style="padding:14px 0;border-bottom:1px solid var(--border-subtle);font-size:12px;letter-spacing:0.5px;color:var(--fg);opacity:0.65;display:flex;justify-content:space-between;">
+          <span>Servomotor SG90</span><span style="opacity:0.35;font-size:10px;">movimiento</span>
+        </div>
+        <div style="padding:14px 0;border-bottom:1px solid var(--border-subtle);font-size:12px;letter-spacing:0.5px;color:var(--fg);opacity:0.65;display:flex;justify-content:space-between;">
+          <span>Motor vibrador</span><span style="opacity:0.35;font-size:10px;">haptic</span>
+        </div>
+        <div style="padding:14px 0;border-bottom:1px solid var(--border-subtle);font-size:12px;letter-spacing:0.5px;color:var(--fg);opacity:0.65;display:flex;justify-content:space-between;">
+          <span>DFPlayer Mini + altavoz</span><span style="opacity:0.35;font-size:10px;">audio</span>
+        </div>
+        <div style="padding:14px 0;font-size:12px;letter-spacing:0.5px;color:var(--fg);opacity:0.65;display:flex;justify-content:space-between;">
+          <span>C++ · Arduino IDE</span><span style="opacity:0.35;font-size:10px;">software</span>
+        </div>
       </div>
-
-      <div class="proy-tags-row">
-        <span class="proy-tag">modelado 3D</span>
-        <span class="proy-tag">renderizado</span>
-        <span class="proy-tag">rhinoceros</span>
-      </div>
     </div>
   </div>
+</section>
 
-  <!-- ── SPLIT (NUEVO) ── -->
-  <div class="proy-split">
-    <div class="proy-split-img">
-      <img src="assets/0-atao/imagen-detalle.jpg" alt="">
+<!-- ── STRIP DE PROCESO ── -->
+<div class="p-strip-wrap" style="border-top:1px solid var(--border-subtle);">
+  <span class="p-strip-label">Imágenes</span>
+  <div class="p-strip-track" id="stripTrack">
+    <img src="assets/and-y/ANDY2.jpg" class="p-strip-img" alt="">
+    <img src="assets/and-y/ANDY3.jpg" class="p-strip-img" alt="">
+    <img src="assets/and-y/ANDY4.jpg" class="p-strip-img" alt="">
+    <img src="assets/and-y/ANDY6.jpg" class="p-strip-img" alt="">
+    <img src="assets/and-y/ANDY7.jpg" class="p-strip-img" alt="">
+   <img src="assets/and-y/andyafiche.jpg" class="p-strip-img" alt="">
+  </div>
+</div>
+
+<!-- ── RECONOCIMIENTO + dos imágenes ── -->
+<section class="p-wrap" style="padding-bottom:80px;">
+  <!-- Badge festival -->
+  <div style="border:1px solid var(--border-subtle);padding:32px 40px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;border-radius:4px;">
+    <div>
+      <span class="p-label" style="margin-bottom:6px;display:block;">reconocimiento</span>
+      <p style="font-size:16px;font-weight:600;letter-spacing:-0.01em;color:var(--fg);">Seleccionado —Expuesto en Festival Primavera Hacker 2025</p>
     </div>
-    <div class="proy-split-text">
-      <p class="proy-concepto-tag"></p>
- <p>
-    Arduino R4 Minima · Sensor ultrasónico HC-SR04 · Servomotor SG90
-· Motor vibrador · Reproductor MP3 DFPlayer Mini + altavoz · Mini
-protoboard
-        </p>
-    </div>
+    <span style="font-size:32px;opacity:0.15;">★</span>
   </div>
 
-  <!-- ── PROCESO ── -->
-  <div class="proy-proceso-wrap" id="procesoWrap">
-    <span class="proy-proceso-label">proceso</span>
-    <div class="proy-proceso-track" id="procesoTrack">
-      <img src="assets/and-y/proceso1.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/and-y/proceso2.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/and-y/proceso3.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/and-y/proceso4.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/and-y/proceso5.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/and-y/proceso6.jpg" class="proy-proceso-img" alt="">
-    </div>
+  <!-- Dos imágenes -->
+  <div style="display:grid;grid-template-columns:3fr 2fr;gap:10px;margin-top:10px;">
+    <img src="assets/and-y/andyexpo.png" alt="" class="p-img p-img-hover" style="height:400px;object-fit:cover;border-radius:4px;">
+    <img src="assets/and-y/expositoras.HEIC" alt="" class="p-img p-img-hover" style="height:400px;object-fit:cover;border-radius:4px;">
   </div>
+</section>
 
-  <!-- ── TEXTO CONTEXTO GRID ── -->
-  <div class="proy-grid-text">
- <p>
-    Proyecto seleccionado, expuesto en Festival
-“Primavera Hacker” 2025.
-        </p>
-  </div>
+<!-- ── IMAGEN FINAL ── -->
+<img src="assets/and-y/expo.HEIC" alt="" class="p-img p-bleed" style="height:60vh;object-fit:cover;">
 
-  <!-- ── GRID ── -->
-  <div class="proy-grid">
-    <img src="assets/and-y/imagen2.jpg" class="proy-grid-a" alt="">
-    <img src="assets/and-y/imagen3.jpg" class="proy-grid-b" alt="">
-    <img src="assets/and-y/imagen4.jpg" class="proy-grid-c" alt="">
-  </div>
-
-  <!-- ── FULL IMAGE ── -->
-  <div class="proy-full">
-    <img src="assets/and-y/imagen5.jpg" alt="">
-    <div class="proy-full-text">
-      <p class="proy-full-quote">
-      </p>
-      <span class="proy-full-credit">KORA — 2025</span>
-    </div>
-  </div>
-
+</div><!-- /wrapper -->
+ 
+<!-- FOOTER: fuera de todo, último elemento antes de </body> -->
+<div class="p-footer">
+  <a href="albura.html">← albura</a>
+  <a href="projects.html" style="opacity:0.35;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;color:var(--fg);">proyectos</a>
+  <a href="0-atao.html" class="p-footer-pink">0-atao →</a>
 </div>
 
 <script src="cursor.js"></script>
 <script src="nav.js"></script>
 <script src="nav-typing.js"></script>
 <script src="transitions.js"></script>
-
 <script>
-(function() {
-  const wrap  = document.getElementById("procesoWrap");
-  const track = document.getElementById("procesoTrack");
-  if (!wrap || !track) return;
-
-  let targetX = 0;
-  let currentX = 0;
-  let maxScroll = 0;
-  let raf = null;
-
-  function getMax() {
-    return Math.max(0, track.scrollWidth - wrap.clientWidth + parseInt(getComputedStyle(track).paddingLeft) * 2);
-  }
-
-  wrap.addEventListener("mousemove", (e) => {
-    const rect = wrap.getBoundingClientRect();
-    const rel  = (e.clientX - rect.left) / rect.width;
-    maxScroll  = getMax();
-    targetX    = rel * maxScroll;
-    if (!raf) raf = requestAnimationFrame(lerp);
-  });
-
-  wrap.addEventListener("mouseleave", () => {
-    targetX = 0;
-    if (!raf) raf = requestAnimationFrame(lerp);
-  });
-
-  function lerp() {
-    currentX += (targetX - currentX) * 0.07;
-    track.style.transform = `translateX(-${currentX}px)`;
-
-    if (Math.abs(targetX - currentX) > 0.3) {
-      raf = requestAnimationFrame(lerp);
-    } else {
-      raf = null;
-    }
-  }
-
-  let touchStartX = 0;
-  let touchStartScroll = 0;
-
-  wrap.addEventListener("touchstart", (e) => {
-    touchStartX      = e.touches[0].clientX;
-    touchStartScroll = currentX;
-  }, { passive: true });
-
-  wrap.addEventListener("touchmove", (e) => {
-    const dx = touchStartX - e.touches[0].clientX;
-    maxScroll = getMax();
-    targetX   = Math.max(0, Math.min(maxScroll, touchStartScroll + dx));
-    if (!raf) raf = requestAnimationFrame(lerp);
-  }, { passive: true });
+(function(){
+  const wrap=document.querySelector('.p-strip-wrap'),track=document.getElementById('stripTrack');
+  if(!wrap||!track)return;
+  let tX=0,cX=0,raf=null;
+  function max(){return Math.max(0,track.scrollWidth-wrap.clientWidth);}
+  wrap.addEventListener('mousemove',e=>{const r=wrap.getBoundingClientRect();tX=(e.clientX-r.left)/r.width*max();if(!raf)raf=requestAnimationFrame(lerp);});
+  wrap.addEventListener('mouseleave',()=>{tX=0;if(!raf)raf=requestAnimationFrame(lerp);});
+  function lerp(){cX+=(tX-cX)*0.07;track.style.transform=`translateX(-${cX}px)`;raf=Math.abs(tX-cX)>0.3?requestAnimationFrame(lerp):null;}
+  let tx0=0,cx0=0;
+  wrap.addEventListener('touchstart',e=>{tx0=e.touches[0].clientX;cx0=cX;},{passive:true});
+  wrap.addEventListener('touchmove',e=>{tX=Math.max(0,Math.min(max(),cx0+(tx0-e.touches[0].clientX)));if(!raf)raf=requestAnimationFrame(lerp);},{passive:true});
 })();
 </script>
-
 </body>
 </html>
