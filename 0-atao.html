@@ -6,178 +6,139 @@
   <title>0-atao — KORA</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
+  <style>
+    /* Texto que hace glitch al hover */
+    .atao-glitch {
+      display: inline-block;
+      transition: letter-spacing 0.2s ease;
+    }
+    .atao-glitch:hover {
+      letter-spacing: -0.09em;
+      color: var(--pink);
+    }
+  </style>
 </head>
 <body>
-
 <nav>
-  <div class="nav-left">
-    <a href="projects.html" class="nav-link active">Proyectos</a>
-  </div>
-  <div class="nav-center">
-    <a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a>
-  </div>
-  <div class="nav-right">
-    <a href="about.html" class="nav-link">About</a>
-    <button class="dark-toggle" aria-label="Modo oscuro"></button>
-  </div>
+  <div class="nav-left"><a href="projects.html" class="nav-link active">Proyectos</a></div>
+  <div class="nav-center"><a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a></div>
+  <div class="nav-right"><a href="about.html" class="nav-link">About</a><button class="dark-toggle" aria-label="Modo oscuro"></button></div>
 </nav>
 
-<div class="proy">
-
-  <!-- ── TÍTULO ── -->
-  <div class="proy-title-block">
-    <p class="proy-eyebrow">Diseño de interacción</p>
-    <h1 class="proy-h1">0-atao</h1>
-    <span class="proy-year">2025</span>
+<!-- ── HERO: número enorme de fondo, título encima ── -->
+<section style="position:relative;padding-top:80px;overflow:hidden;">
+  <div style="position:absolute;top:60px;left:0;right:0;overflow:hidden;pointer-events:none;user-select:none;">
+    <span class="p-bignumber" style="display:block;padding-left:40px;"></span>
   </div>
-
-  <div class="proy-rule"></div>
-
-  <!-- ── COVER ── -->
-  <img src="assets/0-atao/cover.jpg" alt="Cover" class="proy-cover">
-
-  <!-- ── CONCEPTO ── -->
-  <div class="proy-concepto">
-    <div class="proy-concepto-left">
-      <span class="proy-num">2025</span>
+  <div class="p-wrap" style="padding-top:80px;padding-bottom:60px;position:relative;z-index:1;">
+    <span class="p-eyebrow">Diseño de interacción · 2025</span>
+    <h1 class="p-h1 atao-glitch" style="font-size:clamp(68px,13vw,170px);">0-atao</h1>
+    <div style="margin-top:24px;display:flex;align-items:center;gap:20px;">
+      <a href="https://github.com/paredesvania/dis8645-2025-2-proyectos/tree/main/00-examen/grupo-01" target="_blank" class="p-gh-link">GitHub →</a>
+      <div class="p-tags">
+        <span class="p-tag">arduino</span>
+        <span class="p-tag">arcade</span>
+        <span class="p-tag">C++</span>
+      </div>
     </div>
-    <div class="proy-concepto-right">
-      <p class="proy-concepto-tag">concepto</p>
+  </div>
+</section>
 
-      <div class="proy-concepto-body">
-        <p>
-         0aTAo es una máquina Arcade que invita al usuario a corregir una figura simple, pero cada intento de reparación genera aún más
+<div class="p-rule p-bleed"></div>
+
+<!-- ── COVER full bleed ── -->
+<img src="assets/0-atao/cover.jpg" alt="0-atao" class="p-img p-img-hover p-bleed" style="height:90vh;object-fit:cover;">
+
+<!-- ── STATEMENT: frase grande que define el proyecto ── -->
+<section class="p-wrap" style="padding-top:80px;padding-bottom:40px;">
+  <p class="p-statement" style="max-width:800px;font-size:clamp(26px,4vw,52px);">Cada intento de <span style="color:var(--pink);">reparación</span> genera aún más caos.</p>
+</section>
+
+<!-- ── CONCEPTO: texto compacto a la derecha ── -->
+<section class="p-wrap" style="padding-bottom:80px;display:grid;grid-template-columns:1fr 2fr;gap:60px;align-items:start;">
+  <span class="p-label" style="padding-top:4px;">sobre el proyecto</span>
+  <div>
+    <p class="p-body" style="margin-bottom:16px;">0aTAo es una máquina Arcade que invita al usuario 
+      a corregir una figura simple, pero cada intento de reparación genera aún más
 desorden. Algunos botones comen pixeles, cambian los colores, el joystick no se mueve a donde quieres y el
-instructivo no te da instrucciones claras!
-        </p>
-      </div>
-
-      <div class="proy-tags-row">
-        <span class="proy-tag">diseño de interacción</span>
-        <span class="proy-tag">arduino</span>
-        <span class="proy-tag">programación</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── SPLIT (NUEVO) ── -->
-  <div class="proy-split">
-    <div class="proy-split-img">
-      <img src="assets/0-atao/imagen-detalle.jpg" alt="">
-    </div>
-    <div class="proy-split-text">
-      <p class="proy-concepto-tag">interacción</p>
-      <p>
-       Al iniciar, un cuadrado perfecto se desestabiliza cuando uno de sus píxeles se desplaza. Desde ahí, todas
+instructivo no te da instrucciones claras!</p>
+    <p class="p-body">
+      Al iniciar, un cuadrado perfecto se desestabiliza cuando uno de sus píxeles se desplaza. Desde ahí, todas
 las acciones del usuario buscan corregir el error, sin éxito. Pero cuando el jugador deja de intervenir, la figura
-vuelve a su estado original, reforzando la aporía como idea central del proyecto.
-      </p>
+vuelve a su estado original, reforzando la aporía como idea central del proyecto.</p>
+  </div>
+</section>
+
+<!-- ── IMAGEN DETALLE + TEXTO TÉCNICO ── -->
+<section class="p-wrap" style="padding-bottom:10px;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:stretch;">
+    <img src="assets/0-atao/imagen-detalle.jpg" alt="" class="p-img p-img-hover" style="height:480px;object-fit:cover;border-radius:4px;">
+    <div style="display:flex;flex-direction:column;justify-content:space-between;padding:40px;border:1px solid var(--border-subtle);border-radius:4px;">
+      <div>
+        <span class="p-label" style="display:block;margin-bottom:20px;">hardware</span>
+        <div style="display:flex;flex-direction:column;gap:0;">
+          <div style="padding:12px 0;border-bottom:1px solid var(--border-subtle);font-size:12px;color:var(--fg);opacity:0.6;">2× Arduino R4 Minima</div>
+          <div style="padding:12px 0;border-bottom:1px solid var(--border-subtle);font-size:12px;color:var(--fg);opacity:0.6;">Matriz de píxeles 8×8</div>
+          <div style="padding:12px 0;border-bottom:1px solid var(--border-subtle);font-size:12px;color:var(--fg);opacity:0.6;">Pantalla LED</div>
+          <div style="padding:12px 0;border-bottom:1px solid var(--border-subtle);font-size:12px;color:var(--fg);opacity:0.6;">Joystick + 5 botones</div>
+          <div style="padding:12px 0;font-size:12px;color:var(--fg);opacity:0.6;">Acrílico + impresión 3D</div>
+        </div>
+      </div>
+      <div>
+        <span class="p-label" style="display:block;margin-bottom:12px;">contexto</span>
+        <p class="p-body" style="font-size:12px;">Una experiencia basada en la aporía, el problema existe, pero cualquier intento de solución resulta inútil o se anula a sí mismo.</p>
+      </div>
     </div>
   </div>
+</section>
 
-  <!-- ── PROCESO ── -->
-  <div class="proy-proceso-wrap" id="procesoWrap">
-    <span class="proy-proceso-label">proceso</span>
-    <div class="proy-proceso-track" id="procesoTrack">
-      <img src="assets/0-atao/proceso1.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/0-atao/proceso2.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/0-atao/proceso3.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/0-atao/proceso4.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/0-atao/proceso5.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/0-atao/proceso6.jpg" class="proy-proceso-img" alt="">
-    </div>
+<!-- ── STRIP PROCESO ── -->
+<div class="p-strip-wrap" style="border-top:1px solid var(--border-subtle);margin-top:80px;">
+  <span class="p-strip-label">proceso</span>
+  <div class="p-strip-track" id="stripTrack">
+    <img src="assets/0-atao/proceso1.jpg" class="p-strip-img" alt="">
+    <img src="assets/0-atao/proceso2.jpg" class="p-strip-img" alt="">
+    <img src="assets/0-atao/proceso3.jpg" class="p-strip-img" alt="">
+    <img src="assets/0-atao/proceso4.jpg" class="p-strip-img" alt="">
+    <img src="assets/0-atao/proceso5.jpg" class="p-strip-img" alt="">
+    <img src="assets/0-atao/proceso6.jpg" class="p-strip-img" alt="">
   </div>
+</div>
 
-  <!-- ── TEXTO CONTEXTO GRID ── -->
-  <div class="proy-grid-text">
-    <p>
-     El dispositivo está hecho a base de acrílico, programado en Arduino IDE en lenguaje C++. Usa dos placas Arduino R4
-Minima, una matriz de píxeles 8×8, una pantalla LED, un joystick y cinco botones. Una experencia interactiva basada en la aporia,
-entendida como una situación en la que el problema existe, pero cualquier intento de solución resulta inútil o se anula a sí mismo.
-    </p>
+<!-- ── DOS IMÁGENES FINALES ── -->
+<section class="p-wrap" style="padding-bottom:0;">
+  <div style="display:grid;grid-template-columns:2fr 1fr;gap:10px;">
+    <img src="assets/0-atao/proceso3.jpg" alt="" class="p-img p-img-hover" style="height:420px;object-fit:cover;border-radius:4px;">
+    <img src="assets/0-atao/proceso4.jpg" alt="" class="p-img p-img-hover" style="height:420px;object-fit:cover;border-radius:4px;">
   </div>
+</section>
 
-  <!-- ── GRID ── -->
-  <div class="proy-grid">
-    <img src="assets/PROYECTO/imagen2.jpg" class="proy-grid-a" alt="">
-    <img src="assets/PROYECTO/imagen3.jpg" class="proy-grid-b" alt="">
-    <img src="assets/PROYECTO/imagen4.jpg" class="proy-grid-c" alt="">
-  </div>
-
-  <!-- ── FULL IMAGE ── -->
-  <div class="proy-full">
-    <img src="assets/albura/imagen5.jpg" alt="">
-    <div class="proy-full-text">
-      <p class="proy-full-quote">
-        “Mientras más intentas arreglarlo, peor se vuelve.”
-      </p>
-      <span class="proy-full-credit">KORA — 2025</span>
-    </div>
-  </div>
-
+</div><!-- /wrapper -->
+ 
+<!-- FOOTER: fuera de todo, último elemento antes de </body> -->
+<div class="p-footer">
+  <a href="and-y.html">← and-y</a>
+  <a href="projects.html" style="opacity:0.35;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;color:var(--fg);">proyectos</a>
+  <a href="iphone.html" class="p-footer-pink">iphone →</a>
 </div>
 
 <script src="cursor.js"></script>
 <script src="nav.js"></script>
 <script src="nav-typing.js"></script>
 <script src="transitions.js"></script>
-
 <script>
-(function() {
-  const wrap  = document.getElementById("procesoWrap");
-  const track = document.getElementById("procesoTrack");
-  if (!wrap || !track) return;
-
-  let targetX = 0;
-  let currentX = 0;
-  let maxScroll = 0;
-  let raf = null;
-
-  function getMax() {
-    return Math.max(0, track.scrollWidth - wrap.clientWidth + parseInt(getComputedStyle(track).paddingLeft) * 2);
-  }
-
-  wrap.addEventListener("mousemove", (e) => {
-    const rect = wrap.getBoundingClientRect();
-    const rel  = (e.clientX - rect.left) / rect.width;
-    maxScroll  = getMax();
-    targetX    = rel * maxScroll;
-    if (!raf) raf = requestAnimationFrame(lerp);
-  });
-
-  wrap.addEventListener("mouseleave", () => {
-    targetX = 0;
-    if (!raf) raf = requestAnimationFrame(lerp);
-  });
-
-  function lerp() {
-    currentX += (targetX - currentX) * 0.07;
-    track.style.transform = `translateX(-${currentX}px)`;
-
-    if (Math.abs(targetX - currentX) > 0.3) {
-      raf = requestAnimationFrame(lerp);
-    } else {
-      raf = null;
-    }
-  }
-
-  let touchStartX = 0;
-  let touchStartScroll = 0;
-
-  wrap.addEventListener("touchstart", (e) => {
-    touchStartX      = e.touches[0].clientX;
-    touchStartScroll = currentX;
-  }, { passive: true });
-
-  wrap.addEventListener("touchmove", (e) => {
-    const dx = touchStartX - e.touches[0].clientX;
-    maxScroll = getMax();
-    targetX   = Math.max(0, Math.min(maxScroll, touchStartScroll + dx));
-    if (!raf) raf = requestAnimationFrame(lerp);
-  }, { passive: true });
+(function(){
+  const wrap=document.querySelector('.p-strip-wrap'),track=document.getElementById('stripTrack');
+  if(!wrap||!track)return;
+  let tX=0,cX=0,raf=null;
+  function max(){return Math.max(0,track.scrollWidth-wrap.clientWidth);}
+  wrap.addEventListener('mousemove',e=>{const r=wrap.getBoundingClientRect();tX=(e.clientX-r.left)/r.width*max();if(!raf)raf=requestAnimationFrame(lerp);});
+  wrap.addEventListener('mouseleave',()=>{tX=0;if(!raf)raf=requestAnimationFrame(lerp);});
+  function lerp(){cX+=(tX-cX)*0.07;track.style.transform=`translateX(-${cX}px)`;raf=Math.abs(tX-cX)>0.3?requestAnimationFrame(lerp):null;}
+  let tx0=0,cx0=0;
+  wrap.addEventListener('touchstart',e=>{tx0=e.touches[0].clientX;cx0=cX;},{passive:true});
+  wrap.addEventListener('touchmove',e=>{tX=Math.max(0,Math.min(max(),cx0+(tx0-e.touches[0].clientX)));if(!raf)raf=requestAnimationFrame(lerp);},{passive:true});
 })();
 </script>
-
 </body>
 </html>
