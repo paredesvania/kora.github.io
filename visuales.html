@@ -6,158 +6,107 @@
   <title>Visuales — KORA</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
+  <style>
+    .vis-grid {
+      columns: 3;
+      column-gap: 6px;
+      padding: 0 48px;
+    }
+    .vis-grid img {
+      width: 100%;
+      display: block;
+      margin-bottom: 6px;
+      break-inside: avoid;
+      border-radius: 4px;
+      transition: filter 0.3s ease;
+    }
+    .vis-grid img:hover { filter: brightness(0.82); }
+    /* Alturas distintas para romper la uniformidad */
+    .vis-grid img:nth-child(4n+1) { aspect-ratio: 3/4; }
+    .vis-grid img:nth-child(4n+2) { aspect-ratio: 4/3; }
+    .vis-grid img:nth-child(4n+3) { aspect-ratio: 1/1; }
+    .vis-grid img:nth-child(4n)   { aspect-ratio: 2/3; }
+    @media (max-width: 768px) {
+      .vis-grid { columns: 2; padding: 0 20px; }
+    }
+  </style>
 </head>
 <body>
-
 <nav>
-  <div class="nav-left">
-    <a href="projects.html" class="nav-link active">Proyectos</a>
-  </div>
-  <div class="nav-center">
-    <a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a>
-  </div>
-  <div class="nav-right">
-    <a href="about.html" class="nav-link">About</a>
-    <button class="dark-toggle" aria-label="Modo oscuro"></button>
-  </div>
+  <div class="nav-left"><a href="projects.html" class="nav-link active">Proyectos</a></div>
+  <div class="nav-center"><a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a></div>
+  <div class="nav-right"><a href="about.html" class="nav-link">About</a><button class="dark-toggle" aria-label="Modo oscuro"></button></div>
 </nav>
 
-<div class="proy">
-
-  <!-- ── TÍTULO ── -->
-  <div class="proy-title-block">
-    <p class="proy-eyebrow">Experimentación</p>
-    <h1 class="proy-h1">Visuales</h1>
-    <span class="proy-year">2026</span>
+<!-- HEADER: título + descripción en misma línea -->
+<section class="p-wrap" style="padding-top:120px;padding-bottom:60px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:flex-end;">
+  <div>
+    <span class="p-eyebrow">Experimentación · ongoing</span>
+    <h1 class="p-h1" style="font-size:clamp(56px,11vw,150px);">Visuales</h1>
   </div>
-
-  <div class="proy-rule"></div>
-
-  <!-- ── IMAGEN COVER ── -->
-  <!-- ruta -->
-  <img src="assets/albura/albur.jpg" alt="Cover" class="proy-cover">
-
-  <!-- ── FILA(mouse drag) ── -->
-  <div class="proy-proceso-wrap" id="procesoWrap">
-    <span class="proy-proceso-label"></span>
-    <div class="proy-proceso-track" id="procesoTrack">
-      <!-- imágenes -->
-      <img src="assets/albura/proceso1.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/albura/proceso2.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/albura/proceso3.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/albura/proceso4.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/albura/proceso5.jpg" class="proy-proceso-img" alt="">
-      <img src="assets/albura/proceso6.jpg" class="proy-proceso-img" alt="">
+  <div style="padding-bottom:12px;">
+    <p class="p-body">Técnicas visuales sin un objetivo específico. Distintas herramientas, materiales y enfoques para explorar posibilidades creativas.</p>
+    <div class="p-tags" style="margin-top:20px;">
+      <span class="p-tag">experimentación</span>
+      <span class="p-tag">aprendizaje</span>
+      <span class="p-tag">ongoing</span>
     </div>
   </div>
+</section>
 
-  <!-- ── CONCEPTO ── -->
-  <div class="proy-concepto">
-    <div class="proy-concepto-left">
-      <span class="proy-num">2026</span>
-    </div>
-    <div class="proy-concepto-right">
-      <p class="proy-concepto-tag">concepto</p>
-      <!-- descripción -->
-      <p class="proy-concepto-body">
-      Cosas hechas para probar técnicas visuales, sin un objetivo específico más allá de la experimentación 
-      y el aprendizaje. Cualquier cosa que surja del proceso de creación 
-      sin una dirección clara. Distintas herramientas, materiales y enfoques para explorar posibilidades
-       creativas.
-      </p>
-      <!-- etiquetas -->
-      <div class="proy-tags-row">
-        <span class="proy-tag">experimentación</span>
-        <span class="proy-tag">aprendizaje</span>
-        <span class="proy-tag">creatividad</span>
-      </div>
-    </div>
+<div class="p-rule p-bleed" style="margin-bottom:24px;"></div>
+
+<!-- STRIP con mouse -->
+<div class="p-strip-wrap" style="padding:0 0 40px;">
+  <div class="p-strip-track" id="stripTrack" style="padding:0 48px;">
+    <img src="assets/visuales/proceso1.jpg" class="p-strip-img" alt="">
+    <img src="assets/visuales/proceso2.jpg" class="p-strip-img" alt="">
+    <img src="assets/visuales/proceso3.jpg" class="p-strip-img" alt="">
+    <img src="assets/visuales/proceso4.jpg" class="p-strip-img" alt="">
+    <img src="assets/visuales/proceso5.jpg" class="p-strip-img" alt="">
+    <img src="assets/visuales/proceso6.jpg" class="p-strip-img" alt="">
   </div>
+</div>
 
-  <!-- ── 5. GRID IRREGULAR ── -->
-  <div class="proy-grid">
-    <!-- rutas -->
-    <img src="assets/albura/imagen2.jpg" class="proy-grid-a" alt="">
-    <img src="assets/albura/imagen3.jpg" class="proy-grid-b" alt="">
-    <img src="assets/albura/imagen4.jpg" class="proy-grid-c" alt="">
-  </div>
+<!-- MASONRY GALERÍA -->
+<div class="vis-grid">
+  <img src="assets/visuales/imagen1.jpg" alt="">
+  <img src="assets/visuales/imagen2.jpg" alt="">
+  <img src="assets/visuales/imagen3.jpg" alt="">
+  <img src="assets/visuales/imagen4.jpg" alt="">
+  <img src="assets/visuales/imagen5.jpg" alt="">
+  <img src="assets/visuales/imagen6.jpg" alt="">
+  <img src="assets/visuales/imagen7.jpg" alt="">
+  <img src="assets/visuales/imagen8.jpg" alt="">
+  <img src="assets/visuales/imagen9.jpg" alt="">
+</div>
 
-  <!-- ── IMAGEN FULL CON TEXTO ── -->
-  <div class="proy-full">
-    <img src="assets/albura/imagen5.jpg" alt="">
-    <div class="proy-full-text">
-      <!--frase o vacío -->
-      <p class="proy-full-quote"></p>
-      <span class="proy-full-credit">KORA — 2026</span>
-    </div>
-  </div>
-
-</div><!-- /proy -->
+</div><!-- /wrapper -->
+ 
+<!-- FOOTER: fuera de todo, último elemento antes de </body> -->
+<div class="p-footer">
+  <a href="feria-movil.html">← feria móvil</a>
+  <a href="projects.html" style="opacity:0.35;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;color:var(--fg);">proyectos</a>
+  <a href="color-game.html" class="p-footer-pink">Find the odd one →</a>
+</div>
 
 <script src="cursor.js"></script>
 <script src="nav.js"></script>
 <script src="nav-typing.js"></script>
 <script src="transitions.js"></script>
-
 <script>
-// ── FILA DE PROCESO — se mueve siguiendo el mouse ──
-(function() {
-  const wrap  = document.getElementById("procesoWrap");
-  const track = document.getElementById("procesoTrack");
-  if (!wrap || !track) return;
-
-  let targetX = 0;
-  let currentX = 0;
-  let maxScroll = 0;
-  let raf = null;
-
-  function getMax() {
-    // Cuánto puede moverse la fila hacia la izquierda
-    return Math.max(0, track.scrollWidth - wrap.clientWidth + parseInt(getComputedStyle(track).paddingLeft) * 2);
-  }
-
-  wrap.addEventListener("mousemove", (e) => {
-    const rect = wrap.getBoundingClientRect();
-    const rel  = (e.clientX - rect.left) / rect.width; // 0 = izquierda, 1 = derecha
-    maxScroll  = getMax();
-    targetX    = rel * maxScroll;
-    if (!raf) raf = requestAnimationFrame(lerp);
-  });
-
-  wrap.addEventListener("mouseleave", () => {
-    targetX = 0;
-    if (!raf) raf = requestAnimationFrame(lerp);
-  });
-
-  function lerp() {
-    currentX += (targetX - currentX) * 0.07;
-    track.style.transform = `translateX(-${currentX}px)`;
-
-    if (Math.abs(targetX - currentX) > 0.3) {
-      raf = requestAnimationFrame(lerp);
-    } else {
-      raf = null;
-    }
-  }
-
-  // Touch: drag con el dedo
-  let touchStartX = 0;
-  let touchStartScroll = 0;
-
-  wrap.addEventListener("touchstart", (e) => {
-    touchStartX      = e.touches[0].clientX;
-    touchStartScroll = currentX;
-  }, { passive: true });
-
-  wrap.addEventListener("touchmove", (e) => {
-    const dx = touchStartX - e.touches[0].clientX;
-    maxScroll = getMax();
-    targetX   = Math.max(0, Math.min(maxScroll, touchStartScroll + dx));
-    if (!raf) raf = requestAnimationFrame(lerp);
-  }, { passive: true });
+(function(){
+  const wrap=document.querySelector('.p-strip-wrap'),track=document.getElementById('stripTrack');
+  if(!wrap||!track)return;
+  let tX=0,cX=0,raf=null;
+  function max(){return Math.max(0,track.scrollWidth-wrap.clientWidth);}
+  wrap.addEventListener('mousemove',e=>{const r=wrap.getBoundingClientRect();tX=(e.clientX-r.left)/r.width*max();if(!raf)raf=requestAnimationFrame(lerp);});
+  wrap.addEventListener('mouseleave',()=>{tX=0;if(!raf)raf=requestAnimationFrame(lerp);});
+  function lerp(){cX+=(tX-cX)*0.07;track.style.transform=`translateX(-${cX}px)`;raf=Math.abs(tX-cX)>0.3?requestAnimationFrame(lerp):null;}
+  let tx0=0,cx0=0;
+  wrap.addEventListener('touchstart',e=>{tx0=e.touches[0].clientX;cx0=cX;},{passive:true});
+  wrap.addEventListener('touchmove',e=>{tX=Math.max(0,Math.min(max(),cx0+(tx0-e.touches[0].clientX)));if(!raf)raf=requestAnimationFrame(lerp);},{passive:true});
 })();
 </script>
-
 </body>
 </html>
