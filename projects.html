@@ -3,97 +3,209 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Proyectos — KORA</title>
+  <title>Visuales — KORA</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    .vis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      gap: 3px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .vis-win-big  { grid-column: 1; grid-row: 1 / 3; height: 620px; }
+    .vis-win-sm   { grid-column: 2; height: 307px; }
+
+    .vis-win {
+      position: relative;
+      background: #0a0a0a;
+      overflow: hidden;
+      border-radius: 6px;
+      cursor: none !important;
+    }
+
+    /* Barra tipo terminal */
+    .vis-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 28px;
+      background: rgba(10,10,10,0.85);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 6px;
+      z-index: 20;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .vis-dot { width: 8px; height: 8px; border-radius: 50%; opacity: 0.7; }
+    .vis-dot-r { background: #ff5f57; }
+    .vis-dot-y { background: #ffbd2e; }
+    .vis-dot-g { background: #28c840; }
+    .vis-bar-title {
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.28); margin-left: 6px; font-family: 'Poppins', sans-serif;
+    }
+
+    /* iframe */
+    .vis-win iframe {
+      display: block;
+      width: 100%;
+      border: none;
+      position: absolute;
+      top: 28px; left: 0; right: 0; bottom: 0;
+      height: calc(100% - 28px);
+      pointer-events: none; /* desactivado hasta que se haga hover */
+      opacity: 0.5;
+      transition: opacity 0.4s ease;
+    }
+
+    /* Al hacer hover en la ventana, activar iframe y quitar overlay */
+    .vis-win:hover iframe {
+      pointer-events: auto;
+      opacity: 1;
+    }
+    .vis-win:hover .vis-overlay { opacity: 0; pointer-events: none; }
+
+    /* Overlay de instrucción */
+    .vis-overlay {
+      position: absolute;
+      inset: 28px 0 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      z-index: 15;
+      transition: opacity 0.35s ease;
+      background: rgba(0,0,0,0.15);
+    }
+    .vis-overlay-icon {
+      font-size: 22px;
+      opacity: 0.5;
+      filter: grayscale(1);
+    }
+    .vis-overlay-text {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Hint esquina */
+    .vis-hint {
+      position: absolute;
+      bottom: 10px; right: 12px;
+      font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: rgba(255,255,255,0.18);
+      font-family: 'Poppins', sans-serif;
+      pointer-events: none; z-index: 20;
+    }
+
+    @media (max-width: 768px) {
+      .vis-grid { grid-template-columns: 1fr; padding: 0 20px; }
+      .vis-win-big, .vis-win-sm { grid-column: 1; grid-row: auto; height: 300px; }
+      .vis-win iframe { pointer-events: auto; opacity: 1; }
+      .vis-overlay { display: none; }
+    }
+  </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-left">
-    <a href="projects.html" class="nav-link active">Proyectos</a>
-  </div>
-  <div class="nav-center">
-    <a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a>
-  </div>
-  <div class="nav-right">
-    <a href="about.html" class="nav-link">About</a>
-    <button class="dark-toggle" aria-label="Modo oscuro"></button>
-  </div>
+  <div class="nav-left"><a href="projects.html" class="nav-link active">Proyectos</a></div>
+  <div class="nav-center"><a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a></div>
+  <div class="nav-right"><a href="about.html" class="nav-link">About</a><button class="dark-toggle" aria-label="Modo oscuro"></button></div>
 </nav>
 
-<div class="projects-grid" id="projects-grid">
+<div style="padding-top:80px;">
 
-  <!-- COLUMNA 1 — scroll hacia abajo -->
-  <div class="column" data-dir="down">
-    <div class="col-inner">
-      <a href="and-y.html" class="card">
-        <img src="assets/and-y/andy1.jpg" alt="AND-Y">
-        <div class="overlay"><h2>AND-Y</h2><p>Seleccionado - Primavera Hacker</p></div>
-      </a>
-      <a href="color-game.html" class="card-game">
-        <div class="card-game-bg" id="game-card-bg"></div>
-        <div class="card-game-overlay">
-          <p class="card-game-label">experimento interactivo</p>
-          <h2 class="card-game-title">find the odd one.</h2>
-          <p class="card-game-desc">juego / color / percepción</p>
-        </div>
-      </a>
-      <a href="0-atao.html" class="card">
-        <img src="assets/0-atao/0atao.png" alt="0-atao">
-        <div class="overlay"><h2>0-atao</h2><p>Interacción digital</p></div>
-      </a>
-      <a href="and-y.html" class="card">
-        <img src="assets/and-y/andy1.jpg" alt="AND-Y">
-        <div class="overlay"><h2>AND-Y</h2><p>Seleccionado - Primavera Hacker</p></div>
-      </a>
+  <div class="p-wrap" style="padding-top:60px;padding-bottom:48px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:flex-end;">
+    <div>
+      <span class="p-eyebrow">Experimentación · ongoing</span>
+      <h1 class="p-h1" style="font-size:clamp(56px,11vw,150px);">Visuales</h1>
+    </div>
+    <div style="padding-bottom:12px;">
+      <p class="p-body">Sketches interactivos en p5.js. Exploración de física de partículas, percepción visual y generación procedural.</p>
+      <div class="p-tags" style="margin-top:20px;">
+        <span class="p-tag">p5.js</span>
+        <span class="p-tag">generativo</span>
+        <span class="p-tag">interactivo</span>
+        <span class="p-tag">ongoing</span>
+      </div>
     </div>
   </div>
 
-  <!-- COLUMNA 2 — scroll hacia arriba -->
-  <div class="column" data-dir="up">
-    <div class="col-inner">
-      <a href="iphone.html" class="card">
-        <img src="assets/iphone/iphone.PNG" alt="iPhone">
-        <div class="overlay"><h2>iPhone</h2><p>Modelado 3D y renderizado</p></div>
-      </a>
-      <a href="lemontech.html" class="card">
-        <img src="assets/lemontech/lemontech1.png" alt="Lemontech">
-        <div class="overlay"><h2>Lemontech</h2><p>Identidad visual corporativa</p></div>
-      </a>
-      <a href="portaminas.html" class="card">
-        <img src="assets/portaminas/porta02.JPG" alt="Portaminas">
-        <div class="overlay"><h2>Portaminas</h2><p>Modelado 3D y renderizado</p></div>
-      </a>
-      <a href="visuales.html" class="card">
-        <img src="assets/visuales/imagen1.jpg" alt="Visuales">
-        <div class="overlay"><h2>Visuales</h2><p>Experimentos visuales y motion graphics</p></div>
-      </a>
-    </div>
+  <div class="p-rule p-bleed" style="margin-bottom:32px;"></div>
+
+  <!-- instrucción global -->
+  <div class="p-wrap" style="padding-bottom:16px;">
+    <p class="p-label">pasa el mouse sobre cada ventana para interactuar</p>
   </div>
 
-  <!-- COLUMNA 3 — scroll hacia abajo -->
-  <div class="column" data-dir="down">
-    <div class="col-inner">
-      <a href="albura.html" class="card">
-        <img src="assets/albura/albura.png" alt="Albura">
-        <div class="overlay"><h2>Albura</h2><p>Curvado de madera</p></div>
-      </a>
-      <a href="feria-movil.html" class="card">
-        <img src="assets/feria-movil/feria-movil4.png" alt="Feria Móvil">
-        <div class="overlay"><h2>Feria Móvil</h2><p>Estructura plegable</p></div>
-      </a>
-      <a href="velador.html" class="card">
-        <img src="assets/velador/velador 1.png" alt="Mesa de Noche">
-        <div class="overlay"><h2>Mesa de Noche</h2><p>Diseño de producto</p></div>
-      </a>
-      <a href="albura.html" class="card">
-        <img src="assets/albura/albura.png" alt="Albura">
-        <div class="overlay"><h2>Albura</h2><p>Curvado de madera</p></div>
-      </a>
+  <div class="vis-grid">
+
+    <!-- TV — grande izquierda -->
+    <div class="vis-win vis-win-big" data-src="sketch-tv.html">
+      <div class="vis-bar">
+        <div class="vis-dot vis-dot-r"></div>
+        <div class="vis-dot vis-dot-y"></div>
+        <div class="vis-dot vis-dot-g"></div>
+        <span class="vis-bar-title">tv_static.js</span>
+      </div>
+      <iframe scrolling="no"></iframe>
+      <div class="vis-overlay">
+        <div class="vis-overlay-icon">📺</div>
+        <div class="vis-overlay-text">hover · click para glitch</div>
+      </div>
+      <div class="vis-hint">click → glitch</div>
     </div>
+
+    <!-- Pulse — arriba derecha -->
+    <div class="vis-win vis-win-sm" data-src="sketch-pulse.html">
+      <div class="vis-bar">
+        <div class="vis-dot vis-dot-r"></div>
+        <div class="vis-dot vis-dot-y"></div>
+        <div class="vis-dot vis-dot-g"></div>
+        <span class="vis-bar-title">pulse.js</span>
+      </div>
+      <iframe scrolling="no"></iframe>
+      <div class="vis-overlay">
+        <div class="vis-overlay-icon">◎</div>
+        <div class="vis-overlay-text">hover · mover mouse</div>
+      </div>
+      <div class="vis-hint">mouse → orbita</div>
+    </div>
+
+    <!-- Trails — abajo derecha -->
+    <div class="vis-win vis-win-sm" data-src="sketch-trails.html">
+      <div class="vis-bar">
+        <div class="vis-dot vis-dot-r"></div>
+        <div class="vis-dot vis-dot-y"></div>
+        <div class="vis-dot vis-dot-g"></div>
+        <span class="vis-bar-title">trails.js</span>
+      </div>
+      <iframe scrolling="no"></iframe>
+      <div class="vis-overlay">
+        <div class="vis-overlay-icon">✦</div>
+        <div class="vis-overlay-text">hover · dibujar con mouse</div>
+      </div>
+      <div class="vis-hint">drag → trazar</div>
+    </div>
+
   </div>
 
+  <div style="height:80px;"></div>
+
+</div>
+
+<div class="p-footer">
+  <a href="color-game.html">← color.exe</a>
+  <a href="projects.html" style="opacity:0.35;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;color:var(--fg);">proyectos</a>
+  <a href="albura.html" class="p-footer-pink">albura →</a>
 </div>
 
 <script src="cursor.js"></script>
@@ -102,119 +214,49 @@
 <script src="transitions.js"></script>
 
 <script>
-// ── COLUMNAS: auto-scroll + control manual con wheel ──
-(function () {
-  const columns = document.querySelectorAll('.column');
+// Lazy load: cargar el iframe solo cuando la ventana entra en viewport
+// y solo activar p5 al hacer hover para no sobrecargar la CPU
+(function() {
+  const windows = document.querySelectorAll('.vis-win[data-src]');
 
-  // Estado por columna
-  const state = Array.from(columns).map((col, i) => {
-    const inner = col.querySelector('.col-inner');
-    const dir   = col.dataset.dir === 'up' ? -1 : 1;
-    return {
-      col,
-      inner,
-      dir,           // dirección auto: 1 = hacia abajo, -1 = hacia arriba
-      offset: 0,     // posición actual en px
-      speed: 0.3,    // velocidad auto (px por frame)
-      hovered: false,
-      manualV: 0,    // velocidad manual acumulada por wheel
-    };
-  });
-
-  function getMax(s) {
-    // Mitad del contenido: cuando llega al 50% vuelve al inicio (loop)
-    return s.inner.scrollHeight / 2;
-  }
-
-  // Loop principal
-  function tick() {
-    state.forEach(s => {
-      const max = getMax(s);
-      if (max <= 0) return;
-
-      if (s.hovered && Math.abs(s.manualV) > 0.01) {
-        // Modo manual: aplica la velocidad acumulada con fricción
-        s.offset += s.manualV;
-        s.manualV *= 0.88; // fricción
-      } else {
-        // Modo auto: avanza lentamente en su dirección
-        s.offset += s.speed * s.dir;
+  // Intersection Observer: carga el iframe cuando el usuario llega a la sección
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const win = entry.target;
+      const iframe = win.querySelector('iframe');
+      // Solo cargar si no está cargado aún
+      if (!iframe.src) {
+        iframe.src = win.dataset.src;
       }
+      observer.unobserve(win); // no volver a observar
+    });
+  }, { threshold: 0.1 });
 
-      // Loop infinito: cuando llega a la mitad vuelve a 0
-      if (s.offset >= max) s.offset -= max;
-      if (s.offset < 0)    s.offset += max;
+  windows.forEach(win => observer.observe(win));
 
-      s.inner.style.transform = `translateY(-${s.offset}px)`;
+  // Al hacer hover: iframe queda activo (CSS lo maneja)
+  // Al salir del hover: mantener cargado pero reducir framerate via blur
+  windows.forEach(win => {
+    const iframe = win.querySelector('iframe');
+
+    win.addEventListener('mouseenter', () => {
+      // Notificar al iframe que está activo (si el sketch lo soporta)
+      try {
+        if (iframe.contentWindow) {
+          iframe.contentWindow.focus();
+        }
+      } catch(e) {}
     });
 
-    requestAnimationFrame(tick);
-  }
-
-  // Detectar qué columna tiene el mouse
-  state.forEach(s => {
-    s.col.addEventListener('mouseenter', () => { s.hovered = true; });
-    s.col.addEventListener('mouseleave', () => {
-      s.hovered = false;
-      // Al salir, la velocidad manual se convierte en impulso
-      // que el auto-scroll va absorbiendo gradualmente
+    win.addEventListener('mouseleave', () => {
+      try {
+        if (iframe.contentWindow) {
+          iframe.contentWindow.blur();
+        }
+      } catch(e) {}
     });
   });
-
-  // Wheel sobre la columna activa
-  const grid = document.getElementById('projects-grid');
-  grid.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    state.forEach(s => {
-      if (!s.hovered) return;
-      // Sumar delta al manualV (con cap para que no vuele)
-      s.manualV += e.deltaY * 0.4;
-      s.manualV  = Math.max(-20, Math.min(20, s.manualV));
-    });
-  }, { passive: false });
-
-  // Arrancar con offsets distintos para que no empiecen todas iguales
-  state[0].offset = 0;
-  state[1].offset = 200;
-  state[2].offset = 100;
-
-  requestAnimationFrame(tick);
-})();
-
-// ── GAME CARD: cuadros animados ──
-(function () {
-  const bg = document.getElementById('game-card-bg');
-  if (!bg) return;
-
-  const sat = 60, lit = 50, total = 20;
-
-  function paint(hue, oddIdx, delta) {
-    const spans = bg.querySelectorAll('span');
-    const sign  = Math.random() < 0.5 ? 1 : -1;
-    const oddLit = Math.max(15, Math.min(85, lit + sign * delta));
-    spans.forEach((s, i) => {
-      s.classList.toggle('odd', i === oddIdx);
-      s.style.background = `hsl(${hue},${sat}%,${i === oddIdx ? oddLit : lit}%)`;
-    });
-  }
-
-  // Crear spans
-  for (let i = 0; i < total; i++) {
-    const s = document.createElement('span');
-    s.style.borderRadius = '4px';
-    s.style.animationDelay = (Math.random() * 2) + 's';
-    bg.appendChild(s);
-  }
-
-  function randomize() {
-    const hue   = Math.floor(Math.random() * 360);
-    const odd   = Math.floor(Math.random() * total);
-    const delta = 7 + Math.floor(Math.random() * 6);
-    paint(hue, odd, delta);
-  }
-
-  randomize();
-  setInterval(randomize, 3500);
 })();
 </script>
 
