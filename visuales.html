@@ -7,83 +7,173 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
+    /* ── GRID DE VENTANAS ── */
     .vis-grid {
-      columns: 3;
-      column-gap: 6px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      gap: 2px;
+      max-width: 1100px;
+      margin: 0 auto;
       padding: 0 48px;
     }
-    .vis-grid img {
-      width: 100%;
-      display: block;
-      margin-bottom: 6px;
-      break-inside: avoid;
-      border-radius: 4px;
-      transition: filter 0.3s ease;
+
+    /* Ventana grande — ocupa columna 1 entera */
+    .vis-win-big   { grid-column: 1; grid-row: 1 / 3; }
+    /* Dos ventanas pequeñas a la derecha */
+    .vis-win-sm    { grid-column: 2; }
+    /* Ventana que cruza las dos columnas abajo */
+    .vis-win-wide  { grid-column: 1 / 3; }
+
+    /* ── VENTANA ── */
+    .vis-win {
+      position: relative;
+      background: #0a0a0a;
+      overflow: hidden;
+      border-radius: 6px;
     }
-    .vis-grid img:hover { filter: brightness(0.82); }
-    /* Alturas distintas para romper la uniformidad */
-    .vis-grid img:nth-child(4n+1) { aspect-ratio: 3/4; }
-    .vis-grid img:nth-child(4n+2) { aspect-ratio: 4/3; }
-    .vis-grid img:nth-child(4n+3) { aspect-ratio: 1/1; }
-    .vis-grid img:nth-child(4n)   { aspect-ratio: 2/3; }
+
+    /* Barra superior tipo terminal */
+    .vis-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 28px;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 6px;
+      z-index: 10;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .vis-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      opacity: 0.6;
+    }
+    .vis-dot-r { background: #ff5f57; }
+    .vis-dot-y { background: #ffbd2e; }
+    .vis-dot-g { background: #28c840; }
+    .vis-bar-title {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-left: 8px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* iframe que llena la ventana */
+    .vis-win iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: none;
+      margin-top: 28px; /* deja espacio para la barra */
+    }
+
+    /* Alturas específicas por ventana */
+    .vis-win-big  { height: 600px; }
+    .vis-win-sm   { height: 296px; }
+    .vis-win-wide { height: 380px; }
+
+    /* Hint de interacción */
+    .vis-hint {
+      position: absolute;
+      bottom: 10px;
+      right: 12px;
+      font-size: 8px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+      font-family: 'Poppins', sans-serif;
+      pointer-events: none;
+      z-index: 10;
+    }
+
     @media (max-width: 768px) {
-      .vis-grid { columns: 2; padding: 0 20px; }
+      .vis-grid { grid-template-columns: 1fr; padding: 0 20px; }
+      .vis-win-big, .vis-win-sm, .vis-win-wide { grid-column: 1; grid-row: auto; }
+      .vis-win-big  { height: 340px; }
+      .vis-win-sm   { height: 260px; }
+      .vis-win-wide { height: 260px; }
     }
   </style>
 </head>
 <body>
+
 <nav>
   <div class="nav-left"><a href="projects.html" class="nav-link active">Proyectos</a></div>
   <div class="nav-center"><a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a></div>
   <div class="nav-right"><a href="about.html" class="nav-link">About</a><button class="dark-toggle" aria-label="Modo oscuro"></button></div>
 </nav>
 
-<!-- HEADER: título + descripción en misma línea -->
-<section class="p-wrap" style="padding-top:120px;padding-bottom:60px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:flex-end;">
-  <div>
-    <span class="p-eyebrow">Experimentación · ongoing</span>
-    <h1 class="p-h1" style="font-size:clamp(56px,11vw,150px);">Visuales</h1>
-  </div>
-  <div style="padding-bottom:12px;">
-    <p class="p-body">Técnicas visuales sin un objetivo específico. Distintas herramientas, materiales y enfoques para explorar posibilidades creativas.</p>
-    <div class="p-tags" style="margin-top:20px;">
-      <span class="p-tag">experimentación</span>
-      <span class="p-tag">aprendizaje</span>
-      <span class="p-tag">ongoing</span>
+<div style="padding-top:80px;">
+
+  <!-- HEADER -->
+  <div class="p-wrap" style="padding-top:60px;padding-bottom:48px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:flex-end;">
+    <div>
+      <span class="p-eyebrow">Experimentación · ongoing</span>
+      <h1 class="p-h1" style="font-size:clamp(56px,11vw,150px);">Visuales</h1>
+    </div>
+    <div style="padding-bottom:12px;">
+      <p class="p-body">Sketches interactivos hechos en p5.js. Exploración, percepción visual y generación procedural.</p>
+      <div class="p-tags" style="margin-top:20px;">
+        <span class="p-tag">p5.js</span>
+        <span class="p-tag">generativo</span>
+        <span class="p-tag">interactivo</span>
+        <span class="p-tag">ongoing</span>
+      </div>
     </div>
   </div>
-</section>
 
-<div class="p-rule p-bleed" style="margin-bottom:24px;"></div>
+  <div class="p-rule p-bleed" style="margin-bottom:32px;"></div>
 
-<!-- STRIP con mouse -->
-<div class="p-strip-wrap" style="padding:0 0 40px;">
-  <div class="p-strip-track" id="stripTrack" style="padding:0 48px;">
-    <img src="assets/visuales/proceso1.jpg" class="p-strip-img" alt="">
-    <img src="assets/visuales/proceso2.jpg" class="p-strip-img" alt="">
-    <img src="assets/visuales/proceso3.jpg" class="p-strip-img" alt="">
-    <img src="assets/visuales/proceso4.jpg" class="p-strip-img" alt="">
-    <img src="assets/visuales/proceso5.jpg" class="p-strip-img" alt="">
-    <img src="assets/visuales/proceso6.jpg" class="p-strip-img" alt="">
+  <!-- GRID DE VENTANAS -->
+  <div class="vis-grid">
+
+    <!-- VENTANA 1: TV — grande a la izquierda -->
+    <div class="vis-win vis-win-big">
+      <div class="vis-bar">
+        <div class="vis-dot vis-dot-r"></div>
+        <div class="vis-dot vis-dot-y"></div>
+        <div class="vis-dot vis-dot-g"></div>
+        <span class="vis-bar-title">tv_static.js</span>
+      </div>
+      <iframe src="sketch-tv.html" scrolling="no" loading="lazy"></iframe>
+      <div class="vis-hint">click para glitch</div>
+    </div>
+
+    <!-- VENTANA 2: Pulse — arriba derecha -->
+    <div class="vis-win vis-win-sm">
+      <div class="vis-bar">
+        <div class="vis-dot vis-dot-r"></div>
+        <div class="vis-dot vis-dot-y"></div>
+        <div class="vis-dot vis-dot-g"></div>
+        <span class="vis-bar-title">pulse.js</span>
+      </div>
+      <iframe src="sketch-pulse.html" scrolling="no" loading="lazy"></iframe>
+      <div class="vis-hint">mover mouse</div>
+    </div>
+
+    <!-- VENTANA 3: Trails — abajo derecha -->
+    <div class="vis-win vis-win-sm">
+      <div class="vis-bar">
+        <div class="vis-dot vis-dot-r"></div>
+        <div class="vis-dot vis-dot-y"></div>
+        <div class="vis-dot vis-dot-g"></div>
+        <span class="vis-bar-title">trails.js</span>
+      </div>
+      <iframe src="sketch-trails.html" scrolling="no" loading="lazy"></iframe>
+      <div class="vis-hint">dibujar con mouse</div>
+    </div>
   </div>
-</div>
 
-<!-- MASONRY GALERÍA -->
-<div class="vis-grid">
-  <img src="assets/visuales/imagen1.jpg" alt="">
-  <img src="assets/visuales/imagen2.jpg" alt="">
-  <img src="assets/visuales/imagen3.jpg" alt="">
-  <img src="assets/visuales/imagen4.jpg" alt="">
-  <img src="assets/visuales/imagen5.jpg" alt="">
-  <img src="assets/visuales/imagen6.jpg" alt="">
-  <img src="assets/visuales/imagen7.jpg" alt="">
-  <img src="assets/visuales/imagen8.jpg" alt="">
-  <img src="assets/visuales/imagen9.jpg" alt="">
-</div>
+  <div style="height:80px;"></div>
 
 </div><!-- /wrapper -->
- 
-<!-- FOOTER: fuera de todo, último elemento antes de </body> -->
+
 <div class="p-footer">
   <a href="color-game.html">← color.exe</a>
   <a href="projects.html" style="opacity:0.35;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;color:var(--fg);">proyectos</a>
@@ -94,19 +184,5 @@
 <script src="nav.js"></script>
 <script src="nav-typing.js"></script>
 <script src="transitions.js"></script>
-<script>
-(function(){
-  const wrap=document.querySelector('.p-strip-wrap'),track=document.getElementById('stripTrack');
-  if(!wrap||!track)return;
-  let tX=0,cX=0,raf=null;
-  function max(){return Math.max(0,track.scrollWidth-wrap.clientWidth);}
-  wrap.addEventListener('mousemove',e=>{const r=wrap.getBoundingClientRect();tX=(e.clientX-r.left)/r.width*max();if(!raf)raf=requestAnimationFrame(lerp);});
-  wrap.addEventListener('mouseleave',()=>{tX=0;if(!raf)raf=requestAnimationFrame(lerp);});
-  function lerp(){cX+=(tX-cX)*0.07;track.style.transform=`translateX(-${cX}px)`;raf=Math.abs(tX-cX)>0.3?requestAnimationFrame(lerp):null;}
-  let tx0=0,cx0=0;
-  wrap.addEventListener('touchstart',e=>{tx0=e.touches[0].clientX;cx0=cX;},{passive:true});
-  wrap.addEventListener('touchmove',e=>{tX=Math.max(0,Math.min(max(),cx0+(tx0-e.touches[0].clientX)));if(!raf)raf=requestAnimationFrame(lerp);},{passive:true});
-})();
-</script>
 </body>
 </html>
