@@ -6,6 +6,166 @@
   <title>Proyectos — KORA</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+
+    /* ── CARD VISUALES EXPERIMENTAL ── */
+    .card-visuales-exp {
+      position: relative;
+      display: block;
+      aspect-ratio: 4/5;
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      background: #0a0a0a;
+      flex-shrink: 0;
+      cursor: none !important;
+    }
+
+    .visuales-pattern {
+      position: absolute;
+      inset: 0;
+    }
+
+    .halftone-circle {
+      position: absolute;
+      width: 180%;
+      height: 180%;
+      top: -40%;
+      left: -40%;
+      background: radial-gradient(circle, rgba(255,42,163,0.18) 0%, transparent 60%);
+      animation: hRotate 8s linear infinite;
+    }
+
+    .pixel-cross {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,42,163,0.5) 1px, transparent 1px);
+      background-size: 18px 18px;
+      animation: pShift 4s ease-in-out infinite alternate;
+    }
+
+    .scan-line {
+      position: absolute;
+      left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,42,163,0.6), transparent);
+      animation: scan 3s linear infinite;
+      top: 0;
+    }
+
+    @keyframes hRotate { to { transform: rotate(360deg); } }
+    @keyframes pShift  { to { background-position: 9px 9px; } }
+    @keyframes scan    { from { top: -2px; } to { top: 100%; } }
+
+    .visuales-label-wrap {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 40%, transparent 70%);
+      transform: translateY(100%);
+      opacity: 0;
+      transition: transform 0.45s cubic-bezier(0.2,0.8,0.2,1), opacity 0.3s ease;
+    }
+    .card-visuales-exp:hover .visuales-label-wrap {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .visuales-label-wrap h2 {
+      color: white; font-size: 16px; font-weight: 500;
+      transform: translateY(10px); opacity: 0;
+      transition: all 0.3s ease 0.1s;
+      font-family: 'Poppins', sans-serif;
+    }
+    .visuales-label-wrap p {
+      color: rgba(255,255,255,0.6); font-size: 10px;
+      letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px;
+      transform: translateY(10px); opacity: 0;
+      transition: all 0.3s ease 0.2s;
+      font-family: 'Poppins', sans-serif;
+    }
+    .card-visuales-exp:hover .visuales-label-wrap h2,
+    .card-visuales-exp:hover .visuales-label-wrap p {
+      transform: translateY(0); opacity: 1;
+    }
+
+    /* ── MOBILE: layout completamente distinto ── */
+    @media (max-width: 768px) {
+
+      /* Ocultar el grid de columnas animadas */
+      .projects-grid {
+        display: none !important;
+      }
+
+      /* Mostrar el grid mobile */
+      .projects-mobile {
+        display: block !important;
+        padding: 76px 16px 40px;
+      }
+
+      .card-visuales-exp { cursor: auto !important; }
+    }
+
+    /* Mobile grid — oculto en desktop */
+    .projects-mobile {
+      display: none;
+    }
+
+    .mobile-section-label {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.3;
+      color: var(--fg);
+      margin: 32px 0 12px;
+      display: block;
+    }
+    .mobile-section-label:first-child { margin-top: 0; }
+
+    .mobile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .mobile-grid .card,
+    .mobile-grid .card-game,
+    .mobile-grid .card-visuales-exp {
+      aspect-ratio: 3/4;
+      border-radius: 12px;
+    }
+
+    /* En mobile el overlay siempre visible */
+    @media (max-width: 768px) {
+      .projects-mobile .overlay {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+      }
+      .projects-mobile .overlay h2,
+      .projects-mobile .overlay p {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+      }
+      .projects-mobile .visuales-label-wrap {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+      }
+      .projects-mobile .visuales-label-wrap h2,
+      .projects-mobile .visuales-label-wrap p {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+      }
+      .projects-mobile .card-game-overlay .card-game-desc {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -22,69 +182,27 @@
   </div>
 </nav>
 
- <div class="projects-grid" id="projects-grid">
+<!-- ══════════════════════════════════
+     DESKTOP: 4 columnas animadas
+     ══════════════════════════════════ -->
+<div class="projects-grid" id="projects-grid">
 
-  <!-- COLUMNA 1 → interacción / electrónica -->
+  <!-- COLUMNA 1 — interacción / electrónica -->
   <div class="column" data-dir="down">
     <div class="col-inner">
-
-      <a href="and-y.html" class="card">
-        <img src="assets/and-y/andy1.jpg" alt="AND-Y">
-        <div class="overlay">
-          <h2>AND-Y</h2>
-          <p>Seleccionado — Primavera Hacker</p>
-        </div>
-      </a>
-
-      <a href="0-atao.html" class="card">
-        <img src="assets/0-atao/0atao.png" alt="0-atao">
-        <div class="overlay">
-          <h2>0-atao</h2>
-          <p>Interacción digital</p>
-        </div>
-      </a>
-
-      <a href="sintetizador.html" class="card">
-        <img src="assets/sintetizador/sinte.jpg" alt="Sintetizador">
-        <div class="overlay">
-          <h2>Sintetizador</h2>
-          <p>Diseño electrónico</p>
-        </div>
-      </a>
-
+      <a href="and-y.html" class="card"><img src="assets/and-y/andy1.jpg" alt="AND-Y"><div class="overlay"><h2>AND-Y</h2><p>Seleccionado — Primavera Hacker</p></div></a>
+      <a href="0-atao.html" class="card"><img src="assets/0-atao/0atao.png" alt="0-atao"><div class="overlay"><h2>0-atao</h2><p>Interacción digital</p></div></a>
+      <a href="sintetizador.html" class="card"><img src="assets/sintetizador/sinte.jpg" alt="Sintetizador"><div class="overlay"><h2>Sintetizador</h2><p>Diseño electrónico</p></div></a>
       <!-- duplicado -->
-      <a href="and-y.html" class="card">
-        <img src="assets/and-y/andy1.jpg" alt="AND-Y">
-        <div class="overlay">
-          <h2>AND-Y</h2>
-          <p>Seleccionado — Primavera Hacker</p>
-        </div>
-      </a>
-
-      <a href="0-atao.html" class="card">
-        <img src="assets/0-atao/0atao.png" alt="0-atao">
-        <div class="overlay">
-          <h2>0-atao</h2>
-          <p>Interacción digital</p>
-        </div>
-      </a>
-
-      <a href="sintetizador.html" class="card">
-        <img src="assets/sintetizador/sinte.jpg" alt="Sintetizador">
-        <div class="overlay">
-          <h2>Sintetizador</h2>
-          <p>Diseño electrónico</p>
-        </div>
-      </a>
-
+      <a href="and-y.html" class="card"><img src="assets/and-y/andy1.jpg" alt="AND-Y"><div class="overlay"><h2>AND-Y</h2><p>Seleccionado — Primavera Hacker</p></div></a>
+      <a href="0-atao.html" class="card"><img src="assets/0-atao/0atao.png" alt="0-atao"><div class="overlay"><h2>0-atao</h2><p>Interacción digital</p></div></a>
+      <a href="sintetizador.html" class="card"><img src="assets/sintetizador/sinte.jpg" alt="Sintetizador"><div class="overlay"><h2>Sintetizador</h2><p>Diseño electrónico</p></div></a>
     </div>
   </div>
 
-
-  <!-- COLUMNA 2 → visual experimentation -->
+  <!-- COLUMNA 2 — visual / experimental -->
   <div class="column" data-dir="up">
     <div class="col-inner">
-
       <a href="color-game.html" class="card-game">
         <div class="card-game-bg"></div>
         <div class="card-game-overlay">
@@ -93,28 +211,15 @@
           <p class="card-game-desc">juego / color / percepción</p>
         </div>
       </a>
-
       <a href="p5.js.html" class="card-visuales-exp">
         <div class="visuales-pattern">
           <div class="halftone-circle"></div>
           <div class="pixel-cross"></div>
           <div class="scan-line"></div>
         </div>
-
-        <div class="visuales-label-wrap">
-          <h2>p5.js</h2>
-          <p>creative coding</p>
-        </div>
+        <div class="visuales-label-wrap"><h2>p5.js</h2><p>creative coding</p></div>
       </a>
-
-      <a href="touchdesigner.html" class="card">
-        <img src="assets/touchdesigner/touchdesigner.jpg" alt="TouchDesigner">
-        <div class="overlay">
-          <h2>TouchDesigner</h2>
-          <p>Visuales generativas</p>
-        </div>
-      </a>
-
+      <a href="touchdesigner.html" class="card"><img src="assets/touchdesigner/touchdesigner.jpg" alt="TouchDesigner"><div class="overlay"><h2>TouchDesigner</h2><p>Visuales generativas</p></div></a>
       <!-- duplicado -->
       <a href="color-game.html" class="card-game">
         <div class="card-game-bg"></div>
@@ -124,146 +229,97 @@
           <p class="card-game-desc">juego / color / percepción</p>
         </div>
       </a>
-
       <a href="p5.js.html" class="card-visuales-exp">
         <div class="visuales-pattern">
           <div class="halftone-circle"></div>
           <div class="pixel-cross"></div>
           <div class="scan-line"></div>
         </div>
-
-        <div class="visuales-label-wrap">
-          <h2>p5.js</h2>
-          <p>creative coding</p>
-        </div>
+        <div class="visuales-label-wrap"><h2>p5.js</h2><p>creative coding</p></div>
       </a>
-
-      <a href="touchdesigner.html" class="card">
-        <img src="assets/touchdesigner/touchdesigner.jpg" alt="TouchDesigner">
-        <div class="overlay">
-          <h2>TouchDesigner</h2>
-          <p>Visuales generativas</p>
-        </div>
-      </a>
-
+      <a href="touchdesigner.html" class="card"><img src="assets/touchdesigner/touchdesigner.jpg" alt="TouchDesigner"><div class="overlay"><h2>TouchDesigner</h2><p>Visuales generativas</p></div></a>
     </div>
   </div>
 
-
-  <!-- COLUMNA 3 → CAD / branding -->
+  <!-- COLUMNA 3 — CAD / branding -->
   <div class="column" data-dir="down">
     <div class="col-inner">
-
-      <a href="iphone.html" class="card">
-        <img src="assets/iphone/iphone.PNG" alt="iPhone">
-        <div class="overlay">
-          <h2>iPhone</h2>
-          <p>Modelado 3D y renderizado</p>
-        </div>
-      </a>
-
-      <a href="portaminas.html" class="card">
-        <img src="assets/portaminas/porta02.JPG" alt="Portaminas">
-        <div class="overlay">
-          <h2>Portaminas</h2>
-          <p>Modelado 3D y renderizado</p>
-        </div>
-      </a>
-
-      <a href="lemontech.html" class="card">
-        <img src="assets/lemontech/lemontech1.png" alt="Lemontech">
-        <div class="overlay">
-          <h2>Lemontech</h2>
-          <p>Identidad visual corporativa</p>
-        </div>
-      </a>
-
+      <a href="iphone.html" class="card"><img src="assets/iphone/iphone.PNG" alt="iPhone"><div class="overlay"><h2>iPhone</h2><p>Modelado 3D y renderizado</p></div></a>
+      <a href="portaminas.html" class="card"><img src="assets/portaminas/porta02.JPG" alt="Portaminas"><div class="overlay"><h2>Portaminas</h2><p>Modelado 3D y renderizado</p></div></a>
+      <a href="lemontech.html" class="card"><img src="assets/lemontech/lemontech1.png" alt="Lemontech"><div class="overlay"><h2>Lemontech</h2><p>Identidad visual corporativa</p></div></a>
       <!-- duplicado -->
-      <a href="iphone.html" class="card">
-        <img src="assets/iphone/iphone.PNG" alt="iPhone">
-        <div class="overlay">
-          <h2>iPhone</h2>
-          <p>Modelado 3D y renderizado</p>
-        </div>
-      </a>
-
-      <a href="portaminas.html" class="card">
-        <img src="assets/portaminas/porta02.JPG" alt="Portaminas">
-        <div class="overlay">
-          <h2>Portaminas</h2>
-          <p>Modelado 3D y renderizado</p>
-        </div>
-      </a>
-
-      <a href="lemontech.html" class="card">
-        <img src="assets/lemontech/lemontech1.png" alt="Lemontech">
-        <div class="overlay">
-          <h2>Lemontech</h2>
-          <p>Identidad visual corporativa</p>
-        </div>
-      </a>
-
+      <a href="iphone.html" class="card"><img src="assets/iphone/iphone.PNG" alt="iPhone"><div class="overlay"><h2>iPhone</h2><p>Modelado 3D y renderizado</p></div></a>
+      <a href="portaminas.html" class="card"><img src="assets/portaminas/porta02.JPG" alt="Portaminas"><div class="overlay"><h2>Portaminas</h2><p>Modelado 3D y renderizado</p></div></a>
+      <a href="lemontech.html" class="card"><img src="assets/lemontech/lemontech1.png" alt="Lemontech"><div class="overlay"><h2>Lemontech</h2><p>Identidad visual corporativa</p></div></a>
     </div>
   </div>
 
-
-  <!-- COLUMNA 4 → producto físico -->
+  <!-- COLUMNA 4 — producto físico -->
   <div class="column" data-dir="up">
     <div class="col-inner">
-
-      <a href="albura.html" class="card">
-        <img src="assets/albura/albura.png" alt="Albura">
-        <div class="overlay">
-          <h2>Albura</h2>
-          <p>Curvado de madera</p>
-        </div>
-      </a>
-
-      <a href="feria-movil.html" class="card">
-        <img src="assets/feria-movil/feria-movil4.png" alt="Feria Móvil">
-        <div class="overlay">
-          <h2>Feria Móvil</h2>
-          <p>Estructura plegable</p>
-        </div>
-      </a>
-
-      <a href="velador.html" class="card">
-        <img src="assets/velador/velador 1.png" alt="Mesa de Noche">
-        <div class="overlay">
-          <h2>Mesa de Noche</h2>
-          <p>Diseño de producto</p>
-        </div>
-      </a>
-
+      <a href="albura.html" class="card"><img src="assets/albura/albura.png" alt="Albura"><div class="overlay"><h2>Albura</h2><p>Curvado de madera</p></div></a>
+      <a href="feria-movil.html" class="card"><img src="assets/feria-movil/feria-movil4.png" alt="Feria Móvil"><div class="overlay"><h2>Feria Móvil</h2><p>Estructura plegable</p></div></a>
+      <a href="velador.html" class="card"><img src="assets/velador/velador 1.png" alt="Mesa de Noche"><div class="overlay"><h2>Mesa de Noche</h2><p>Diseño de producto</p></div></a>
       <!-- duplicado -->
-      <a href="albura.html" class="card">
-        <img src="assets/albura/albura.png" alt="Albura">
-        <div class="overlay">
-          <h2>Albura</h2>
-          <p>Curvado de madera</p>
-        </div>
-      </a>
-
-      <a href="feria-movil.html" class="card">
-        <img src="assets/feria-movil/feria-movil4.png" alt="Feria Móvil">
-        <div class="overlay">
-          <h2>Feria Móvil</h2>
-          <p>Estructura plegable</p>
-        </div>
-      </a>
-
-      <a href="velador.html" class="card">
-        <img src="assets/velador/velador 1.png" alt="Mesa de Noche">
-        <div class="overlay">
-          <h2>Mesa de Noche</h2>
-          <p>Diseño de producto</p>
-        </div>
-      </a>
-
+      <a href="albura.html" class="card"><img src="assets/albura/albura.png" alt="Albura"><div class="overlay"><h2>Albura</h2><p>Curvado de madera</p></div></a>
+      <a href="feria-movil.html" class="card"><img src="assets/feria-movil/feria-movil4.png" alt="Feria Móvil"><div class="overlay"><h2>Feria Móvil</h2><p>Estructura plegable</p></div></a>
+      <a href="velador.html" class="card"><img src="assets/velador/velador 1.png" alt="Mesa de Noche"><div class="overlay"><h2>Mesa de Noche</h2><p>Diseño de producto</p></div></a>
     </div>
   </div>
 
 </div>
+
+
+<!-- ══════════════════════════════════
+     MOBILE: grid estático con scroll
+     ══════════════════════════════════ -->
+<div class="projects-mobile">
+
+  <span class="mobile-section-label">interacción</span>
+  <div class="mobile-grid">
+    <a href="and-y.html" class="card"><img src="assets/and-y/andy1.jpg" alt="AND-Y"><div class="overlay"><h2>AND-Y</h2><p>Primavera Hacker</p></div></a>
+    <a href="0-atao.html" class="card"><img src="assets/0-atao/0atao.png" alt="0-atao"><div class="overlay"><h2>0-atao</h2><p>Interacción digital</p></div></a>
+    <a href="sintetizador.html" class="card"><img src="assets/sintetizador/sinte.jpg" alt="Sintetizador"><div class="overlay"><h2>Sintetizador</h2><p>Diseño electrónico</p></div></a>
+    <a href="color-game.html" class="card-game">
+      <div class="card-game-bg" id="mob-game-bg"></div>
+      <div class="card-game-overlay">
+        <p class="card-game-label">interactivo</p>
+        <h2 class="card-game-title">find the odd one.</h2>
+        <p class="card-game-desc">juego / color</p>
+      </div>
+    </a>
+  </div>
+
+  <span class="mobile-section-label">visual / generativo</span>
+  <div class="mobile-grid">
+    <a href="p5.js.html" class="card-visuales-exp">
+      <div class="visuales-pattern">
+        <div class="halftone-circle"></div>
+        <div class="pixel-cross"></div>
+        <div class="scan-line"></div>
+      </div>
+      <div class="visuales-label-wrap"><h2>p5.js</h2><p>creative coding</p></div>
+    </a>
+    
+    <a href="touchdesigner.html" class="card"><img src="assets/touchdesigner/touchdesigner.jpg" alt="TouchDesigner"><div class="overlay"><h2>TouchDesigner</h2><p>Visuales generativas</p></div></a>
+  </div>
+
+  <span class="mobile-section-label">3D / branding</span>
+  <div class="mobile-grid">
+    <a href="iphone.html" class="card"><img src="assets/iphone/iphone.PNG" alt="iPhone"><div class="overlay"><h2>iPhone</h2><p>Modelado 3D</p></div></a>
+    <a href="portaminas.html" class="card"><img src="assets/portaminas/porta02.JPG" alt="Portaminas"><div class="overlay"><h2>Portaminas</h2><p>Modelado 3D</p></div></a>
+    <a href="lemontech.html" class="card"><img src="assets/lemontech/lemontech1.png" alt="Lemontech"><div class="overlay"><h2>Lemontech</h2><p>Identidad visual</p></div></a>
+  </div>
+
+  <span class="mobile-section-label">producto</span>
+  <div class="mobile-grid">
+    <a href="albura.html" class="card"><img src="assets/albura/albura.png" alt="Albura"><div class="overlay"><h2>Albura</h2><p>Curvado de madera</p></div></a>
+    <a href="feria-movil.html" class="card"><img src="assets/feria-movil/feria-movil4.png" alt="Feria Móvil"><div class="overlay"><h2>Feria Móvil</h2><p>Plegable</p></div></a>
+    <a href="velador.html" class="card"><img src="assets/velador/velador 1.png" alt="Mesa de Noche"><div class="overlay"><h2>Mesa de Noche</h2><p>Diseño de producto</p></div></a>
+  </div>
+
+</div>
+
 
 <script src="cursor.js"></script>
 <script src="nav.js"></script>
@@ -271,9 +327,11 @@
 <script src="transitions.js"></script>
 
 <script>
-// ── COLUMNAS ──
+// ── COLUMNAS DESKTOP ──
 (function () {
-  const columns = document.querySelectorAll('.column');
+  const columns = document.querySelectorAll('.projects-grid .column');
+  if (!columns.length) return;
+
   const state = Array.from(columns).map(col => ({
     col, inner: col.querySelector('.col-inner'),
     dir: col.dataset.dir === 'up' ? -1 : 1,
@@ -292,7 +350,7 @@
         s.offset += s.speed * s.dir;
       }
       if (s.offset >= max) s.offset -= max;
-      if (s.offset < 0)   s.offset += max;
+      if (s.offset <  0)   s.offset += max;
       s.inner.style.transform = `translateY(-${s.offset}px)`;
     });
     requestAnimationFrame(tick);
@@ -303,24 +361,29 @@
     s.col.addEventListener('mouseleave', () => { s.hovered = false; });
   });
 
-  document.getElementById('projects-grid').addEventListener('wheel', e => {
-    e.preventDefault();
-    state.forEach(s => {
-      if (!s.hovered) return;
-      s.manualV += e.deltaY * 0.4;
-      s.manualV = Math.max(-20, Math.min(20, s.manualV));
-    });
-  }, { passive: false });
+  const grid = document.getElementById('projects-grid');
+  if (grid) {
+    grid.addEventListener('wheel', e => {
+      e.preventDefault();
+      state.forEach(s => {
+        if (!s.hovered) return;
+        s.manualV += e.deltaY * 0.4;
+        s.manualV = Math.max(-20, Math.min(20, s.manualV));
+      });
+    }, { passive: false });
+  }
 
   state[0].offset = 0;
   state[1].offset = 200;
   state[2].offset = 100;
+  state[3].offset = 300;
   requestAnimationFrame(tick);
 })();
 
-// ── GAME CARDS ──
+// ── GAME CARDS (todas) ──
 (function () {
   document.querySelectorAll('.card-game-bg').forEach(bg => {
+    if (bg.children.length) return; // ya inicializado
     for (let i = 0; i < 20; i++) {
       const s = document.createElement('span');
       s.style.borderRadius = '4px';
@@ -328,6 +391,7 @@
       bg.appendChild(s);
     }
   });
+
   function randomize() {
     document.querySelectorAll('.card-game-bg').forEach(bg => {
       const hue = Math.floor(Math.random() * 360);
@@ -344,7 +408,6 @@
   randomize();
   setInterval(randomize, 3500);
 })();
-
 // ── VISUALES CARD ──
 (function () {
   document.querySelectorAll('.visuales-bg').forEach(bg => {
