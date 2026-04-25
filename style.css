@@ -163,7 +163,7 @@ body.dark .dark-toggle::after { transform: translateX(16px); background: var(--p
   height: calc(100vh - 61px);
   margin-top: 61px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   padding: 16px var(--pad);
   overflow: hidden;
@@ -495,4 +495,123 @@ body.dark .quote { background: rgba(255,42,163,0.07); }
   object-fit: cover;
   object-position: center;
   display: block;
+}
+/* VISUALES EXP CARD */
+
+.card-visuales-exp {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4/5; /* mismo tamaño que tus otras cards */
+  overflow: hidden;
+  border-radius: 10px;
+  background: #f5f5f5;
+  text-decoration: none;
+}
+
+/* zona visual */
+.visuales-pattern {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* círculo halftone */
+.halftone-circle {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  background:
+    radial-gradient(circle, black 12%, transparent 13%);
+  background-size: 14px 14px;
+  filter: contrast(200%);
+  animation: pulseDots 4s ease-in-out infinite;
+}
+
+/* cruz pixel */
+.pixel-cross {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  bottom: 15%;
+  left: 15%;
+  background-image:
+    linear-gradient(black 0 0),
+    linear-gradient(black 0 0);
+  background-size: 100% 20px, 20px 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.9;
+  transform: rotate(12deg);
+}
+
+/* línea rgb */
+.scan-line {
+  position: absolute;
+  width: 100%;
+  height: 14px;
+  top: 35%;
+  background: linear-gradient(
+    90deg,
+    #ff00ff,
+    #00ffff,
+    #00ff00,
+    #ff0000,
+    #0000ff
+  );
+  animation: scanMove 3s linear infinite;
+}
+
+/* texto */
+.visuales-label-wrap {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  z-index: 3;
+}
+
+.visuales-mini-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.5);
+}
+
+.card-visuales-exp h2 {
+  font-size: 32px;
+  color: black;
+  margin: 5px 0;
+}
+
+.card-visuales-exp p {
+  font-size: 12px;
+  color: rgba(0,0,0,0.7);
+}
+
+/* hover */
+.card-visuales-exp:hover .halftone-circle {
+  transform: translateX(-50%) scale(1.1);
+}
+
+.card-visuales-exp:hover .scan-line {
+  height: 22px;
+}
+
+/* animaciones */
+@keyframes pulseDots {
+  0%,100% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.15);
+  }
+}
+
+@keyframes scanMove {
+  0% { transform: translateY(-20px); }
+  100% { transform: translateY(180px); }
 }
