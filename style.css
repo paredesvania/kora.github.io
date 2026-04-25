@@ -615,3 +615,282 @@ body.dark .quote { background: rgba(255,42,163,0.07); }
   0% { transform: translateY(-20px); }
   100% { transform: translateY(180px); }
 }
+
+.visuales-mini-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 6px;
+  font-family: 'Poppins', sans-serif;
+}
+
+    /* ── CARD VISUALES EXPERIMENTAL ── */
+    .card-visuales-exp {
+      position: relative;
+      display: block;
+      aspect-ratio: 4/5;
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      background: #0a0a0a;
+      flex-shrink: 0;
+      cursor: none !important;
+    }
+
+    .visuales-pattern {
+      position: absolute;
+      inset: 0;
+    }
+
+    .halftone-circle {
+      position: absolute;
+      width: 180%;
+      height: 180%;
+      top: -40%;
+      left: -40%;
+      background: radial-gradient(circle, rgba(255,42,163,0.18) 0%, transparent 60%);
+      animation: hRotate 8s linear infinite;
+    }
+
+    .pixel-cross {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,42,163,0.5) 1px, transparent 1px);
+      background-size: 18px 18px;
+      animation: pShift 4s ease-in-out infinite alternate;
+    }
+
+    .scan-line {
+      position: absolute;
+      left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,42,163,0.6), transparent);
+      animation: scan 3s linear infinite;
+      top: 0;
+    }
+
+    @keyframes hRotate { to { transform: rotate(360deg); } }
+    @keyframes pShift  { to { background-position: 9px 9px; } }
+    @keyframes scan    { from { top: -2px; } to { top: 100%; } }
+
+/* ───────── VISUALES CARD ───────── */
+.card-visuales-exp {
+  position: relative;
+  display: block;
+  aspect-ratio: 4/5;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  background: #ffffff;
+  flex-shrink: 0;
+  cursor: none !important;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* fondo */
+.visuales-pattern {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* circulo de puntos */
+.halftone-circle {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+
+  background-image: radial-gradient(
+    circle,
+    black 1px,
+    transparent 1px
+  );
+
+  background-size: 10px 10px;
+  opacity: 0.9;
+
+  animation: rotateDots 12s linear infinite;
+}
+
+/* cruz negra */
+.pixel-cross {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  bottom: 18%;
+  right: 18%;
+
+  background:
+    linear-gradient(black, black),
+    linear-gradient(black, black);
+
+  background-size: 100% 12px, 12px 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  animation: floatCross 4s ease-in-out infinite;
+}
+
+/* línea glitch color */
+.scan-line {
+  position: absolute;
+  width: 100%;
+  height: 6px;
+  top: 30%;
+
+  background: linear-gradient(
+    90deg,
+    #ff00cc,
+    #00e5ff,
+    #ffe600,
+    #ff00cc
+  );
+
+  filter: blur(1px);
+
+  animation: glitchMove 3s linear infinite;
+}
+
+/* hover overlay */
+.visuales-label-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 22px;
+
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.75),
+    transparent
+  );
+
+  transform: translateY(100%);
+  opacity: 0;
+  transition: 0.4s ease;
+}
+
+.card-visuales-exp:hover .visuales-label-wrap {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* textos */
+.visuales-mini-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 6px;
+}
+
+.visuales-label-wrap h2 {
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.visuales-label-wrap p:last-child {
+  color: rgba(255,255,255,0.75);
+  font-size: 11px;
+  margin-top: 6px;
+}
+
+/* animaciones */
+@keyframes rotateDots {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to { transform: translateX(-50%) rotate(360deg); }
+}
+
+@keyframes floatCross {
+  0%,100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glitchMove {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+    /* ── MOBILE: layout completamente distinto ── */
+    @media (max-width: 768px) {
+
+      /* Ocultar el grid de columnas animadas */
+      .projects-grid {
+        display: none !important;
+      }
+
+      /* Mostrar el grid mobile */
+      .projects-mobile {
+        display: block !important;
+        padding: 76px 16px 40px;
+      }
+
+      .card-visuales-exp { cursor: auto !important; }
+    }
+
+    /* Mobile grid — oculto en desktop */
+    .projects-mobile {
+      display: none;
+    }
+
+    .mobile-section-label {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.3;
+      color: var(--fg);
+      margin: 32px 0 12px;
+      display: block;
+    }
+    .mobile-section-label:first-child { margin-top: 0; }
+
+    .mobile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .mobile-grid .card,
+    .mobile-grid .card-game,
+    .mobile-grid .card-visuales-exp {
+      aspect-ratio: 3/4;
+      border-radius: 12px;
+    }
+
+    /* En mobile el overlay siempre visible */
+    @media (max-width: 768px) {
+      .projects-mobile .overlay {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+      }
+      .projects-mobile .overlay h2,
+      .projects-mobile .overlay p {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+      }
+      .projects-mobile .visuales-label-wrap {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+      }
+      .projects-mobile .visuales-label-wrap h2,
+      .projects-mobile .visuales-label-wrap p {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+      }
+      .projects-mobile .card-game-overlay .card-game-desc {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+      }
+    }
+  
