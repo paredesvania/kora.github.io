@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const el = document.getElementById("nav-typing-text");
   if (!el) return;
 
-  const sequences = ["kora_lab();", "kora();", 'print("<3");'];
+  const sequences = ["koraNode();", "kora();", 'print("<3");'];
   let i = 0, j = 0, deleting = false;
 
   function type() {
