@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../assets/otros/favicon.png">
+  <title>La Caja — KORA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    (function(){
+      var t=localStorage.getItem("kora-theme");
+      if(t==="dark"){document.documentElement.style.background="#0a0a0a";document.documentElement.classList.add("dark-pre");}
+    })();
+  </script>
+</head>
+<body>
+<nav>
+  <div class="nav-left"><a href="../projects.html" class="nav-link active">Proyectos</a></div>
+  <div class="nav-center"><a href="../index.html" class="nav-logo"><span id="nav-typing-text"></span></a></div>
+  <div class="nav-right"><a href="../about.html" class="nav-link">About</a><button class="dark-toggle" aria-label="Modo oscuro"></button></div>
+</nav>
+
+<!-- ── HERO ── -->
+<section style="position:relative;padding-top:80px;overflow:hidden;">
+  <div style="position:absolute;top:60px;left:0;right:0;overflow:hidden;pointer-events:none;user-select:none;">
+    <span class="p-bignumber" style="display:block;padding-left:40px;"></span>
+  </div>
+  <div class="p-wrap" style="padding-top:80px;padding-bottom:60px;position:relative;z-index:1;">
+    <span class="p-eyebrow">Diseño electrónico · 2026</span>
+    <h1 class="p-h1" style="font-size:clamp(68px,13vw,170px);">La Caja</h1>
+    <div style="margin-top:24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+      <a href="https://github.com/paredesvania/Taller-dis8644-2026-1/blob/main/00-proyecto-01/grupo-09/README.md" target="_blank" class="p-gh-link">GitHub →</a>
+      <div class="p-tags">
+        <span class="p-tag">electrónica</span>
+        <span class="p-tag">sintetizador</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="p-rule p-bleed"></div>
+
+<!-- ── COVER ── -->
+<img src="../assets/sintetizador/la-caja2.png" alt="La Caja" class="p-img p-img-hover p-bleed" style="height:120vh;object-fit:cover;">
+
+<!-- ── STATEMENT ── -->
+<section class="p-wrap" style="padding-top:80px;padding-bottom:40px;">
+  <p class="p-statement" style="max-width:820px;font-size:clamp(24px,3.5vw,46px);">Dispositivo electrónico que genera sonido a través de osciladores analógicos controlados por circuitos integrados, creando un  <span style="color:var(--pink);">ritmo secuencial</span> que el usuario puede deformar en tiempo real.</p>
+</section>
+
+<!-- ── CONCEPTO ── -->
+<section class="p-wrap" style="padding-bottom:80px;display:grid;grid-template-columns:1fr 2fr;gap:60px;align-items:start;">
+  <span class="p-label" style="padding-top:4px;">concepto</span>
+  <div>
+    <p class="p-body" style="margin-bottom:16px;">La Caja es una exploración del ruido: una pulsación constante que se convierte en punto de intervención directa. Adopta una estética de honestidad industrial, exponiendo sus cables con perforaciones de geometría de píxel que funcionan también como pantalla de luz rítmica interior.</p>
+    <p class="p-body">El ciclo sonoro comienza con un chip <strong>555</strong> que genera el pulso, distribuido por un <strong>4017</strong> en cuatro pasos secuenciales. El <strong>4093</strong> configura el carácter sonoro como sintetizador, generando ondas cuadradas que el usuario puede deformar.</p>
+  </div>
+</section>
+
+<!-- ── VIDEO ── -->
+<section class="p-wrap" style="padding-bottom:80px;">
+  <span class="p-label" style="display:block;margin-bottom:20px;">demo</span>
+  <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;background:#0a0a0a;">
+    <iframe
+      src="https://www.youtube.com/embed/fcjKkdh8bFI"
+      style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
+      allow="autoplay; fullscreen"
+      allowfullscreen
+      loading="lazy">
+    </iframe>
+  </div>
+</section>
+
+<!-- ── CÓMO FUNCIONA: cadena de señal ── -->
+<section class="p-wrap" style="padding-bottom:80px;">
+  <span class="p-label" style="display:block;margin-bottom:32px;">cadena de señal</span>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;">
+    <div style="padding:28px 24px;border:1px solid var(--border-subtle);border-radius:4px 0 0 4px;">
+      <span style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--pink);opacity:0.8;display:block;margin-bottom:8px;">01 — clock</span>
+      <span style="font-size:20px;font-weight:700;color:var(--fg);font-family:var(--font-display);display:block;margin-bottom:8px;">NE555</span>
+      <p style="font-size:11px;line-height:1.7;opacity:0.55;color:var(--fg);">Genera onda cuadrada continua en modo astable. El pulso que no para.</p>
+    </div>
+    <div style="padding:28px 24px;border:1px solid var(--border-subtle);border-left:none;">
+      <span style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--pink);opacity:0.8;display:block;margin-bottom:8px;">02 — secuencia</span>
+      <span style="font-size:20px;font-weight:700;color:var(--fg);font-family:var(--font-display);display:block;margin-bottom:8px;">CD4017</span>
+      <p style="font-size:11px;line-height:1.7;opacity:0.55;color:var(--fg);">Contador que activa 4 pasos en loop: Q0→Q1→Q2→Q3→Q0.</p>
+    </div>
+    <div style="padding:28px 24px;border:1px solid var(--border-subtle);border-left:none;">
+      <span style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--pink);opacity:0.8;display:block;margin-bottom:8px;">03 — síntesis</span>
+      <span style="font-size:20px;font-weight:700;color:var(--fg);font-family:var(--font-display);display:block;margin-bottom:8px;">HEF4093</span>
+      <p style="font-size:11px;line-height:1.7;opacity:0.55;color:var(--fg);">4 puertas NAND Schmitt. Cada una oscila a su propio tono con RC.</p>
+    </div>
+    <div style="padding:28px 24px;border:1px solid var(--border-subtle);border-left:none;border-radius:0 4px 4px 0;">
+      <span style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--pink);opacity:0.8;display:block;margin-bottom:8px;">04 — salida</span>
+      <span style="font-size:20px;font-weight:700;color:var(--fg);font-family:var(--font-display);display:block;margin-bottom:8px;">LM386</span>
+      <p style="font-size:11px;line-height:1.7;opacity:0.55;color:var(--fg);">Amplificador que lleva la señal al parlante con potencia suficiente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── IMAGEN CIRCUITO + MODIFICACIONES ── -->
+<section class="p-wrap" style="padding-bottom:80px;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start;">
+    <img src="../assets/sintetizador/la-caja1.png" alt="La Caja" class="p-img p-img-hover" style="height:520px;object-fit:cover;border-radius:4px;">
+    <div style="padding:40px;border:1px solid var(--border-subtle);border-radius:4px;height:520px;overflow:auto;display:flex;flex-direction:column;gap:24px;justify-content:center;">
+      <div>
+        <span class="p-label" style="display:block;margin-bottom:16px;">Detalles</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0;">
+        <div style="padding:14px 0;border-bottom:1px solid var(--border-subtle);">
+          <span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink);opacity:0.8;display:block;margin-bottom:4px;">mod 01</span>
+          <span style="font-size:13px;font-weight:600;color:var(--fg);display:block;margin-bottom:4px;">Condensadores de osciladores</span>
+          <span style="font-size:11px;opacity:0.55;color:var(--fg);line-height:1.6;">Valores distintos por step (0.47µF / 1µF / 1µF / 4.7µF) para que cada paso tenga su propio carácter de tono.</span>
+        </div>
+        <div style="padding:14px 0;border-bottom:1px solid var(--border-subtle);">
+          <span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink);opacity:0.8;display:block;margin-bottom:4px;">mod 02</span>
+          <span style="font-size:13px;font-weight:600;color:var(--fg);display:block;margin-bottom:4px;">Interruptor de encendido</span>
+          <span style="font-size:11px;opacity:0.55;color:var(--fg);line-height:1.6;">Switch en la línea VCC. Permite encender y apagar sin desconectar la batería.</span>
+        </div>
+        <div style="padding:14px 0;">
+          <span style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--pink);opacity:0.8;display:block;margin-bottom:4px;">mod 03</span>
+          <span style="font-size:13px;font-weight:600;color:var(--fg);display:block;margin-bottom:4px;">LEDs decorativos</span>
+          <span style="font-size:11px;opacity:0.55;color:var(--fg);line-height:1.6;">555 independiente para LEDs decorativos que parpadean al ritmo del circuito. Hace visible el comportamiento sonoro desde afuera.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CARCASA ── -->
+<section class="p-wrap" style="padding-bottom:40px;">
+  <div style="display:grid;grid-template-columns:1fr 2fr;gap:60px;align-items:start;">
+    <span class="p-label" style="padding-top:4px;">carcasa</span>
+    <div>
+      <p class="p-body" style="margin-bottom:16px;">Cartón corrugado de desecho intervenido con perforaciones geométricas inspiradas en el píxel. La estructura deja visible parte de los cables internos como decisión estética: <em>honestidad constructiva</em>.</p>
+      <p class="p-body">Potenciómetros de tempo e interfaz en el panel superior. Parlante en el panel trasero para que el sonido no apunte directo hacia quien escucha.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── IMAGEN CARCASA ── -->
+<img src="../assets/sintetizador/esq-la-caja.png" alt="La Caja exterior" class="p-img p-img-hover p-bleed" style="height:115vh;object-fit:cover;">
+
+<!-- ── PROCESO ── -->
+<div class="p-strip-wrap" style="border-top:1px solid var(--border-subtle);margin-top:80px;">
+  <span class="p-strip-label">proceso</span>
+  <div class="p-strip-track" id="stripTrack">
+    <img src="../assets/sintetizador/sesion06a.png" class="p-strip-img" alt="">
+    <img src="../assets/sintetizador/la-caja1.png" class="p-strip-img" alt="">
+    <img src="../assets/sintetizador/la-caja.png" class="p-strip-img" alt="">
+    <img src="../assets/sintetizador/interior01.png" class="p-strip-img" alt="">
+    <img src="../assets/sintetizador/interior02.png" class="p-strip-img" alt="">
+    <img src="../assets/sintetizador/carcasa-exterior.png" class="p-strip-img" alt="">
+  </div>
+</div>
+
+<!-- ── VIDEOS EVOLUCIÓN ── -->
+<section class="p-wrap" style="padding-top:80px;padding-bottom:80px;">
+  <span class="p-label" style="display:block;margin-bottom:20px;">evolución sonora</span>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    <div>
+      <span style="font-size:9px;letter-spacing:2px;text-transform:uppercase;opacity:0.4;color:var(--fg);display:block;margin-bottom:10px;">versión anterior</span>
+      <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;background:#0a0a0a;">
+        <iframe src="https://www.youtube.com/embed/yy7ecwrgO0s"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
+          allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+    <div>
+      <span style="font-size:9px;letter-spacing:2px;text-transform:uppercase;opacity:0.4;color:var(--fg);display:block;margin-bottom:10px;">versión final</span>
+      <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:8px;background:#0a0a0a;">
+        <iframe src="https://www.youtube.com/embed/2OlexzJCbLg"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
+          allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONCLUSIÓN ── -->
+<section class="p-wrap" style="padding-bottom:100px;border-top:1px solid var(--border-subtle);padding-top:80px;">
+  <div style="display:grid;grid-template-columns:1fr 2fr;gap:60px;align-items:start;">
+    <span class="p-label" style="padding-top:4px;"></span>
+    <p class="p-body" style="font-size:15px;max-width:640px;font-style:italic;opacity:0.75;">
+      "La Caja se manifiesta como un insecto eléctrico atrapado en un loop, convencido de que si repite el mismo gesto suficientes veces va a encontrar la salida."
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="p-footer">
+  <a href="and-y.html" class="p-footer-prev">
+    <span class="p-footer-label">← anterior</span>
+    <span class="p-footer-name">AND-Y</span>
+    <span class="p-footer-arrow">←</span>
+  </a>
+  <div class="p-footer-center">
+    <a href="../projects.html">proyectos</a>
+  </div>
+  <a href="0-atao.html" class="p-footer-next">
+    <span class="p-footer-label">siguiente →</span>
+    <span class="p-footer-name">0-atao</span>
+    <span class="p-footer-arrow">→</span>
+  </a>
+</div>
+
+<script src="../js/cursor.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/nav-typing.js"></script>
+<script src="../js/transitions.js"></script>
+<script>
+(function(){
+  const wrap=document.querySelector('.p-strip-wrap'),track=document.getElementById('stripTrack');
+  if(!wrap||!track)return;
+  let tX=0,cX=0,raf=null;
+  function max(){return Math.max(0,track.scrollWidth-wrap.clientWidth);}
+  wrap.addEventListener('mousemove',e=>{const r=wrap.getBoundingClientRect();tX=(e.clientX-r.left)/r.width*max();if(!raf)raf=requestAnimationFrame(lerp);});
+  wrap.addEventListener('mouseleave',()=>{tX=0;if(!raf)raf=requestAnimationFrame(lerp);});
+  function lerp(){cX+=(tX-cX)*0.07;track.style.transform=`translateX(-${cX}px)`;raf=Math.abs(tX-cX)>0.3?requestAnimationFrame(lerp):null;}
+  let tx0=0,cx0=0;
+  wrap.addEventListener('touchstart',e=>{tx0=e.touches[0].clientX;cx0=cX;},{passive:true});
+  wrap.addEventListener('touchmove',e=>{tX=Math.max(0,Math.min(max(),cx0+(tx0-e.touches[0].clientX)));if(!raf)raf=requestAnimationFrame(lerp);},{passive:true});
+})();
+</script>
+</body>
+</html>

@@ -3,96 +3,205 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="assets/otros/favicon.png">
   <title>About — KORA</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script>
+    (function(){
+      var t=localStorage.getItem("kora-theme");
+      if(t==="dark"){document.documentElement.style.background="#0a0a0a";document.documentElement.classList.add("dark-pre");}
+    })();
+  </script>
 </head>
 <body>
   <nav>
-    <div class="nav-left">
-      <a href="projects.html" class="nav-link">Proyectos</a>
-    </div>
-    <div class="nav-center">
-      <a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a>
-    </div>
+    <div class="nav-left"><a href="projects.html" class="nav-link">Proyectos</a></div>
+    <div class="nav-center"><a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a></div>
     <div class="nav-right">
       <a href="about.html" class="nav-link active">About</a>
       <button class="dark-toggle" aria-label="Modo oscuro"></button>
     </div>
   </nav>
 
-  <section class="about">
-    <h2 class="about-title">
-      Hola, soy <b>Vania,</b><br>
-      pero puedes llamarme <span class="highlight">Kora.</span>
-    </h2>
+  <!-- ══════════════════════════════
+       STAGES A + B — Word reveal
+       ══════════════════════════════ -->
+  <div class="about-intro-scroll" id="intro-scroll">
+    <div class="about-intro-sticky">
+      <p class="word-reveal" id="intro-text"></p>
+    </div>
+  </div>
 
-    <div class="about-intro">
-      <div class="about-image">
-        <img class="img-light" src="assets/about/vania.png"  alt="Autorretrato de Vania">
-        <img class="img-dark"  src="assets/about/vania1.png" alt="Autorretrato de Vania — modo oscuro">
-      </div>
-      <div class="about-text">
-        <p>Soy estudiante de cuarto año de <b>Diseño Industrial</b>, últimamente obsesionada con la tecnología y cómo interactuamos con ella. El <b>diseño de interacción</b> es mi alter ego, es donde todo cobra sentido.</p>
-        <div class="quote">
-          "I consider design the highest expression of human creativity (...)"
-          <span class="author">— Paola Antonelli, manifesto #42</span>
-        </div>
+  <!-- ══════════════════════════════
+       STAGE C — Bio: image + text + tools
+       Imagen fija: siempre vania2.png
+       ══════════════════════════════ -->
+  <div class="about-bio">
+    <div class="about-image-col">
+      <!-- Imagen única y estática -->
+      <img src="assets/about/vania2.png" alt="Vania" id="about-img">
+    </div>
+    <div class="about-text">
+      <p>Soy estudiante de cuarto año de <b>Diseño Industrial</b>, últimamente obsesionada con la tecnología y cómo interactuamos con ella. El <b>diseño de interacción</b> es mi alter ego, es donde todo cobra sentido.</p>
+      <div class="quote">
+        "Design, the act of putting constructs in an order, or dis-order, seems to be human destiny."
+        <span class="author">— Richard Neutra: Survival Through Design (1953)</span>
       </div>
     </div>
+  </div>
 
-    <div class="section-divider"></div>
-
-    <div class="tools-section">
-      <p class="section-label">Herramientas que uso:</p>
-      <div class="tools-tags">
-        <span class="tool-tag featured">p5.js</span>
-        <span class="tool-tag">Figma</span>
-        <span class="tool-tag featured">Arduino</span>
-        <span class="tool-tag">Python</span>
-        <span class="tool-tag featured">TouchDesigner</span>
-        <span class="tool-tag">Rhino</span>
-        <span class="tool-tag">VS Code</span>
-        <span class="tool-tag">AutoCAD</span>
-        <span class="tool-tag">Illustrator</span>
-        <span class="tool-tag">Photoshop</span>
-        <span class="tool-tag">InDesign</span>
-      </div>
+  <div class="about-tools">
+    <p class="section-label" style="margin-bottom:20px;">Herramientas que uso:</p>
+    <div class="tools-tags">
+      <span class="tool-tag featured">p5.js</span>
+      <span class="tool-tag">Figma</span>
+      <span class="tool-tag featured">Arduino</span>
+      <span class="tool-tag">Python</span>
+      <span class="tool-tag featured">TouchDesigner</span>
+      <span class="tool-tag">Rhino</span>
+      <span class="tool-tag">VS Code</span>
+      <span class="tool-tag">AutoCAD</span>
+      <span class="tool-tag">Illustrator</span>
+      <span class="tool-tag">Photoshop</span>
+      <span class="tool-tag">InDesign</span>
     </div>
+  </div>
 
-    <div class="section-divider"></div>
+  <div class="section-divider"></div>
 
+  <!-- ══════════════════════════════
+       STAGE E — Education + Experience
+       ══════════════════════════════ -->
+  <div class="about-info-wrap">
     <div class="about-info-grid">
       <div>
         <h3>Educación</h3>
-        <div class="info-item">Diseño, mención Industrial - TOP 5º — Universidad Diego Portales<span>2023 – Actualidad</span></div>
-        <div class="info-item">Diplomado en Medio Ambiente y Crisis Sostenible — Universidad Diego Portales<span>2025 – Actualidad</span></div>
-        <div class="info-item">Ingeniería en Diseño Industrial y Desarrollo de productos — Universidad Politécnica de Valencia<span>Intercambio 2025</span></div>
+        <div class="info-item">
+          Diseño, mención Industrial — TOP 5°<br>Universidad Diego Portales
+          <span>2023 – Actualidad</span>
+        </div>
+        <div class="info-item">
+          Diplomado en Medio Ambiente y Crisis Sostenible<br>Universidad Diego Portales
+          <span>2025 – Actualidad</span>
+        </div>
+        <div class="info-item">
+          Ingeniería en Diseño Industrial<br>Universidad Politécnica de Valencia
+          <span>Intercambio 2025</span>
+        </div>
       </div>
       <div class="info-divider"></div>
       <div>
         <h3>Experiencia</h3>
-        <div class="info-item">Interactivo con Local Variable Studio para obra compuesta por Sokio — Centro GAM<span>2026</span></div>
-        <div class="info-item">Expositora Seleccionada — 6to Festival Primavera Hacker<span>2025</span></div>
-        <div class="info-item">Diseño gráfico para vasos corporativos — Lemontech<span>2023</span></div>
+        <div class="info-item">
+          Interactivo con Local Variable Studio para obra de Sokio<br>Centro GAM
+          <span>2026</span>
+        </div>
+        <div class="info-item">
+          Expositora Seleccionada<br>6to Festival Primavera Hacker
+          <span>2025</span>
+        </div>
+        <div class="info-item">
+          Diseño gráfico para vasos corporativos<br>Lemontech
+          <span>2023</span>
+        </div>
       </div>
     </div>
+  </div>
 
-    <div class="contact-section">
-      <p class="contact-title">Contáctame</p>
-      <p class="contact-text">Si estás trabajando en algo o tienes una idea en mente, feliz de conversar. ;)</p>
+  <div class="section-divider"></div>
+
+  <!-- ── CONTACT ── -->
+  <div class="contact-wrap">
+    <div class="contact-block">
+      <span class="contact-eyebrow">Contáctame</span>
+      <p class="contact-big" id="contact-text"></p>
       <div class="contact-links">
-        <a href="mailto:hola.koralab@gmail.com" target="_blank">Email ↗</a>
-        <a href="https://github.com/paredesvania" target="_blank">GitHub ↗</a>
-        <a href="https://www.instagram.com/koraalab?igsh=NTV4NmZkamJkY2xu" target="_blank">Instagram ↗</a>
+        <a href="mailto:koranode@gmail.com" target="_blank">Email > </a>
+        <a href="https://github.com/paredesvania" target="_blank"> GitHub ></a>
+        <a href="https://www.instagram.com/koraalab?igsh=NTV4NmZkamJkY2xu" target="_blank">Instagram > </a>
       </div>
     </div>
-  </section>
+  </div>
 
-  <script src="cursor.js"></script>
-  <script src="nav.js"></script>
-  <script src="nav-typing.js"></script>
-  <script src="transitions.js"></script>
-  <script src="about.js"></script>
+  <script src="js/cursor.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/nav-typing.js"></script>
+  <script src="js/transitions.js"></script>
+  <script src="js/about.js"></script>
+
+  <script>
+  // 1. REVELACIÓN DE PALABRAS (SE MANTIENE)
+  (function () {
+    const container  = document.getElementById("intro-text");
+    const scrollZone = document.getElementById("intro-scroll");
+    if (!container || !scrollZone) return;
+
+    const words = [
+      { text: "Hola,",    cls: "",     immediate: true  },
+      { text: "soy",      cls: "",     immediate: false },
+      { text: "Vania,",   cls: "",     immediate: false },
+      { text: "pero",     cls: "",     immediate: false },
+      { text: "puedes",   cls: "",     immediate: false },
+      { text: "llamarme", cls: "",     immediate: false },
+      { text: "Kora.",    cls: "kora", immediate: false },
+    ];
+
+    const spans = words.map(({ text, cls, immediate }) => {
+      const span = document.createElement("span");
+      span.className = "w" + (cls ? " " + cls : "") + (immediate ? " immediate" : "");
+      span.textContent = text;
+      container.appendChild(span);
+      return span;
+    });
+
+    const scrollWords = spans.filter((_, i) => !words[i].immediate);
+
+    function onScroll() {
+      const rect   = scrollZone.getBoundingClientRect();
+      const zoneH  = scrollZone.offsetHeight;
+      const vh     = window.innerHeight;
+      const scrolled = -rect.top;
+      const available = zoneH - vh;
+      const progress = Math.max(0, Math.min(1, scrolled / available));
+
+      scrollWords.forEach((span, i) => {
+        const threshold = (i + 1) / (scrollWords.length + 1);
+        span.classList.toggle("visible", progress >= threshold);
+      });
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  })();
+
+  // 2. CONTACTO (SE MANTIENE)
+  (function () {
+    const container = document.getElementById("contact-text");
+    if (!container) return;
+    const text = "¿Tienes algo en mente? Feliz de conversar. ;)";
+    text.split(" ").forEach(word => {
+      const span = document.createElement("span");
+      span.className = "cw";
+      span.textContent = word;
+      container.appendChild(span);
+    });
+  })();
+
+  // 3. REVELACIÓN DE ITEMS INFO (SE MANTIENE)
+  document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll(".info-item");
+    if (!items.length) return;
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add("visible"), i * 110);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(item => obs.observe(item));
+  });
+  </script>
 </body>
 </html>

@@ -4,59 +4,475 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KORA</title>
+  <link rel="icon" type="image/png" href="assets/otros/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script>
+    (function(){
+      var t = localStorage.getItem("kora-theme");
+      if (t === "dark") {
+        document.documentElement.classList.add("dark-pre");
+        document.documentElement.style.background = "#0a0a0a";
+      }
+    })();
+  </script>
+  <style>
+    html.dark-pre { background: #0a0a0a !important; }
+
+    /* ── SCROLL ZONE: 220vh da espacio para la coreografía ── */
+    #hero-scroll-zone { height: 220vh; position: relative; }
+    #hero-sticky {
+      position: sticky; top: 0;
+      height: 100vh; width: 100%;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    /* ── TYPING ── */
+    #typing-line {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: clamp(2.4rem, 7.5vw, 6rem);
+      font-weight: 400; font-family: var(--font-body);
+      color: var(--fg); white-space: nowrap;
+      text-align: center; user-select: none;
+      will-change: opacity; z-index: 2;
+    }
+
+    /* ── LETRAS INDIVIDUALES ── */
+    #fly-container {
+      position: absolute; inset: 0;
+      pointer-events: none; overflow: visible;
+    }
+    .fly-letter {
+      position: absolute; top: 0; left: 0;
+      font-family: var(--font-display); font-weight: 700;
+      letter-spacing: 0; line-height: 1;
+      color: var(--fg);
+      pointer-events: none; user-select: none;
+      will-change: transform, opacity;
+    }
+
+    /* ── LINKS CLICKABLES: invisibles, posicionados sobre las palabras ──
+       pointer-events se activa por JS cuando conv > 0.8               */
+    .word-link {
+      position: absolute;
+      display: block;
+      text-decoration: none;
+      pointer-events: none;
+      z-index: 10;
+      border-radius: 2px;
+      /* sin color, sin borde — completamente invisible */
+      background: transparent;
+      cursor: none !important;
+    }
+
+    /* ── SEPARADOR VERTICAL (entre palabras en desktop) ── */
+    #hero-sep {
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      width: 1px; height: 0;
+      background: var(--pink);
+      z-index: 4; opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ── SCROLL HINT ── */
+    #scroll-hint {
+      position: absolute; bottom: 28px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column;
+      align-items: center; gap: 6px;
+      opacity: 0.2; z-index: 6;
+      pointer-events: none;
+      animation: hintBob 2.4s ease-in-out infinite;
+      transition: opacity 0.5s ease;
+    }
+    #scroll-hint.hidden { opacity: 0 !important; animation: none; }
+    #scroll-hint span { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--fg); }
+    #scroll-hint svg  { width: 14px; height: 14px; color: var(--fg); }
+    @keyframes hintBob {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(5px); }
+    }
+
+    /* ── INTERACTIVE BLOCK ── */
+    #interactive-block {
+      position: relative; z-index: 1;
+      background: var(--bg);
+    }
+  </style>
 </head>
 <body>
+
   <nav>
-    <div class="nav-left">
-      <a href="projects.html" class="nav-link">Proyectos</a>
-    </div>
-    <div class="nav-center">
-      <a href="index.html" class="nav-logo">KORA</a>
-    </div>
+    <div class="nav-left"><a href="projects.html" class="nav-link">Proyectos</a></div>
+    <div class="nav-center"><a href="index.html" class="nav-logo">KORA</a></div>
     <div class="nav-right">
       <a href="about.html" class="nav-link">About</a>
       <button class="dark-toggle" aria-label="Modo oscuro"></button>
     </div>
   </nav>
-  <div id="hero">
-    <div id="typing-line">
-      <span id="typing-text"></span>
+
+  <div id="hero-scroll-zone">
+    <div id="hero-sticky">
+
+      <div id="typing-line"><span id="typing-text"></span></div>
+      <div id="fly-container"></div>
+      <div id="hero-sep"></div>
+
+      <!-- Los links se posicionan exactamente sobre las palabras formadas -->
+      <a id="link-projects" href="projects.html" class="word-link" aria-label="Ver Proyectos"></a>
+      <a id="link-about"    href="about.html"    class="word-link" aria-label="Ver About"></a>
+
+      <div id="scroll-hint">
+        <span>scroll</span>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M8 3v10M4 9l4 4 4-4"/>
+        </svg>
+      </div>
+
     </div>
   </div>
+
   <section id="interactive-block">
     <div class="interactive-content">
       <p class="interactive-code">systemAwait.Input();</p>
-      <input
-        id="command-input"
-        placeholder='type("something");'
-        autocomplete="off"
-      />
+      <input id="command-input" placeholder='type("here");' autocomplete="off"/>
     </div>
     <div id="playground"></div>
     <div class="color-controls">
-      <button data-bg="
-#000000" data-text="
-#ffffff"></button>
-      <button data-bg="
-#ff2aa3" data-text="
-#ffffff"></button>
-      <button data-bg="
-#1e2bff" data-text="
-#ffffff"></button>
-      <button data-bg="
-#f5e6c8" data-text="
-#000000"></button>
-      <button data-bg="
-#3a5a40" data-text="
-#ffffff"></button>
+      <button data-bg="#000000" data-text="#ffffff"></button>
+      <button data-bg="#ff2aa3" data-text="#ffffff"></button>
+      <button data-bg="#1e2bff" data-text="#ffffff"></button>
+      <button data-bg="#f5e6c8" data-text="#000000"></button>
+      <button data-bg="#3a5a40" data-text="#ffffff"></button>
     </div>
   </section>
-  <!-- sin defer en ninguno, orden importa -->
-  <script src="cursor.js"></script>
-  <script src="nav.js"></script>
-  <script src="sketch.js"></script>
-  <script src="transitions.js"></script>
+
+  <script src="js/cursor.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/sketch.js"></script>
+  <script src="js/transitions.js"></script>
+
+  <script>
+  (function () {
+    // ── Refs ──
+    const typingEl    = document.getElementById("typing-text");
+    const typingLine  = document.getElementById("typing-line");
+    const flyContainer= document.getElementById("fly-container");
+    const sep         = document.getElementById("hero-sep");
+    const linkProj    = document.getElementById("link-projects");
+    const linkAbout   = document.getElementById("link-about");
+    const hint        = document.getElementById("scroll-hint");
+    const nav         = document.querySelector("nav");
+    const zone        = document.getElementById("hero-scroll-zone");
+
+    // ── Utils ──
+    function ss(e0, e1, x) {
+      const t = Math.max(0, Math.min(1, (x - e0) / (e1 - e0)));
+      return t * t * (3 - 2 * t);
+    }
+    function lerp(a, b, t) { return a + (b - a) * t; }
+    function h2r(h) { return [parseInt(h.slice(1,3),16), parseInt(h.slice(3,5),16), parseInt(h.slice(5,7),16)]; }
+    function lerpColor(a, b, t) {
+      const [ar,ag,ab] = h2r(a), [br,bg,bb] = h2r(b);
+      return `rgb(${~~lerp(ar,br,t)},${~~lerp(ag,bg,t)},${~~lerp(ab,bb,t)})`;
+    }
+
+    // ══════════════════════════════
+    //  TYPING — Stage 1
+    // ══════════════════════════════
+    ;(function () {
+      if (!typingEl) return;
+      const seqs = ["koraNode();", "kora();", 'print("<3");'];
+      let si=0, sj=0, del=false, done=false;
+      function tick() {
+        if (done) return;
+        const cur = seqs[si];
+        if (!del) {
+          typingEl.textContent = cur.slice(0, sj+1); sj++;
+          if (sj === cur.length) {
+            if (si === seqs.length-1) { done=true; return; }
+            del=true; setTimeout(tick, 1200); return;
+          }
+          setTimeout(tick, 68);
+        } else {
+          typingEl.textContent = cur.slice(0, sj-1); sj--;
+          if (sj === 0) { del=false; si++; setTimeout(tick, 280); return; }
+          setTimeout(tick, 38);
+        }
+      }
+      setTimeout(tick, 400);
+    })();
+
+    // ══════════════════════════════
+    //  LETRAS — Stages 2 & 3
+    // ══════════════════════════════
+    const WORD_L = "PROJECTS";
+    const WORD_R = "ABOUT";
+    const ALL    = [...WORD_L, ...WORD_R];
+
+    const flyEls = ALL.map((char, idx) => {
+      const el = document.createElement("span");
+      el.className = "fly-letter";
+      el.textContent = char;
+      el.dataset.side = idx < WORD_L.length ? "left" : "right";
+      flyContainer.appendChild(el);
+      return el;
+    });
+
+    // Estado de layout
+    let fontSize  = 100;
+    let isMobile  = false;
+    let origins   = null;
+    let targets   = null;
+    let wordBoxL  = null; // { x, y, w, h }
+    let wordBoxR  = null;
+
+    // Posiciones de orígenes: fijas (no aleatorias en cada resize)
+    const ORIGIN_PX = [0.08,0.18,0.72,0.85,0.55,0.92,0.35,0.65,0.25,0.78,0.42,0.10,0.88];
+    const ORIGIN_PY = [0.15,0.75,0.20,0.60,0.85,0.35,0.50,0.15,0.65,0.30,0.80,0.45,0.70];
+    const ORIGIN_ROT= [-25,  15, -18,  30, -12,  22,  -8,  28, -20,  18, -15,  25, -10];
+
+    // ── Calcular layout con medición real vía canvas ──
+    function calcLayout() {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      isMobile  = vw < 640;
+
+      // Canvas para medir texto real con la fuente cargada
+      const cv  = document.createElement("canvas");
+      const ctx = cv.getContext("2d");
+
+      // ── Calcular fontSize que garantiza que las palabras quepan ──
+      // Desktop: side-by-side | Mobile: stacked
+      if (!isMobile) {
+        // Empezar con tamaño grande y reducir si no cabe
+        let fs = Math.min(vw * 0.092, 160);
+        ctx.font = `700 ${fs}px 'All Round Gothic', Poppins, sans-serif`;
+        const gapBetween = fs * 0.65;
+        const wL = ctx.measureText(WORD_L).width;
+        const wR = ctx.measureText(WORD_R).width;
+        const totalW = wL + gapBetween + wR;
+        const maxW   = vw * 0.86;
+        if (totalW > maxW) {
+          fs = fs * maxW / totalW;
+        }
+        fontSize = fs;
+      } else {
+        // PROJECTS es la palabra más larga → determina el fontSize
+        let fs = Math.min(vw * 0.135, 60);
+        ctx.font = `700 ${fs}px 'All Round Gothic', Poppins, sans-serif`;
+        const wL   = ctx.measureText(WORD_L).width;
+        const maxW = vw * 0.88;
+        if (wL > maxW) { fs = fs * maxW / wL; }
+        fontSize = fs;
+      }
+
+      // ── Re-medir con fontSize final ──
+      ctx.font = `700 ${fontSize}px 'All Round Gothic', Poppins, sans-serif`;
+
+      // ── Calcular targets (posición final de cada letra) ──
+      targets = [];
+
+      if (!isMobile) {
+        // Desktop: side-by-side centrado
+        const gapBetween = fontSize * 0.65;
+        const wL = ctx.measureText(WORD_L).width;
+        const wR = ctx.measureText(WORD_R).width;
+        const totalW = wL + gapBetween + wR;
+        const ox = (vw - totalW) / 2;
+        const oy = vh / 2 - fontSize * 0.52;
+
+        let cx = ox;
+        for (const ch of WORD_L) {
+          targets.push({ x: cx, y: oy });
+          cx += ctx.measureText(ch).width;
+        }
+        wordBoxL = { x: ox, y: oy, w: wL, h: fontSize * 1.15 };
+
+        cx = ox + wL + gapBetween;
+        for (const ch of WORD_R) {
+          targets.push({ x: cx, y: oy });
+          cx += ctx.measureText(ch).width;
+        }
+        wordBoxR = { x: ox + wL + gapBetween, y: oy, w: wR, h: fontSize * 1.15 };
+
+      } else {
+        // Mobile: stacked, ambas palabras centradas
+        const wL = ctx.measureText(WORD_L).width;
+        const wR = ctx.measureText(WORD_R).width;
+        const oxL = (vw - wL) / 2;
+        const oxR = (vw - wR) / 2;
+        // Gap vertical entre las dos palabras: 1.8× fontSize
+        const oyL = vh * 0.5 - fontSize * 1.1;
+        const oyR = vh * 0.5 + fontSize * 0.35;
+
+        let cx = oxL;
+        for (const ch of WORD_L) {
+          targets.push({ x: cx, y: oyL });
+          cx += ctx.measureText(ch).width;
+        }
+        wordBoxL = { x: oxL, y: oyL, w: wL, h: fontSize * 1.15 };
+
+        cx = oxR;
+        for (const ch of WORD_R) {
+          targets.push({ x: cx, y: oyR });
+          cx += ctx.measureText(ch).width;
+        }
+        wordBoxR = { x: oxR, y: oyR, w: wR, h: fontSize * 1.15 };
+      }
+
+      // ── Orígenes: posiciones dispersas (fijas, no random) ──
+      const vwPrev = origins?.[0]?._vw || vw;
+      const vhPrev = origins?.[0]?._vh || vh;
+      origins = ALL.map((_, i) => ({
+        x:   ORIGIN_PX[i % ORIGIN_PX.length] * vw,
+        y:   ORIGIN_PY[i % ORIGIN_PY.length] * vh,
+        rot: ORIGIN_ROT[i % ORIGIN_ROT.length],
+        _vw: vw, _vh: vh
+      }));
+    }
+
+    // ── Aplicar posiciones ──
+    let hoverState = null; // 'left' | 'right' | null
+
+    function applyLayout(conv, letterOp, pinkT) {
+      const isDark  = document.body.classList.contains("dark");
+      const fgColor = isDark ? "#f0f0f0" : "#0a0a0a";
+
+      flyEls.forEach((el, i) => {
+        const o  = origins[i];
+        const t  = targets[i];
+        const cx = lerp(o.x, t.x, conv);
+        const cy = lerp(o.y, t.y, conv);
+        const cr = lerp(o.rot, 0, conv);
+
+        // Hover: dim el lado no hover cuando conv > 0.9
+        let op = letterOp;
+        if (hoverState && conv > 0.9) {
+          const side = el.dataset.side;
+          if (side === "left"  && hoverState === "right") op *= 0.35;
+          if (side === "right" && hoverState === "left")  op *= 0.35;
+        }
+
+        el.style.fontSize  = fontSize + "px";
+        el.style.opacity   = op;
+        el.style.transform = `translate(${cx}px, ${cy}px) rotate(${cr}deg)`;
+        el.style.color     = el.dataset.side === "right"
+          ? lerpColor(fgColor, "#ff2aa3", pinkT)
+          : fgColor;
+      });
+    }
+
+    // ── Posicionar los <a> links ──
+    function positionLinks(conv) {
+      if (!wordBoxL || !wordBoxR) return;
+      const linkOp = ss(0.78, 1.0, conv);
+      const active = linkOp > 0.45;
+
+      [
+        { el: linkProj,  box: wordBoxL },
+        { el: linkAbout, box: wordBoxR }
+      ].forEach(({ el, box }) => {
+        el.style.left          = box.x + "px";
+        el.style.top           = box.y + "px";
+        el.style.width         = box.w + "px";
+        el.style.height        = box.h + "px";
+        el.style.pointerEvents = active ? "auto" : "none";
+      });
+    }
+
+    // ── Hover handlers ──
+    linkProj.addEventListener("mouseenter",  () => { hoverState = "left"; });
+    linkProj.addEventListener("mouseleave",  () => { hoverState = null; });
+    linkAbout.addEventListener("mouseenter", () => { hoverState = "right"; });
+    linkAbout.addEventListener("mouseleave", () => { hoverState = null; });
+
+    // ── Touch feedback ──
+    [linkProj, linkAbout].forEach(link => {
+      link.addEventListener("touchstart", () => {
+        // Pequeño feedback visual al tocar
+        const side = link === linkProj ? "left" : "right";
+        flyEls.filter(el => el.dataset.side === side).forEach(el => {
+          el.style.opacity = "0.5";
+        });
+        setTimeout(() => {
+          flyEls.filter(el => el.dataset.side === side).forEach(el => {
+            el.style.opacity = "1";
+          });
+        }, 150);
+      }, { passive: true });
+    });
+
+    // ══════════════════════════════
+    //  SCROLL HANDLER
+    // ══════════════════════════════
+    let rafId = null;
+
+    function update() {
+      rafId = null;
+      const sy    = window.scrollY;
+      const zoneH = zone.offsetHeight;
+      const vh    = window.innerHeight;
+      const p     = Math.max(0, Math.min(1, sy / (zoneH - vh)));
+
+      // Stage 0→1: typing desaparece (p 0.12→0.28)
+      typingLine.style.opacity = 1 - ss(0.12, 0.28, p);
+
+      // Stage 1→2: letras aparecen (p 0.18→0.34)
+      const letterOp = ss(0.18, 0.34, p);
+
+      // Stage 2→3: convergencia (p 0.28→0.72)
+      const conv = ss(0.28, 0.72, p);
+
+      // ABOUT se torna rosa (p 0.62→0.78)
+      const pinkT = ss(0.62, 0.78, p);
+
+      applyLayout(conv, letterOp, pinkT);
+      positionLinks(conv);
+
+      // Separador: solo en desktop
+      if (!isMobile) {
+        const sepP = 0; // separator removed
+        const maxH = vh * 0.48;
+        sep.style.height  = "0px";
+        sep.style.marginTop = -(sepP * maxH / 2) + "px";
+        sep.style.opacity   = sepP;
+      } else {
+        sep.style.opacity = "0";
+      }
+
+      // Nav aparece desde p=0.78
+      if (nav) nav.classList.toggle("nav-hidden", p < 0.78);
+
+      // Hint
+      if (sy > 20) hint.classList.add("hidden");
+    }
+
+    function onScroll() {
+      if (!rafId) rafId = requestAnimationFrame(update);
+    }
+
+    // ── Setup ──
+    function setup() {
+      calcLayout();
+      // Estado inicial
+      flyEls.forEach((el, i) => {
+        el.style.fontSize  = fontSize + "px";
+        el.style.opacity   = "0";
+        el.style.transform = `translate(${origins[i].x}px, ${origins[i].y}px) rotate(${origins[i].rot}deg)`;
+      });
+      update();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", () => { calcLayout(); update(); });
+    }
+
+    // Esperar fuentes → medición precisa
+    (document.fonts?.ready || Promise.resolve()).then(setup);
+
+  })();
+  </script>
 </body>
 </html>

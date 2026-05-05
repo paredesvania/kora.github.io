@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../assets/otros/favicon.png">
+  <title>TouchDesigner — KORA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    (function(){
+      var t=localStorage.getItem("kora-theme");
+      if(t==="dark"){document.documentElement.style.background="#0a0a0a";document.documentElement.classList.add("dark-pre");}
+    })();
+  </script>
+</head>
+<body>
+<nav>
+  <div class="nav-left"><a href="../projects.html" class="nav-link active">Proyectos</a></div>
+  <div class="nav-center"><a href="../index.html" class="nav-logo"><span id="nav-typing-text"></span></a></div>
+  <div class="nav-right"><a href="../about.html" class="nav-link">About</a><button class="dark-toggle" aria-label="Modo oscuro"></button></div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="p-wrap" style="padding-top:120px;padding-bottom:60px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:flex-end;">
+  <div>
+    <span class="p-eyebrow">Visuales generativos · ongoing</span>
+    <h1 class="p-h1" style="font-size:clamp(52px,10vw,130px);">Touch<br>Designer</h1>
+  </div>
+  <div style="padding-bottom:12px;">
+    <p class="p-body" style="margin-bottom:20px;">Espacio de exploración con TouchDesigner para visuales generativos, sistemas reactivos al audio y patches interactivos en tiempo real.</p>
+    <div class="p-tags">
+      <span class="p-tag">touchdesigner</span>
+      <span class="p-tag">generativo</span>
+      <span class="p-tag">tiempo real</span>
+      <span class="p-tag">audio-reactivo</span>
+    </div>
+  </div>
+</section>
+
+<div class="p-rule p-bleed"></div>
+
+<!-- ── COVER ── -->
+<img src="../assets/touchdesigner/azul1.png" alt="TouchDesigner" class="p-img p-img-hover p-bleed" style="height:75vh;object-fit:cover;">
+
+<!-- ══════════════════════════════════════
+     EXPERIMENTOS
+     ══════════════════════════════════════ -->
+<section class="p-wrap" style="padding-top:80px;padding-bottom:0;">
+
+   <!-- EXP 03: imagen + video lado a lado -->
+  <div class="td-exp">
+    <div class="td-exp-grid-2">
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="td-video-wrap">
+          <video
+          src="../assets/touchdesigner/laley1.mp4"
+          autoplay muted loop playsinline
+          preload="metadata"
+          title="Experimento 04">
+          Tu navegador no soporta video HTML5.
+        </video>
+        </div>
+        <img src="../assets/touchdesigner/laley.png" alt="" class="td-img" style="height:450px;object-fit:cover;">
+      </div>
+      <div class="td-text" style="padding-left:32px;">
+        <span class="td-exp-num">experimento 03</span>
+        <h2 class="td-exp-title">Interactivo con cámara</h2>
+        <p class="td-exp-body">Con MediaPipe, Interactivo inspirado en la portada del álbum de La Ley, Desiertos.</p>
+        <div class="p-tags" style="margin-top:8px;">
+          <span class="p-tag">MediaPipe</span>
+          <span class="p-tag">interactivo</span>
+          <span class="p-tag">cámara</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXP 01: Video grande + texto -->
+  <div class="td-exp">
+    <div class="td-exp-grid-wide">
+      <div>
+        <div class="td-video-wrap">
+          <video
+          src="../assets/touchdesigner/particulas.mp4"
+          autoplay muted loop playsinline
+          preload="metadata"
+          title="Experimento 01">
+        </video>
+        </div>
+      </div>
+      <div class="td-text">
+        <span class="td-exp-num">experimento 01</span>
+        <h2 class="td-exp-title">Visuales con particulas</h2>
+        <p class="td-exp-body">Se transformó una imagen en partículas para generar una imagen dinámica, modificada con feedbacks.</p>
+        <div class="p-tags" style="margin-top:8px;">
+          <span class="p-tag">Sistema de Partículas</span>
+          <span class="p-tag">Feedback</span>
+          <span class="p-tag">Dinámico</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXP 03: imagen + video lado a lado -->
+  <div class="td-exp">
+    <div class="td-exp-grid-2">
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="td-video-wrap">
+          <video
+          src="../assets/touchdesigner/myblood.mp4"
+          autoplay muted loop playsinline
+          preload="metadata"
+          title="Experimento 04">
+          Tu navegador no soporta video HTML5.
+        </video>
+        </div>
+        <img src="../assets/touchdesigner/myblood.png" alt="" class="td-img" style="height:450px;object-fit:cover;">
+      </div>
+      <div class="td-text" style="padding-left:32px;">
+        <span class="td-exp-num">experimento 03</span>
+        <h2 class="td-exp-title">¿Canción en una imagen?</h2>
+        <p class="td-exp-body">Los 03:17 min de audio del videoclip de My Blood by Pablo Chill-E y Polimá Westcoast en una imagen.
+Tutorial del funcionamiento base de @elekktronaut </p>
+        <div class="p-tags" style="margin-top:8px;">
+          <span class="p-tag">Audio Reactivo</span>
+          <span class="p-tag">Imagen</span>
+          <span class="p-tag">Música</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section><!-- /experiments -->
+
+<div style="height:80px;"></div>
+
+<!-- FOOTER -->
+<div class="p-footer">
+  <a href="p5.js.html" class="p-footer-prev">
+    <span class="p-footer-label">← anterior</span>
+    <span class="p-footer-name">p5.js</span>
+    <span class="p-footer-arrow">←</span>
+  </a>
+  <div class="p-footer-center">
+    <a href="../projects.html">proyectos</a>
+  </div>
+  <a href="albura.html" class="p-footer-next">
+    <span class="p-footer-label">siguiente →</span>
+    <span class="p-footer-name">Albura</span>
+    <span class="p-footer-arrow">→</span>
+  </a>
+</div>
+
+<script src="../js/cursor.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/nav-typing.js"></script>
+<script src="../js/transitions.js"></script>
+</body>
+</html>

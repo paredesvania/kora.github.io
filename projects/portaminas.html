@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../assets/otros/favicon.png">
+  <title>Portaminas — KORA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    (function(){
+      var t=localStorage.getItem("kora-theme");
+      if(t==="dark"){document.documentElement.style.background="#0a0a0a";document.documentElement.classList.add("dark-pre");}
+    })();
+  </script>
+</head>
+<body>
+<nav>
+  <div class="nav-left"><a href="../projects.html" class="nav-link active">Proyectos</a></div>
+  <div class="nav-center"><a href="../index.html" class="nav-logo"><span id="nav-typing-text"></span></a></div>
+  <div class="nav-right"><a href="../about.html" class="nav-link">About</a><button class="dark-toggle" aria-label="Modo oscuro"></button></div>
+</nav>
+
+<!-- HERO: título a la izquierda, datos técnicos a la derecha -->
+<section class="p-wrap" style="padding-top:120px;padding-bottom:60px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:flex-end;">
+  <div>
+    <span class="p-eyebrow">Modelado 3D · Renderizado · 2024</span>
+    <h1 class="p-h1" style="font-size:clamp(60px,11vw,150px);">iPhone</h1>
+  </div>
+  <div style="padding-bottom:12px;display:flex;flex-direction:column;gap:20px;">
+    <p class="p-body">A partir del análisis de un lápiz portaminas real, se realizó su reconstrucción digital en Rhinoceros 8.</p>
+    <div class="p-tags">
+      <span class="p-tag">rhinoceros 8</span>
+      <span class="p-tag">v-ray</span>
+      <span class="p-tag">modelado 3D</span>
+    </div>
+  </div>
+</section>
+
+<div class="p-rule p-bleed"></div>
+
+<!-- COVER -->
+<img src="../assets/portaminas/porta01.JPG" alt="portaminas" class="p-img p-img-hover p-bleed" style="height:85vh;object-fit:cover;">
+
+<!-- SPECS en tres columnas -->
+<section class="p-wrap" style="padding-top:0;padding-bottom:0;border-bottom:1px solid var(--border-subtle);">
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border-subtle);">
+    <div style="padding:40px 0;border-right:1px solid var(--border-subtle);padding-right:40px;">
+      <span class="p-label" style="display:block;margin-bottom:10px;">software</span>
+      <span style="font-size:20px;font-weight:600;letter-spacing:-0.02em;color:var(--fg);">Rhinoceros 8</span>
+    </div>
+    <div style="padding:40px;border-right:1px solid var(--border-subtle);">
+      <span class="p-label" style="display:block;margin-bottom:10px;">render</span>
+      <span style="font-size:20px;font-weight:600;letter-spacing:-0.02em;color:var(--fg);">V-Ray</span>
+    </div>
+</section>
+
+<div class="p-rule p-bleed"></div>
+
+<!-- TEXTO CENTRADO CON AIRE -->
+<section class="p-wrap" style="padding-top:80px;padding-bottom:80px;max-width:700px;">
+  <p class="p-body" style="font-size:15px;">Se aplicaron materiales realistas
+y se configuraron luces y efectos utilizando Caos, con el objetivo de contextualizar el objeto en un entorno coherente,
+reforzando su presencia y funcionalidad.</p>
+</section>
+
+<!-- RENDERS: scroll horizontal libre -->
+<div style="overflow-x:auto;scrollbar-width:none;padding-bottom:4px;" id="rendersScroll">
+  <div style="display:flex;gap:6px;padding:0 48px;width:max-content;">
+    <img src="../assets/portaminas/porta02.JPG" alt="" style="width:50vw;max-width:700px;height:45vh;object-fit:cover;flex-shrink:0;display:block;border-radius:4px;" class="p-img-hover">
+    <img src="../assets/portaminas/porta03.JPG" alt="" style="width:50vw;max-width:700px;height:45vh;object-fit:cover;flex-shrink:0;display:block;border-radius:4px;" class="p-img-hover">
+    <img src="../assets/portaminas/porta04.JPG" alt="" style="width:50vw;max-width:700px;height:45vh;object-fit:cover;flex-shrink:0;display:block;border-radius:4px;" class="p-img-hover">
+
+  </div>
+</div>
+
+</div><!-- /wrapper -->
+ 
+<!-- FOOTER: fuera de todo, último elemento antes de <script src="../js/cursor.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/nav-typing.js"></script>
+<script src="../js/transitions.js"></script>
+</body> -->
+<!-- FOOTER -->
+<div class="p-footer">
+  <a href="velador.html" class="p-footer-prev">
+    <span class="p-footer-label">← anterior</span>
+    <span class="p-footer-name">Velador</span>
+    <span class="p-footer-arrow">←</span>
+  </a>
+  <div class="p-footer-center">
+    <a href="../projects.html">proyectos</a>
+  </div>
+  <a href="color-game.html" class="p-footer-next">
+    <span class="p-footer-label">siguiente →</span>
+    <span class="p-footer-name">color.exe</span>
+    <span class="p-footer-arrow">→</span>
+  </a>
+</div>
+
+<script>
+(function(){
+  const wrap=document.querySelector('.p-strip-wrap'),track=document.getElementById('stripTrack');
+  if(!wrap||!track)return;
+  let tX=0,cX=0,raf=null;
+  function max(){return Math.max(0,track.scrollWidth-wrap.clientWidth);}
+  wrap.addEventListener('mousemove',e=>{const r=wrap.getBoundingClientRect();tX=(e.clientX-r.left)/r.width*max();if(!raf)raf=requestAnimationFrame(lerp);});
+  wrap.addEventListener('mouseleave',()=>{tX=0;if(!raf)raf=requestAnimationFrame(lerp);});
+  function lerp(){cX+=(tX-cX)*0.07;track.style.transform=`translateX(-${cX}px)`;raf=Math.abs(tX-cX)>0.3?requestAnimationFrame(lerp):null;}
+  let tx0=0,cx0=0;
+  wrap.addEventListener('touchstart',e=>{tx0=e.touches[0].clientX;cx0=cX;},{passive:true});
+  wrap.addEventListener('touchmove',e=>{tX=Math.max(0,Math.min(max(),cx0+(tx0-e.touches[0].clientX)));if(!raf)raf=requestAnimationFrame(lerp);},{passive:true});
+  // Scroll horizontal en renders con mouse
+  const rs=document.getElementById('rendersScroll');
+  if(rs){rs.style.cursor='none';rs.addEventListener('wheel',e=>{e.preventDefault();rs.scrollLeft+=e.deltaY*0.8;},{passive:false});}
+})();
+</script>
+<script src="../js/cursor.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/nav-typing.js"></script>
+<script src="../js/transitions.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>* { margin:0; padding:0; box-sizing:border-box; } body { background:#0a0a0f; overflow:hidden; } canvas { display:block; }</style>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+<script>
+let trails = [];
+const MAX_TRAILS = 80;
+function setup() { createCanvas(windowWidth,windowHeight); pixelDensity(1); noSmooth(); }
+function draw() { background(10,10,15,40); updateTrails(); drawTrails(); }
+function mouseMoved() { addTrail(mouseX,mouseY); }
+function mouseDragged() { addTrail(mouseX,mouseY); }
+function addTrail(x,y) {
+  trails.push({x,y,px:x,py:y,life:255});
+  if (trails.length>MAX_TRAILS) trails.shift();
+}
+function updateTrails() {
+  for (let t of trails) t.life-=3;
+  trails = trails.filter(t=>t.life>0);
+}
+function drawTrails() {
+  strokeWeight(1);
+  for (let i=1;i<trails.length;i++) {
+    let t=trails[i], prev=trails[i-1];
+    stroke(255,60,180,t.life);
+    line(prev.x,prev.y,t.x,t.y);
+  }
+}
+function windowResized() { resizeCanvas(windowWidth,windowHeight); }
+</script>
+</body>
+</html>
