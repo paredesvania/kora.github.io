@@ -313,7 +313,7 @@ body.dark .dark-toggle::after { transform: translateX(14px); background: var(--p
   transition: transform 0.5s ease, filter 0.3s ease;
   opacity: 0.96;
 }
-.card:hover img { transform: scale(1.04); filter: brightness(0.82); }
+.card:hover img { transform: scale(1.04); }
 .overlay {
   position: absolute; inset: 0;
   display: flex; flex-direction: column; justify-content: flex-end;
@@ -423,7 +423,7 @@ body.dark .quote { background: rgba(255,42,163,0.07); }
 .section-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; opacity: 0.32; margin-bottom: 20px; display: block; color: var(--fg); transition: color 0.4s; }
 .tools-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .tool-tag { border: 0.5px solid var(--border-subtle); padding: 7px 16px; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 40px; color: var(--fg); font-weight: 400; transition: border-color 0.2s, color 0.2s; }
-.tool-tag:hover { border-color: var(--pink); color: var(--pink); }
+.tool-tag:hover { opacity: 0.8; /* subtle dim only — not clickable */ }
 .tool-tag.featured { background: var(--pink); border-color: var(--pink); color: white; font-weight: 600; }
 
 .section-divider { width: 100%; height: 1px; background: var(--border-subtle); margin: 80px 0; position: relative; transition: background 0.4s; }
@@ -585,8 +585,8 @@ body.dark .quote { background: rgba(255,42,163,0.07); }
 .p-rule::before { content: ''; position: absolute; left: 0; top: 0; height: 1px; width: 60px; background: var(--pink); }
 
 .p-img { display: block; width: 100%; object-fit: cover; }
-.p-img-hover { transition: filter 0.35s ease; }
-.p-img-hover:hover { filter: brightness(0.82); }
+.p-img-hover { /* hover darkening removed — images stay clean */ }
+.p-img-hover:hover { /* no effect */ }
 
 /* Strip */
 .p-strip-wrap { overflow: hidden; width: 100%; padding: 48px 0; }
@@ -820,201 +820,7 @@ body.dark .quote { background: rgba(255,42,163,0.07); }
 .mobile-section-label:first-child { margin-top: 0; }
 .mobile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 4px; }
 .mobile-grid .card, .mobile-grid .card-game, .mobile-grid .card-visuales-exp { aspect-ratio: 3/4; border-radius: 10px; }
-
-   /* ══════════════════════════════════════════════
-       ABOUT — scroll-staged layout
-       Stage A: "Hola," (immediate)
-       Stage B: rest of sentence (scroll-revealed)
-       Stage C: image + bio + tools (static)
-       Stage D: image cycling vania2→5 (scroll-locked)
-       Stage E: education + experience (normal scroll)
-       ══════════════════════════════════════════════ */
-
-    /* ── STAGE A+B: Intro ── */
-    .about-intro-scroll {
-      height: 200vh;           /* scroll space for word reveal */
-      position: relative;
-    }
-    .about-intro-sticky {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 0 40px;
-      max-width: 1100px;
-      margin: 0 auto;
-      /* full-width sticky needs width:100vw relative to margin auto parent */
-      width: 100%;
-    }
-    .word-reveal {
-      font-size: clamp(36px, 6vw, 76px);
-      font-weight: 700;
-      font-family: var(--font-display);
-      letter-spacing: -0.04em;
-      line-height: 1.12;
-      color: var(--fg);
-      max-width: 900px;
-    }
-    .word-reveal .w {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity 0.38s ease, transform 0.38s ease;
-      margin-right: 0.2em;
-    }
-    .word-reveal .w.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    /* "Hola," always shows immediately */
-    .word-reveal .w.immediate { opacity: 1; transform: translateY(0); }
-    .word-reveal .w.kora { color: var(--pink); }
-
-    /* ── STAGE C: bio section (normal flow) ── */
-    .about-bio {
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 60px;
-      align-items: start;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 80px 40px;
-    }
-    .about-image-col {
-      /* In stage D this becomes sticky */
-      position: sticky;
-      top: 120px;
-      width: 100%;
-      max-width: 260px;
-    }
-    /* Single <img> that swaps src — no stacking issues */
-    #about-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 14px;
-      object-fit: cover;
-      max-height: 340px;
-      transition: opacity 0.45s ease;
-    }
-    .about-text { max-width: 520px; padding-top: 8px; }
-    .about-text p {
-      margin-bottom: 18px; line-height: 1.9;
-      opacity: 0.65; font-size: 13.5px;
-      color: var(--fg); font-weight: 400;
-    }
-    .quote {
-      margin-top: 28px; padding: 18px 22px;
-      border-left: 2px solid var(--pink);
-      font-size: 12px; line-height: 1.9;
-      background: rgba(255,42,163,0.04);
-      border-radius: 0 8px 8px 0;
-      color: var(--fg); font-style: italic; font-weight: 400;
-    }
-    body.dark .quote { background: rgba(255,42,163,0.07); }
-    .quote .author {
-      display: block; margin-top: 8px;
-      font-size: 9px; opacity: 0.45;
-      letter-spacing: 1.5px; font-style: normal; text-transform: uppercase;
-    }
-
-    /* ── TOOLS ── */
-    .about-tools {
-      max-width: 1100px; margin: 0 auto;
-      padding: 0 40px 80px;
-    }
-    .tools-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tool-tag {
-      border: 0.5px solid var(--border-subtle); padding: 7px 16px;
-      font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
-      border-radius: 40px; color: var(--fg); font-weight: 400;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .tool-tag:hover { border-color: var(--pink); color: var(--pink); }
-    .tool-tag.featured { background: var(--pink); border-color: var(--pink); color: white; font-weight: 600; }
-
-    /* ── STAGE D: image cycling scroll zone ── */
-    .about-image-scroll {
-      height: 400vh;   /* 4 images × 100vh each = room to cycle */
-      position: relative;
-    }
-    .about-image-sticky {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    #about-img-cycle {
-      width: 260px;
-      height: 340px;
-      border-radius: 14px;
-      object-fit: cover;
-      transition: opacity 0.5s ease;
-    }
-
-    /* ── DIVIDERS ── */
-    .section-divider {
-      width: 100%; height: 1px; background: var(--border-subtle);
-      margin: 0 0 80px; position: relative;
-    }
-    .section-divider::before {
-      content: ''; position: absolute; left: 40px; top: 0;
-      height: 1px; width: 60px; background: var(--pink);
-    }
-
-    /* ── STAGE E: info grid ── */
-    .about-info-wrap { max-width: 1100px; margin: 0 auto; padding: 0 40px 80px; }
-    .about-info-grid { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 40px; }
-    .about-info-grid h3 {
-      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
-      opacity: 0.32; margin-bottom: 20px; font-weight: 500; color: var(--fg);
-    }
-    .info-divider { width: 1px; background: var(--border-subtle); }
-
-    .info-item {
-      margin-bottom: 20px; font-size: 12.5px; font-weight: 400;
-      color: var(--fg); line-height: 1.65;
-      opacity: 0; transform: translateY(14px);
-      transition: opacity 0.5s ease, transform 0.5s ease,
-                  border-left-width 0.3s ease 0.25s, padding-left 0.3s ease 0.25s;
-      border-left: 0px solid var(--pink); padding-left: 0;
-    }
-    .info-item.visible {
-      opacity: 0.72; transform: translateY(0);
-      border-left-width: 2px; padding-left: 12px;
-    }
-    .info-item span { display: block; font-size: 9px; opacity: 0.4; margin-top: 4px; letter-spacing: 1px; }
-
-    /* ── CONTACT ── */
-    .contact-wrap { max-width: 1100px; margin: 0 auto; padding: 0 40px 100px; }
-    .contact-block { border-top: 1px solid var(--border-subtle); padding-top: 60px; }
-    .contact-eyebrow {
-      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
-      font-weight: 500; opacity: 0.38; margin-bottom: 24px; color: var(--fg); display: block;
-    }
-    .contact-big {
-      font-size: clamp(28px, 5vw, 56px); font-weight: 700;
-      font-family: var(--font-display); letter-spacing: -0.04em;
-      line-height: 1.05; color: var(--fg); margin-bottom: 40px; max-width: 800px;
-    }
-    .contact-big .cw {
-      display: inline-block; margin-right: 0.18em;
-      transition: color 0.2s ease, transform 0.2s ease;
-    }
-    .contact-big .cw:hover { color: var(--pink); transform: translateY(-3px); }
-    .contact-links { display: flex; gap: 10px; flex-wrap: wrap; }
-    .contact-links a {
-      font-size: 11px; text-decoration: none; color: var(--fg);
-      letter-spacing: 1.5px; font-weight: 600; padding: 12px 24px;
-      border: 0.5px solid var(--border-subtle); border-radius: 40px;
-      opacity: 0.55; transition: opacity 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
-      display: inline-flex; align-items: center; gap: 8px;
-    }
-    .contact-links a:hover { opacity: 1; border-color: var(--pink); color: var(--pink); transform: translateY(-2px); }
+   
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {

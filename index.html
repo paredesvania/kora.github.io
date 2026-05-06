@@ -62,9 +62,8 @@
       pointer-events: none;
       z-index: 10;
       border-radius: 2px;
-      /* sin color, sin borde — completamente invisible */
       background: transparent;
-      cursor: none !important;
+      cursor: pointer !important; /* override cursor:none when words are formed */
     }
 
     /* ── SEPARADOR VERTICAL (entre palabras en desktop) ── */
@@ -138,7 +137,7 @@
   <section id="interactive-block">
     <div class="interactive-content">
       <p class="interactive-code">systemAwait.Input();</p>
-      <input id="command-input" placeholder='type("here");' autocomplete="off"/>
+      <input id="command-input" placeholder='type("something");' autocomplete="off"/>
     </div>
     <div id="playground"></div>
     <div class="color-controls">
@@ -349,17 +348,24 @@
         const cy = lerp(o.y, t.y, conv);
         const cr = lerp(o.rot, 0, conv);
 
-        // Hover: dim el lado no hover cuando conv > 0.9
+        // Hover feedback: hovered side lifts 6px, opposite dims
         let op = letterOp;
+        let liftY = 0;
         if (hoverState && conv > 0.9) {
           const side = el.dataset.side;
           if (side === "left"  && hoverState === "right") op *= 0.35;
           if (side === "right" && hoverState === "left")  op *= 0.35;
+          // Hovered side: lift slightly
+          if (side === "left"  && hoverState === "left")  liftY = -6;
+          if (side === "right" && hoverState === "right") liftY = -6;
         }
 
         el.style.fontSize  = fontSize + "px";
         el.style.opacity   = op;
-        el.style.transform = `translate(${cx}px, ${cy}px) rotate(${cr}deg)`;
+        el.style.transition = hoverState && conv > 0.9
+          ? "opacity 0.2s ease, transform 0.2s ease"
+          : "opacity 0.1s ease";
+        el.style.transform = `translate(${cx}px, ${cy + liftY}px) rotate(${cr}deg)`;
         el.style.color     = el.dataset.side === "right"
           ? lerpColor(fgColor, "#ff2aa3", pinkT)
           : fgColor;
@@ -384,7 +390,7 @@
       });
     }
 
-    // ── Hover handlers ──
+    // ── Hover handlers — lift hovered word, dim opposite ──
     linkProj.addEventListener("mouseenter",  () => { hoverState = "left"; });
     linkProj.addEventListener("mouseleave",  () => { hoverState = null; });
     linkAbout.addEventListener("mouseenter", () => { hoverState = "right"; });
