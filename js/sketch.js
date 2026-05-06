@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (containsBannedWord(value)) {
       input.value = "";
       input.placeholder = "esa no... intenta otra cosa ;)";
-      setTimeout(() => { input.placeholder = 'type("something");'; }, 2000);
+      setTimeout(() => { input.placeholder = 'type here'; }, 2000);
       return;
     }
     startPlayground(value);
