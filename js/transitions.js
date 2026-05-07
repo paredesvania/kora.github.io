@@ -25,21 +25,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function fontSz() { return Math.min(W * 0.28, 220); }
 
-  // Letras caen desde arriba, pasan por el centro sin parar,
-  // rebotan UNA vez contra el "suelo invisible" (un poco más abajo del centro)
-  // y luego siguen cayendo fuera de pantalla desvaneciéndose
   function spawnLetters() {
     const fs = fontSz();
     ctx.font = `700 ${fs}px Poppins, sans-serif`;
     const totalW = ctx.measureText(WORD).width;
     let x = (W - totalW) / 2;
-    // El "suelo" está justo en el centro visual
     const floorY = H / 2 + fs * 0.35;
 
     letters = [];
     for (const char of WORD) {
       const cw = ctx.measureText(char).width;
-      const stagger = Math.random() * 60; // caen ligeramente desfasadas
+      const stagger = Math.random() * 60;
       letters.push({
         char, fs,
         x:      x + (Math.random() - 0.5) * 40,
@@ -50,8 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
         rot:    (Math.random() - 0.5) * 0.2,
         vrot:   (Math.random() - 0.5) * 0.04,
         alpha:  1,
-        bounced: false,  // ¿ya rebotó?
-        falling: false,  // ¿ya está en caída final?
+        bounced: false,
+        falling: false,
       });
       x += cw;
     }
@@ -79,56 +75,43 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateCover() {
-    // Fondo aparece rápido al principio
     bgAlpha = Math.min(1, bgAlpha + 0.07);
 
     letters.forEach(l => {
-      // Gravedad siempre activa — nunca paran
       l.vy  += GRAVITY;
       l.y   += l.vy;
       l.x   += l.vx;
       l.rot += l.vrot;
       l.vx  *= 0.97;
 
-      // Un solo rebote al pasar el floorY
       if (!l.bounced && l.y >= l.floorY) {
         l.y       = l.floorY;
-        l.vy      = -l.vy * 0.38;  // rebote amortiguado — no sube mucho
+        l.vy      = -l.vy * 0.38;
         l.vrot    = (Math.random() - 0.5) * 0.06;
         l.bounced = true;
       }
 
-      // Después del rebote, cuando vuelve a bajar: caída final con desvanecimiento
-      if (l.bounced && !l.falling && l.vy > 0) {
-        l.falling = true;
-      }
-      if (l.falling) {
-        l.alpha = Math.max(0, l.alpha - 0.022);
-      }
+      if (l.bounced && !l.falling && l.vy > 0) l.falling = true;
+      if (l.falling) l.alpha = Math.max(0, l.alpha - 0.022);
     });
 
     ctx.clearRect(0, 0, W, H);
     drawBg();
     drawLetters();
 
-    // Navegar cuando el fondo está lleno Y las letras ya pasaron el floorY
     const lettersGone = letters.every(l => l.bounced && l.vy > 0);
     if (bgAlpha >= 1 && lettersGone) {
       if (onDone) { onDone(); onDone = null; }
     }
 
-    // Terminar loop cuando todo desapareció
     const allDone = letters.every(l => l.alpha <= 0 || l.y > H + 100);
     if (allDone && bgAlpha >= 1) {
-      rafId = null;
-      phase = "idle";
-      return;
+      rafId = null; phase = "idle"; return;
     }
 
     rafId = requestAnimationFrame(updateCover);
   }
 
-  // Entrada en nueva página: solo el fondo que desaparece, limpio
   function updateUncover() {
     bgAlpha = Math.max(0, bgAlpha - 0.06);
     ctx.clearRect(0, 0, W, H);
@@ -136,11 +119,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (bgAlpha <= 0) {
       canvas.style.display = "none";
-      phase = "idle";
-      rafId = null;
-      return;
+      phase = "idle"; rafId = null; return;
     }
     rafId = requestAnimationFrame(updateUncover);
+  }
+
+  function forceHide() {
+    // Limpia el canvas inmediatamente — usado al navegar con atrás/adelante
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    bgAlpha = 0;
+    phase   = "idle";
+    canvas.style.display = "none";
+    ctx.clearRect(0, 0, W, H);
   }
 
   function run(p, cb) {
@@ -154,7 +144,6 @@ document.addEventListener("DOMContentLoaded", () => {
       spawnLetters();
       rafId = requestAnimationFrame(updateCover);
     } else {
-      // Entrada: fondo opaco que se desvanece suavemente
       bgAlpha = 1;
       rafId = requestAnimationFrame(updateUncover);
     }
@@ -163,8 +152,24 @@ document.addEventListener("DOMContentLoaded", () => {
   resize();
   window.addEventListener("resize", resize);
 
-  // Entrada en la página
+  // Entrada normal en la página
   run("uncover");
+
+  // ── FIX: bfcache (back/forward con gestos o flechas) ──
+  // El evento `pageshow` se dispara SIEMPRE al mostrar la página,
+  // incluyendo cuando el navegador la restaura desde caché (persisted=true).
+  // DOMContentLoaded NO se dispara en ese caso, por eso el canvas quedaba opaco.
+  window.addEventListener("pageshow", (e) => {
+    if (e.persisted) {
+      // Página restaurada desde bfcache (gesto atrás/adelante)
+      forceHide();
+    }
+  });
+
+  // ── FIX adicional: popstate (historial sin recarga completa) ──
+  window.addEventListener("popstate", () => {
+    forceHide();
+  });
 
   document.addEventListener("click", (e) => {
     const a = e.target.closest("a");
