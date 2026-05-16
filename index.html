@@ -37,6 +37,10 @@
       color: var(--fg); white-space: nowrap;
       text-align: center; user-select: none;
       will-change: opacity; z-index: 2;
+      transition: font-size 0.2s ease;
+    }
+    #typing-line.typing-small {
+      font-size: clamp(1rem, 2.8vw, 2.2rem) !important;
     }
 
     /* ── LETRAS INDIVIDUALES ── */
@@ -78,21 +82,30 @@
 
     /* ── SCROLL HINT ── */
     #scroll-hint {
-      position: absolute; bottom: 28px; left: 50%;
+      position: absolute; bottom: 32px; left: 50%;
       transform: translateX(-50%);
       display: flex; flex-direction: column;
-      align-items: center; gap: 6px;
-      opacity: 0.2; z-index: 6;
+      align-items: center; gap: 8px;
+      opacity: 0.62; z-index: 6;
       pointer-events: none;
-      animation: hintBob 2.4s ease-in-out infinite;
+      animation: hintBob 2.2s ease-in-out infinite, hintPulse 2.2s ease-in-out infinite;
       transition: opacity 0.5s ease;
     }
+    body.dark #scroll-hint { opacity: 0.78; animation: hintBob 2.2s ease-in-out infinite, hintPulseDark 2.2s ease-in-out infinite; }
     #scroll-hint.hidden { opacity: 0 !important; animation: none; }
-    #scroll-hint span { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--fg); }
-    #scroll-hint svg  { width: 14px; height: 14px; color: var(--fg); }
+    #scroll-hint span { font-size: 10px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--fg); font-weight: 600; }
+    #scroll-hint svg  { width: 20px; height: 20px; color: var(--fg); stroke-width: 2; }
     @keyframes hintBob {
       0%,100% { transform: translateX(-50%) translateY(0); }
-      50%      { transform: translateX(-50%) translateY(5px); }
+      50%      { transform: translateX(-50%) translateY(7px); }
+    }
+    @keyframes hintPulse {
+      0%,100% { opacity: 0.55; }
+      50%      { opacity: 0.9; }
+    }
+    @keyframes hintPulseDark {
+      0%,100% { opacity: 0.65; }
+      50%      { opacity: 1; }
     }
 
     /* ── INTERACTIVE BLOCK ── */
@@ -182,6 +195,8 @@
     // ══════════════════════════════
     //  TYPING — Stage 1
     // ══════════════════════════════
+    let heroTypingDone = false; // shared flag for interactive typing below
+
     ;(function () {
       if (!typingEl) return;
       const seqs = ["koraNode();", "kora();", 'print("<3");'];
@@ -192,7 +207,14 @@
         if (!del) {
           typingEl.textContent = cur.slice(0, sj+1); sj++;
           if (sj === cur.length) {
-            if (si === seqs.length-1) { done=true; return; }
+            if (si === seqs.length-1) {
+              done=true;
+              // Habilitar typing interactivo después de 1.8s
+              setTimeout(() => {
+                heroTypingDone = true;
+              }, 1800);
+              return;
+            }
             del=true; setTimeout(tick, 1200); return;
           }
           setTimeout(tick, 68);
@@ -203,6 +225,206 @@
         }
       }
       setTimeout(tick, 400);
+    })();
+
+    // ══════════════════════════════
+    //  TYPING INTERACTIVO
+    //  Palabras reconocidas y sus respuestas
+    // ══════════════════════════════
+    ;(function () {
+      const FINAL_TEXT = 'print("<3");';
+      let userBuf = "";
+      let resetTimer = null;
+
+      // ── Easter egg: glitch digital + pixel heart ──
+      function heartGlitch() {
+        // 1. TEXT SCRAMBLE — el typing-line se corrompe y vuelve
+        const GLITCH_CHARS = "01<>!#$%{}[]|/\\?~ABCDEFabcdef01010101";
+        const originalText = typingEl.textContent;
+        let frame = 0;
+        const totalFrames = 18;
+        const scrambleTimer = setInterval(() => {
+          if (frame < totalFrames - 3) {
+            // Scramble random
+            typingEl.textContent = Array.from({ length: 7 + Math.floor(Math.random() * 4) }, () =>
+              GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)]
+            ).join("");
+            typingLine.style.color = frame % 2 === 0 ? "#ff2aa3" : "var(--fg)";
+          } else {
+            // Settle de vuelta
+            typingEl.textContent = originalText;
+            typingLine.style.color = "";
+            clearInterval(scrambleTimer);
+          }
+          frame++;
+        }, 45);
+
+        // 2. SCANLINE FLASH — overlay breve con líneas de CRT
+        const scan = document.createElement("div");
+        Object.assign(scan.style, {
+          position:       "fixed", inset: "0",
+          pointerEvents:  "none", zIndex: "99997",
+          opacity:        "0.18",
+          background:     "repeating-linear-gradient(0deg, transparent, transparent 2px, #ff2aa3 2px, #ff2aa3 4px)",
+          transition:     "opacity 0.4s ease",
+        });
+        document.body.appendChild(scan);
+        requestAnimationFrame(() => {
+          setTimeout(() => { scan.style.opacity = "0"; setTimeout(() => scan.remove(), 420); }, 200);
+        });
+
+        // 3. PIXEL HEART — canvas 8-bit centrado en pantalla
+        const HEART = [
+          [0,0,1,1,0,1,1,0,0],
+          [0,1,1,1,1,1,1,1,0],
+          [1,1,1,1,1,1,1,1,1],
+          [1,1,1,1,1,1,1,1,1],
+          [0,1,1,1,1,1,1,1,0],
+          [0,0,1,1,1,1,1,0,0],
+          [0,0,0,1,1,1,0,0,0],
+          [0,0,0,0,1,0,0,0,0],
+        ];
+        const PX   = window.innerWidth < 600 ? 10 : 14;
+        const COLS = HEART[0].length;
+        const ROWS = HEART.length;
+        const canvas = document.createElement("canvas");
+        canvas.width  = COLS * PX;
+        canvas.height = ROWS * PX;
+        Object.assign(canvas.style, {
+          position:        "fixed",
+          left:            "50%", top: "50%",
+          transform:       "translate(-50%, -50%)",
+          zIndex:          "99998",
+          imageRendering:  "pixelated",
+          opacity:         "1",
+          pointerEvents:   "none",
+          transition:      "opacity 0.6s ease",
+        });
+        document.body.appendChild(canvas);
+        const ctx2d = canvas.getContext("2d");
+        ctx2d.imageSmoothingEnabled = false;
+
+        // Recopilar píxeles activos y barajar para aparición aleatoria
+        const pixels = [];
+        HEART.forEach((row, r) => row.forEach((on, c) => { if (on) pixels.push([c, r]); }));
+        pixels.sort(() => Math.random() - 0.5);
+
+        // Dibujar píxel a píxel con stagger — cada uno puede tener glitch de color
+        pixels.forEach(([c, r], idx) => {
+          setTimeout(() => {
+            // Glitch ocasional: pinta blanco, luego corrige a rosa
+            const isGlitch = Math.random() < 0.2;
+            ctx2d.fillStyle = isGlitch ? "#ffffff" : "#ff2aa3";
+            ctx2d.fillRect(c * PX, r * PX, PX, PX);
+            if (isGlitch) {
+              setTimeout(() => {
+                ctx2d.fillStyle = "#ff2aa3";
+                ctx2d.fillRect(c * PX, r * PX, PX, PX);
+              }, 80 + Math.random() * 180);
+            }
+          }, idx * 18);
+        });
+
+        // Fade out tras un momento de vida
+        const lifeTime = pixels.length * 18 + 700;
+        setTimeout(() => {
+          canvas.style.opacity = "0";
+          setTimeout(() => canvas.remove(), 650);
+        }, lifeTime);
+      }
+
+      const COMMANDS = {
+        // Saludos
+        "hello":      { reply: 'hello! :)',                      action: null },
+        "hola":       { reply: 'hola! :)',                       action: null },
+        "hi":         { reply: 'hi there!',                      action: null },
+        "hey":        { reply: 'hey! :)',                        action: null },
+        // Kora
+        "kora":       { reply: 'koraNode();',                    action: null },
+        "kora()":     { reply: 'koraNode();',                    action: null },
+        // Proyectos / Projects
+        "projects":   { reply: 'navigating...',                  action: () => setTimeout(() => location.href = 'projects.html', 700) },
+        "proyectos":  { reply: 'navegando...',                   action: () => setTimeout(() => location.href = 'projects.html', 700) },
+        "project":    { reply: 'navigating...',                  action: () => setTimeout(() => location.href = 'projects.html', 700) },
+        "proyecto":   { reply: 'navegando...',                   action: () => setTimeout(() => location.href = 'projects.html', 700) },
+        // About / Sobre mí
+        "about":      { reply: 'navigating...',                  action: () => setTimeout(() => location.href = 'about.html', 700) },
+        "sobre mi":   { reply: 'navegando...',                   action: () => setTimeout(() => location.href = 'about.html', 700) },
+        "sobre mí":   { reply: 'navegando...',                   action: () => setTimeout(() => location.href = 'about.html', 700) },
+        "quién eres": { reply: 'navegando...',                   action: () => setTimeout(() => location.href = 'about.html', 700) },
+        "quien eres": { reply: 'navegando...',                   action: () => setTimeout(() => location.href = 'about.html', 700) },
+        // Help / Ayuda
+        "help":       { reply: 'try: hello · projects · about',     action: null },
+        "help()":     { reply: 'try: hello · projects · about',     action: null },
+        "ayuda":      { reply: 'prueba: hola · proyectos · about',  action: null },
+        "ayuda()":    { reply: 'prueba: hola · proyectos · about',  action: null },
+        // Easter egg <3
+        "<3":         { reply: 'print("<3");',                   action: heartGlitch },
+        // Reset
+        "clear":      { reply: FINAL_TEXT,                       action: null },
+        "limpiar":    { reply: FINAL_TEXT,                       action: null },
+      };
+
+      function resetToFinal(delay = 1800) {
+        clearTimeout(resetTimer);
+        resetTimer = setTimeout(() => {
+          typingEl.textContent = FINAL_TEXT;
+          typingLine.classList.remove("typing-small");
+          userBuf = "";
+        }, delay);
+      }
+
+      function applyReply(text) {
+        typingEl.textContent = text;
+        // Si el texto es largo, reducir fuente para que no se salga
+        if (text.length > 18) {
+          typingLine.classList.add("typing-small");
+        } else {
+          typingLine.classList.remove("typing-small");
+        }
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (!heroTypingDone) return;
+        if (window.scrollY > 30) return; // solo activo en el hero
+
+        if (e.key === "Backspace") {
+          userBuf = userBuf.slice(0, -1);
+          typingEl.textContent = userBuf || FINAL_TEXT;
+          if (!userBuf) typingLine.classList.remove("typing-small");
+          clearTimeout(resetTimer);
+          return;
+        }
+
+        if (e.key === "Enter") {
+          const val = userBuf.toLowerCase().trim();
+          if (!val) return;
+          const cmd = COMMANDS[val];
+          if (cmd) {
+            applyReply(cmd.reply);
+            if (cmd.action) cmd.action();
+          } else {
+            applyReply(`"${userBuf}" not found`);
+          }
+          userBuf = "";
+          resetToFinal(2000);
+          return;
+        }
+
+        if (e.key === "Escape") {
+          userBuf = "";
+          typingEl.textContent = FINAL_TEXT;
+          typingLine.classList.remove("typing-small");
+          clearTimeout(resetTimer);
+          return;
+        }
+
+        // Sólo letras, números y símbolos básicos
+        if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && userBuf.length < 22) {
+          userBuf += e.key;
+          typingEl.textContent = userBuf;
+        }
+      });
     })();
 
     // ══════════════════════════════
@@ -348,24 +570,25 @@
         const cy = lerp(o.y, t.y, conv);
         const cr = lerp(o.rot, 0, conv);
 
-        // Hover feedback: hovered side lifts 6px, opposite dims
+        // Hover feedback: hovered side lifts + scales, opposite dims
         let op = letterOp;
         let liftY = 0;
+        let scale = 1;
         if (hoverState && conv > 0.9) {
           const side = el.dataset.side;
           if (side === "left"  && hoverState === "right") op *= 0.35;
           if (side === "right" && hoverState === "left")  op *= 0.35;
-          // Hovered side: lift slightly
-          if (side === "left"  && hoverState === "left")  liftY = -6;
-          if (side === "right" && hoverState === "right") liftY = -6;
+          // Hovered side: lift + scale up
+          if (side === "left"  && hoverState === "left")  { liftY = -8; scale = 1.07; }
+          if (side === "right" && hoverState === "right") { liftY = -8; scale = 1.07; }
         }
 
         el.style.fontSize  = fontSize + "px";
         el.style.opacity   = op;
         el.style.transition = hoverState && conv > 0.9
-          ? "opacity 0.2s ease, transform 0.2s ease"
+          ? "opacity 0.22s ease, transform 0.22s ease"
           : "opacity 0.1s ease";
-        el.style.transform = `translate(${cx}px, ${cy + liftY}px) rotate(${cr}deg)`;
+        el.style.transform = `translate(${cx}px, ${cy + liftY}px) rotate(${cr}deg) scale(${scale})`;
         el.style.color     = el.dataset.side === "right"
           ? lerpColor(fgColor, "#ff2aa3", pinkT)
           : fgColor;
@@ -391,10 +614,10 @@
     }
 
     // ── Hover handlers — lift hovered word, dim opposite ──
-    linkProj.addEventListener("mouseenter",  () => { hoverState = "left"; });
-    linkProj.addEventListener("mouseleave",  () => { hoverState = null; });
-    linkAbout.addEventListener("mouseenter", () => { hoverState = "right"; });
-    linkAbout.addEventListener("mouseleave", () => { hoverState = null; });
+    linkProj.addEventListener("mouseenter",  () => { hoverState = "left";  if (!rafId) rafId = requestAnimationFrame(update); });
+    linkProj.addEventListener("mouseleave",  () => { hoverState = null;    if (!rafId) rafId = requestAnimationFrame(update); });
+    linkAbout.addEventListener("mouseenter", () => { hoverState = "right"; if (!rafId) rafId = requestAnimationFrame(update); });
+    linkAbout.addEventListener("mouseleave", () => { hoverState = null;    if (!rafId) rafId = requestAnimationFrame(update); });
 
     // ── Touch feedback ──
     [linkProj, linkAbout].forEach(link => {

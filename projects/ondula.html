@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../assets/otros/favicon.png">
+  <title>Óndula — KORA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    (function(){
+      var t=localStorage.getItem("kora-theme");
+      if(t==="dark"){document.documentElement.style.background="#0a0a0a";document.documentElement.classList.add("dark-pre");}
+    })();
+  </script>
+  <style>
+    /* ── Paleta específica de Óndula ── */
+    :root {
+      --ondula-deep:   #050d1a;   /* azul abisal */
+      --ondula-mid:    #0a2540;   /* azul profundo */
+      --ondula-iris:   #1a6b8a;   /* iridiscente */
+      --ondula-glow:   #4ecdc4;   /* destello agua */
+      --ondula-accent: #7eb8c9;   /* superficie */
+    }
+
+    /* ── HERO oscuro full-bleed ── */
+    .ondula-hero {
+      width: 100%;
+      min-height: 100vh;
+      background: var(--ondula-deep);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Video/imagen de fondo del hero */
+    .ondula-hero-media {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.55;
+      filter: saturate(0.7) brightness(0.6);
+    }
+
+    .ondula-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Fecha del concierto — badge destacado */
+    .ondula-date {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--ondula-glow);
+      border: 0.5px solid var(--ondula-glow);
+      padding: 6px 14px;
+      border-radius: 40px;
+      margin-bottom: 28px;
+      opacity: 0.9;
+    }
+    .ondula-date::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--ondula-glow);
+      animation: pulseDot 2s ease-in-out infinite;
+    }
+    @keyframes pulseDot {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    .ondula-hero h1 {
+      font-size: clamp(72px, 15vw, 200px);
+      font-weight: 700;
+      font-family: var(--font-display);
+      letter-spacing: -0.05em;
+      line-height: 0.88;
+      color: #f0f8ff;
+      margin-bottom: 32px;
+    }
+    .ondula-hero h1 span {
+      color: var(--ondula-glow);
+      font-style: italic;
+    }
+
+    .ondula-hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .ondula-hero-artist {
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      color: rgba(240,248,255,0.55);
+      font-weight: 400;
+    }
+    .ondula-hero-artist strong {
+      color: rgba(240,248,255,0.9);
+      font-weight: 600;
+    }
+
+    /* ── CONCEPTO: texto sobre fondo oscuro ── */
+    .ondula-concept {
+      background: var(--ondula-deep);
+      padding: 100px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Frase central grande */
+    .ondula-statement {
+      font-size: clamp(28px, 4.5vw, 56px);
+      font-weight: 700;
+      font-family: var(--font-display);
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+      color: #f0f8ff;
+      max-width: 860px;
+      margin-bottom: 64px;
+    }
+    .ondula-statement em {
+      font-style: normal;
+      color: var(--ondula-glow);
+    }
+
+    /* Palabras clave flotando */
+    .ondula-keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 64px;
+    }
+    .ondula-kw {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 6px 14px;
+      border: 0.5px solid rgba(78,205,196,0.25);
+      border-radius: 40px;
+      color: rgba(78,205,196,0.7);
+    }
+
+    /* Grid concepto: label + texto */
+    .ondula-concept-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 60px;
+      align-items: start;
+      color: rgba(240,248,255,0.65);
+    }
+    .ondula-concept-label {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ondula-glow);
+      opacity: 0.7;
+      font-weight: 600;
+      padding-top: 4px;
+    }
+    .ondula-concept-text {
+      font-size: 14px;
+      line-height: 1.9;
+      font-weight: 400;
+    }
+    .ondula-concept-text p { margin-bottom: 16px; }
+    .ondula-concept-text p:last-child { margin-bottom: 0; }
+
+    /* ── VISUALES: los 3 estados ── */
+    .ondula-states {
+      background: var(--ondula-deep);
+      padding: 0 0 100px;
+    }
+    .ondula-states-header {
+      padding: 0 48px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .ondula-state {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
+      border-top: 0.5px solid rgba(78,205,196,0.12);
+    }
+    .ondula-state:nth-child(even) { direction: rtl; }
+    .ondula-state:nth-child(even) > * { direction: ltr; }
+
+    .ondula-state-media {
+      position: relative;
+      overflow: hidden;
+      background: var(--ondula-mid);
+      min-height: 500px;
+    }
+    .ondula-state-media img,
+    .ondula-state-media video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.8);
+      transition: transform 0.8s ease;
+    }
+    .ondula-state:hover .ondula-state-media img,
+    .ondula-state:hover .ondula-state-media video {
+      transform: scale(1.03);
+    }
+    .ondula-state-media-placeholder {
+      width: 100%; height: 100%; min-height: 500px;
+      background: var(--ondula-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(78,205,196,0.2);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .ondula-state-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 56px;
+      background: var(--ondula-deep);
+    }
+    .ondula-state-num {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ondula-glow);
+      opacity: 0.6;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .ondula-state-title {
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 700;
+      font-family: var(--font-display);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: #f0f8ff;
+      margin-bottom: 20px;
+    }
+    .ondula-state-sub {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--ondula-glow);
+      opacity: 0.5;
+      margin-bottom: 28px;
+    }
+    .ondula-state-desc {
+      font-size: 13px;
+      line-height: 1.85;
+      color: rgba(240,248,255,0.55);
+      font-weight: 400;
+      max-width: 400px;
+    }
+
+    /* ── TÉCNICO ── */
+    .ondula-tech {
+      background: var(--ondula-deep);
+      border-top: 0.5px solid rgba(78,205,196,0.12);
+      padding: 100px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .ondula-tech-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 48px;
+    }
+    .ondula-tech-item {
+      padding: 36px 32px;
+      border: 0.5px solid rgba(78,205,196,0.1);
+      background: rgba(10,37,64,0.4);
+    }
+    .ondula-tech-item:first-child { border-radius: 4px 0 0 4px; }
+    .ondula-tech-item:last-child  { border-radius: 0 4px 4px 0; }
+    .ondula-tech-icon {
+      font-size: 20px;
+      margin-bottom: 16px;
+      opacity: 0.7;
+    }
+    .ondula-tech-label {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ondula-glow);
+      opacity: 0.6;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .ondula-tech-title {
+      font-size: 16px;
+      font-weight: 700;
+      font-family: var(--font-display);
+      color: #f0f8ff;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+    .ondula-tech-desc {
+      font-size: 11px;
+      line-height: 1.75;
+      color: rgba(240,248,255,0.42);
+      font-weight: 400;
+    }
+
+    /* ── GALERÍA: strip de imágenes ── */
+    .ondula-strip-section {
+      background: var(--ondula-deep);
+      border-top: 0.5px solid rgba(78,205,196,0.12);
+      padding: 80px 0;
+    }
+    .ondula-strip-label {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ondula-glow);
+      opacity: 0.5;
+      font-weight: 600;
+      padding: 0 48px;
+      margin-bottom: 24px;
+      display: block;
+    }
+    .ondula-strip-track {
+      display: flex;
+      gap: 8px;
+      padding: 0 48px;
+      overflow: hidden;
+    }
+    .ondula-strip-track img,
+    .ondula-strip-track video {
+      flex-shrink: 0;
+      width: 380px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 4px;
+      display: block;
+      filter: saturate(0.75);
+      transition: filter 0.3s ease;
+    }
+    .ondula-strip-track img:hover,
+    .ondula-strip-track video:hover { filter: saturate(1); }
+
+    /* ── CONCIERTO: sección final ── */
+    .ondula-concert {
+      background: var(--ondula-deep);
+      border-top: 0.5px solid rgba(78,205,196,0.12);
+      padding: 100px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .ondula-concert-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-top: 48px;
+    }
+    .ondula-img-full {
+      width: 100%;
+      display: block;
+      border-radius: 4px;
+      object-fit: cover;
+      filter: saturate(0.7);
+    }
+    .ondula-concert-info {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .ondula-info-block {}
+    .ondula-info-field {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ondula-glow);
+      opacity: 0.55;
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .ondula-info-value {
+      font-size: 15px;
+      font-weight: 600;
+      font-family: var(--font-display);
+      color: #f0f8ff;
+      letter-spacing: -0.01em;
+    }
+    .ondula-divider {
+      width: 100%;
+      height: 0.5px;
+      background: rgba(78,205,196,0.12);
+    }
+
+    /* ── FOOTER oscuro ── */
+    .ondula-footer-override .p-footer {
+      background: var(--ondula-deep);
+      border-top-color: rgba(78,205,196,0.12);
+    }
+    .ondula-footer-override .p-footer-prev,
+    .ondula-footer-override .p-footer-next {
+      color: #f0f8ff;
+    }
+    .ondula-footer-override .p-footer-prev:hover,
+    .ondula-footer-override .p-footer-next:hover {
+      background: var(--ondula-iris);
+      border-color: var(--ondula-iris);
+    }
+    .ondula-footer-override .p-footer-center a { color: rgba(240,248,255,0.3); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .ondula-hero-content { padding: 0 20px; }
+      .ondula-concept       { padding: 60px 20px; }
+      .ondula-states-header { padding: 0 20px 40px; }
+      .ondula-tech          { padding: 60px 20px; }
+      .ondula-concert       { padding: 60px 20px; }
+      .ondula-state         { grid-template-columns: 1fr; direction: ltr; }
+      .ondula-state:nth-child(even) { direction: ltr; }
+      .ondula-state-info    { padding: 40px 20px; }
+      .ondula-tech-grid     { grid-template-columns: 1fr; }
+      .ondula-tech-item     { border-radius: 4px; }
+      .ondula-concert-grid  { grid-template-columns: 1fr; }
+      .ondula-strip-track img,
+      .ondula-strip-track video { width: 260px; height: 180px; }
+      .ondula-strip-label,
+      .ondula-strip-track   { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-left"><a href="../projects.html" class="nav-link active">Proyectos</a></div>
+  <div class="nav-center"><a href="../index.html" class="nav-logo"><span id="nav-typing-text"></span></a></div>
+  <div class="nav-right">
+    <a href="../about.html" class="nav-link">About</a>
+    <button class="dark-toggle" aria-label="Modo oscuro"></button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════
+     HERO
+     ══════════════════════════════════ -->
+<div class="ondula-hero">
+  <!--
+    IMAGEN / VIDEO DE FONDO DEL HERO:
+    Reemplaza este img con tu visual más impactante.
+    También puedes usar <video autoplay muted loop playsinline>
+  -->
+  <img
+    src="../assets/ondula/hero.png"
+    alt="Óndula"
+    class="ondula-hero-media">
+
+  <div class="ondula-hero-content">
+    <div class="ondula-date">17 mayo 2025 — en vivo</div>
+    <h1>Óndula<br><span>—</span></h1>
+    <div class="ondula-hero-meta">
+      <span class="ondula-hero-artist">Visuales en vivo para <strong>Fernanda Quevedo</strong></span>
+      <div class="p-tags">
+        <span class="p-tag" style="border-color:rgba(78,205,196,0.3);color:rgba(78,205,196,0.7);">TouchDesigner</span>
+        <span class="p-tag" style="border-color:rgba(78,205,196,0.3);color:rgba(78,205,196,0.7);">MadMapper</span>
+        <span class="p-tag" style="border-color:rgba(78,205,196,0.3);color:rgba(78,205,196,0.7);">MIDI reactivo</span>
+        <span class="p-tag" style="border-color:rgba(78,205,196,0.3);color:rgba(78,205,196,0.7);">audio reactivo</span>
+        <span class="p-tag" style="border-color:rgba(78,205,196,0.3);color:rgba(78,205,196,0.7);">proyección en vivo</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     CONCEPTO
+     ══════════════════════════════════ -->
+<div style="background:var(--ondula-deep);">
+<div class="ondula-concept">
+
+  <p class="ondula-statement">
+    El mar como <em>estado emocional.</em><br>
+    Un cuerpo en tránsito entre la profundidad y la superficie.
+  </p>
+
+  <div class="ondula-keywords">
+    <span class="ondula-kw">Vaivén</span>
+    <span class="ondula-kw">Umbral</span>
+    <span class="ondula-kw">Abisal</span>
+    <span class="ondula-kw">Mareo</span>
+    <span class="ondula-kw">Iridiscencia</span>
+    <span class="ondula-kw">Borroso</span>
+    <span class="ondula-kw">Sin límites</span>
+    <span class="ondula-kw">Espiral</span>
+    <span class="ondula-kw">Introspectivo</span>
+  </div>
+
+  <div class="ondula-concept-grid">
+    <span class="ondula-concept-label">idea central</span>
+    <div class="ondula-concept-text">
+      <p>Óndula trabaja el mar como estado emocional, no como decoración. La idea central es un cuerpo en tránsito entre la profundidad y la superficie — el vaivén, el mareo, la tensión de no saber si se está subiendo o hundiéndose.</p>
+      <p>El mar no aparece como paisaje. Aparece como territorio emocional denso y en constante movimiento.</p>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════
+     GALERÍA — VISUALES (antes del concierto)
+     strip de imágenes / capturas de las visuales
+     ══════════════════════════════════ -->
+<div class="ondula-strip-section">
+  <span class="ondula-strip-label">visuales</span>
+  <div class="ondula-strip-track" id="stripTrack">
+    <!--
+      Agrega aquí tus capturas o exports de las visuales.
+      Formato recomendado: PNG o JPG, 16:9 o libre.
+      También puedes poner <video autoplay muted loop playsinline>.
+    -->
+    <img src="../assets/ondula/visual-01.png" alt="Visual Profundidad">
+    <img src="../assets/ondula/visual-02.png" alt="Visual Vaivén">
+    <img src="../assets/ondula/visual-03.png" alt="Visual Superficie">
+    <img src="../assets/ondula/visual-04.png" alt="Detalle visual">
+    <img src="../assets/ondula/visual-05.png" alt="Detalle visual">
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     LOS 3 ESTADOS EMOCIONALES
+     ══════════════════════════════════ -->
+<div class="ondula-states">
+  <div class="ondula-states-header">
+    <span class="ondula-concept-label" style="margin-bottom:0;">tres estados</span>
+  </div>
+
+  <!-- ESTADO 1: PROFUNDIDAD -->
+  <div class="ondula-state">
+    <div class="ondula-state-media">
+      <!--
+        Imagen o video del estado "Profundidad".
+        Ej: <video src="../assets/ondula/profundidad.mp4" autoplay muted loop playsinline>
+      -->
+      <img src="../assets/ondula/profundidad.png" alt="Profundidad">
+    </div>
+    <div class="ondula-state-info">
+      <span class="ondula-state-num">estado 01</span>
+      <h2 class="ondula-state-title">Profundidad</h2>
+      <span class="ondula-state-sub">el ahogo — lo abisal — lo más oscuro</span>
+      <p class="ondula-state-desc">Lo más denso del disco. La oscuridad sin borde definido, formas que se disuelven, destellos iridiscentes que vienen de abajo. No hay horizonte ni salida visible.</p>
+    </div>
+  </div>
+
+  <!-- ESTADO 2: VAIVÉN -->
+  <div class="ondula-state">
+    <div class="ondula-state-media">
+      <img src="../assets/ondula/vaivenvisual.png" alt="Vaivén">
+    </div>
+    <div class="ondula-state-info">
+      <span class="ondula-state-num">estado 02</span>
+      <h2 class="ondula-state-title">Vaivén</h2>
+      <span class="ondula-state-sub">el tránsito — la inestabilidad — entre</span>
+      <p class="ondula-state-desc">El movimiento lento entre el fondo y la superficie. Ni arriba ni abajo. Las formas oscilan, espirales que no terminan, corrientes que tiran en sentidos opuestos.</p>
+    </div>
+  </div>
+
+  <!-- ESTADO 3: SUPERFICIE -->
+  <div class="ondula-state">
+    <div class="ondula-state-media">
+      <img src="../assets/ondula/superficie.png" alt="Superficie">
+    </div>
+    <div class="ondula-state-info">
+      <span class="ondula-state-num">estado 03</span>
+      <h2 class="ondula-state-title">Superficie</h2>
+      <span class="ondula-state-sub">la salida — la luz — el aire</span>
+      <p class="ondula-state-desc">La luz llega desde arriba. Las formas se disuelven hacia el blanco. El agua se vuelve transparente. Tensión que no desaparece pero cambia de dirección.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════
+     CÓMO FUNCIONA EN VIVO
+     ══════════════════════════════════ -->
+<div style="background:var(--ondula-deep);border-top:0.5px solid rgba(78,205,196,0.12);">
+<div class="ondula-tech">
+
+  <div style="display:grid;grid-template-columns:1fr 2fr;gap:60px;align-items:start;margin-bottom:64px;">
+    <span class="ondula-concept-label">interacción en vivo</span>
+    <div class="ondula-concept-text">
+      <p>Las visuales son reactivas a lo que ocurre en el escenario. Cada concierto es distinto — responden a la performance, no la repiten.</p>
+    </div>
+  </div>
+
+  <div class="ondula-tech-grid">
+    <div class="ondula-tech-item">
+      <div class="ondula-tech-icon">🎤</div>
+      <span class="ondula-tech-label">sensor 01</span>
+      <div class="ondula-tech-title">Voz</div>
+      <p class="ondula-tech-desc">Sensor de audio conectado al micrófono de Fernanda. La voz activa y modifica las visuales en tiempo real — intensidad, frecuencia, silencio.</p>
+    </div>
+    <div class="ondula-tech-item">
+      <div class="ondula-tech-icon">🎹</div>
+      <span class="ondula-tech-label">sensor 02</span>
+      <div class="ondula-tech-title">Piano MIDI</div>
+      <p class="ondula-tech-desc">Teclas específicas programadas para disparar eventos visuales concretos. Cambios de estado, explosiones de luz, transiciones entre los tres mundos.</p>
+    </div>
+    <div class="ondula-tech-item">
+      <div class="ondula-tech-icon">📽</div>
+      <span class="ondula-tech-label">montaje</span>
+      <div class="ondula-tech-title">Proyección</div>
+      <p class="ondula-tech-desc">Proyector mínimo 4.000 lúmenes. Señal enviada desde TouchDesigner a <strong style="color:rgba(240,248,255,0.7);">MadMapper</strong> para el mapping sobre la tela tul del fondo del escenario.</p>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════
+     VIDEO DEMO DE LAS VISUALES
+     Agrega aquí un clip de preview
+     ══════════════════════════════════ -->
+<div style="background:var(--ondula-deep);border-top:0.5px solid rgba(78,205,196,0.12);padding:80px 48px;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <span class="ondula-concept-label" style="margin-bottom:24px;display:block;">demo visual</span>
+    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:6px;background:#050d1a;">
+      <!--
+        OPCIÓN A — video local:
+        <video src="../assets/ondula/demo.mp4" controls playsinline preload="metadata"
+               style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;">
+        </video>
+
+        OPCIÓN B — YouTube:
+        <iframe src="https://www.youtube.com/embed/TU_ID"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
+          allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>
+      -->
+      <video
+        src="../assets/ondula/demo.mp4"
+        controls playsinline preload="metadata"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:6px;">
+      </video>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PLANO TÉCNICO
+     ══════════════════════════════════ -->
+<div style="background:var(--ondula-deep);border-top:0.5px solid rgba(78,205,196,0.12);">
+<div class="ondula-concept" style="padding-bottom:80px;">
+  <span class="ondula-concept-label" style="display:block;margin-bottom:40px;">montaje técnico</span>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;">
+    <!-- Plano -->
+    <div>
+      <img
+        src="../assets/ondula/plano.png"
+        alt="Plano técnico de montaje — Óndula"
+        style="width:100%;display:block;border-radius:4px;filter:invert(1) brightness(0.75);opacity:0.85;">
+      <!-- filter:invert hace el plano blanco sobre fondo oscuro -->
+    </div>
+    <!-- Detalles técnicos -->
+    <div style="display:flex;flex-direction:column;gap:0;">
+      <div style="padding:14px 0;border-bottom:0.5px solid rgba(78,205,196,0.12);">
+        <span style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#4ecdc4;opacity:0.6;font-weight:600;display:block;margin-bottom:4px;">proyección</span>
+        <span style="font-size:13px;color:rgba(240,248,255,0.7);">Proyector mínimo 4.000 lúmenes — cielo o suelo del escenario, apuntando al fondo</span>
+      </div>
+      <div style="padding:14px 0;border-bottom:0.5px solid rgba(78,205,196,0.12);">
+        <span style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#4ecdc4;opacity:0.6;font-weight:600;display:block;margin-bottom:4px;">superficie</span>
+        <span style="font-size:13px;color:rgba(240,248,255,0.7);">Tela tul cubriendo la pared del fondo — difumina la imagen y añade textura física a la proyección</span>
+      </div>
+      <div style="padding:14px 0;border-bottom:0.5px solid rgba(78,205,196,0.12);">
+        <span style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#4ecdc4;opacity:0.6;font-weight:600;display:block;margin-bottom:4px;">software</span>
+        <span style="font-size:13px;color:rgba(240,248,255,0.7);">TouchDesigner → MadMapper para mapping y proyección final</span>
+      </div>
+      <div style="padding:14px 0;border-bottom:0.5px solid rgba(78,205,196,0.12);">
+        <span style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#4ecdc4;opacity:0.6;font-weight:600;display:block;margin-bottom:4px;">MIDI</span>
+        <span style="font-size:13px;color:rgba(240,248,255,0.7);">Extensor de cable MIDI — piano del escenario al computador ubicado detrás de escena</span>
+      </div>
+      <div style="padding:14px 0;">
+        <span style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#4ecdc4;opacity:0.6;font-weight:600;display:block;margin-bottom:4px;">audio</span>
+        <span style="font-size:13px;color:rgba(240,248,255,0.7);">Cableado de micrófono del escenario al computador — input directo a TouchDesigner</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════
+     CONCIERTO — fecha, espacio, imágenes
+     (rellenar después del 17 de mayo)
+     ══════════════════════════════════ -->
+<div style="background:var(--ondula-deep);border-top:0.5px solid rgba(78,205,196,0.12);">
+<div class="ondula-concert">
+
+  <span class="ondula-concept-label" style="margin-bottom:0;">el concierto</span>
+
+  <div class="ondula-concert-grid">
+
+    <!-- Imagen grande del concierto — agregar después del 17 de mayo -->
+    <div>
+      <!--
+        Reemplaza con foto del concierto:
+        <img src="../assets/ondula/concierto-01.jpg" alt="Concierto" class="ondula-img-full" style="height:600px;">
+      -->
+      <div style="height:500px;background:var(--ondula-mid);border-radius:4px;display:flex;align-items:center;justify-content:center;">
+        <span style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(78,205,196,0.2);">
+          fotos del concierto — 17.05.25
+        </span>
+      </div>
+      <!-- Dos fotos menores debajo -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">
+        <div style="height:200px;background:var(--ondula-mid);border-radius:4px;display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(78,205,196,0.15);">foto</span>
+        </div>
+        <div style="height:200px;background:var(--ondula-mid);border-radius:4px;display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(78,205,196,0.15);">foto</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info del concierto -->
+    <div class="ondula-concert-info">
+      <div class="ondula-info-block">
+        <span class="ondula-info-field">artista</span>
+        <div class="ondula-info-value">Fernanda Quevedo</div>
+      </div>
+      <div class="ondula-divider"></div>
+      <div class="ondula-info-block">
+        <span class="ondula-info-field">proyecto</span>
+        <div class="ondula-info-value">Óndula</div>
+      </div>
+      <div class="ondula-divider"></div>
+      <div class="ondula-info-block">
+        <span class="ondula-info-field">fecha</span>
+        <div class="ondula-info-value">17 mayo 2025</div>
+      </div>
+      <div class="ondula-divider"></div>
+      <div class="ondula-info-block">
+        <span class="ondula-info-field">rol</span>
+        <div class="ondula-info-value">Diseño y programación de visuales en vivo</div>
+      </div>
+      <div class="ondula-divider"></div>
+      <div class="ondula-info-block">
+        <span class="ondula-info-field">herramientas</span>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
+          <span class="p-tag" style="border-color:rgba(78,205,196,0.25);color:rgba(78,205,196,0.65);">TouchDesigner</span>
+          <span class="p-tag" style="border-color:rgba(78,205,196,0.25);color:rgba(78,205,196,0.65);">MIDI</span>
+          <span class="p-tag" style="border-color:rgba(78,205,196,0.25);color:rgba(78,205,196,0.65);">OSC</span>
+          <span class="p-tag" style="border-color:rgba(78,205,196,0.25);color:rgba(78,205,196,0.65);">Audio input</span>
+          <span class="p-tag" style="border-color:rgba(78,205,196,0.25);color:rgba(78,205,196,0.65);">MadMapper</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════
+     GALERÍA POST-CONCIERTO (strip)
+     Agregar fotos del evento el 17 de mayo
+     ══════════════════════════════════ -->
+<div class="ondula-strip-section" id="concert-strip">
+  <span class="ondula-strip-label">registro del concierto</span>
+  <div class="ondula-strip-track" id="concertTrack">
+    <!--
+      Agrega aquí las fotos del concierto.
+      Ejemplo:
+      <img src="../assets/ondula/concierto-01.jpg" alt="">
+      <img src="../assets/ondula/concierto-02.jpg" alt="">
+    -->
+    <div style="width:380px;height:260px;background:var(--ondula-mid);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+      <span style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(78,205,196,0.2);">17.05.25</span>
+    </div>
+    <div style="width:380px;height:260px;background:var(--ondula-mid);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+      <span style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(78,205,196,0.2);">17.05.25</span>
+    </div>
+    <div style="width:380px;height:260px;background:var(--ondula-mid);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+      <span style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(78,205,196,0.2);">17.05.25</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<div class="ondula-footer-override">
+  <div class="p-footer" style="background:var(--ondula-deep);border-top-color:rgba(78,205,196,0.12);">
+    <a href="touchdesigner.html" class="p-footer-prev" style="color:#f0f8ff;">
+      <span class="p-footer-label" style="opacity:0.38;color:rgba(240,248,255,0.6);">← anterior</span>
+      <span class="p-footer-name" style="color:#f0f8ff;">TouchDesigner</span>
+      <span class="p-footer-arrow" style="color:#f0f8ff;">←</span>
+    </a>
+    <div class="p-footer-center">
+      <a href="../projects.html" style="color:rgba(240,248,255,0.3);">proyectos</a>
+    </div>
+    <a href="albura.html" class="p-footer-next" style="color:#f0f8ff;">
+      <span class="p-footer-label" style="opacity:0.38;color:rgba(240,248,255,0.6);">siguiente →</span>
+      <span class="p-footer-name" style="color:#f0f8ff;">Albura</span>
+      <span class="p-footer-arrow" style="color:#f0f8ff;">→</span>
+    </a>
+  </div>
+</div>
+
+<script src="../js/cursor.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/nav-typing.js"></script>
+<script src="../js/transitions.js"></script>
+<script>
+// ── STRIPS ──
+(function(){
+  [
+    { wrapSel: '.ondula-strip-section', trackId: 'stripTrack' },
+    { wrapSel: '#concert-strip',        trackId: 'concertTrack' },
+  ].forEach(({ wrapSel, trackId }) => {
+    const wrap  = document.querySelector(wrapSel);
+    const track = document.getElementById(trackId);
+    if (!wrap || !track) return;
+    let tX=0, cX=0, raf=null;
+    function max() { return Math.max(0, track.scrollWidth - wrap.clientWidth); }
+    wrap.addEventListener('mousemove', e => {
+      const r = wrap.getBoundingClientRect();
+      tX = (e.clientX - r.left) / r.width * max();
+      if (!raf) raf = requestAnimationFrame(lerp);
+    });
+    wrap.addEventListener('mouseleave', () => { tX = 0; if (!raf) raf = requestAnimationFrame(lerp); });
+    function lerp() { cX += (tX - cX) * 0.07; track.style.transform = `translateX(-${cX}px)`; raf = Math.abs(tX - cX) > 0.3 ? requestAnimationFrame(lerp) : null; }
+    let tx0=0, cx0=0;
+    wrap.addEventListener('touchstart', e => { tx0 = e.touches[0].clientX; cx0 = cX; }, { passive: true });
+    wrap.addEventListener('touchmove',  e => { tX = Math.max(0, Math.min(max(), cx0 + (tx0 - e.touches[0].clientX))); if (!raf) raf = requestAnimationFrame(lerp); }, { passive: true });
+  });
+})();
+</script>
+
+</body>
+</html>
