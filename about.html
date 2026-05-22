@@ -117,13 +117,10 @@
     </div>
   </div>
 
-  <!-- ══════════════════════════════
-       STAGE C — Bio: image + text + tools
-       Imagen fija: siempre vania2.png
-       ══════════════════════════════ -->
+
   <div class="about-bio">
     <div class="about-image-col">
-      <!-- Imagen única y estática -->
+      <!-- Imagen  -->
       <img src="assets/about/vania2.png" alt="Vania" id="about-img">
     </div>
     <div class="about-text">
@@ -138,11 +135,11 @@
   <div class="about-tools">
     <p class="section-label" style="margin-bottom:20px;">Herramientas que uso:</p>
     <div class="tools-tags">
-      <span class="tool-tag featured">p5.js</span>
+      <span class="tool-tag">p5.js</span>
       <span class="tool-tag">Figma</span>
-      <span class="tool-tag featured">Arduino</span>
+      <span class="tool-tag">Arduino</span>
       <span class="tool-tag">Python</span>
-      <span class="tool-tag featured">TouchDesigner</span>
+      <span class="tool-tag">TouchDesigner</span>
       <span class="tool-tag">Rhino</span>
       <span class="tool-tag">VS Code</span>
       <span class="tool-tag">AutoCAD</span>
@@ -177,16 +174,20 @@
       <div class="info-divider"></div>
       <div>
         <h3>Experiencia</h3>
+                        <div class="info-item">
+          Visuales reactivas a Audio y MIDI<br>Concierto de SoloIsabel, Santiago de Chile.
+          <span>2026</span>
+        </div>
         <div class="info-item">
           Interactivo con Local Variable Studio para obra "Splitting/Absense" by Sokio<br>Centro GAM, Santiago de Chile.
           <span>2026</span>
         </div>
         <div class="info-item">
-          Expositora Seleccionada<br>6to Festival Primavera Hacker
+          Expositora Seleccionada<br>6to Festival Primavera Hacker, Santiago de Chile.
           <span>2025</span>
         </div>
         <div class="info-item">
-          Diseño gráfico para vasos corporativos<br>Lemontech
+          Diseño gráfico para vasos corporativos<br>Lemontech, Santiago de Chile.
           <span>2023</span>
         </div>
       </div>
@@ -203,7 +204,7 @@
       <div class="contact-links">
         <a href="mailto:koranode@gmail.com" target="_blank">Email > </a>
         <a href="https://github.com/paredesvania" target="_blank"> GitHub ></a>
-        <a href="https://www.instagram.com/koraalab?igsh=NTV4NmZkamJkY2xu" target="_blank">Instagram > </a>
+        <a href="https://www.instagram.com/koranode?igsh=NTV4NmZkamJkY2xu" target="_blank">Instagram > </a>
       </div>
     </div>
   </div>
@@ -215,7 +216,7 @@
   <script src="js/about.js"></script>
 
   <script>
-  // 1. REVELACIÓN DE PALABRAS (SE MANTIENE)
+  // 1. REVELACIÓN DE PALABRAS
   (function () {
     const container  = document.getElementById("intro-text");
     const scrollZone = document.getElementById("intro-scroll");
@@ -259,7 +260,7 @@
     onScroll();
   })();
 
-  // 2. CONTACTO (SE MANTIENE)
+  // 2. CONTACTO 
   (function () {
     const container = document.getElementById("contact-text");
     if (!container) return;
@@ -272,7 +273,7 @@
     });
   })();
 
-  // 3. REVELACIÓN DE ITEMS INFO (SE MANTIENE)
+  // 3. REVELACIÓN DE ITEMS INFO
   document.addEventListener("DOMContentLoaded", () => {
     const items = document.querySelectorAll(".info-item");
     if (!items.length) return;
