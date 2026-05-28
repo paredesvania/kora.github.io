@@ -43,7 +43,36 @@
       nav.classList.add("nav-hidden");
     }
 
-  
+    // ── MENÚ OVERLAY ──
+    var navRight = document.querySelector(".nav-right");
+    if (!navRight) return;
+
+    var inSub = window.location.pathname.includes("/projects/");
+    var base  = inSub ? "../" : "";
+
+
+    // Overlay
+    var overlay = document.createElement("div");
+    overlay.className = "kora-menu";
+    overlay.innerHTML =
+      '<nav class="kora-menu-links">' +
+        '<a href="' + base + 'index.html" class="kora-menu-item">' +
+          '<span class="kora-menu-num">00</span>' +
+          '<span class="kora-menu-word">Inicio</span>' +
+          '<span class="kora-menu-arrow">→</span>' +
+        '</a>' +
+        '<a href="' + base + 'projects.html" class="kora-menu-item">' +
+          '<span class="kora-menu-num">01</span>' +
+          '<span class="kora-menu-word">Proyectos</span>' +
+          '<span class="kora-menu-arrow">→</span>' +
+        '</a>' +
+        '<a href="' + base + 'about.html" class="kora-menu-item">' +
+          '<span class="kora-menu-num">02</span>' +
+          '<span class="kora-menu-word">About</span>' +
+          '<span class="kora-menu-arrow">→</span>' +
+        '</a>' +
+      '</nav>';
+    document.body.appendChild(overlay);
 
     var isOpen = false;
 

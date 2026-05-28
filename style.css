@@ -73,8 +73,8 @@ body {
   font-family: var(--font-body);
   background: var(--bg);
   color: var(--fg);
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.65;
   font-weight: 400;
   transition: color 0.4s ease;
 }
@@ -137,7 +137,7 @@ nav.nav-hidden {
 
 /* Links de nav */
 .nav-link {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -436,52 +436,52 @@ body.dark .about-image .img-light { opacity: 0; }
 body.dark .about-image .img-dark  { opacity: 1; }
 
 .about-text   { max-width: 520px; padding-top: 8px; }
-.about-text p { margin-bottom: 18px; line-height: 1.9; opacity: 0.65; font-size: 13.5px; color: var(--fg); font-weight: 400; transition: color 0.4s; }
+.about-text p { margin-bottom: 20px; line-height: 1.9; opacity: 0.72; font-size: 16px; color: var(--fg); font-weight: 400; transition: color 0.4s; }
 
 .quote {
-  margin-top: 28px; padding: 18px 22px;
+  margin-top: 28px; padding: 20px 24px;
   border-left: 2px solid var(--pink);
-  font-size: 12px; line-height: 1.9;
+  font-size: 15px; line-height: 1.9;
   background: rgba(255, 42, 163, 0.04);
   border-radius: 0 8px 8px 0;
   color: var(--fg); font-style: italic; font-weight: 400;
   transition: color 0.4s, background 0.4s;
 }
 body.dark .quote { background: rgba(255,42,163,0.07); }
-.quote .author { display: block; margin-top: 8px; font-size: 9px; opacity: 0.45; letter-spacing: 1.5px; font-style: normal; text-transform: uppercase; }
+.quote .author { display: block; margin-top: 10px; font-size: 11px; opacity: 0.45; letter-spacing: 1.5px; font-style: normal; text-transform: uppercase; }
 
 .tools-section  { margin-bottom: 80px; }
-.section-label  { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; opacity: 0.32; margin-bottom: 20px; display: block; color: var(--fg); transition: color 0.4s; }
+.section-label  { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; opacity: 0.32; margin-bottom: 20px; display: block; color: var(--fg); transition: color 0.4s; }
 .tools-tags     { display: flex; flex-wrap: wrap; gap: 8px; }
-.tool-tag       { border: 0.5px solid var(--border-subtle); padding: 7px 16px; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 40px; color: var(--fg); font-weight: 400; transition: border-color 0.2s, color 0.2s; }
+.tool-tag       { border: 0.5px solid var(--border-subtle); padding: 8px 18px; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 40px; color: var(--fg); font-weight: 400; transition: border-color 0.2s, color 0.2s; }
 .tool-tag.featured { background: var(--pink); border-color: var(--pink); color: white; font-weight: 600; }
 
 .section-divider { width: 100%; height: 1px; background: var(--border-subtle); margin: 80px 0; position: relative; transition: background 0.4s; }
 .section-divider::before { content: ''; position: absolute; left: 0; top: 0; height: 1px; width: 60px; background: var(--pink); }
 
 .about-info-grid { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 40px; margin-bottom: 80px; }
-.about-info-grid h3 { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.32; margin-bottom: 20px; font-weight: 500; color: var(--fg); transition: color 0.4s; }
+.about-info-grid h3 { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.32; margin-bottom: 20px; font-weight: 500; color: var(--fg); transition: color 0.4s; }
 .info-divider { width: 1px; background: var(--border-subtle); transition: background 0.4s; }
 
 .info-item {
-  margin-bottom: 20px; font-size: 12.5px; font-weight: 400;
+  margin-bottom: 20px; font-size: 15px; font-weight: 400;
   color: var(--fg); line-height: 1.65;
   opacity: 0; transform: translateY(14px);
   transition: opacity 0.5s ease, transform 0.5s ease, color 0.4s;
 }
 .info-item.visible {
-  opacity: 0.72; transform: translateY(0);
+  opacity: 0.8; transform: translateY(0);
   border-left: 2px solid var(--pink); padding-left: 12px;
   transition: opacity 0.5s ease, transform 0.5s ease, color 0.4s,
               border-left-width 0.3s ease 0.25s, padding-left 0.3s ease 0.25s;
 }
-.info-item span { display: block; font-size: 9px; opacity: 0.4; margin-top: 4px; letter-spacing: 1px; }
+.info-item span { display: block; font-size: 11px; opacity: 0.4; margin-top: 4px; letter-spacing: 1px; }
 
 .contact-section { padding-top: 40px; border-top: 1px solid var(--border-subtle); }
 .contact-title { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; opacity: 0.38; margin-bottom: 12px; color: var(--fg); transition: color 0.4s; }
 .contact-text  { font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; font-family: var(--font-display); letter-spacing: -0.02em; max-width: 600px; margin-bottom: 32px; line-height: 1.2; color: var(--fg); transition: color 0.4s; }
 .contact-links { display: flex; gap: 10px; flex-wrap: wrap; }
-.contact-links a { font-size: 10px; color: var(--fg); letter-spacing: 1.5px; font-weight: 500; padding: 10px 20px; border: 0.5px solid var(--border-subtle); border-radius: 40px; opacity: 0.55; transition: opacity 0.2s, border-color 0.2s, color 0.2s; }
+.contact-links a { font-size: 12px; color: var(--fg); letter-spacing: 1.5px; font-weight: 500; padding: 12px 24px; border: 0.5px solid var(--border-subtle); border-radius: 40px; opacity: 0.55; transition: opacity 0.2s, border-color 0.2s, color 0.2s; }
 .contact-links a:hover { opacity: 1; border-color: var(--pink); color: var(--pink); }
 
 
@@ -577,12 +577,12 @@ body.dark .quote { background: rgba(255,42,163,0.07); }
 .p-wrap  { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
 .p-bleed { width: 100%; max-width: none; }
 
-.p-eyebrow   { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; color: var(--pink); opacity: 0.75; display: block; margin-bottom: 10px; }
+.p-eyebrow   { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; color: var(--pink); opacity: 0.75; display: block; margin-bottom: 14px; }
 .p-h1        { font-weight: 700; letter-spacing: -0.05em; line-height: 0.88; color: var(--fg); font-family: var(--font-display); transition: color 0.4s; }
 .p-statement { font-size: clamp(22px,3.5vw,40px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.15; color: var(--fg); font-family: var(--font-display); transition: color 0.4s; }
-.p-body      { font-size: 14px; line-height: 1.85; opacity: 0.6; color: var(--fg); font-weight: 400; transition: color 0.4s; }
-.p-label     { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; opacity: 0.28; color: var(--fg); }
-.p-tag       { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; padding: 5px 14px; border: 0.5px solid var(--border-subtle); border-radius: 40px; color: var(--fg); opacity: 0.55; display: inline-block; }
+.p-body      { font-size: 17px; line-height: 1.9; opacity: 0.75; color: var(--fg); font-weight: 400; transition: color 0.4s; }
+.p-label     { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; opacity: 0.28; color: var(--fg); }
+.p-tag       { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500; padding: 6px 16px; border: 0.5px solid var(--border-subtle); border-radius: 40px; color: var(--fg); opacity: 0.55; display: inline-block; }
 .p-tags      { display: flex; flex-wrap: wrap; gap: 8px; }
 
 .p-rule { width: 100%; height: 1px; background: var(--border-subtle); position: relative; }
@@ -591,7 +591,7 @@ body.dark .quote { background: rgba(255,42,163,0.07); }
 .p-img { display: block; width: 100%; object-fit: cover; }
 
 .p-strip-wrap  { overflow: hidden; width: 100%; padding: 48px 0; }
-.p-strip-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; opacity: 0.25; color: var(--fg); padding: 0 48px; margin-bottom: 16px; display: block; }
+.p-strip-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; opacity: 0.25; color: var(--fg); padding: 0 48px; margin-bottom: 16px; display: block; }
 .p-strip-track { display: flex; gap: 10px; padding: 0 48px; will-change: transform; }
 .p-strip-img   { flex-shrink: 0; width: 260px; height: 300px; object-fit: cover; border-radius: 6px; display: block; transition: transform 0.3s ease; }
 .p-strip-img:hover { transform: scale(1.02); }
@@ -617,7 +617,7 @@ body.dark .quote { background: rgba(255,42,163,0.07); }
 .p-footer-prev:hover,
 .p-footer-next:hover { background: var(--pink); color: #fff; border-color: var(--pink); }
 
-.p-footer-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; opacity: 0.38; transition: opacity 0.2s; }
+.p-footer-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; opacity: 0.38; transition: opacity 0.2s; }
 .p-footer-prev:hover .p-footer-label,
 .p-footer-next:hover .p-footer-label { opacity: 0.75; }
 
@@ -628,7 +628,7 @@ body.dark .quote { background: rgba(255,42,163,0.07); }
 .p-footer-next:hover .p-footer-arrow { transform: translateX(4px);  opacity: 1; }
 
 .p-footer-center { display: flex; align-items: center; justify-content: center; padding: 0 32px; }
-.p-footer-center a { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; color: var(--fg); opacity: 0.3; transition: opacity 0.2s, color 0.2s; writing-mode: vertical-rl; transform: rotate(180deg); }
+.p-footer-center a { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; color: var(--fg); opacity: 0.3; transition: opacity 0.2s, color 0.2s; writing-mode: vertical-rl; transform: rotate(180deg); }
 .p-footer-center a:hover { opacity: 1; color: var(--pink); }
 
 .p-footer-pink { color: var(--pink) !important; opacity: 0.85 !important; }
