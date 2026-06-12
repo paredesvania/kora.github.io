@@ -13,33 +13,46 @@
       if(t==="dark"){document.documentElement.style.background="#0a0a0a";document.documentElement.classList.add("dark-pre");}
     })();
   </script>
+  <style>
+    .group-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 0; border-bottom: 1px solid var(--border-subtle);
+      text-decoration: none; color: var(--fg);
+      transition: color 0.2s;
+    }
+    .group-row:first-child { border-top: 1px solid var(--border-subtle); }
+    .group-row:hover { color: var(--pink); }
+    .group-row:hover .group-handle { color: var(--pink); opacity: 1; }
+    .group-name   { font-size: 16px; font-weight: 500; letter-spacing: -0.01em; }
+    .group-handle { font-size: 11px; letter-spacing: 1.5px; opacity: 0.4; transition: color 0.2s, opacity 0.2s; }
+  </style>
 </head>
 <body>
+
 <nav>
   <div class="nav-left"><a href="../projects.html" class="nav-link active">Proyectos</a></div>
   <div class="nav-center"><a href="../index.html" class="nav-logo"><span id="nav-typing-text"></span></a></div>
   <div class="nav-right"><a href="../about.html" class="nav-link">About</a><button class="dark-toggle" aria-label="Modo oscuro"></button></div>
 </nav>
 
-<!-- ── HERO: título grande a la izquierda, año a la derecha ── -->
+<!-- ── HERO ── -->
 <section class="p-wrap" style="padding-top:120px;padding-bottom:60px;display:flex;justify-content:space-between;align-items:flex-end;">
   <div>
     <span class="p-eyebrow">Interacción Digital · 2025</span>
     <h1 class="p-h1" style="font-size:clamp(68px,13vw,170px);">AND-y</h1>
   </div>
   <div style="padding-bottom:16px;text-align:right;">
-    <a href="https://github.com/paredesvania/dis8645-2025-02-procesos/tree/main/00-proyecto-02/grupo-01" target="_blank" class="p-gh-link">
-      GitHub →
-    </a>
+    <a href="https://github.com/paredesvania/dis8645-2025-02-procesos/tree/main/00-proyecto-02/grupo-01"
+      target="_blank" class="p-gh-link">GitHub ↗</a>
   </div>
 </section>
 
 <div class="p-rule p-bleed"></div>
 
-<!-- ── COVER full-bleed ── -->
+<!-- ── COVER ── -->
 <img src="../assets/and-y/andy1.jpg" alt="AND-y" class="p-img p-img-hover p-bleed" style="width:100%;height:auto;display:block;">
 
-<!-- ── CONCEPTO: texto que empieza en el margen pero la frase es grande ── -->
+<!-- ── CONCEPTO ── -->
 <section class="p-wrap" style="padding-top:80px;padding-bottom:60px;">
   <span class="p-label" style="display:block;margin-bottom:24px;">concepto</span>
   <p class="p-statement" style="max-width:740px;">AND-Y detecta qué tan cerca estás y responde: te saluda, tiembla de nervios, o levanta el brazo para decirte datos curiosos.</p>
@@ -51,39 +64,38 @@
   </div>
 </section>
 
-<!-- ── DESPIECE + COMPONENTES: imagen grande izquierda, lista derecha ── -->
+<!-- ── DESPIECE + COMPONENTES ── -->
 <section class="p-wrap" style="padding-bottom:80px;">
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;align-items:stretch;">
-    <!-- imagen despiece -->
-    <img src="../assets/and-y/vistaExplo.png" alt="Despiece AND-y" class="p-img p-img-hover" style="height:700px;object-fit:cover;border-radius:4px;">
-    <!-- lista de componentes -->
-    <div style="border:1px solid var(--border-subtle);padding:48px 40px;display:flex;flex-direction:column;justify-content:center;gap:0;border-radius:4px;">
+    <img src="../assets/and-y/vistaExplo.png" alt="Despiece AND-y"
+      class="p-img p-img-hover" style="height:700px;object-fit:cover;border-radius:4px;">
+    <div style="border:1px solid var(--border-subtle);padding:48px 40px;display:flex;flex-direction:column;justify-content:center;border-radius:4px;">
       <span class="p-label" style="margin-bottom:28px;">componentes</span>
       <div style="display:flex;flex-direction:column;">
         <div style="padding:14px 0;border-bottom:1px solid var(--border-subtle);font-size:12px;letter-spacing:0.5px;color:var(--fg);opacity:0.65;display:flex;justify-content:space-between;">
-          <span>Arduino R4 Minima</span><span style="opacity:0.35;font-size:10px;">microcontrolador</span>
+          <span>Arduino R4 Minima</span><span style="opacity:0.4;font-size:10px;text-transform:uppercase;letter-spacing:1px;">microcontrolador</span>
         </div>
         <div style="padding:14px 0;border-bottom:1px solid var(--border-subtle);font-size:12px;letter-spacing:0.5px;color:var(--fg);opacity:0.65;display:flex;justify-content:space-between;">
-          <span>HC-SR04</span><span style="opacity:0.35;font-size:10px;">sensor ultrasónico</span>
+          <span>HC-SR04</span><span style="opacity:0.4;font-size:10px;text-transform:uppercase;letter-spacing:1px;">sensor ultrasónico</span>
         </div>
         <div style="padding:14px 0;border-bottom:1px solid var(--border-subtle);font-size:12px;letter-spacing:0.5px;color:var(--fg);opacity:0.65;display:flex;justify-content:space-between;">
-          <span>Servomotor SG90</span><span style="opacity:0.35;font-size:10px;">movimiento</span>
+          <span>Servomotor SG90</span><span style="opacity:0.4;font-size:10px;text-transform:uppercase;letter-spacing:1px;">movimiento</span>
         </div>
         <div style="padding:14px 0;border-bottom:1px solid var(--border-subtle);font-size:12px;letter-spacing:0.5px;color:var(--fg);opacity:0.65;display:flex;justify-content:space-between;">
-          <span>Motor vibrador</span><span style="opacity:0.35;font-size:10px;">haptic</span>
+          <span>Motor vibrador</span><span style="opacity:0.4;font-size:10px;text-transform:uppercase;letter-spacing:1px;">haptic</span>
         </div>
         <div style="padding:14px 0;border-bottom:1px solid var(--border-subtle);font-size:12px;letter-spacing:0.5px;color:var(--fg);opacity:0.65;display:flex;justify-content:space-between;">
-          <span>DFPlayer Mini + altavoz</span><span style="opacity:0.35;font-size:10px;">audio</span>
+          <span>DFPlayer Mini + altavoz</span><span style="opacity:0.4;font-size:10px;text-transform:uppercase;letter-spacing:1px;">audio</span>
         </div>
         <div style="padding:14px 0;font-size:12px;letter-spacing:0.5px;color:var(--fg);opacity:0.65;display:flex;justify-content:space-between;">
-          <span>C++ · Arduino IDE</span><span style="opacity:0.35;font-size:10px;">software</span>
+          <span>C++ · Arduino IDE</span><span style="opacity:0.4;font-size:10px;text-transform:uppercase;letter-spacing:1px;">software</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── STRIP DE PROCESO ── -->
+<!-- ── STRIP DE IMÁGENES ── -->
 <div class="p-strip-wrap" style="border-top:1px solid var(--border-subtle);">
   <span class="p-strip-label">Imágenes</span>
   <div class="p-strip-track" id="stripTrack">
@@ -95,32 +107,50 @@
   </div>
 </div>
 
-<!-- ── RECONOCIMIENTO + dos imágenes ── -->
+<!-- ── RECONOCIMIENTO ── -->
 <section class="p-wrap" style="padding-bottom:80px;">
-  <!-- Badge festival -->
   <div style="border:1px solid var(--border-subtle);padding:32px 40px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;border-radius:4px;">
     <div>
       <span class="p-label" style="margin-bottom:6px;display:block;">reconocimiento</span>
-      <p style="font-size:16px;font-weight:600;letter-spacing:-0.01em;color:var(--fg);">Seleccionado —Expuesto en Festival Primavera Hacker 2025</p>
+      <p style="font-size:16px;font-weight:600;letter-spacing:-0.01em;color:var(--fg);">Seleccionado — Expuesto en Festival Primavera Hacker 2025</p>
     </div>
     <span style="font-size:32px;opacity:0.15;">★</span>
   </div>
-
-  <!-- Dos imágenes -->
   <div style="display:grid;grid-template-columns:3fr 2fr;gap:10px;margin-top:10px;">
     <img src="../assets/and-y/expo1.jpeg" alt="" class="p-img p-img-hover" style="height:400px;object-fit:cover;border-radius:4px;">
     <img src="../assets/and-y/expositoras.jpeg" alt="" class="p-img p-img-hover" style="height:400px;object-fit:cover;border-radius:4px;">
   </div>
 </section>
 
-</div><!-- /wrapper -->
- 
-<!-- FOOTER: fuera de todo, último elemento antes de <script src="../js/cursor.js"></script>
-<script src="../js/nav.js"></script>
-<script src="../js/nav-typing.js"></script>
-<script src="../js/transitions.js"></script>
-</body> -->
-<!-- FOOTER -->
+<!-- ── CRÉDITOS DEL GRUPO ── -->
+<section class="p-wrap" style="padding-bottom:100px;">
+  <div style="border-top:1px solid var(--border-subtle);padding-top:60px;">
+    <span class="p-label" style="display:block;margin-bottom:10px;">trabajo en grupo</span>
+    <p style="font-size:17px;line-height:1.75;opacity:0.72;color:var(--fg);max-width:520px;margin-bottom:40px;">
+      Este proyecto fue desarrollado en colaboración con:
+    </p>
+    <div style="max-width:560px;">
+      <a class="group-row" href="https://github.com/yamna-bit" target="_blank">
+        <span class="group-name">Yamna Carrión</span>
+        <span class="group-handle">yamna-bit ↗</span>
+      </a>
+      <a class="group-row" href="https://github.com/sofiacartes" target="_blank">
+        <span class="group-name">Sofía Cartes</span>
+        <span class="group-handle">sofiacartes ↗</span>
+      </a>
+      <a class="group-row" href="https://github.com/mmillar95" target="_blank">
+        <span class="group-name">Millaray Millar</span>
+        <span class="group-handle">mmillar95 ↗</span>
+      </a>
+      <a class="group-row" href="https://github.com/vxlentiinaa" target="_blank">
+        <span class="group-name">Valentina Ruz</span>
+        <span class="group-handle">vxlentinaa ↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Navegación proyectos -->
 <div class="p-footer">
   <a href="albura.html" class="p-footer-prev">
     <span class="p-footer-label">← anterior</span>
@@ -137,18 +167,39 @@
   </a>
 </div>
 
+<!-- Footer global -->
+<footer class="kora-footer">
+  <div class="kora-footer-inner">
+    <span>Vania Paredes — Santiago de Chile</span>
+    <span class="kora-footer-logo">KORA</span>
+    <span>© 2026 Todos los derechos reservados</span>
+  </div>
+</footer>
+
 <script>
 (function(){
-  const wrap=document.querySelector('.p-strip-wrap'),track=document.getElementById('stripTrack');
-  if(!wrap||!track)return;
-  let tX=0,cX=0,raf=null;
-  function max(){return Math.max(0,track.scrollWidth-wrap.clientWidth);}
-  wrap.addEventListener('mousemove',e=>{const r=wrap.getBoundingClientRect();tX=(e.clientX-r.left)/r.width*max();if(!raf)raf=requestAnimationFrame(lerp);});
-  wrap.addEventListener('mouseleave',()=>{tX=0;if(!raf)raf=requestAnimationFrame(lerp);});
-  function lerp(){cX+=(tX-cX)*0.07;track.style.transform=`translateX(-${cX}px)`;raf=Math.abs(tX-cX)>0.3?requestAnimationFrame(lerp):null;}
-  let tx0=0,cx0=0;
-  wrap.addEventListener('touchstart',e=>{tx0=e.touches[0].clientX;cx0=cX;},{passive:true});
-  wrap.addEventListener('touchmove',e=>{tX=Math.max(0,Math.min(max(),cx0+(tx0-e.touches[0].clientX)));if(!raf)raf=requestAnimationFrame(lerp);},{passive:true});
+  const wrap = document.querySelector('.p-strip-wrap');
+  const track = document.getElementById('stripTrack');
+  if (!wrap || !track) return;
+  let tX=0, cX=0, raf=null;
+  function max(){ return Math.max(0, track.scrollWidth - wrap.clientWidth); }
+  wrap.addEventListener('mousemove', e => {
+    const r = wrap.getBoundingClientRect();
+    tX = (e.clientX - r.left) / r.width * max();
+    if (!raf) raf = requestAnimationFrame(lerp);
+  });
+  wrap.addEventListener('mouseleave', () => { tX=0; if (!raf) raf=requestAnimationFrame(lerp); });
+  function lerp(){
+    cX += (tX-cX)*0.07;
+    track.style.transform = `translateX(-${cX}px)`;
+    raf = Math.abs(tX-cX) > 0.3 ? requestAnimationFrame(lerp) : null;
+  }
+  let tx0=0, cx0=0;
+  wrap.addEventListener('touchstart', e => { tx0=e.touches[0].clientX; cx0=cX; }, {passive:true});
+  wrap.addEventListener('touchmove',  e => {
+    tX = Math.max(0, Math.min(max(), cx0+(tx0-e.touches[0].clientX)));
+    if (!raf) raf = requestAnimationFrame(lerp);
+  }, {passive:true});
 })();
 </script>
 <script src="../js/cursor.js"></script>

@@ -30,75 +30,266 @@
       display: inline-block; opacity: 0; transform: translateY(12px);
       transition: opacity 0.38s ease, transform 0.38s ease; margin-right: 0.2em;
     }
-    .word-reveal .w.visible   { opacity: 1; transform: translateY(0); }
-    .word-reveal .w.immediate { opacity: 1; transform: translateY(0); }
-    .word-reveal .w.kora      { color: var(--pink); }
+    .word-reveal .w.visible, .word-reveal .w.immediate { opacity: 1; transform: translateY(0); }
+    .word-reveal .w.kora { color: var(--pink); }
+
+    /* ── SCROLL HINT ── */
+    .about-hint {
+      position: fixed; bottom: 36px; left: 50%;
+      transform: translateX(-50%); z-index: 50;
+      pointer-events: none; opacity: 1; transition: opacity 0.7s ease;
+    }
+    .about-hint.hidden { opacity: 0; }
+    .about-hint svg { width: 20px; height: 20px; color: var(--fg); stroke-width: 1.5; opacity: 0.3; animation: hintDown 1.8s ease-in-out infinite; }
+    @keyframes hintDown { 0%,100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
 
     /* ── BIO ── */
     .about-bio {
-      display: grid; grid-template-columns: 260px 1fr;
-      gap: 60px; align-items: start;
       max-width: 1100px; margin: 0 auto; padding: 80px 40px;
     }
-    .about-image-col { position: sticky; top: 120px; width: 100%; max-width: 260px; }
-    #about-img {
-      width: 100%; height: auto; display: block;
-      border-radius: 14px; object-fit: cover; max-height: 340px;
-    }
-    .about-text { max-width: 520px; padding-top: 8px; }
-    .about-text p { margin-bottom: 18px; line-height: 1.9; opacity: 0.65; font-size: 13.5px; color: var(--fg); font-weight: 400; }
+    .about-text { max-width: 680px; }
+    .about-text p { margin-bottom: 24px; line-height: 1.95; opacity: 0.82; font-size: 18px; color: var(--fg); font-weight: 400; }
     .quote {
-      margin-top: 28px; padding: 18px 22px;
-      border-left: 2px solid var(--pink); font-size: 12px; line-height: 1.9;
+      margin-top: 32px; padding: 22px 26px;
+      border-left: 2px solid var(--pink); font-size: 17px; line-height: 1.9;
       background: rgba(255,42,163,0.04); border-radius: 0 8px 8px 0;
       color: var(--fg); font-style: italic; font-weight: 400;
     }
     body.dark .quote { background: rgba(255,42,163,0.07); }
-    .quote .author { display: block; margin-top: 8px; font-size: 9px; opacity: 0.45; letter-spacing: 1.5px; font-style: normal; text-transform: uppercase; }
-
-    /* ── TOOLS ── */
-    .about-tools { max-width: 1100px; margin: 0 auto; padding: 0 40px 80px; }
-    .tools-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tool-tag { border: 0.5px solid var(--border-subtle); padding: 7px 16px; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; border-radius: 40px; color: var(--fg); font-weight: 400; }
-    .tool-tag.featured { background: var(--pink); border-color: var(--pink); color: white; font-weight: 600; }
+    .quote .author { display: block; margin-top: 10px; font-size: 11px; opacity: 0.45; letter-spacing: 1.5px; font-style: normal; text-transform: uppercase; }
 
     /* ── INFO GRID ── */
     .section-divider { width: 100%; height: 1px; background: var(--border-subtle); margin: 0 0 80px; position: relative; }
     .section-divider::before { content: ''; position: absolute; left: 40px; top: 0; height: 1px; width: 60px; background: var(--pink); }
     .about-info-wrap { max-width: 1100px; margin: 0 auto; padding: 0 40px 80px; }
     .about-info-grid { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 40px; }
-    .about-info-grid h3 { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.32; margin-bottom: 20px; font-weight: 500; color: var(--fg); }
+    .about-info-grid h3 { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.32; margin-bottom: 24px; font-weight: 500; color: var(--fg); }
     .info-divider { width: 1px; background: var(--border-subtle); }
-    .info-item { margin-bottom: 20px; font-size: 12.5px; font-weight: 400; color: var(--fg); line-height: 1.65; opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease, border-left-width 0.3s ease 0.25s, padding-left 0.3s ease 0.25s; border-left: 0px solid var(--pink); padding-left: 0; }
-    .info-item.visible { opacity: 0.72; transform: translateY(0); border-left-width: 2px; padding-left: 12px; }
-    .info-item span { display: block; font-size: 9px; opacity: 0.4; margin-top: 4px; letter-spacing: 1px; }
+    .info-item {
+      margin-bottom: 22px; font-size: 16px; font-weight: 400; color: var(--fg); line-height: 1.7;
+      opacity: 0; transform: translateY(14px);
+      transition: opacity 0.5s ease, transform 0.5s ease, border-left-width 0.3s ease 0.25s, padding-left 0.3s ease 0.25s;
+      border-left: 0px solid var(--pink); padding-left: 0;
+    }
+    .info-item.visible { opacity: 0.82; transform: translateY(0); border-left-width: 2px; padding-left: 14px; }
+    .info-item span { display: block; font-size: 12px; opacity: 0.4; margin-top: 5px; letter-spacing: 1px; }
 
-    /* ── CONTACT ── */
+    /* ── CONTACT WRAP ── */
     .contact-wrap { max-width: 1100px; margin: 0 auto; padding: 0 40px 100px; }
     .contact-block { border-top: 1px solid var(--border-subtle); padding-top: 60px; }
-    .contact-eyebrow { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; opacity: 0.38; margin-bottom: 24px; color: var(--fg); display: block; }
-    .contact-big { font-size: clamp(28px, 5vw, 56px); font-weight: 700; font-family: var(--font-display); letter-spacing: -0.04em; line-height: 1.05; color: var(--fg); margin-bottom: 40px; max-width: 800px; }
+    .contact-eyebrow { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; opacity: 0.38; margin-bottom: 24px; color: var(--fg); display: block; }
+    .contact-big { font-size: clamp(28px, 5vw, 56px); font-weight: 700; font-family: var(--font-display); letter-spacing: -0.04em; line-height: 1.05; color: var(--fg); margin-bottom: 44px; max-width: 800px; }
     .contact-big .cw { display: inline-block; margin-right: 0.18em; transition: color 0.2s ease, transform 0.2s ease; }
     .contact-big .cw:hover { color: var(--pink); transform: translateY(-3px); }
-    .contact-links { display: flex; gap: 10px; flex-wrap: wrap; }
-    .contact-links a { font-size: 11px; text-decoration: none; color: var(--fg); letter-spacing: 1.5px; font-weight: 600; padding: 12px 24px; border: 0.5px solid var(--border-subtle); border-radius: 40px; opacity: 0.55; transition: opacity 0.2s, border-color 0.2s, color 0.2s, transform 0.2s; display: inline-flex; align-items: center; gap: 8px; }
-    .contact-links a:hover { opacity: 1; border-color: var(--pink); color: var(--pink); transform: translateY(-2px); }
+
+    /* ════════════════════════════════════════
+       CARTA POSTAL — bordes troquelados cuadrados
+       ════════════════════════════════════════ */
+    .carta-wrap { max-width: 800px; }
+
+    /* Los "hoyos" del troquelado usan var(--bg) = fondo de la página,
+       así se mezclan perfectamente con el entorno en dark y light mode. */
+    .carta-card {
+      --pg: 7px;          /* espacio entre perforaciones */
+      --ps: 10px;         /* tamaño de cada cuadrado */
+      --pd: 10px;         /* profundidad del troquelado */
+      --cg: 15px;         /* esquina cuadrada (> pd) */
+      --paper: #fce8f3;   /* papel rosado */
+
+      position: relative;
+      transform-origin: top center;
+
+      background:
+        /* 1. Esquinas cuadradas encima de todo */
+        linear-gradient(var(--paper),var(--paper)) 0    0    / var(--cg) var(--cg) no-repeat,
+        linear-gradient(var(--paper),var(--paper)) 100% 0    / var(--cg) var(--cg) no-repeat,
+        linear-gradient(var(--paper),var(--paper)) 0    100% / var(--cg) var(--cg) no-repeat,
+        linear-gradient(var(--paper),var(--paper)) 100% 100% / var(--cg) var(--cg) no-repeat,
+        /* 2. Troquelado top y bottom */
+        repeating-linear-gradient(90deg,  var(--paper) 0,var(--paper) var(--pg),var(--bg) var(--pg),var(--bg) calc(var(--pg) + var(--ps)))
+          0    0    / calc(var(--pg) + var(--ps)) var(--pd) repeat-x,
+        repeating-linear-gradient(90deg,  var(--paper) 0,var(--paper) var(--pg),var(--bg) var(--pg),var(--bg) calc(var(--pg) + var(--ps)))
+          0    100% / calc(var(--pg) + var(--ps)) var(--pd) repeat-x,
+        /* 3. Troquelado left y right */
+        repeating-linear-gradient(180deg, var(--paper) 0,var(--paper) var(--pg),var(--bg) var(--pg),var(--bg) calc(var(--pg) + var(--ps)))
+          0    0    / var(--pd) calc(var(--pg) + var(--ps)) repeat-y,
+        repeating-linear-gradient(180deg, var(--paper) 0,var(--paper) var(--pg),var(--bg) var(--pg),var(--bg) calc(var(--pg) + var(--ps)))
+          100% 0    / var(--pd) calc(var(--pg) + var(--ps)) repeat-y,
+        /* 4. Base del papel */
+        var(--paper);
+    }
+    /* Borde punteado interior */
+    .carta-card::before {
+      content: ''; position: absolute; inset: 18px;
+      border: 1px dashed rgba(255,42,163,0.28);
+      pointer-events: none; z-index: 0;
+    }
+    .carta-inner { padding: 38px 46px; position: relative; z-index: 1; }
+
+    /* Layout horizontal: izquierda | divisor | derecha */
+    .carta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: 0 36px;
+      align-items: start;
+    }
+    .carta-vline { background: rgba(255,42,163,0.22); align-self: stretch; }
+
+    /* IZQUIERDA: mensaje */
+    .carta-left { display: flex; flex-direction: column; }
+    .carta-saludo {
+      font-size: 21px; font-weight: 600; letter-spacing: -0.02em;
+      color: #1a0a12; margin-bottom: 10px; line-height: 32px;
+    }
+    .carta-paper {
+      background-image: repeating-linear-gradient(
+        transparent 0, transparent 31px,
+        rgba(255,42,163,0.14) 31px, rgba(255,42,163,0.14) 32px
+      );
+      background-position: 0 8px;
+    }
+    .carta-textarea {
+      width: 100%; border: none; outline: none; resize: none;
+      background: transparent; font-family: var(--font-body);
+      font-size: 15px; line-height: 32px; color: #1a0a12;
+      min-height: 192px; display: block; caret-color: #ff2aa3;
+    }
+    .carta-textarea::placeholder { color: rgba(26,10,18,0.3); }
+
+    /* DERECHA: campos */
+    .carta-right { display: flex; flex-direction: column; gap: 22px; }
+    .carta-campo { display: flex; flex-direction: column; gap: 5px; }
+    .carta-lbl {
+      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+      font-weight: 700; color: rgba(26,10,18,0.42);
+    }
+    .carta-val {
+      font-size: 20px; font-weight: 600; letter-spacing: -0.02em; color: #1a0a12;
+      border-bottom: 1.5px solid rgba(255,42,163,0.28); padding-bottom: 3px;
+    }
+    .carta-inp {
+      font-size: 20px; font-weight: 600; letter-spacing: -0.02em;
+      border: none; border-bottom: 1.5px solid rgba(255,42,163,0.28);
+      outline: none; background: transparent; color: #1a0a12;
+      padding-bottom: 3px; font-family: var(--font-body); width: 100%;
+      caret-color: #ff2aa3;
+    }
+    .carta-inp::placeholder { color: rgba(26,10,18,0.28); font-weight: 400; font-size: 17px; }
+    .carta-inp:focus { border-bottom-color: #ff2aa3; }
+    .carta-correo-inp {
+      font-size: 16px; border: none; border-bottom: 1.5px solid rgba(255,42,163,0.28);
+      outline: none; background: transparent; color: #1a0a12;
+      padding-bottom: 3px; font-family: var(--font-body); width: 100%;
+      caret-color: #ff2aa3;
+    }
+    .carta-correo-inp::placeholder { color: rgba(26,10,18,0.28); }
+    .carta-correo-inp:focus { border-bottom-color: #ff2aa3; }
+
+    /* Pie de la carta: fecha + matasellos + botón */
+    .carta-foot {
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid rgba(255,42,163,0.2); padding-top: 18px;
+      gap: 10px; margin-top: auto;
+    }
+    .carta-fecha { font-size: 11px; letter-spacing: 0.5px; color: rgba(26,10,18,0.38); }
+    .carta-foot-r { display: flex; align-items: center; gap: 14px; }
+
+    /* Botón enviar — visible y prominente */
+    .carta-btn {
+      -webkit-appearance: none; appearance: none;
+      font-family: var(--font-body); font-size: 12px; letter-spacing: 2px;
+      text-transform: uppercase; font-weight: 700;
+      padding: 13px 30px; border-radius: 40px; outline: none; cursor: pointer;
+      background: #1a0a12; border: 2px solid #1a0a12; color: #fce8f3;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .carta-btn:hover  { background: #ff2aa3; border-color: #ff2aa3; color: #fff; }
+    .carta-btn:active { transform: scale(0.97); }
+    .carta-btn:disabled { opacity: 0.25; cursor: default; }
+    .carta-error { font-size: 12px; color: #ff2aa3; margin-top: 14px; min-height: 16px; font-weight: 600; }
+
+    /* ── Animaciones de cierre / apertura ── */
+    @keyframes cartaCierre {
+      0%   { transform: perspective(900px) rotateX(0)     scaleY(1);   opacity: 1; }
+      45%  { transform: perspective(900px) rotateX(-20deg) scaleY(0.4); opacity: 0.6; }
+      100% { transform: perspective(900px) rotateX(-90deg) scaleY(0);   opacity: 0; }
+    }
+    @keyframes cartaAbrir {
+      0%   { transform: perspective(900px) rotateX(90deg) scaleY(0);    opacity: 0; }
+      55%  { transform: perspective(900px) rotateX(8deg)  scaleY(1.04); opacity: 1; }
+      100% { transform: perspective(900px) rotateX(0)     scaleY(1);    opacity: 1; }
+    }
+    .carta-cerrando { animation: cartaCierre 0.55s cubic-bezier(0.77,0,0.175,1) forwards; }
+    .carta-abriendo { animation: cartaAbrir  0.6s  cubic-bezier(0.34,1.56,0.64,1) forwards; }
+
+    /* ── Estado enviada ── */
+    .carta-done {
+      position: relative; transform-origin: top center;
+      background:
+        linear-gradient(#fce8f3,#fce8f3) 0    0    / 15px 15px no-repeat,
+        linear-gradient(#fce8f3,#fce8f3) 100% 0    / 15px 15px no-repeat,
+        linear-gradient(#fce8f3,#fce8f3) 0    100% / 15px 15px no-repeat,
+        linear-gradient(#fce8f3,#fce8f3) 100% 100% / 15px 15px no-repeat,
+        repeating-linear-gradient(90deg,  #fce8f3 0,#fce8f3 7px,var(--bg) 7px,var(--bg) 17px) 0    0    / 17px 10px repeat-x,
+        repeating-linear-gradient(90deg,  #fce8f3 0,#fce8f3 7px,var(--bg) 7px,var(--bg) 17px) 0    100% / 17px 10px repeat-x,
+        repeating-linear-gradient(180deg, #fce8f3 0,#fce8f3 7px,var(--bg) 7px,var(--bg) 17px) 0    0    / 10px 17px repeat-y,
+        repeating-linear-gradient(180deg, #fce8f3 0,#fce8f3 7px,var(--bg) 7px,var(--bg) 17px) 100% 0    / 10px 17px repeat-y,
+        #fce8f3;
+      padding: 72px 44px;
+      display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center;
+      max-width: 800px;
+    }
+    .carta-done-k    { font-size: 52px; font-weight: 500; color: #ff2aa3; letter-spacing: -0.04em; line-height: 1; }
+    .carta-done-t    { font-size: 24px; font-weight: 600; letter-spacing: -0.03em; color: #1a0a12; }
+    .carta-done-s    { font-size: 15px; color: rgba(26,10,18,0.45); }
+
+    /* ── Links secundarios ── */
+    .contact-links-row {
+      display: flex; align-items: center; gap: 28px;
+      margin-top: 36px; flex-wrap: wrap;
+    }
+    .contact-link-item {
+      font-size: 14px; font-weight: 500; color: var(--fg); opacity: 0.55;
+      display: inline-flex; align-items: center; gap: 7px;
+      border-bottom: 1px solid transparent; padding-bottom: 1px;
+      transition: opacity 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .contact-link-item:hover { opacity: 1; color: var(--pink); border-color: var(--pink); }
+    .contact-link-sep { width: 1px; height: 14px; background: var(--border-subtle); }
+
+    /* ── Footer ── */
+    .kora-footer { border-top: 1px solid var(--border-subtle); padding: 28px 48px; transition: border-color 0.4s; }
+    .kora-footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .kora-footer span { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; color: var(--fg); opacity: 0.22; }
+    .kora-footer-logo { opacity: 0.09 !important; font-weight: 700 !important; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       .about-intro-sticky { padding: 0 20px; }
-      .about-bio { grid-template-columns: 1fr; gap: 28px; padding: 60px 20px; }
-      .about-image-col { position: relative; top: auto; max-width: 180px; }
-      .about-tools { padding: 0 20px 60px; }
+      .about-bio { padding: 60px 20px; }
       .about-info-wrap { padding: 0 20px 60px; }
       .about-info-grid { grid-template-columns: 1fr; gap: 28px; }
       .info-divider { display: none; }
       .section-divider::before { left: 20px; }
       .contact-wrap { padding: 0 20px 80px; }
+      .carta-grid { grid-template-columns: 1fr; }
+      .carta-vline { display: none; }
+      .carta-inner { padding: 28px 24px; }
+      .kora-footer { padding: 24px 20px; }
+      .kora-footer-inner { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .kora-footer-logo { display: none !important; }
+      .contact-links-row { gap: 16px; }
     }
   </style>
 </head>
 <body>
+
+  <div class="about-hint" id="about-hint">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor">
+      <path d="M8 2v12M4 10l4 4 4-4"/>
+    </svg>
+  </div>
+
   <nav>
     <div class="nav-left"><a href="projects.html" class="nav-link">Proyectos</a></div>
     <div class="nav-center"><a href="index.html" class="nav-logo"><span id="nav-typing-text"></span></a></div>
@@ -108,52 +299,29 @@
     </div>
   </nav>
 
-  <!-- ══════════════════════════════
-       STAGES A + B — Word reveal
-       ══════════════════════════════ -->
+  <!-- ── Word reveal ── -->
   <div class="about-intro-scroll" id="intro-scroll">
     <div class="about-intro-sticky">
       <p class="word-reveal" id="intro-text"></p>
     </div>
   </div>
 
-
+  <!-- ── Bio ── -->
   <div class="about-bio">
-    <div class="about-image-col">
-      <!-- Imagen  -->
-      <img src="assets/about/vania2.png" alt="Vania" id="about-img">
-    </div>
     <div class="about-text">
-      <p>Soy estudiante de cuarto año de <b>Diseño Industrial</b>, últimamente obsesionada con la tecnología y cómo interactuamos con ella. El <b>diseño de interacción</b> es mi alter ego, es donde todo cobra sentido.</p>
+      <p>Soy <b>Vania Paredes</b>, diseñadora e interesada en todo lo que cruza tecnología con experiencia. Estudio <b>Diseño Industrial</b> en la UDP.
+He hecho visuales para conciertos, instalaciones interactivas y objetos que hacen cosas raras. Busco el punto donde el diseño y la tecnología se vuelven inseparables.
+        
       <div class="quote">
         "Design, the act of putting constructs in an order, or dis-order, seems to be human destiny."
         <span class="author">— Richard Neutra: Survival Through Design (1953)</span>
       </div>
     </div>
   </div>
-
-  <div class="about-tools">
-    <p class="section-label" style="margin-bottom:20px;">Herramientas que uso:</p>
-    <div class="tools-tags">
-      <span class="tool-tag">p5.js</span>
-      <span class="tool-tag">Figma</span>
-      <span class="tool-tag">Arduino</span>
-      <span class="tool-tag">Python</span>
-      <span class="tool-tag">TouchDesigner</span>
-      <span class="tool-tag">Rhino</span>
-      <span class="tool-tag">VS Code</span>
-      <span class="tool-tag">AutoCAD</span>
-      <span class="tool-tag">Illustrator</span>
-      <span class="tool-tag">Photoshop</span>
-      <span class="tool-tag">InDesign</span>
-    </div>
-  </div>
-
+ 
   <div class="section-divider"></div>
 
-  <!-- ══════════════════════════════
-       STAGE E — Education + Experience
-       ══════════════════════════════ -->
+  <!-- ── Educación + Experiencia ── -->
   <div class="about-info-wrap">
     <div class="about-info-grid">
       <div>
@@ -174,7 +342,7 @@
       <div class="info-divider"></div>
       <div>
         <h3>Experiencia</h3>
-                        <div class="info-item">
+        <div class="info-item">
           Visuales reactivas a Audio y MIDI<br>Concierto de SoloIsabel, Santiago de Chile.
           <span>2026</span>
         </div>
@@ -196,18 +364,119 @@
 
   <div class="section-divider"></div>
 
-  <!-- ── CONTACT ── -->
+  <!-- ── Contacto ── -->
   <div class="contact-wrap">
     <div class="contact-block">
       <span class="contact-eyebrow">Contáctame</span>
       <p class="contact-big" id="contact-text"></p>
-      <div class="contact-links">
-        <a href="mailto:koranode@gmail.com" target="_blank">koranode@gmail.com > </a>
-        <a href="https://github.com/paredesvania" target="_blank"> GitHub ></a>
-        <a href="https://www.instagram.com/koranode?igsh=NTV4NmZkamJkY2xu" target="_blank">Instagram > </a>
+
+      <div class="carta-wrap">
+
+        <!-- Carta activa -->
+        <div id="carta-form-area">
+          <div class="carta-card" id="carta-card">
+            <div class="carta-inner">
+              <div class="carta-grid">
+
+                <!-- IZQUIERDA: mensaje con líneas de papel -->
+                <div class="carta-left">
+                  <p class="carta-saludo">Hola Kora,</p>
+                  <div class="carta-paper">
+                    <textarea class="carta-textarea" id="carta-msg"
+                      placeholder="Escribe aquí tu mensaje…"
+                      rows="6" maxlength="2500"></textarea>
+                  </div>
+                </div>
+
+                <!-- Divisor vertical -->
+                <div class="carta-vline"></div>
+
+                <!-- DERECHA: datos + pie -->
+                <div class="carta-right">
+                  <div class="carta-campo">
+                    <span class="carta-lbl">Para:</span>
+                    <span class="carta-val">Kora</span>
+                  </div>
+                  <div class="carta-campo">
+                    <span class="carta-lbl">De:</span>
+                    <input class="carta-inp" id="carta-nombre" type="text"
+                      placeholder="Tu nombre" autocomplete="name">
+                  </div>
+                  <div class="carta-campo">
+                    <span class="carta-lbl">Correo:</span>
+                    <input class="carta-correo-inp" id="carta-correo" type="email"
+                      placeholder="para responderte" autocomplete="email">
+                  </div>
+
+                  <div class="carta-foot">
+                    <span class="carta-fecha" id="carta-fecha"></span>
+                    <div class="carta-foot-r">
+                      <!-- Matasellos circular -->
+                      <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+                        stroke="#1a0a12" stroke-linecap="round" style="opacity:0.18">
+                        <circle cx="20" cy="20" r="17" stroke-width="1.2"/>
+                        <circle cx="20" cy="20" r="11" stroke-width="0.5"/>
+                        <line x1="4" y1="17" x2="36" y2="17" stroke-width="1"/>
+                        <line x1="4" y1="20" x2="36" y2="20" stroke-width="1"/>
+                        <line x1="4" y1="23" x2="36" y2="23" stroke-width="1"/>
+                      </svg>
+                      <button class="carta-btn" id="carta-btn-enviar">Enviar →</button>
+                    </div>
+                  </div>
+                  <p class="carta-error" id="carta-error"></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Estado enviada -->
+        <div id="carta-done-area" style="display:none;">
+          <div class="carta-done carta-abriendo">
+            <span class="carta-done-k">K</span>
+            <p class="carta-done-t">Tu carta llegó.</p>
+            <p class="carta-done-s">Te respondo pronto :)</p>
+          </div>
+        </div>
+
+      </div><!-- /carta-wrap -->
+
+      <!-- Links secundarios -->
+      <div class="contact-links-row">
+        <a class="contact-link-item" href="mailto:koranode@gmail.com">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4">
+            <rect x="1" y="2.5" width="12" height="9" rx="1.5"/>
+            <path d="M1 3.5l6 4.5 6-4.5"/>
+          </svg>
+          koranode@gmail.com
+        </a>
+        <div class="contact-link-sep"></div>
+        <a class="contact-link-item" href="https://github.com/paredesvania" target="_blank">
+          GitHub ↗
+        </a>
+        <div class="contact-link-sep"></div>
+        <a class="contact-link-item" href="https://www.instagram.com/koranode" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4">
+            <rect x="1.5" y="1.5" width="13" height="13" rx="3.5"/>
+            <circle cx="8" cy="8" r="3"/>
+            <circle cx="11.5" cy="4.5" r="0.6" fill="currentColor" stroke="none"/>
+          </svg>
+          Instagram
+        </a>
       </div>
+
     </div>
   </div>
+
+  <!-- ── Footer ── -->
+  <footer class="kora-footer">
+    <div class="kora-footer-inner">
+      <span>Vania Paredes — Santiago de Chile</span>
+      <span class="kora-footer-logo">KORA</span>
+      <span>© 2026 Todos los derechos reservados</span>
+    </div>
+  </footer>
 
   <script src="js/cursor.js"></script>
   <script src="js/nav.js"></script>
@@ -216,12 +485,11 @@
   <script src="js/about.js"></script>
 
   <script>
-  // 1. REVELACIÓN DE PALABRAS
+  // 1. WORD REVEAL
   (function () {
     const container  = document.getElementById("intro-text");
     const scrollZone = document.getElementById("intro-scroll");
     if (!container || !scrollZone) return;
-
     const words = [
       { text: "Hola,",    cls: "",     immediate: true  },
       { text: "soy",      cls: "",     immediate: false },
@@ -231,62 +499,118 @@
       { text: "llamarme", cls: "",     immediate: false },
       { text: "Kora.",    cls: "kora", immediate: false },
     ];
-
     const spans = words.map(({ text, cls, immediate }) => {
-      const span = document.createElement("span");
-      span.className = "w" + (cls ? " " + cls : "") + (immediate ? " immediate" : "");
-      span.textContent = text;
-      container.appendChild(span);
-      return span;
+      const s = document.createElement("span");
+      s.className = "w" + (cls ? " " + cls : "") + (immediate ? " immediate" : "");
+      s.textContent = text;
+      container.appendChild(s);
+      return s;
     });
-
     const scrollWords = spans.filter((_, i) => !words[i].immediate);
-
     function onScroll() {
-      const rect   = scrollZone.getBoundingClientRect();
-      const zoneH  = scrollZone.offsetHeight;
-      const vh     = window.innerHeight;
-      const scrolled = -rect.top;
-      const available = zoneH - vh;
-      const progress = Math.max(0, Math.min(1, scrolled / available));
-
-      scrollWords.forEach((span, i) => {
-        const threshold = (i + 1) / (scrollWords.length + 1);
-        span.classList.toggle("visible", progress >= threshold);
-      });
+      const p = Math.max(0, Math.min(1,
+        -scrollZone.getBoundingClientRect().top / (scrollZone.offsetHeight - window.innerHeight)
+      ));
+      scrollWords.forEach((sp, i) =>
+        sp.classList.toggle("visible", p >= (i + 1) / (scrollWords.length + 1))
+      );
     }
-
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
   })();
 
-  // 2. CONTACTO 
+  // 2. CONTACT HEADING ANIMADO
   (function () {
-    const container = document.getElementById("contact-text");
-    if (!container) return;
-    const text = "¿Tienes algo en mente? Feliz de conversar. ;)";
-    text.split(" ").forEach(word => {
-      const span = document.createElement("span");
-      span.className = "cw";
-      span.textContent = word;
-      container.appendChild(span);
+    const c = document.getElementById("contact-text");
+    if (!c) return;
+    "¿Tienes algo en mente? Feliz de conversar. ;)".split(" ").forEach(w => {
+      const s = document.createElement("span");
+      s.className = "cw"; s.textContent = w;
+      c.appendChild(s);
     });
   })();
 
-  // 3. REVELACIÓN DE ITEMS INFO
+  // 3. INFO ITEMS
   document.addEventListener("DOMContentLoaded", () => {
     const items = document.querySelectorAll(".info-item");
     if (!items.length) return;
     const obs = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add("visible"), i * 110);
-          obs.unobserve(entry.target);
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add("visible"), i * 110);
+          obs.unobserve(e.target);
         }
       });
     }, { threshold: 0.15 });
     items.forEach(item => obs.observe(item));
   });
+
+  // 4. SCROLL HINT
+  (function () {
+    const hint = document.getElementById("about-hint");
+    if (!hint) return;
+    let gone = false;
+    window.addEventListener("scroll", () => {
+      if (gone || window.scrollY <= 40) return;
+      gone = true; hint.classList.add("hidden");
+    }, { passive: true });
+  })();
+
+  // 5. CARTA — fecha + envío + animación
+  (function () {
+    // Fecha
+    const fechaEl = document.getElementById("carta-fecha");
+    if (fechaEl) {
+      const now = new Date();
+      const m = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+      fechaEl.textContent = now.getDate() + " " + m[now.getMonth()] + ". " + now.getFullYear();
+    }
+
+    const btn       = document.getElementById("carta-btn-enviar");
+    const errorEl   = document.getElementById("carta-error");
+    const formArea  = document.getElementById("carta-form-area");
+    const doneArea  = document.getElementById("carta-done-area");
+    const cardEl    = document.getElementById("carta-card");
+    if (!btn) return;
+
+    btn.addEventListener("click", async () => {
+      const msg    = (document.getElementById("carta-msg")?.value    || "").trim();
+      const nombre = (document.getElementById("carta-nombre")?.value || "").trim();
+      const correo = (document.getElementById("carta-correo")?.value || "").trim();
+
+      errorEl.textContent = "";
+      if (!msg)    { errorEl.textContent = "La carta está vacía.";                 return; }
+      if (!nombre) { errorEl.textContent = "¿Cómo te llamas?";                    return; }
+      if (!correo || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
+                     errorEl.textContent = "Necesito tu correo para responderte."; return; }
+
+      btn.disabled = true;
+
+      // Animación de cierre y envío en paralelo
+      cardEl.classList.add("carta-cerrando");
+
+      let ok = false;
+      try {
+        const res = await fetch("https://formspree.io/f/xwvjkbjp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify({ nombre, correo, mensaje: msg }),
+        });
+        ok = res.ok;
+      } catch { ok = false; }
+
+      setTimeout(() => {
+        if (ok) {
+          formArea.style.display = "none";
+          doneArea.style.display = "";
+        } else {
+          cardEl.classList.remove("carta-cerrando");
+          btn.disabled = false;
+          errorEl.textContent = "Algo salió mal. Intenta de nuevo.";
+        }
+      }, 560);
+    });
+  })();
   </script>
 </body>
 </html>
