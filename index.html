@@ -292,14 +292,15 @@
     const COMMANDS = {
       "hello":      { reply: 'hello! :)',                         action: null },
       "hola":       { reply: 'hola! :)',                          action: null },
-      "hi":         { reply: 'hi there!',                         action: null },
+      "hi":         { reply: 'hi there! <3',                         action: null },
       "hey":        { reply: 'hey! :)',                           action: null },
-      "kora":       { reply: 'koraNode();',                       action: null },
+      "kora":        { reply: 'print("<3");',                      action: heartGlitch },
       "kora()":     { reply: 'koraNode();',                       action: null },
       "projects":   { reply: 'navigating...',                     action: () => setTimeout(() => location.href = 'projects.html', 700) },
       "proyectos":  { reply: 'navegando...',                      action: () => setTimeout(() => location.href = 'projects.html', 700) },
       "project":    { reply: 'navigating...',                     action: () => setTimeout(() => location.href = 'projects.html', 700) },
       "proyecto":   { reply: 'navegando...',                      action: () => setTimeout(() => location.href = 'projects.html', 700) },
+      "que haces":   { reply: 'navegando...',                      action: () => setTimeout(() => location.href = 'projects.html', 700) },
       "about":      { reply: 'navigating...',                     action: () => setTimeout(() => location.href = 'about.html', 700) },
       "sobre mi":   { reply: 'navegando...',                      action: () => setTimeout(() => location.href = 'about.html', 700) },
       "sobre mí":   { reply: 'navegando...',                      action: () => setTimeout(() => location.href = 'about.html', 700) },
@@ -310,8 +311,13 @@
       "ayuda":      { reply: 'prueba: hola · proyectos · about', action: null },
       "ayuda()":    { reply: 'prueba: hola · proyectos · about', action: null },
       "<3":         { reply: 'print("<3");',                      action: heartGlitch },
+     "vania":         { reply: 'print("<3");',                      action: heartGlitch },
       "clear":      { reply: FINAL_TEXT,                          action: null },
       "limpiar":    { reply: FINAL_TEXT,                          action: null },
+      "como estas":      { reply: 'feliz :) gracias x preguntar',     action: null },
+      "how are you":      { reply: 'happy! :) thanks 4 ask',           action: null },
+     "como estas?":      { reply: 'feliz :) gracias x preguntar',     action: null },
+      "how are you?":      { reply: 'happy! :) thanks 4 ask',           action: null },
     };
 
     function resetToFinal(delay = 1800) {
@@ -357,6 +363,7 @@
         return;
       }
       if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && userBuf.length < 22) {
+        e.preventDefault(); // evita que espacio y otros caracteres hagan scroll
         userBuf += e.key;
         typingEl.textContent = userBuf;
       }
