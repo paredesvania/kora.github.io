@@ -33,6 +33,42 @@
       background: var(--bg);
     }
 
+    /* Video de fondo: se reproduce solo, en loop y sin sonido.
+       Su opacidad se controla desde el scroll (se desvanece al bajar). */
+    #hero-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.5;
+      z-index: 0;
+      pointer-events: none;
+      will-change: opacity;
+    }
+
+    /* ── NUEVO: botón de play que sigue al mouse ── */
+    #hero-cursor {
+      position: fixed; top: 0; left: 0;
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: rgba(10, 10, 10, 0.38);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
+      z-index: 20;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      will-change: transform, opacity;
+    }
+    #hero-cursor.visible { opacity: 1; }
+    #hero-cursor svg { width: 22px; height: 22px; margin-left: 3px; fill: #fff; }
+
+    /* NUEVO: mientras el botón está visible reemplaza al cursor normal y a la bolita rosada */
+    html.hero-hover #hero-sticky,
+    html.hero-hover #hero-sticky * { cursor: none !important; }
+    html.hero-hover .cursor { opacity: 0 !important; }
+
     /* Typing */
     #typing-line {
       position: absolute; top: 50%; left: 50%;
@@ -97,6 +133,17 @@
 <div id="hero-scroll-zone">
   <div id="hero-sticky">
 
+    <!-- NUEVO: se quitó "autoplay" del atributo (igual que en Umbral) -->
+    <video id="hero-video"
+      src="assets/umbral/umbral.mp4"
+      muted loop playsinline preload="auto"
+      aria-hidden="true"></video>
+
+    <!-- NUEVO: botón de play que sigue al mouse -->
+    <div id="hero-cursor" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>
+    </div>
+
     <div id="typing-line"><span id="typing-text"></span></div>
     <div id="fly-container"></div>
     <div id="hero-sep"></div>
@@ -153,6 +200,10 @@
   const hint         = document.getElementById("scroll-hint");
   const nav          = document.querySelector("nav");
   const zone         = document.getElementById("hero-scroll-zone");
+  const heroVideo    = document.getElementById("hero-video");
+
+  // Opacidad máxima del video (0 a 1). Súbela para más presencia, bájala para más sutil.
+  const VIDEO_OPACITY = 0.5;
 
   // ── Utils ──
   function ss(e0, e1, x) {
@@ -165,6 +216,88 @@
     const [ar,ag,ab] = h2r(a), [br,bg,bb] = h2r(b);
     return `rgb(${~~lerp(ar,br,t)},${~~lerp(ag,bg,t)},${~~lerp(ab,bb,t)})`;
   }
+
+  // ══════════════════════════════
+  //  VIDEO DE FONDO — autoplay
+  // ══════════════════════════════
+  if (heroVideo) {
+    heroVideo.muted = true; // algunos navegadores exigen esto por JS para permitir autoplay
+    const tryPlay = () => { const pr = heroVideo.play(); if (pr && pr.catch) pr.catch(() => {}); };
+    tryPlay();
+    // Si el navegador lo bloquea (ahorro de batería, etc.), arranca con la primera interacción
+    ["click", "touchstart", "keydown", "scroll"].forEach(evt =>
+      window.addEventListener(evt, () => { if (heroVideo.paused && heroVideo.dataset.hidden !== "1") tryPlay(); }, { once: true, passive: true })
+    );
+  }
+
+  // ══════════════════════════════
+  //  NUEVO: BOTÓN DE PLAY QUE SIGUE AL MOUSE (solo play, sin pausa)
+  // ══════════════════════════════
+  ;(function () {
+    const heroEl     = document.getElementById("hero-sticky");
+    const heroCursor = document.getElementById("hero-cursor");
+    if (!heroEl || !heroVideo || !heroCursor) return;
+
+    const isTouch = window.matchMedia("(hover: none)").matches;
+    let hcInside = false;   // el mouse está sobre el hero
+    let hcReady  = false;   // espera un instante para no parpadear si el video arranca solo
+    let hcRaf    = null;
+    let hcX = window.innerWidth / 2, hcY = window.innerHeight / 2;
+    let hcTX = hcX, hcTY = hcY;
+
+    setTimeout(() => { hcReady = true; syncHeroCursor(); }, 700);
+
+    function hcLoop() {
+      hcX = lerp(hcX, hcTX, 0.14);
+      hcY = lerp(hcY, hcTY, 0.14);
+      heroCursor.style.transform = `translate3d(${hcX}px, ${hcY}px, 0) translate(-50%, -50%)`;
+      hcRaf = requestAnimationFrame(hcLoop);
+    }
+
+    function syncHeroCursor() {
+      const canShow = hcReady
+        && heroVideo.paused
+        && heroVideo.dataset.hidden !== "1"
+        && window.scrollY < window.innerHeight * 0.4;
+      const show = canShow && (isTouch || hcInside);
+
+      if (isTouch) { // en celular no hay mouse: botón fijo en el centro
+        hcX = hcTX = window.innerWidth / 2;
+        hcY = hcTY = window.innerHeight / 2;
+        heroCursor.style.transform = `translate3d(${hcX}px, ${hcY}px, 0) translate(-50%, -50%)`;
+      }
+
+      heroCursor.classList.toggle("visible", show);
+      document.documentElement.classList.toggle("hero-hover", show && !isTouch);
+
+      if (show && !isTouch && !hcRaf) hcRaf = requestAnimationFrame(hcLoop);
+      if (!show && hcRaf) { cancelAnimationFrame(hcRaf); hcRaf = null; }
+    }
+
+    heroEl.addEventListener("mouseenter", (e) => {
+      hcInside = true; hcTX = hcX = e.clientX; hcTY = hcY = e.clientY;
+      syncHeroCursor();
+    });
+    heroEl.addEventListener("mouseleave", () => { hcInside = false; syncHeroCursor(); });
+    heroEl.addEventListener("mousemove", (e) => {
+      if (!hcInside) { hcInside = true; hcX = e.clientX; hcY = e.clientY; }
+      hcTX = e.clientX; hcTY = e.clientY;
+      syncHeroCursor();
+    });
+
+    // Clic en el hero: play (los links PROJECTS y ABOUT siguen navegando normal)
+    heroEl.addEventListener("click", (e) => {
+      if (e.target.closest("a")) return;
+      if (heroVideo.paused && window.scrollY < window.innerHeight * 0.4) {
+        const pr = heroVideo.play();
+        if (pr && pr.catch) pr.catch(() => {});
+      }
+    });
+
+    ["play", "playing", "pause"].forEach(evt => heroVideo.addEventListener(evt, syncHeroCursor));
+    window.addEventListener("scroll", syncHeroCursor, { passive: true });
+    window.addEventListener("resize", syncHeroCursor);
+  })();
 
   // ══════════════════════════════
   //  TYPING — Stage 1
@@ -545,6 +678,19 @@
     const letterOp = ss(0.18, 0.34, p);
     const conv     = ss(0.28, 0.72, p);
     const pinkT    = ss(0.62, 0.78, p);
+
+    // Video de fondo: se desvanece al bajar y se pausa cuando ya no se ve
+    if (heroVideo) {
+      const vFade = 1 - ss(0.10, 0.42, p);
+      heroVideo.style.opacity = (VIDEO_OPACITY * vFade).toFixed(3);
+      if (vFade <= 0) {
+        heroVideo.dataset.hidden = "1";
+        if (!heroVideo.paused) heroVideo.pause();
+      } else {
+        heroVideo.dataset.hidden = "0";
+        if (heroVideo.paused) { const pr = heroVideo.play(); if (pr && pr.catch) pr.catch(() => {}); }
+      }
+    }
 
     applyLayout(conv, letterOp, pinkT);
     positionLinks(conv);
