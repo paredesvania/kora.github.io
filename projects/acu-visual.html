@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="../assets/otros/favicon.png">
+  <title>Acu-Visual — KORA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    (function(){
+      var t=localStorage.getItem("kora-theme");
+      if(t==="dark"){document.documentElement.style.background="#0a0a0a";document.documentElement.classList.add("dark-pre");}
+    })();
+  </script>
+  <style>
+
+    /* ── HERO VIDEO FULLSCREEN ── */
+    .av-hero {
+      position: relative;
+      width: 100%; height: 100vh;
+      overflow: hidden;
+      background: #050505;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 0 72px;
+      cursor: none;
+    }
+    .av-hero-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.65;
+    }
+    .av-hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 50%, transparent 100%);
+      pointer-events: none;
+    }
+    .av-hero-content {
+      position: relative; z-index: 2;
+      padding: 0 48px;
+      max-width: 1100px; margin: 0 auto; width: 100%;
+    }
+    .av-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 9px; letter-spacing: 3px;
+      text-transform: uppercase; font-weight: 600;
+      color: #fff;
+      border: 0.5px solid rgba(255,255,255,0.3);
+      padding: 6px 14px; border-radius: 40px;
+      margin-bottom: 24px; opacity: 0.75;
+    }
+    .av-hero h1 {
+      font-size: clamp(56px, 12vw, 160px);
+      font-weight: 700; font-family: var(--font-display);
+      letter-spacing: -0.05em; line-height: 0.88;
+      color: #fff; margin-bottom: 28px;
+    }
+    .av-hero-meta {
+      display: flex; align-items: center;
+      gap: 20px; flex-wrap: wrap;
+    }
+    .av-hero-sub { font-size: 13px; color: rgba(255,255,255,0.5); }
+    .av-hero-sub strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+    /* ── SHARED ── */
+    .u-wrap {
+      max-width: 1100px; margin: 0 auto;
+      padding-left: 48px; padding-right: 48px;
+    }
+    .u-label {
+      font-size: 9px; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--pink);
+      opacity: 0.55; font-weight: 600; display: block;
+    }
+
+    /* ── CONCEPTO ── */
+    .u-concept { padding: 88px 0 72px; background: var(--bg); }
+    .u-statement {
+      font-size: clamp(24px, 3.8vw, 48px);
+      font-weight: 700; font-family: var(--font-display);
+      letter-spacing: -0.04em; line-height: 1.1;
+      color: var(--fg); max-width: 860px;
+      margin-bottom: 20px;
+    }
+    .u-statement em { font-style: normal; color: var(--pink); }
+    .u-body {
+      font-size: 13px; line-height: 1.9;
+      color: var(--fg); opacity: 0.55;
+      max-width: 640px; margin-top: 24px;
+    }
+    .u-gh-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 10px; letter-spacing: 2px;
+      text-transform: uppercase; font-weight: 600;
+      color: var(--fg); text-decoration: none;
+      opacity: 0.5;
+      border-bottom: 0.5px solid var(--fg);
+      padding-bottom: 2px;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .u-gh-link:hover { opacity: 1; color: var(--pink); border-color: var(--pink); }
+
+    /* ── VIDEO YOUTUBE ── */
+    .av-demo {
+      background: var(--bg);
+      border-top: 0.5px solid var(--border-subtle);
+      padding: 72px 0;
+    }
+    .av-demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 64px; align-items: center;
+    }
+    .av-demo-intro {
+      font-size: 13px; color: var(--fg); opacity: 0.5;
+      max-width: 480px; line-height: 1.9; margin-top: 20px;
+    }
+    .av-video-frame {
+      position: relative; width: 100%;
+      aspect-ratio: 9/16; background: #000; overflow: hidden;
+    }
+    .av-video-frame iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; border: 0;
+    }
+
+    /* ── GRÁFICA — 2 fotos ── */
+    .u-captures {
+      background: var(--bg);
+      border-top: 0.5px solid var(--border-subtle);
+      padding: 72px 0 0;
+    }
+    .u-captures-header { padding: 0 48px 36px; max-width: 1100px; margin: 0 auto; }
+    .u-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+    }
+    .u-grid-cell {
+      position: relative; overflow: hidden;
+      background: var(--border-subtle);
+      aspect-ratio: 16/9;
+    }
+    .u-grid-cell img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.6s ease;
+    }
+    .u-grid-cell:hover img { transform: scale(1.03); }
+
+    /* ── CÓMO FUNCIONA ── */
+    .u-gestos {
+      background: var(--bg);
+      border-top: 0.5px solid var(--border-subtle);
+      padding: 72px 0;
+    }
+    .u-gestos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px; margin-top: 48px;
+    }
+    .u-gestos-col-title {
+      font-size: 10px; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--fg);
+      opacity: 0.3; font-weight: 600;
+      margin-bottom: 20px; display: block;
+    }
+    .u-gesto-row {
+      display: flex; gap: 20px;
+      padding: 14px 0;
+      border-bottom: 0.5px solid var(--border-subtle);
+      align-items: flex-start;
+    }
+    .u-gesto-row:first-of-type { border-top: 0.5px solid var(--border-subtle); }
+    .u-gesto-key {
+      font-size: 11px; font-weight: 600;
+      color: var(--pink); opacity: 0.8;
+      min-width: 150px; flex-shrink: 0;
+      font-family: var(--font-body);
+    }
+    .u-gesto-val {
+      font-size: 11px; color: var(--fg); opacity: 0.5;
+      line-height: 1.6;
+    }
+
+    /* ── STACK + META ── */
+    .u-stack {
+      background: var(--bg);
+      border-top: 0.5px solid var(--border-subtle);
+      padding: 72px 0;
+    }
+    .u-stack-row {
+      display: flex; gap: 0;
+      border-top: 0.5px solid var(--border-subtle);
+      margin-top: 40px;
+    }
+    .u-stack-item {
+      flex: 1; padding: 24px 0 24px 28px;
+      border-right: 0.5px solid var(--border-subtle);
+    }
+    .u-stack-item:first-child { padding-left: 0; }
+    .u-stack-item:last-child { border-right: none; }
+    .u-stack-label {
+      font-size: 8px; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--fg);
+      opacity: 0.28; font-weight: 600;
+      display: block; margin-bottom: 6px;
+    }
+    .u-stack-val {
+      font-size: 13px; font-weight: 600;
+      font-family: var(--font-display);
+      color: var(--fg); letter-spacing: -0.02em;
+    }
+
+    /* ── CURSOR PLAY BUTTON ── */
+    .av-cursor-btn {
+      position: absolute;
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.35);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
+      z-index: 10;
+      transform: translate(-50%, -50%);
+      top: 50%; left: 50%;
+      transition: transform 0.08s ease, background 0.2s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+    .av-cursor-btn.visible { opacity: 1; }
+    .av-cursor-btn.playing { background: rgba(255,255,255,0.06); }
+    .av-cursor-icon {
+      font-size: 20px; color: #fff; line-height: 1;
+      margin-left: 3px; transition: opacity 0.15s;
+    }
+    .av-cursor-btn.playing .av-cursor-icon { margin-left: 0; }
+
+    /* ── ÉNFASIS INALÁMBRICO ── */
+    .av-wireless {
+      background: var(--bg);
+      border-top: 0.5px solid var(--border-subtle);
+      padding: 72px 0;
+    }
+    .av-flow { display: flex; align-items: flex-start; margin-top: 56px; }
+    .av-node { flex-shrink: 0; width: 120px; text-align: center; }
+    .av-node-dot {
+      width: 56px; height: 56px; border-radius: 50%;
+      border: 0.5px solid var(--pink);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px; color: var(--pink);
+    }
+    .av-node-name { display: block; font-size: 12px; font-weight: 600; color: var(--fg); }
+    .av-node-sub { display: block; font-size: 10px; color: var(--fg); opacity: 0.4; margin-top: 3px; }
+    .av-link {
+      flex: 1; height: 2px; margin-top: 27px;
+      background: repeating-linear-gradient(90deg, var(--pink) 0 8px, transparent 8px 16px);
+      background-size: 16px 2px;
+      animation: avDash 1s linear infinite;
+      opacity: 0.75;
+    }
+    .av-link.wired { background: var(--fg); opacity: 0.25; animation: none; }
+    @keyframes avDash { to { background-position: 16px 0; } }
+    .av-legend {
+      display: flex; gap: 28px; flex-wrap: wrap; margin-top: 44px;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      font-weight: 600; color: var(--fg); opacity: 0.4;
+    }
+
+    /* ── EQUIPO ── */
+    .av-team {
+      background: var(--bg);
+      border-top: 0.5px solid var(--border-subtle);
+      padding: 72px 0;
+    }
+    .av-team-list { margin-top: 40px; border-top: 0.5px solid var(--border-subtle); }
+    .av-team-row {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 20px; flex-wrap: wrap;
+      padding: 24px 0; border-bottom: 0.5px solid var(--border-subtle);
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .av-demo-grid { grid-template-columns: 1fr; gap: 32px; }
+      .av-video-frame { max-width: 360px; margin: 0 auto; }
+      .av-flow { flex-direction: column; align-items: center; }
+      .av-link {
+        width: 2px; height: 44px; margin: 10px 0;
+        background: repeating-linear-gradient(180deg, var(--pink) 0 8px, transparent 8px 16px);
+        background-size: 2px 16px; animation: avDashV 1s linear infinite;
+      }
+      .av-link.wired { background: var(--fg); animation: none; }
+      @keyframes avDashV { to { background-position: 0 16px; } }
+      .av-hero { cursor: auto; }
+      .av-hero-content { padding: 0 20px; }
+      .u-wrap { padding-left: 20px; padding-right: 20px; }
+      .u-captures-header { padding: 0 20px 28px; }
+      .u-grid-2 { grid-template-columns: 1fr; }
+      .u-gestos-grid { grid-template-columns: 1fr; gap: 40px; }
+      .u-gesto-key { min-width: 110px; }
+      .u-stack-row { flex-direction: column; }
+      .u-stack-item { border-right: none; border-bottom: 0.5px solid var(--border-subtle); padding-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left"><a href="../projects.html" class="nav-link active">Proyectos</a></div>
+  <div class="nav-center"><a href="../index.html" class="nav-logo"><span id="nav-typing-text"></span></a></div>
+  <div class="nav-right">
+    <a href="../about.html" class="nav-link">About</a>
+    <button class="dark-toggle" aria-label="Modo oscuro"></button>
+  </div>
+</nav>
+
+<!-- ══ HERO — video de fondo ══ -->
+<div class="av-hero">
+  <video
+    src="../assets/acu-visual/prueba3.mp4"
+    class="av-hero-video"
+    muted loop playsinline id="heroVideo">
+  </video>
+  <div class="av-cursor-btn" id="heroCursor">
+    <span class="av-cursor-icon" id="heroCursorIcon">▶</span>
+  </div>
+  <div class="av-hero-content">
+    <div class="av-eyebrow">Visualización de datos en tiempo real · 2026</div>
+    <h1>Acu-Visual</h1>
+    <div class="av-hero-meta">
+      <span class="av-hero-sub">Sonido inalámbrico de la FAAD hecho imagen en tiempo real con <strong>TouchDesigner</strong></span>
+      <div class="p-tags">
+        <span class="p-tag">TouchDesigner</span>
+        <span class="p-tag">Raspberry Pi Pico</span>
+        <span class="p-tag">MQTT</span>
+        <span class="p-tag">Adafruit IO</span>
+        <span class="p-tag">inalámbrico</span>
+        <span class="p-tag">sonido</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CONCEPTO ══ -->
+<div class="u-concept">
+  <div class="u-wrap">
+    <span class="u-label" style="margin-bottom:28px;">sobre el proyecto</span>
+    <p class="u-statement">
+      ¿Cómo presenciamos el habitar de los espacios a través del <em>sonido?</em>
+    </p>
+    <p class="u-body">
+      Acu-Visual observa en vivo las huellas sonoras que dejan las personas al ocupar un lugar: conversaciones, pasos, risas, silencios. Esa identidad acústica cambiante habla de cómo se vive y se comparte un espacio, y se convierte en la materia prima de visualizaciones experimentales hechas en TouchDesigner.
+    </p>
+    <p class="u-body" style="margin-top:12px;">
+      Dos micrófonos conectados a Raspberry Pi Pico 2W escuchan dos sectores del mismo edificio de la Facultad de Artes, Arquitectura y Diseño de la UDP: el Pañol y el Laboratorio de Interacción Digital. Sus datos viajan por internet hasta un computador que los transforma en movimiento, forma y color. Lo que normalmente solo se oye se manifiesta frente a nosotros, como un retrato vivo de ambos lugares.
+    </p>
+    <div style="margin-top:36px;">
+      <a href="https://github.com/paredesvania/dis9079-2026-1/tree/main/00-examen/grupo-2" target="_blank" class="u-gh-link">
+        Ver en GitHub →
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ INALÁMBRICO ══ -->
+<div class="av-wireless">
+  <div class="u-wrap">
+    <span class="u-label" style="margin-bottom:28px;">inalámbrico</span>
+    <p class="u-statement">
+      Sin cables entre el <em>sonido</em> y la imagen.
+    </p>
+    <p class="u-body">
+      Cada Raspberry Pi Pico 2W se conecta por WiFi y publica el nivel de sonido por MQTT en Adafruit IO. Los micrófonos y el computador que genera la visualización no comparten ningún cable: los datos viajan por internet, así que cada parte puede estar en un lugar distinto.
+    </p>
+
+    <div class="av-flow">
+      <div class="av-node">
+        <div class="av-node-dot">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+        </div>
+        <span class="av-node-name">Micrófono</span>
+        <span class="av-node-sub">MAX9812</span>
+      </div>
+      <div class="av-link wired"></div>
+      <div class="av-node">
+        <div class="av-node-dot">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>
+        </div>
+        <span class="av-node-name">Pico 2W</span>
+        <span class="av-node-sub">WiFi</span>
+      </div>
+      <div class="av-link"></div>
+      <div class="av-node">
+        <div class="av-node-dot">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M7 18a4 4 0 0 1-.5-8A6 6 0 0 1 18 9.5 4.3 4.3 0 0 1 17.5 18z"/></svg>
+        </div>
+        <span class="av-node-name">Adafruit IO</span>
+        <span class="av-node-sub">MQTT</span>
+      </div>
+      <div class="av-link"></div>
+      <div class="av-node">
+        <div class="av-node-dot">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg>
+        </div>
+        <span class="av-node-name">TouchDesigner</span>
+        <span class="av-node-sub">visuales</span>
+      </div>
+    </div>
+
+    <div class="av-legend">
+      <span>— cable corto, en la placa</span>
+      <span style="color:var(--pink);opacity:0.9;">- - - inalámbrico</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ VIDEO: FUNCIONAMIENTO A DISTANCIA ══ -->
+<div class="av-demo">
+  <div class="u-wrap">
+    <div class="av-demo-grid">
+      <div>
+        <span class="u-label">funcionamiento a distancia</span>
+        <p class="av-demo-intro">
+          Demostración en vivo: un micrófono en el Laboratorio de Interacción Digital, otro en el Pañol y la visualización proyectada en la sala 102. Todo en el mismo edificio, sin cables entre los espacios: los datos viajan por WiFi e internet en tiempo real.
+        </p>
+      </div>
+      <!-- Para cambiar el video, reemplaza el ID después de /embed/ -->
+      <div class="av-video-frame">
+        <iframe
+          src="https://www.youtube.com/embed/wxTEaNKYboA"
+          title="Acu-Visual — demostración a distancia"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ GRÁFICA ══ -->
+<div class="u-captures">
+  <div class="u-captures-header u-wrap">
+    <span class="u-label">gráfica</span>
+  </div>
+  <div class="u-grid-2">
+    <div class="u-grid-cell">
+      <img src="../assets/acu-visual/voice6.png" alt="Acu-Visual — visualización generativa">
+    </div>
+    <div class="u-grid-cell">
+      <img src="../assets/acu-visual/voice13.png" alt="Acu-Visual — visualización generativa">
+    </div>
+  </div>
+</div>
+
+<!-- ══ CÓMO FUNCIONA ══ -->
+<div class="u-gestos">
+  <div class="u-wrap">
+    <span class="u-label" style="margin-bottom:0;">cómo funciona</span>
+    <div class="u-gestos-grid">
+
+      <!-- Input -->
+      <div>
+        <span class="u-gestos-col-title">input — raspberry pi pico 2w</span>
+        <div class="u-gesto-row">
+          <span class="u-gesto-key">Micrófono MAX9812</span>
+          <span class="u-gesto-val">Toma ráfagas de 150 lecturas y calcula la amplitud del sonido</span>
+        </div>
+        <div class="u-gesto-row">
+          <span class="u-gesto-key">Porcentaje</span>
+          <span class="u-gesto-val">La amplitud se convierte a un valor de 0 a 100</span>
+        </div>
+        <div class="u-gesto-row">
+          <span class="u-gesto-key">Máximo por segundo</span>
+          <span class="u-gesto-val">Adafruit IO permite un dato por segundo, así que se envía el nivel más alto: un aplauso breve no se pierde</span>
+        </div>
+        <div class="u-gesto-row">
+          <span class="u-gesto-key">Reconexión</span>
+          <span class="u-gesto-val">Cada Pico publica en su propio feed y se reconecta sola si cae el WiFi o MQTT</span>
+        </div>
+      </div>
+
+      <!-- Output -->
+      <div>
+        <span class="u-gestos-col-title">output — touchdesigner</span>
+        <div class="u-gesto-row">
+          <span class="u-gesto-key">MQTT Client DAT</span>
+          <span class="u-gesto-val">Se suscribe a los feeds de ambos lugares al conectarse</span>
+        </div>
+        <div class="u-gesto-row">
+          <span class="u-gesto-key">Callbacks DAT</span>
+          <span class="u-gesto-val">Identifica de qué edificio viene cada mensaje y actualiza su valor</span>
+        </div>
+        <div class="u-gesto-row">
+          <span class="u-gesto-key">Constant CHOP</span>
+          <span class="u-gesto-val">Guarda el último valor de cada Pico, aunque los datos no lleguen a la vez</span>
+        </div>
+        <div class="u-gesto-row">
+          <span class="u-gesto-key">Visuales</span>
+          <span class="u-gesto-val">Movimiento, formas y colores responden a la actividad sonora de cada lugar</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ STACK TÉCNICO ══ -->
+<div class="u-stack">
+  <div class="u-wrap">
+    <span class="u-label">stack técnico</span>
+    <div class="u-stack-row">
+      <div class="u-stack-item">
+        <span class="u-stack-label">software</span>
+        <div class="u-stack-val">TouchDesigner</div>
+      </div>
+      <div class="u-stack-item">
+        <span class="u-stack-label">hardware</span>
+        <div class="u-stack-val">Pico 2W + MAX9812</div>
+      </div>
+      <div class="u-stack-item">
+        <span class="u-stack-label">red</span>
+        <div class="u-stack-val">WiFi · MQTT · Adafruit IO</div>
+      </div>
+      <div class="u-stack-item">
+        <span class="u-stack-label">lenguaje</span>
+        <div class="u-stack-val">Python</div>
+      </div>
+      <div class="u-stack-item">
+        <span class="u-stack-label">contexto</span>
+        <div class="u-stack-val">Examen · 2026</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EQUIPO ══ -->
+<div class="av-team">
+  <div class="u-wrap">
+    <span class="u-label">este proyecto fue hecho por</span>
+    <div class="av-team-list">
+      <div class="av-team-row">
+        <div class="u-stack-val">Camila Parada</div>
+        <a href="https://github.com/Camila-Parada" target="_blank" class="u-gh-link">GitHub →</a>
+      </div>
+      <div class="av-team-row">
+        <div class="u-stack-val">Vania Paredes</div>
+        <a href="https://github.com/paredesvania" target="_blank" class="u-gh-link">GitHub →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<div class="p-footer">
+  <a href="umbral.html" class="p-footer-prev">
+    <span class="p-footer-label">← anterior</span>
+    <span class="p-footer-name">Umbral</span>
+    <span class="p-footer-arrow">←</span>
+  </a>
+  <div class="p-footer-center">
+    <a href="../projects.html">proyectos</a>
+  </div>
+  <a href="and-y.html" class="p-footer-next">
+    <span class="p-footer-label">siguiente →</span>
+    <span class="p-footer-name">AND-Y</span>
+    <span class="p-footer-arrow">→</span>
+  </a>
+</div>
+
+<script src="../js/cursor.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/nav-typing.js"></script>
+<script src="../js/transitions.js"></script>
+
+<script>
+// ── HERO: botón play que sigue el mouse ──
+(function(){
+  var hero   = document.querySelector('.av-hero');
+  var video  = document.getElementById('heroVideo');
+  var cursor = document.getElementById('heroCursor');
+  var icon   = document.getElementById('heroCursorIcon');
+  if (!hero || !video || !cursor) return;
+
+  var mx = window.innerWidth / 2, my = window.innerHeight / 2;
+  var cx = mx, cy = my;
+  var raf = null;
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function animate() {
+    cx = lerp(cx, mx, 0.14);
+    cy = lerp(cy, my, 0.14);
+    cursor.style.left = cx + 'px';
+    cursor.style.top  = cy + 'px';
+    raf = requestAnimationFrame(animate);
+  }
+
+  hero.addEventListener('mouseenter', function() {
+    cursor.classList.add('visible');
+    if (!raf) raf = requestAnimationFrame(animate);
+  });
+
+  hero.addEventListener('mouseleave', function() {
+    cursor.classList.remove('visible');
+    cancelAnimationFrame(raf); raf = null;
+  });
+
+  hero.addEventListener('mousemove', function(e) {
+    var r = hero.getBoundingClientRect();
+    mx = e.clientX - r.left;
+    my = e.clientY - r.top;
+  });
+
+  hero.addEventListener('click', function() {
+    if (video.paused) {
+      video.play();
+      cursor.classList.add('playing');
+      icon.textContent = '⏸';
+    } else {
+      video.pause();
+      cursor.classList.remove('playing');
+      icon.textContent = '▶';
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
