@@ -2,4 +2,4 @@
 
 Hola! Mi nombre es Vania, pero puedes llamarme _**Kora**_.
 
-Este es mi portafolio.
+Soy una diseñadora industrial y de interacción digital, revisa lo que hago!
